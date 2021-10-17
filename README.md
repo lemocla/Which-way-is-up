@@ -1,108 +1,110 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# **Which Way is Up**
 
-Welcome USER_NAME,
+## **INTRODUCTION** 
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+[include screenshots of project on responsive devices]
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+Which Way Is Up -  an online gallery and ecommerce website for artist Peter Charalambides - was created for educational purposes only as part of the Code Institute’s full stack development course.
 
-## Gitpod Reminders
+Using the principles of UX design, this fully responsive and interactive website was developed using HTML, CSS, JavaScript and Python as well as Django as a framework.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+View live project here [link to deployed link]
 
-`python3 -m http.server`
 
-A blue button should appear to click: _Make Public_,
 
-Another blue button should appear to click: _Open Browser_.
+## **TABLE OF CONTENT** 
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+  - [UX Design](#ux-design)
+    - [Strategy](#Strategy)
+    - [User stories](#user-stories)
+    - [Scope](#scope)
+    - [Structure](#structure)
+    - [Skeleton](#skeleton)
+    - [Design](#design)
+  - [Features](#FEATURES)
+    - [Existing features](#existing-features)
+    - [Features left to implement](#features-left-to-implement)
+  - [Technologies Used](#Technology-used)
+    - [Languages](#Languages)
+    - [Libraries and frameworks](#Libraries-frameworks-and-other-technologies)
+  - [Testing](#TESTING)
+  - [Deployment](#DEPLOYMENT)
+    - [Deployment of the page](#Deployment-of-the-page)
+    - [How to run the code locally](#How-to-run-the-code-locally)
+   - [Credits](#CREDITS)
+     - [Code](#Code)
+     - [Content](#Content)
+     - [Media](#Media)
+     - [Acknowledgment](#Acknowledgments)
 
-A blue button should appear to click: _Make Public_,
+## **UX DESIGN**
 
-Another blue button should appear to click: _Open Browser_.
+ - ### **Strategy**  
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+   Peter Charalambides is a London based artist operating under the umbrella Which Way Is Up and whose style sits within the urban art movement.
+   
+   Whilst Peter Charalambides’ breadth of work is versatile, he specialises in doodle art illustration on a wide range of mediums including furniture.  
+   
+   With over 1300 followers on instagram, Peter would like to revamp his website to showcase his portfolio and include an ecommerce shop where he can sell his art directly to the public.  
+   
+   Peter Charalambides offers original artwork as well as prints of his illustration, with a wide range of pricing, making his art accessible and affordable to all.
+   
+   - #### **Site owner goal**
+     - To increase online presence 
+     - To drive and connect with audience through the website
+     - To tell artist story and profile by showcasing portfolio
+     - Convert interest into sales 
+   - #### **User goals** 
+     - To access a user-friendly website across multiple devices 
+     - To discover artist work and collections 
+     - To buy prints and unique piece of arts
+     - To contact and connect with the artist
 
-To log into the Heroku toolbelt CLI:
+ - ### **User stories** 
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+    1. **Navigation and website experience**
+        - As a site user, I want a responsive website so that I can access it on different devices.
+        - As a site user, I want to easily navigate across the site so that I can find the information I need.
+        - As a site user, I want to read about the artist so that I can learn about artist background and exhibitions
+        - As a site user, I want to view the artist work so that can understand the artist work
+        - As a site user, I want to see the details for an artwork so that I can get a better appreciation and decide if I would want to buy it.
+        - As site user, I want to engage with the artist work so that I can be part of the artist community
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+    2. **Shopping experience** 
+        - As a shopper, I want to view all the artwork available so that I can quickly have an overview of what is on offer
+        - As a shopper, I want to view available artwork by specific collection and category so that I can quickly find products I’m interested in.
+        - As a shopper, I want to sort the list of artwork available so that I can find a piece in my price range
+        - As a shopper, I want to view the artwork price and details so that I can make an informed decision
+        - As a shopper, I want to read reviews so that I can have a better understanding of the quality of the artist work
+        - As a shopper, I want to view related items so that I can purchase several artwork
+        - As a shopper, I want to select quantity of an item if applicable so I can order what I need
 
-------
+    3. **Shopping bag and checkout**
+        - As a shopper, I want to review items in my shopping bag so that I can adjust quantities ordered.
+        - As a shopper, I want to have a gift option so I can buy a print / piece of art for a special occasion for a friend
+        - As a shopper, I want to enter payment information in a safe and secure way so that I can checkout quickly with confidence
+        - As a shopper, I want to receive confirmation of my order so that I can have a proof of purchase
 
-## Release History
+    4. **Registration and account management** 
+        - As a site user, I want to register for an account so that I can view my orders and my favourite items
+        - As a site user, I want to login and logout so that I can access my profile safely 
+        - As a site user, I want to edit my profile so that I can update my personal information
+        - As a site user, I want to reset my password if I forgot it so that I can access my account
+        - As a site user, I want to delete my profile so that my personal information are removed from the website
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+    5. **Favourite items and product review**
+        - As a site user, I want to save artwork as my favourites so that I can buy it later or buy it again
+        - As a site user, I want to leave a review so that I can let others know about my shopping experience
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+    6. **Contact and connect**
+        - As a site user, I want to contact the site owner so that I can make queries about his work / request for a commission
+        - As a site user, I want to follow the artist on social media so that I can keep up to date with his work
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+    7. **Admin and site management** 
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+        - As the site owner, I want to add, edit and delete a collection so that I can keep my portfolio and work up-to-date
+        - As the site owner, I want to add, edit and delete individual artwork and items to that I can link them to collection and keep my shop up-to-date
+        - As a site owner I want to add related product so that I can encourage multi-buy
+        - As a site owner, I want to be able to edit most of the content of the website, so that I can keep my website up to date and engaging.
+        - As a site owner, I want to manage orders from the console so I can know I have dispatched the order.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
-
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
-
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
-
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
