@@ -108,3 +108,76 @@ View live project here [link to deployed link]
         - As a site owner, I want to be able to edit most of the content of the website, so that I can keep my website up to date and engaging.
         - As a site owner, I want to manage orders from the console so I can know I have dispatched the order.
 
+  - ### **Scope**
+  
+     - #### **Feature trade-off**
+
+        ![Attachments_feature trade off](documentation/scope/Feature_trade_off.png)
+
+        A pdf version of the feature trade-off can been see [here](documentation/scope/Feature_trade_off.pdf)
+
+        This website will be developed as a minimal viable product with room for future improvements and releases incorporating additional features.
+
+     - #### **Functional requirements**
+        - To be able to sign-up using email address and secure password
+        - To be able to login and logout
+        - To be able to add/view/edit/delete profile information
+        - To be able to reset password 
+        - To be able to add/view/edit/delete an collection
+        - To be able to add/view/edit/delete a artwork
+        - To be able to add/view/edit/delete reviews
+        - To be able to create/view/edit/delete shopping bag
+        - To be able to process orders
+        - To be able to process paiement
+        - To be able to sort shop items according to a set of criteria 
+        - To be able to email notification to users
+        - To be able to store and retrieve images 
+        - To be able to contact the site owner 
+        - To receive feedback for important actions: create - update - delete
+        - To handle errors: page 404 not found, page 500 Internal Server Error page and page 403/403 
+
+	 - #### **Non functional requirements**
+	
+       - Display artwork images and information in engaging way
+       - Intuitive navigation and structure
+
+     - #### **Content requirements**
+       - Artist biography and key events/exhibitions
+       - Information about the artist work 
+       - Image library of artwork
+       - Details for the artwork - size, price
+       - Forms where user input is required
+       - Engaging text and headings throughout to introduce main sections of the website
+       - Icons for interactive and visual elements 
+
+     - #### **Constraints**
+	
+       - Technical skills: The site owner is still learning Python and is new to Django Framework which may impact on the successful implementation of the planned features. 
+       - Time: Implementing features using new technical skills will require time and careful planning, especially since the developer is now working full-time.
+
+ - ### **Structure**
+
+     - #### **Organisation of functionality and content**
+
+        - Header: Logo and a collapsible menu with navigational links
+        - Homepage: Give an overview of the artist universe including Hero image, featured collection, downloadable colouring page and reviews
+        - About: Information about the artist
+        - Work: Display artist portfolio and image library
+        - Shop: Display artwork, prints and other items for sale
+        - Product page: Display artwork details
+        - Shopping bag: Display items added in the bag
+        - Footer: Contact form, links to social media and policies
+
+     - #### **Interaction design**
+
+        - Collapsible menu
+        - Artwork image with hovering effect
+        - Buttons and icons with hovering effect
+
+     - #### **Database structure**
+
+        The diagram below illustrates the database structure used in this project, first managed using SQLite during the development process, then Postgres in production with Heroku. A pdf version can be seen [here](documentation/structure/db_structure.pdf).
+
+        ![Attach db structure](documentation/structure/db_structure.png)
+
+
