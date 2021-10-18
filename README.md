@@ -10,32 +10,40 @@ Using the principles of UX design, this fully responsive and interactive website
 
 View live project here [link to deployed link]
 
-
-
 ## **TABLE OF CONTENT** 
 
   - [UX Design](#ux-design)
     - [Strategy](#Strategy)
-    - [User stories](#user-stories)
-    - [Scope](#scope)
-    - [Structure](#structure)
-    - [Skeleton](#skeleton)
-    - [Design](#design)
-  - [Features](#FEATURES)
+    - [User stories](#User-stories)
+    - [Scope](#Scope)
+    - [Structure](#Structure)
+    - [Skeleton](#Skeleton)
+    - [Design](#Design)
+  - [Features](#features)
     - [Existing features](#existing-features)
     - [Features left to implement](#features-left-to-implement)
-  - [Technologies Used](#Technology-used)
-    - [Languages](#Languages)
-    - [Libraries and frameworks](#Libraries-frameworks-and-other-technologies)
-  - [Testing](#TESTING)
-  - [Deployment](#DEPLOYMENT)
-    - [Deployment of the page](#Deployment-of-the-page)
-    - [How to run the code locally](#How-to-run-the-code-locally)
-   - [Credits](#CREDITS)
-     - [Code](#Code)
-     - [Content](#Content)
-     - [Media](#Media)
-     - [Acknowledgment](#Acknowledgments)
+  - [Technologies Used](#technologies-used)
+    - [Languages](#languages)
+    - [Databases platform and cloud storage](#database-platform-and-cloud-storage)
+    - [Libraries and frameworks](#libraries-and-frameworks)
+    - [Other technologies](#other-technologies)  
+  - [Testing](#testing)
+    - [Introduction](#introduction)
+    - [Code validation](#code-validation)
+    - [Testing User stories](#testing-User-stories)
+    - [Automated testing](#automated-testing)
+    - [Responsiveness and compatibility](#responsiveness-and-compatibility)
+    - [Testing performance](#testing-performance)
+    - [Testing accessibility](#testing-accessibility)
+    - [Interesting issues and known bugs](#interesting-issues-and-known-bugs)
+  - [Deployment](#deployment)
+    - [Deployment of the page](#deployment-of-the-page)
+    - [How to run the code locally](#how-to-run-the-code-locally)
+   - [Credits](#credits)
+     - [Code](#code)
+     - [Content](#content)
+     - [Media](#media)
+     - [Acknowledgment](#acknowledgments)
 
 ## **UX DESIGN**
 
@@ -179,5 +187,96 @@ View live project here [link to deployed link]
         The diagram below illustrates the database structure used in this project, first managed using SQLite during the development process, then Postgres in production with Heroku. A pdf version can be seen [here](documentation/structure/db_structure.pdf).
 
         ![Attach db structure](documentation/structure/db_structure.png)
+
+ - ### **Skeleton**
+    
+    - ### **Wireframes**
+
+       ![homepage wireframes](documentation/wireframes/homepage.png)
+
+       Please find all the wireframes in pdf format [here](documentation/wireframes/wireframes.pdf). 
+    
+       Please find below links to a selection of wireframe for this project (png format)
+         - [Homepage menu](documentation/wireframes/homepage_menu.png)
+         - [Work](documentation/wireframes/work.png) 
+         - [Collection details](documentation/wireframes/collection_details.png)
+         - [About page](documentation/wireframes/about.png)
+         - [Shop](documentation/wireframes/shop.png)
+         - [Artwork details](documentation/wireframes/artwork_details.png)
+         - [Shopping bag](documentation/wireframes/shopping_bag.png)
+         - [Checkout page](documentation/wireframes/checkout_page.png)
+         - [Order successful](documentation/wireframes/order_successful.png)
+         - [Saved items](documentation/wireframes/saved_items.png)
+         - [Sign up page](documentation/wireframes/signup.png)
+         - [Login page](documentation/wireframes/login.png)
+         - [Profile page](documentation/wireframes/profile.png)
+         - [Add artwork](documentation/wireframes/add_artwork.png)
+         - [Add collection](documentation/wireframes/add_collection.png)
+         - [Contact us page](documentation/wireframes/contact.png)
+         - [Error page](documentation/wireframes/error_pages.png)
+         - [Policy page](documentation/wireframes/policy_pages.png)
+
+    - #### **Difference to design**
+
+    - #### **Limitations** 
+
+ - ### **Surface / Design** 
+
+     The website will feature a simple, modern and engaging design, with a minimum of colours to keep the emphasis on the artist's work.
+
+    - #### **Imagery**
+
+       The website will solely feature images from the artist's artwork. 
+
+    - #### **Colour scheme**
+ 
+       Since the artwork is either black and white or very color full, the website will use mostly black and white with an additional colour for interactive purposes (such as hovering effect) and feedback to site visitors / shoppers. 
+
+       The website will use the following colour palette, which was custom-made and checked for accessibility using Adobe Color
+
+     - #### **Typography**
+        The website will use the following fonts from Google:
+
+     - #### **Icons**
+       Icons by font-awesome will be used in the navigation bar to allow users to quickly access functionalities offered by the website such as the shopping cart / 
+
+     - #### **Styling**
+        - Horizontal lines to structure and make the content of the website easy to read.
+        - Slightly rounded edge borders and buttons for a more user friendly and inviting interface.
+
+     - #### **Difference to design** 
+
+## **FEATURES**
+
+  - ### **Existing features**
+  - ### **Features left to implement**
+
+## **TECHNOLOGIES USED**
+
+  - ### **Languages**
+  - ### **Databases platform and cloud storage**
+  - ### **Libraries and frameworks**
+  - ### **Other technologies**
+
+## **TESTING**
+
+  - ### **Introduction**
+  - ### **Code validation**
+  - ### **Testing User stories**
+  - ### **Automated testing**
+  - ### **Responsiveness and compatibility**
+  - ### **Testing performance**
+  - ###  **Testing accessibility**
+  - ### **Interesting issues and known bugs**
+    - #### **Known bugs**
+ 
+- ## **DEPLOYMENT**
+
+- ## **CREDITS**
+
+  - ### **Code**
+  - ### **Media and content**
+  - ### **Additional Content**
+  - ### **Acknowledgments**
 
 
