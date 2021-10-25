@@ -270,9 +270,9 @@ View live project here [link to deployed link]
   - ### **Interesting issues and known bugs**
     - #### **Known bugs**
  
-- ## **DEPLOYMENT**
+## **DEPLOYMENT**
 
-- ## **CREDITS**
+## **CREDITS**
 
   - ### **Code**
   - ### **Media and content**
