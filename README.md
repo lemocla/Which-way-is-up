@@ -230,12 +230,16 @@ View live project here [link to deployed link]
 
     - #### **Colour scheme**
  
-       Since the artwork is either black and white or very color full, the website will use mostly black and white with an additional colour for interactive purposes (such as hovering effect) and feedback to site visitors / shoppers. 
+       Since the artwork is either black and white or very colorful, the website will use mostly black and white with an some additional colours for interactive purposes (such as hovering effect) and feedback to site visitors / shoppers. 
 
-       The website will use the following colour palette, which was custom-made and checked for accessibility using Adobe Color
+       The website will use the following colour palette, which was custom-made and checked for accessibility using Adobe Color:
+
+       ![colour palette](documentation/design/palette.jpeg)       
 
      - #### **Typography**
         The website will use the following fonts from Google:
+        - [Bungee](https://fonts.google.com/specimen/Bungee#about) will use Bungee for its urban style in line with the artist's overall style 
+        - Body: [Mulish](https://fonts.google.com/specimen/Mulish?query=mulish#glyphs) for its minimalist and light style in sharp contrast with the headers.
 
      - #### **Icons**
        Icons by font-awesome will be used in the navigation bar to allow users to quickly access functionalities offered by the website such as the shopping cart / 
@@ -243,13 +247,23 @@ View live project here [link to deployed link]
      - #### **Styling**
         - Horizontal lines to structure and make the content of the website easy to read.
         - Slightly rounded edge borders and buttons for a more user friendly and inviting interface.
+        - Some light shadows to add further dimension and depth to the website.
 
      - #### **Difference to design** 
 
 ## **FEATURES**
 
   - ### **Existing features**
+  
+    Implemented features can be found in [this document](documentation/features/features.md).
+ 
   - ### **Features left to implement**
+  	- Additional thumbnail images for product details 
+  	- Pagination on shop when displaying all items 
+  	- Full content management to display and update content on the homepage and other static pages
+  	- Improved user interface for the super admin to manage store, orders and content of the website
+  	- Ability to share artwork on social media
+  	- Add a blog where artist to add/edit/delete post about his creative process and other work.
 
 ## **TECHNOLOGIES USED**
 
