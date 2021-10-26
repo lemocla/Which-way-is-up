@@ -20,3 +20,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 ]
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
