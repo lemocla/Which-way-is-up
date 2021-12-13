@@ -9,8 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Urban art by Peter Charalambides">
+    <meta name="keywords" content="urban art, doodle art, art, doodle illustration, doodle artist, london artist, london urban art">
     <meta name="author" content="Which Way Is Up">
-    <link rel="icon" type="image/png" href="#">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon/favicon.png' %}">
     {% endblock %}
 
     {% block extra_meta %}
@@ -44,8 +46,8 @@
     <title>Which Way is Up {% block extra_title %}{% endblock %}</title>
 </head>
 
-<body>
-
+<body>    
+    <!-- messages -->
     {% if messages %}
     <div class="message-container"></div>
     {% endif %}
