@@ -24,6 +24,7 @@ body {
 
 /*----------------[ HEADERS ]-----------------*/
 
+h2,
 .navbar-brand {
     font-family: Bungee;
 }
@@ -31,6 +32,38 @@ body {
 /*---------------[ BACKGROUND ]---------------*/
 .bg-black {
     background-color: var(--black);
+}
+
+/*---------------[ LINKS ]--------------------*/
+
+a {
+    text-decoration: none;
+    color: inherit
+}
+
+a.btn,
+.btn {
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 2px;
+}
+
+a.btn:hover {
+    background: var(--black);
+    color: #ffffff;
+}
+
+footer a.btn:hover,
+.footer-btn:hover {
+    background-color: var(--ivory) !important;
+    transform: scale(1.02);
+}
+
+nav i:hover,
+footer li a:hover,
+.sm-icon:hover {
+    transform: scale(1.1);
+    color: var(--ivory);
 }
 
 /*-------------[ NAVIGATION ]----------------*/
@@ -56,4 +89,14 @@ body {
 .navbar-dark .navbar-nav .nav-link:hover {
     color: var(--white);
     background-color: transparent;
+}
+
+/*-----------------[ FOOTER ]----------------*/
+
+.footer-header {
+    font-size: 1.25rem;
+}
+
+.sm-icon {
+    font-size: 1.75rem;
 }

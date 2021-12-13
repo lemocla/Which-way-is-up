@@ -53,7 +53,7 @@
     <!-- header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-black py-3">
-            <div class="container-fluid px-5">
+            <div class="container-fluid px-3 px-md-5">
 
                 <!--collapsible button-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -86,21 +86,21 @@
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark px-3"
                             aria-labelledby="accountMenuLink">
                             {% if request.user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                 <!-- super user / admin -->
-                                    <li><a class="dropdown-item" href="#">Add collection</a></li>
-                                    <li><a class="dropdown-item" href="#">Add artwork</a></li>
-                                {% else %}
-                                <!-- authenticated users -->
-                                    <li><a class="dropdown-item" href="#">My Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">My Orders</a></li>
-                                    <li><a class="dropdown-item" href="#">My Reviews</a></li>
-                                {% endif %}
-                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>  
+                            {% if request.user.is_superuser %}
+                            <!-- super user / admin -->
+                            <li><a class="dropdown-item" href="#">Add collection</a></li>
+                            <li><a class="dropdown-item" href="#">Add artwork</a></li>
                             {% else %}
-                                <!-- non authenticated users-->
-                                <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
-                                <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                            <!-- authenticated users -->
+                            <li><a class="dropdown-item" href="#">My Profile</a></li>
+                            <li><a class="dropdown-item" href="#">My Orders</a></li>
+                            <li><a class="dropdown-item" href="#">My Reviews</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                            {% else %}
+                            <!-- non authenticated users-->
+                            <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
                             {% endif %}
                         </ul>
                     </li>
@@ -176,7 +176,58 @@
     {% block postloadjs %}
     {% endblock %}
 
-
+    <!-- footer -->
+    <footer class="container-fluid bg-black px-3 px-md-5 py-5 mt-5">
+        <!--<div class="container">-->
+            <div class="row">
+                <div class="col-sm-12 col-lg-8 text-white pt-3 pt-lg-0 order-2 order-lg-1">
+                    <!-- policies-->
+                    <h2 class="footer-header pb-2 fw-bolc">Useful links</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Delivery and return policy</a></li>
+                        <li><a href="#">Terms & conditions</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                    <!-- contact form -->
+                    <a href="#" class="btn bg-white text-black px-5 py-1 my-lg-2 text-uppercase">Contact</a>
+                </div>
+                <div class="col-sm-12 col-lg-4 text-white order-1 order-lg-2">
+                    <!-- social media links -->
+                    <h2 class="footer-header fw-bold pb-1">Join the community</h2>
+                    <div>
+                        <ul class="list-inline list-unstyled">
+                            <li class="list-inline-item dropdown">
+                                <a class="text-white nav-link" href="https://instagram.com/?hl=en" target="_blank" rel="noreferrer" aria-label="Go to instagram">
+                                    <i class="fab fa-instagram sm-icon" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-white nav-link" href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Go to facebook">
+                                    <i class="fab fa-facebook-square sm-icon" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-white nav-link" href="https://twitter.com/?lang=en" target="_blank" rel="noreferrer" aria-label="Go to twitter">
+                                    <i class="fab fa-twitter sm-icon" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- newsletter subscription-->
+                    <form class="row">
+                        <div class="col-8 col-lg-8 text-black">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email</label>
+                        </div>
+                        <div class="col-4 col-lg-4 px-0">
+                            <button type="submit" class="btn bg-white text-black text-uppercase footer-btn">Sign up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <!--</div>-->
+    </footer>
 </body>
 
 </html>
