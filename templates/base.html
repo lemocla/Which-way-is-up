@@ -67,26 +67,41 @@
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0 order-lg-3">
                     <!-- favourites -->
                     <li class="list-inline-item dropdown">
-                        <a class="text-white nav-link" href="#">
-                            <i class="fas fa-heart fa-lg"></i>
+                        <a class="text-white nav-link" href="#" aria-label="view favourite artworks">
+                            <i class="fas fa-heart fa-lg" aria-hidden="true"></i>
                         </a>
                     </li>
                     <!-- shopping bag-->
                     <li class="list-inline-item">
-                        <a class="text-white nav-link" href="#">
-                            <i class="fas fa-shopping-bag fa-lg"></i>
+                        <a class="text-white nav-link" href="#" aria-label="view shopping bag">
+                            <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
                         </a>
                     </li>
                     <!-- accounts -->
                     <li class="list-inline-item dropdown">
                         <a class="text-white nav-link dropdown-toggle" href="#" role="button" id="accountMenuLink"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user fa-lg"></i>
+                            data-bs-toggle="dropdown" aria-expanded="false" aria-label="display account menu items">
+                            <i class="fas fa-user fa-lg" aria-hidden="true"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark px-3"
                             aria-labelledby="accountMenuLink">
-                            <li><a class="dropdown-item" href="#">Register</a></li>
-                            <li><a class="dropdown-item" href="#">Login</a></li>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                 <!-- super user / admin -->
+                                    <li><a class="dropdown-item" href="#">Add collection</a></li>
+                                    <li><a class="dropdown-item" href="#">Add artwork</a></li>
+                                {% else %}
+                                <!-- authenticated users -->
+                                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">My Orders</a></li>
+                                    <li><a class="dropdown-item" href="#">My Reviews</a></li>
+                                {% endif %}
+                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>  
+                            {% else %}
+                                <!-- non authenticated users-->
+                                <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
+                                <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>
@@ -146,7 +161,7 @@
             </div>
         </nav>
     </header>
-    
+
     <!-- messages -->
     {% if messages %}
     <div class="message-container"></div>
