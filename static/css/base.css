@@ -91,6 +91,50 @@ footer li a:hover,
     background-color: transparent;
 }
 
+/*--------------[ HERO IMAGE ]----------------*/
+
+.hero-image {
+    background-image: url("/media/hero-image.jpg");
+    width: 100%;
+    height: 80vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/*https://css-tricks.com/working-with-shapes-in-web-design/*/
+.trapezoid {
+    border-bottom: 30vh solid #ffffff;
+    border-left: 65px solid transparent;
+    border-right: 0px solid transparent;
+    height: 0;
+    width: 50%;
+    min-width: 315px;
+    position: absolute;
+    bottom: 0rem;
+    right: 0rem;
+}
+
+.hero-text-container {
+    width: 75%;
+    position: absolute;
+    bottom: 0.5rem;
+    right: .75rem;
+}
+
+.hero-header {
+    font-family: Bungee;
+    font-size: 3.75rem;
+    line-height: 3.5rem;
+}
+
+.hero-tagline {
+    padding-top: 0rem;
+    font-size: 1rem;
+    font-family: Mulish;
+}
+
 /*-----------------[ FOOTER ]----------------*/
 
 .footer-header {
@@ -99,4 +143,28 @@ footer li a:hover,
 
 .sm-icon {
     font-size: 1.75rem;
+}
+
+/*-------------[ MEDIA QUERIES ]-------------*/
+
+@media only screen and (min-width: 576px) {
+
+    /* Hero image */
+    .trapezoid {
+        border-left: 55px solid transparent;
+    }
+
+    .hero-text-container {
+        width: 35%;
+        right: 3.25rem;
+    }
+
+    .hero-header {
+        font-size: 4rem;
+        line-height: 3.75rem;
+    }
+
+    .hero-tagline {
+        font-size: 1.15rem;
+    }
 }
