@@ -62,10 +62,20 @@ background-color: var(--black);
 color: var(--white);
 }
 
+.btn-white{
+background-color: var(--white);
+}
+
 .btn-black:hover {
     background: var(--white);
     border: 1px solid var(--black);
     color: var(--black);
+}
+
+.btn-white:hover {
+   background: var(--black);
+   border: 1px solid var(--white);
+   color: var(--white);
 }
 
 footer a.btn:hover,
