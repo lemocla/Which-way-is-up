@@ -128,24 +128,16 @@ footer li a:hover,
     position: relative;
 }
 
-/*https://css-tricks.com/working-with-shapes-in-web-design/*/
-.trapezoid {
-    border-bottom: 30vh solid #ffffff;
-    border-left: 65px solid transparent;
-    border-right: 0px solid transparent;
-    height: 0;
-    width: 50%;
-    min-width: 315px;
+/*trapezoid shape inspired from https://bennettfeely.com/clippy/*/
+
+.hero-trapezoid {
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+    background-color: var(--white);
     position: absolute;
     bottom: 0rem;
     right: 0rem;
-}
-
-.hero-text-container {
-    width: 75%;
-    position: absolute;
-    bottom: 0.5rem;
-    right: .75rem;
+    width: 82.5%;
+    padding: 2rem 1rem 0.5rem 12%;
 }
 
 .hero-header {
@@ -159,6 +151,7 @@ footer li a:hover,
     font-size: 1rem;
     font-family: Mulish;
 }
+
 
 /*-----------[ HOMEPAGE SECTIONS ]-----------*/
 
@@ -180,16 +173,6 @@ footer li a:hover,
 
 @media only screen and (min-width: 576px) {
 
-    /* Hero image */
-    .trapezoid {
-        border-left: 55px solid transparent;
-    }
-
-    .hero-text-container {
-        width: 35%;
-        right: 3.25rem;
-    }
-
     .hero-header {
         font-size: 4rem;
         line-height: 3.75rem;
@@ -198,11 +181,23 @@ footer li a:hover,
     .hero-tagline {
         font-size: 1.15rem;
     }
+
+    .hero-trapezoid {
+        clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+        padding: 3rem 3.25rem 0.75rem 17.5%;  
+    }
 }
 
+
 @media only screen and (min-width: 992px) {
+    .hero-trapezoid {
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        width: 51%;
+        padding: 2rem 3.25rem 0.75rem 5%;
+    }
+
     .img-home {
-        max-height: 400px !important;
+        max-height: 425px !important;
     }
 
     .reviews-container {
@@ -210,8 +205,37 @@ footer li a:hover,
     }
 }
 
+@media only screen and (min-width: 992px) {
+    .hero-trapezoid {
+        padding: 3rem 3.25rem 0.75rem 10%;
+    }
+}
+
 @media only screen and (min-width: 1450px) {
     .container-home {
         width: 90% !important;
     }
+
+    .hero-trapezoid {
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        padding: 3.5rem 3.25rem 0.75rem 20%;
+    }
+}
+
+@media only screen and (min-width: 1750px) {
+      .img-home {
+        max-height: 90% !important;
+    }
+}
+
+@media only screen and (min-width: 2000px) {
+    .container-home {
+        width: 90% !important;
+    }
+
+    .hero-trapezoid {
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        padding: 3.5rem 5% 0.75rem 25%;
+    }
+
 }
