@@ -24,6 +24,7 @@ body {
 
 /*----------------[ HEADERS ]-----------------*/
 
+h1,
 h2,
 h3,
 .navbar-brand,
@@ -33,6 +34,10 @@ h3,
 
 .homepage-h2 {
     font-size: 2.75rem;
+}
+
+.h1-page {
+    font-size: 3rem;
 }
 
 /*---------------[ BACKGROUND ]---------------*/
@@ -64,6 +69,7 @@ a.btn,
 
 .btn-white {
     background-color: var(--white);
+    border: 1px solid var(--black);
 }
 
 .btn-black:hover {
@@ -159,6 +165,41 @@ footer li a:hover,
     list-style-type: none;
 }
 
+/*-----------[ ALL AUTH ]--------------------*/
+
+.form-control,
+.checkboxinput,
+.form-check-input {
+    border: 1px solid var(--darkgrey);
+}
+
+.form-control:focus {
+    border-color: inherit;
+    outline: 0;
+    box-shadow: 0 0 0.5rem 0.15rem rgba(8, 8, 8, 0.15);
+}
+
+.asteriskField {
+    font-weight: bold;
+    color: var(--red);
+    padding-left: 0.25rem;
+}
+
+#div_id_remember {
+    margin: 1.5rem 0;
+}
+
+.form-link {
+    color: #0d6efd;
+}
+
+.img-abs {
+    position: absolute;
+    top: 85px;
+    right: 0px;
+    width: 120px;
+}
+
 /*-----------------[ FOOTER ]----------------*/
 
 .footer-header {
@@ -184,16 +225,25 @@ footer li a:hover,
 
     .hero-trapezoid {
         clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-        padding: 3rem 3.25rem 0.75rem 17.5%;  
+        padding: 3rem 3.25rem 0.75rem 17.5%;
     }
 }
 
+@media only screen and (min-width: 768px) {
+    .img-abs {
+        position: absolute;
+        top: 85px;
+        right: 0px;
+        width: 200px;
+    }
+}
 
 @media only screen and (min-width: 992px) {
     .hero-trapezoid {
         clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
         width: 51%;
-        padding: 2rem 3.25rem 0.75rem 5%;
+        /*padding: 2rem 3.25rem 0.75rem 5%;*/
+        padding: 3rem 3.25rem 0.75rem 10%;
     }
 
     .img-home {
@@ -203,12 +253,23 @@ footer li a:hover,
     .reviews-container {
         max-width: 415px;
     }
+
+    .img-abs {
+        display: none;
+    }
 }
 
+
+/*
 @media only screen and (min-width: 992px) {
     .hero-trapezoid {
         padding: 3rem 3.25rem 0.75rem 10%;
     }
+}*/
+@media only screen and (min-width: 1399px) {
+  .img-sizing{
+  width: 90%;
+  }
 }
 
 @media only screen and (min-width: 1450px) {
@@ -223,7 +284,7 @@ footer li a:hover,
 }
 
 @media only screen and (min-width: 1750px) {
-      .img-home {
+    .img-home {
         max-height: 90% !important;
     }
 }
