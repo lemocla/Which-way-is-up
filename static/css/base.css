@@ -18,18 +18,25 @@
 
 body {
     font-family: Mulish;
-    font-size: 1rem;
+    /*font-size: 1rem;*/
     color: var(--black);
 }
 
 /*----------------[ HEADERS ]-----------------*/
 
 h2,
-.navbar-brand {
+h3,
+.navbar-brand,
+.homepage-h2 {
     font-family: Bungee;
 }
 
+.homepage-h2 {
+    font-size: 2.75rem;
+}
+
 /*---------------[ BACKGROUND ]---------------*/
+
 .bg-black {
     background-color: var(--black);
 }
@@ -41,6 +48,8 @@ a {
     color: inherit
 }
 
+/*-------------[ BUTTONS ]--------------------*/
+
 a.btn,
 .btn {
     text-decoration: none;
@@ -48,9 +57,15 @@ a.btn,
     border-radius: 2px;
 }
 
-a.btn:hover {
-    background: var(--black);
-    color: #ffffff;
+.btn-black{
+background-color: var(--black);
+color: var(--white);
+}
+
+.btn-black:hover {
+    background: var(--white);
+    border: 1px solid var(--black);
+    color: var(--black);
 }
 
 footer a.btn:hover,
@@ -135,6 +150,12 @@ footer li a:hover,
     font-family: Mulish;
 }
 
+/*-----------[ HOMEPAGE SECTIONS ]-----------*/
+
+.ul-materials {
+    list-style-type: none;
+}
+
 /*-----------------[ FOOTER ]----------------*/
 
 .footer-header {
@@ -166,5 +187,17 @@ footer li a:hover,
 
     .hero-tagline {
         font-size: 1.15rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .img-home {
+        max-height: 400px !important;
+    }
+}
+
+@media only screen and (min-width: 1450px) {
+    .container-home {
+        width: 90% !important;
     }
 }

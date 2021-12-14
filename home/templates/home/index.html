@@ -2,11 +2,47 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid hero-image mb-5">
-        <div class="trapezoid"></div>
-        <div class="hero-text-container">
-            <h1 class="hero-header text-end text-black">Which Way Is Up?</h1>
-            <h2 class="hero-tagline text-end">Urban art by Peter Charalambides</h2>
+<!-- hero image -->
+<div class="container-fluid hero-image mb-5">
+    <div class="trapezoid"></div>
+    <div class="hero-text-container">
+        <h1 class="hero-header text-end text-black">Which Way Is Up?</h1>
+        <h2 class="hero-tagline text-end">Urban art by Peter Charalambides</h2>
+    </div>
+</div>
+
+
+<div class="container-fluid px-3 px-md-5 container-home mb-5">
+    <!-- featured collection -->
+    <div class="row px-2 px-md-0 gx-lg-5 pb-4">
+        <div class="col-12">
+            <h2 class="homepage-h2 pb-5 pb-lg-5 mb-0">Featured collection</h2>
+        </div>
+        <div class="col-sm-12 col-lg-6 pe-lg-5 ">
+            <img src="{{MEDIA_URL}}lexi_cinema.jpg" class="p-2 img-fluid img-home shadow rounded mb-5 mb-lg-2"
+                alt="lexi cinema">
+        </div>
+        <div class="col-sm-12 col-lg-6">
+            <h3 class="pb-4">Local Landmarks</h3>
+            <p>"Think local- we are shaped by our surroundings after all…"</p>
+            <p>Colour: Using colour and line to form distinctive images of local landmarks, the works contain hidden
+                facts and phrases associated with the depicted building.</p>
+            <p>Black and White: Using both shade and negative space, these carefully crafted black line drawings capture
+                the design of both iconic landmarks and buildings.</p>
+
+            <ul class="ul-materials ps-0">
+                <li>Colour: Medium: Spray paint and pen on card</li>
+                <li>Black & White Medium: Pen on card</li>
+                <li>Prints: Unframed A4 Art Print on Somerset Enhanced Velvet 255gsm Paper.</li>
+            </ul>
+
+            <div class="mt-3 py-3">
+                <a href="#" class="btn btn-black px-5 py-2 text-uppercase">View collection</a>
+            </div>
         </div>
     </div>
+</div>
+
+
+
 {% endblock %}
