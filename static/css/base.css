@@ -57,13 +57,13 @@ a.btn,
     border-radius: 2px;
 }
 
-.btn-black{
-background-color: var(--black);
-color: var(--white);
+.btn-black {
+    background-color: var(--black);
+    color: var(--white);
 }
 
-.btn-white{
-background-color: var(--white);
+.btn-white {
+    background-color: var(--white);
 }
 
 .btn-black:hover {
@@ -73,9 +73,9 @@ background-color: var(--white);
 }
 
 .btn-white:hover {
-   background: var(--black);
-   border: 1px solid var(--white);
-   color: var(--white);
+    background: var(--black);
+    border: 1px solid var(--white);
+    color: var(--white);
 }
 
 footer a.btn:hover,
@@ -203,6 +203,10 @@ footer li a:hover,
 @media only screen and (min-width: 992px) {
     .img-home {
         max-height: 400px !important;
+    }
+
+    .reviews-container {
+        max-width: 415px;
     }
 }
 
