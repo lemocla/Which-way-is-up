@@ -177,6 +177,7 @@ footer li a:hover,
 .checkboxinput,
 .form-check-input {
     border: 1px solid var(--darkgrey);
+    max-width: 600px;
 }
 
 .form-control:focus {

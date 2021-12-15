@@ -2,10 +2,17 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Account Inactive" %}{% endblock %}
+{% block extra_title %}{% trans "- Account Inactive" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Account Inactive" %}</h1>
-
-<p>{% trans "This account is inactive." %}</p>
+<div class="container mt-md-1 pt-5 pb-3">
+    <div class="row pb-md-3 mb-4">
+        <h1 class="h1-page pb-md-5 pb-4 mt-md-0">{% trans "Account Inactive" %}</h1>
+        <p>{% trans "This account is inactive." %}</p>
+        <div class="mt-5">
+            <a class="btn btn-white px-5 py-2 text-uppercase" href="{% url 'home' %}">Home</a>
+            <a class="btn px-5 py-2 text-uppercase btn-black" href="{% url 'account_login' %}">Sign in</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
