@@ -2,13 +2,13 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block extra_title %}{% trans "- Signup" %}{% endblock %}
 
 {% block content %}
 <div class="container mt-md-1 pt-5 pb-3">
   <div class="row pb-md-3 mb-4">
     <div class="col-lg-6 pe-xl-5">
-      <img class="img-abs" src="{{MEDIA_URL}}register-illustration.png" alt="register illustration" />
+      <img class="img-abs" src="{{MEDIA_URL}}register-illustration.png" width="200" height="200" alt="register illustration" />
       <h1 class="h1-page pb-md-5 pb-4 mt-md-0">{% trans "Sign Up" %}</h1>
 
       <p>{% blocktrans %}Already have an account? Then please <a class="form-link" href="{{ login_url }}">sign in</a>.{% endblocktrans %}
@@ -27,7 +27,7 @@
       </form>
     </div>
     <div class="d-none d-lg-block col-lg-6 text-end align-self-center">
-      <img class="img-fluid img-sizing" src="{{MEDIA_URL}}register-illustration.png" alt="register illustration" />
+      <img class="img-fluid img-sizing" src="{{MEDIA_URL}}register-illustration.png" width="500" height="500" alt="register illustration" />
     </div>
   </div>
 </div>

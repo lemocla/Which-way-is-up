@@ -3,13 +3,13 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block extra_title %}{% trans "- Sign In" %}{% endblock %}
 
 {% block content %}
 <div class="container mt-md-1 pt-5 pb-3">
   <div class="row pb-md-3 mb-4">
     <div class="col-lg-6 pe-xl-5">
-      <img class="img-abs" src="{{MEDIA_URL}}login-illustration.png" alt="contact-illustration" />
+      <img class="img-abs" src="{{MEDIA_URL}}login-illustration.png" width="200" height="200" alt="login-illustration" />
       <h1 class="h1-page pb-md-5 pb-4 mt-md-0">{% trans "Sign In" %}</h1>
 
       {% get_providers as socialaccount_providers %}
@@ -53,7 +53,7 @@
       </form>
     </div>
     <div class="d-none d-lg-block col-lg-6 text-end align-self-center">
-      <img class="img-fluid img-sizing" src="{{MEDIA_URL}}login-illustration.png" alt="contact-illustration" />
+      <img class="img-fluid img-sizing" src="{{MEDIA_URL}}login-illustration.png" width="500" height="500" alt="login illustration" />
     </div>
   </div>
 </div>
