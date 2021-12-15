@@ -22,6 +22,12 @@ body {
     color: var(--black);
 }
 
+/*----------------[CONTAINERS]----------------*/
+
+.container {
+    min-height: 60vh !important;
+}
+
 /*----------------[ HEADERS ]-----------------*/
 
 h1,
@@ -267,9 +273,9 @@ footer li a:hover,
     }
 }*/
 @media only screen and (min-width: 1399px) {
-  .img-sizing{
-  width: 90%;
-  }
+    .img-sizing {
+        width: 90%;
+    }
 }
 
 @media only screen and (min-width: 1450px) {
