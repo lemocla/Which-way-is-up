@@ -34,7 +34,8 @@ h1,
 h2,
 h3,
 .navbar-brand,
-.homepage-h2 {
+.homepage-h2,
+.toast-header {
     font-family: Bungee;
 }
 
@@ -101,6 +102,46 @@ footer li a:hover,
 .sm-icon:hover {
     transform: scale(1.1);
     color: var(--ivory);
+}
+
+/*---------------[ TOASTS ]------------------*/
+
+.message-container {
+    position: fixed;
+    top: 4.15rem;
+    right: 3.5vw;
+    z-index: 99999999999;
+}
+
+.toast {
+    overflow: visible;
+    background-color: var(--white);
+    border: 2px solid var(--black);
+    border-radius: 5px !important;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .85) !important;
+    padding: 0.25rem;
+}
+
+.toast-capper {
+    height: 2px;
+    margin: 0 0.5rem;
+}
+
+/* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
+.arrow-up {
+width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid white;
+    position: absolute;
+    top: -8px;
+    right: 25px;
+}
+
+.toast-header {
+    border-bottom: none;
+    color: inherit;
 }
 
 /*-------------[ NAVIGATION ]----------------*/
@@ -243,9 +284,18 @@ footer li a:hover,
         right: 0px;
         width: 200px;
     }
+
+    .message-container {
+    right: 6vw;
+}
 }
 
 @media only screen and (min-width: 992px) {
+
+    .message-container {
+    right: 4vw;
+}
+
     .hero-trapezoid {
         clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
         width: 51%;
@@ -266,13 +316,12 @@ footer li a:hover,
     }
 }
 
+@media only screen and (min-width: 1200px) {
+.message-container {
+    right: 3vw;
+}
+}
 
-/*
-@media only screen and (min-width: 992px) {
-    .hero-trapezoid {
-        padding: 3rem 3.25rem 0.75rem 10%;
-    }
-}*/
 @media only screen and (min-width: 1399px) {
     .img-sizing {
         width: 90%;
