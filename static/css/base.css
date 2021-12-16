@@ -26,6 +26,11 @@ body {
 
 .container {
     min-height: 60vh !important;
+    margin-top: 78px;
+}
+
+.mg-top {
+    margin-top: 72px;
 }
 
 /*----------------[ HEADERS ]-----------------*/
@@ -129,7 +134,7 @@ footer li a:hover,
 
 /* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
 .arrow-up {
-width: 0;
+    width: 0;
     height: 0;
     border-left: 10px solid transparent;
     border-right: 8px solid transparent;
@@ -286,15 +291,15 @@ width: 0;
     }
 
     .message-container {
-    right: 6vw;
-}
+        right: 6vw;
+    }
 }
 
 @media only screen and (min-width: 992px) {
 
     .message-container {
-    right: 4vw;
-}
+        right: 4vw;
+    }
 
     .hero-trapezoid {
         clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
@@ -317,9 +322,9 @@ width: 0;
 }
 
 @media only screen and (min-width: 1200px) {
-.message-container {
-    right: 3vw;
-}
+    .message-container {
+        right: 3vw;
+    }
 }
 
 @media only screen and (min-width: 1399px) {
