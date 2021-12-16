@@ -10,4 +10,6 @@ urlpatterns = [
          name="delivery_and_returns"),
     path("terms_and_conditions", views.terms_conditions,
          name="terms_and_conditions"),
+    path("accessibility", views.accessibility,
+         name="accessibility"),
 ]

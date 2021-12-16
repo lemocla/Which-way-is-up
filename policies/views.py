@@ -17,3 +17,10 @@ def terms_conditions(request):
     View to return terms and conditions policy
     """
     return render(request, 'policies/terms_and_conditions.html')
+
+
+def accessibility(request):
+    """
+    View to return accessibility policy
+    """
+    return render(request, 'policies/accessibility.html')
