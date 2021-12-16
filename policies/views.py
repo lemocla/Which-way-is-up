@@ -24,3 +24,10 @@ def accessibility(request):
     View to return accessibility policy
     """
     return render(request, 'policies/accessibility.html')
+
+
+def privacy(request):
+    """
+    View to return privacy policy
+    """
+    return render(request, 'policies/privacy.html')
