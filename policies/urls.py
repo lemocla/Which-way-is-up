@@ -8,4 +8,6 @@ from . import views
 urlpatterns = [
     path("delivery_and_returns", views.delivery_returns,
          name="delivery_and_returns"),
+    path("terms_and_conditions", views.terms_conditions,
+         name="terms_and_conditions"),
 ]
