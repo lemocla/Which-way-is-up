@@ -1,3 +1,12 @@
+"""
+Views to render policies content
+"""
+
 from django.shortcuts import render
 
-# Create your views here.
+
+def delivery_returns(request):
+    """
+    View to return delivery and returns policy
+    """
+    return render(request, 'policies/delivery_and_returns.html')
