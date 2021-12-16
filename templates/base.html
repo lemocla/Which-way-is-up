@@ -99,7 +99,7 @@
                     <ul class="navbar-nav mx-lg-auto">
                         <!-- home page -->
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
                         <!-- collection -->
                         <li class="nav-item dropdown">
@@ -183,10 +183,10 @@
                 <!-- policies-->
                 <h2 class="footer-header pb-2 fw-bolc">Useful links</h2>
                 <ul class="list-unstyled">
-                    <li><a href="#">Delivery and return policy</a></li>
-                    <li><a href="#">Terms & conditions</a></li>
-                    <li><a href="#">Accessibility</a></li>
-                    <li><a href="#">Privacy</a></li>
+                    <li><a href="{% url 'delivery_and_returns' %}">Delivery and return policy</a></li>
+                    <li><a href="{% url 'terms_and_conditions' %}">Terms & conditions</a></li>
+                    <li><a href="{% url 'accessibility' %}">Accessibility</a></li>
+                    <li><a href="{% url 'privacy' %}">Privacy</a></li>
                 </ul>
                 <!-- contact form -->
                 <a href="#" class="btn bg-white text-black px-5 py-1 my-lg-2 text-uppercase">Contact</a>
@@ -242,7 +242,7 @@
     </script>
     <!-- script.js -->
     <script src="{% static 'js/script.js' %}"></script>
-    
+
     {% endblock %}
 
     {% block extra_js %}
