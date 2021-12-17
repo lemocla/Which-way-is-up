@@ -217,13 +217,13 @@ footer li a:hover,
     list-style-type: none;
 }
 
-/*-----------[ ALL AUTH ]--------------------*/
+/*-----------[ ALL AUTH / FORMS]-------------*/
 
 .form-control,
 .checkboxinput,
 .form-check-input {
     border: 1px solid var(--darkgrey);
-    max-width: 600px;
+    max-width: 635px;
 }
 
 .form-control:focus {
