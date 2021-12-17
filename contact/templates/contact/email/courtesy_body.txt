@@ -1,0 +1,8 @@
+Dear {{ full_name }},
+
+Thank you for your message
+
+We have received your emessage and we aim to respond to your email within 24 hours.
+
+Best regards,
+Which Way is Up
