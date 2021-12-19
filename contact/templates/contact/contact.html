@@ -10,7 +10,7 @@
         <div class="col-md-6">
             <h1 class="h1-page pb-md-5 pb-4 mt-md-0">Contact us</h1>
             <p>If you don't find what you're looking for, please contact us via the below contact form.</p>
-            <form class="mt-5" id="contact-form" method="post">
+            <form class="mt-5" id="contact-form" action="{% url 'contact' %}" method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="mt-5">
