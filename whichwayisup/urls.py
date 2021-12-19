@@ -26,5 +26,6 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('newsletter/', include('newsletter.urls')),
     path('about/', include('about.urls')),
+    path('my_profile/', include('profiles.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
