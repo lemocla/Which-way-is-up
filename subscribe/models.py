@@ -9,7 +9,7 @@ class Subscription(models.Model):
     '''
     Model to register email address
     '''
-    email = models.EmailField(max_length=255, null=False, blank=False)
+    email = models.EmailField(max_length=255, null=False, blank=False, unique=True)
 
     def __str__(self):
         return str(self.email)
