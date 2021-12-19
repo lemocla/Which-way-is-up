@@ -218,7 +218,7 @@
                     </ul>
                 </div>
                 <!-- newsletter subscription-->
-                <form class="row" id="subscribe-form" method="post" action="{% url 'subscribe' %}">
+                <form class="row" id="subscribe-form" method="post" action="{% url 'newsletter' %}">
                     {% csrf_token %}
                     <div class="col-8 col-lg-8 text-black">
                         {% for field in subscribe_form %}

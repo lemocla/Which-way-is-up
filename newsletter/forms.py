@@ -1,19 +1,19 @@
 """
-form for newsletter subscription
+form to add email to mailing list
 """
 
 from django import forms
-from .models import Subscription
+from .models import Mailing
 # https://docs.djangoproject.com/en/4.0/topics/forms/
 
 
 class SubscribeForm(forms.ModelForm):
     """
-    form fields for newsletter subscription
-    based on Subscription model
+    Set fields for newsletter subscription form
+    based on Mailing model
     """
     class Meta:
-        model = Subscription
+        model = Mailing
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):

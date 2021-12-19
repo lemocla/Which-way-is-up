@@ -24,6 +24,6 @@ urlpatterns = [
     path('', include('home.urls')),
     path('policies/', include('policies.urls')),
     path('contact/', include('contact.urls')),
-    path('test_subscribe/', include('subscribe.urls')),
+    path('newsletter/', include('newsletter.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

@@ -1,5 +1,5 @@
 """
-Functions handling newsletter subscription
+Functions handling newsletter mailing list
 """
 
 from django.http import HttpResponseRedirect
@@ -8,11 +8,11 @@ from django.template.loader import render_to_string
 from django.core.mail import BadHeaderError, send_mail
 from django.conf import settings
 
-from .models import Subscription
+from .models import Mailing
 from .forms import SubscribeForm
 
 
-def add_to_subscribe_list(request):
+def add_to_mailing_list(request):
     """
     Add email to newsletter subscribe list
     Send acknowledgment email and display toast message
