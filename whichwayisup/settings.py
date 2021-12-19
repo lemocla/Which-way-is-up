@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'home',
     'policies',
     'contact',
+    'subscribe',
     'crispy_bootstrap5',
     'crispy_forms',
 ]
@@ -78,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'subscribe.contexts.subscribe_form',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',

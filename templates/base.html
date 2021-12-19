@@ -189,7 +189,8 @@
                     <li><a href="{% url 'privacy' %}">Privacy</a></li>
                 </ul>
                 <!-- contact form -->
-                <a href="{% url 'contact' %}" class="btn bg-white text-black px-5 py-1 my-lg-2 text-uppercase">Contact</a>
+                <a href="{% url 'contact' %}"
+                    class="btn bg-white text-black px-5 py-1 my-lg-2 text-uppercase">Contact</a>
             </div>
             <div class="col-sm-12 col-lg-4 text-white order-1 order-lg-2">
                 <!-- social media links -->
@@ -217,10 +218,13 @@
                     </ul>
                 </div>
                 <!-- newsletter subscription-->
-                <form class="row">
+                <form class="row" id="subscribe-form" method="post" action="{% url 'subscribe' %}">
+                    {% csrf_token %}
                     <div class="col-8 col-lg-8 text-black">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Email</label>
+                        {% for field in subscribe_form %}
+                        {{ field }}
+                        <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                        {% endfor %}
                     </div>
                     <div class="col-4 col-lg-4 px-0">
                         <button type="submit" class="btn bg-white text-black text-uppercase footer-btn">Sign up</button>
@@ -228,7 +232,7 @@
                 </form>
             </div>
         </div>
-        <!--</div>-->
+
     </footer>
 
     {% block core_js %}
