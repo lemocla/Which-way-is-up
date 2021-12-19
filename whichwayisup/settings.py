@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'policies',
     'contact',
     'newsletter',
+    'about',
     'crispy_bootstrap5',
     'crispy_forms',
 ]
