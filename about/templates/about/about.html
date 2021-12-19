@@ -5,10 +5,95 @@
 
 {% block content %}
 
-<div class="container pt-md-5 pt-4 pb-3">
-    <div class="row pb-md-3 mb-4">
-    <h1>About</h1>
+    <div class="container pt-md-5 pt-4 pb-3">
+        <div class="row pb-md-3 mb-4">
+            <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">About</h1>
+            <div class="col-md-3 mb-md-0">
+                <img class='img-fluid shadow-lg rounded img-square' src="{{MEDIA_URL}}about-portrait.jpg" width='375' height='375' alt="artist portrait">
+            </div>
+            <div class="col ps-md-5 ms-md-3 pt-4 pt-md-0 relative text-center text-md-start">
+            
+                    <p class='mb-3 mb-md-5 fs-1 fw-bolder '>Peter Charalambides</p>
+                    <p class="mb-1">Visual Artist</p>
+                    <p class="mb-0">Living & working in London</p>
+                    <div class='mt-md-5 mt-4'>
+                        <a
+                            class='btn border border-dark fs-md-5 text-black px-5 py-2 my-lg-2 text-uppercase'>contact</a>
+                    </div>
+                    <img class='img-drawing d-none d-md-block' src="{{MEDIA_URL}}about-illustration.png" width='500' height='500' alt="black and white doodle illustration">
+            </div>
+        </div>
+        <!-- biography -->
+        <div class="row mt-5 mt-md-5">
+            <div class="col col-md-6">
+                <h2 class='trapez-bg ps-4 py-1 mb-4 mb-md-5'>Biography</h2>
+            </div>
+            <div class="col-12 mt-2 mt-md-0 px-3">
+                <p>Peter Charalambides is a visual artist living and working in London, England.</p>
+                <p>Peter works in a variety of mediums including spray and acrylic paint, oil sticks, collage and pen.
+                    Pieces are characterised by colour and texture- qualities that magnify an expressionist style
+                    throughout his works. There is a defining dichotomy in Peter's work, in so much that he seesaws
+                    wildly between the monochrome and precision, to the free and colourful.</p>
+                <p>Peter is currently working on a series exploring the ideas of choice and freedom. Are choices freely
+                    made or are they influenced by previous decisions (such as what children’s television programmes we
+                    watched as children)? Or perhaps, we have no choice (or freedom whatsoever) and our paths are mapped
+                    from the very outset.</p>
+                <p>Therefore, the pieces attempt to explore the ideas of existentialism, determinism and fatalism
+                    through the medium of imagery, words and mathematics.</p>
+                <p>Peter Charalambides is a working artist and has sold artworks to patrons around the world. His work
+                    has appeared in numerous exhibitions in the U.K and appeared in several publications.</p>
+                <p class='mb-1'>Peter has also donated several of his drawings to local causes, which have subsequently been used in
+                    merchandising and other charitable fund raising activities.</p>
+            </div>
+        </div>
+        <!-- events -->
+        <div class="row mt-5">
+            <div class="col col-md-6">
+                <h2 class='trapez-bg ps-4 py-1 mb-4 mb-md-5'>Events</h2>
+            </div>
+            <div class="ps-4">
+                <div class="timeline-item" data-dates="May 2021">
+                    <h3 class="fs-4">Cultivate presents Still</h3>
+                    <p>Part of an online group exhibition</p>
+                </div>
+                <div class="timeline-item" data-dates="May 2021">
+                    <h3 class="fs-4">Timelapse Studio</h3>
+                    <p>Part of an online group exhibition</p>
+                </div>
+                <div class="timeline-item" data-dates="May 2021">
+                    <h3 class="fs-4">Cultivate presents Still</h3>
+                    <p>Featured on Instagram</p>
+                </div>
+                <div class="timeline-item" data-dates="April 2021">
+                    <h3 class="fs-4">Letters from Nowhere</h3>
+                    <p>Part of an online group exhibition with the Riverside Artists Group</p>
+                </div>
+                <div class="timeline-item" data-dates="February 2021">
+                    <h3 class="fs-4">Willesden Gallery, London</h3>
+                    <p>Featured Artist on Instagram</p>
+                </div>
+                <div class="timeline-item" data-dates="August 2020 - September 2020">
+                    <h3 class="fs-4">Excess: Exhibition 104, Amina Malik Gallery, London</h3>
+                    <p>Part of a group exhibition exploring the ideas of excess</p>
+                </div>
+                <div class="timeline-item" data-dates="May 2020">
+                    <h3 class="fs-4">no barking aRt</h3>
+                    <p>Part of an online group exhibition</p>
+                </div>
+                <div class="timeline-item" data-dates="April 2020">
+                    <h3 class="fs-4">Thread Palette London Magazine</h3>
+                    <p>Featured online in promotion recording Lock Down experiences through art</p>
+                </div>
+                <div class="timeline-item" data-dates="April 2020">
+                    <h3 class="fs-4">Willesden Gallery, London</h3>
+                    <p>Takeover of Instagram Account for one week</p>
+                </div>
+                <div class="timeline-item" data-dates="March 2020">
+                    <h3 class="fs-4">Desperate Times Call For Desperate Measures</h3>
+                    <p>Part of an online group exhibition</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
 {% endblock %}
