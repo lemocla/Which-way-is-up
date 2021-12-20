@@ -7,11 +7,16 @@
 {% block content %}
 <div class="container pt-5 pb-3">
   <div class="row pb-md-3 mb-4">
-    <h1 class="h1-page pb-md-5 pb-4 mt-md-0">{% trans "E-mail Addresses" %}</h1>
+  <div class="col-12 col-lg-8">
+    <h1 class="h1-page pb-md-4 pb-4 mt-md-0">{% trans "E-mail Addresses" %}</h1>
+    </div>
+    <div class="col-12 col-lg-4 pt-lg-1 ">
+     <a class="btn btn-white px-5 py-2 text-uppercase" href="{% url 'profile' %}">Back to profile</a>
+     </div>
     {% if user.emailaddress_set.all %}
-    <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
+    <p class="mt-4 pt-1 mt-lg-0">{% trans 'The following e-mail addresses are associated with your account:' %}</p>
 
-    <form action="{% url 'account_email' %}" class="email_list mt-4" method="post">
+    <form action="{% url 'account_email' %}" class="email_list mt-3" method="post">
       {% csrf_token %}
       <fieldset class="blockLabels">
 
@@ -25,9 +30,9 @@
 
             {{ emailaddress.email }}
             {% if emailaddress.verified %}
-            <span class="verified">{% trans "Verified" %}</span>
+            <span class="verified fw-bold text-success">{% trans "- Verified" %}</span>
             {% else %}
-            <span class="unverified">{% trans "Unverified" %}</span>
+            <span class="unverified fw-bold text-danger">{% trans "- Unverified" %}</span>
             {% endif %}
             {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
           </label>
@@ -35,7 +40,7 @@
         {% endfor %}
 
         <div class="buttonHolder mt-4">
-          <button class="btn px-5 py-2 text-uppercase btn-black" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
+          <button class="btn px-5 py-2 text-uppercase btn-white" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
           <button class="btn px-5 py-2 text-uppercase btn-white" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
           <button class="btn px-5 py-2 text-uppercase btn-danger" type="submit" name="action_remove">{% trans 'Remove' %}</button>
         </div>
@@ -56,7 +61,7 @@
     <form method="post" action="{% url 'account_email' %}" class="add_email">
       {% csrf_token %}
       {{ form|crispy }}
-      <button class="btn px-5 py-2 text-uppercase btn-black mt-4" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+      <button class="btn px-5 py-2 text-uppercase btn-white mt-4" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
     </form>
   </div>
 </div>
