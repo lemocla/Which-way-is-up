@@ -1,14 +1,38 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block extra_title %}- my profile {% endblock %}
 
 {% block content %}
 
-    <div class="container pt-md-5 pt-4 pb-3">
-        <div class="row pb-md-3 mb-4">
-            <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">My profile</h1>
+<div class="container pt-md-5 pt-4 pb-3">
+    <div class="row pb-md-3 mb-4">
+        <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">My profile</h1>
+        <div class="col-md-5 py-1 fw-bold fs-4">Hello!</div>
+        <div class="col-md-7 text-end">
+            <a class="btn btn-white px-5 py-2 text-uppercase" href="{% url 'account_email' %}">Change email</a>
+            <a class="btn btn-white px-5 py-2 text-uppercase" href="{% url 'account_change_password' %}">Change password</a>
         </div>
     </div>
+
+    <form class="row" id="profile-delivery-details">
+        {% csrf_token %}
+        <div class="col-12 col-lg-6 pe-lg-5">
+            <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4 mb-md-5'>Your contact details</h2>
+            {{ cont_form|crispy }}
+        </div>
+        <div class="col-12 col-lg-6 ps-lg-5">
+            <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4 mb-md-5'>Delivery details</h2>
+            {{ del_form|crispy }}
+        </div>
+        <div class="mt-4 text-center">
+            <button class="btn px-5 py-2 text-uppercase btn-black" type="submit">Update</button>
+            <a class="btn btn-white px-5 py-2 text-uppercase" href="">Cancel</a>
+        </div>
+    </form>
+
+</div>
 
 {% endblock %}

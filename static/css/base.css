@@ -219,11 +219,21 @@ footer li a:hover,
 
 /*-----------[ ALL AUTH / FORMS]-------------*/
 
+#profile-delivery-details label {
+    position: absolute;
+    z-index: -1;
+}
+
 .form-control,
 .checkboxinput,
 .form-check-input {
     border: 1px solid var(--darkgrey);
     max-width: 635px;
+}
+
+.form-select {
+    color: inherit;
+    border: 1px solid var(--darkgrey);
 }
 
 .form-control:focus {
@@ -255,26 +265,26 @@ footer li a:hover,
 
 /*----------------[ ABOUT ]---------------*/
 
-.trapez-bg{
+.trapez-bg {
     clip-path: polygon(0% 0%, 97% 0, 100% 100%, 0% 100%);
     background-color: var(--black);
     color: var(--white);
 }
 
-.img-square{
-  object-fit: cover;
-  width: 375px;
-  height: 375px;
+.img-square {
+    object-fit: cover;
+    width: 375px;
+    height: 375px;
 }
 
-.relative{
-  position: relative;
+.relative {
+    position: relative;
 }
 
-.img-drawing{
-  position: absolute;
-  bottom: -100px;
-  right: 0px
+.img-drawing {
+    position: absolute;
+    bottom: -100px;
+    right: 0px
 }
 
 /* adapted from https://github.com/Code-Institute-Solutions/resume-miniproject-bootstrap4/tree/master/16-adding-work-history*/
