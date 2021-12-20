@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
+{% load account %}
 
 
 {% block extra_title %}- my profile {% endblock %}
@@ -10,10 +10,11 @@
 <div class="container pt-md-5 pt-4 pb-3">
     <div class="row pb-md-3 mb-4">
         <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">My profile</h1>
-        <div class="col-md-5 py-1 fw-bold fs-4">Hello!</div>
-        <div class="col-md-7 text-end">
-            <a class="btn btn-white px-5 py-2 text-uppercase" href="{% url 'account_email' %}">Change email</a>
-            <a class="btn btn-white px-5 py-2 text-uppercase" href="{% url 'account_change_password' %}">Change password</a>
+        <div class="col-md-5 py-1 fw-bold fs-4">Hello {{ user|title }}!</div>
+        <div class="col-md-7 text-md-end py-3 py-md-0">
+            <a class="btn btn-white px-2 px-md-4 py-2 text-uppercase" href="{% url 'account_email' %}">Change email</a>
+            <a class="btn btn-white px-2 px-md-4 py-2 text-uppercase" href="{% url 'account_set_password' %}">Change
+                password</a>
         </div>
     </div>
 
@@ -35,4 +36,9 @@
 
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'profiles/js/profile.js' %}"></script>
 {% endblock %}

@@ -224,16 +224,17 @@ footer li a:hover,
     z-index: -1;
 }
 
-.form-control,
-.checkboxinput,
-.form-check-input {
-    border: 1px solid var(--darkgrey);
-    max-width: 635px;
+.form-check-label{
+    padding-left: 0.75rem;
 }
 
+.form-control,
+.checkboxinput,
+.form-check-input,
 .form-select {
     color: inherit;
     border: 1px solid var(--darkgrey);
+    max-width: 635px;
 }
 
 .form-control:focus {
