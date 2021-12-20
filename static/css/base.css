@@ -219,12 +219,20 @@ footer li a:hover,
 
 /*-----------[ ALL AUTH / FORMS]-------------*/
 
-#profile-delivery-details label {
+.form-group{
+    margin-bottom: 1rem;
+}
+
+.form-group label{
+    margin-bottom: 0.35rem;
+}
+
+#profile-form label {
     position: absolute;
     z-index: -1;
 }
 
-.form-check-label{
+.custom-checkbox label{
     padding-left: 0.75rem;
 }
 

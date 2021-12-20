@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+
 {% load static %}
 {% load account %}
 
@@ -18,22 +22,10 @@
         </div>
     </div>
 
-    <form class="row" id="profile-delivery-details">
+    <div class="row">
         {% csrf_token %}
-        <div class="col-12 col-lg-6 pe-lg-5">
-            <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4 mb-md-5'>Your contact details</h2>
-            {{ cont_form|crispy }}
-        </div>
-        <div class="col-12 col-lg-6 ps-lg-5">
-            <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4 mb-md-5'>Delivery details</h2>
-            {{ del_form|crispy }}
-        </div>
-        <div class="mt-4 text-center">
-            <button class="btn px-5 py-2 text-uppercase btn-black" type="submit">Update</button>
-            <a class="btn btn-white px-5 py-2 text-uppercase" href="">Cancel</a>
-        </div>
-    </form>
-
+        {% crispy form %}
+    </div>
 </div>
 
 {% endblock %}
