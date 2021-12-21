@@ -2,8 +2,6 @@
 Context to display subscribe form to all pages
 """
 
-from django.shortcuts import render
-
 from .models import PortfolioCategory
 
 
