@@ -10,7 +10,5 @@ def subscribe_form(request):
     Put subscibe form in context
     """
     form = SubscribeForm()
-    context = {'subscribe_form': form}
-    if request.method == 'GET':
-        return context
-    return
+    context = {'newsletter_form': form}
+    return context

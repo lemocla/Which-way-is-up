@@ -34,7 +34,7 @@ def add_to_mailing_list(request):
             sender = settings.EMAIL_HOST_USER
             recipients = [form.cleaned_data['email']]
             subject = msg
-            body = render_to_string('subscribe/email/body.txt')
+            body = render_to_string('newsletter/email/body.txt')
             # Toast message
             messages.success(request, msg)
             # Send mail

@@ -81,7 +81,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'newsletter.contexts.subscribe_form',
+                'newsletter.context_form.subscribe_form',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -126,7 +126,6 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
-ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = False
 
 WSGI_APPLICATION = 'whichwayisup.wsgi.application'
 
