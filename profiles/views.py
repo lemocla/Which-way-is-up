@@ -1,11 +1,15 @@
 """
 Views to render my profile page content
 """
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth.models import User
+from newsletter.models import Mailing
 from .models import UserProfile
+
 from .forms import UserProfileForm
 
 
@@ -19,9 +23,21 @@ def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=user_profile)
         if form.is_valid():
+            # Save form data in database
             form.save()
+            # Add/ Remove email from newsletter if newsletter is true/false
+            user = User.objects.get(username=user_profile)
+            check = form.cleaned_data['newsletter']
+            try:
+                subscribe = Mailing.objects.get(email=user.email)
+                if not check:
+                    subscribe.delete()
+            except ObjectDoesNotExist:
+                if check:
+                    add = Mailing(email=user.email)
+                    add.save()
+            # Toast
             messages.success(request, 'Profile updated successfully')
-            # return HttpResponseRedirect('/my_profile/')
         else:
             messages.error(
                 request,

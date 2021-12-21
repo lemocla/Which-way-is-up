@@ -8,7 +8,9 @@ from django.template.loader import render_to_string
 from django.core.mail import BadHeaderError, send_mail
 from django.conf import settings
 
-from .models import Mailing
+from django.contrib.auth.models import User
+from profiles.models import UserProfile
+
 from .forms import SubscribeForm
 
 
@@ -28,6 +30,7 @@ def add_to_mailing_list(request):
         if form.is_valid():
             # Data from form
             form.save()
+
             # message / subject
             msg = 'Thank you for signing up to our newsletter!'
             # acknowledgment email variables
@@ -35,6 +38,14 @@ def add_to_mailing_list(request):
             recipients = [form.cleaned_data['email']]
             subject = msg
             body = render_to_string('newsletter/email/body.txt')
+
+            # check if email match a user and tick newsletter checkbox
+            existing_user = User.objects.get(email=form.cleaned_data['email'])
+            if existing_user:
+                profile = UserProfile.objects.get(user=existing_user)
+                if profile and not profile.newsletter:
+                    profile.newsletter = True
+                    profile.save()
             # Toast message
             messages.success(request, msg)
             # Send mail
@@ -42,8 +53,9 @@ def add_to_mailing_list(request):
                 send_mail(subject, body, sender, recipients)
             except BadHeaderError:
                 messages.error(request, "Sorry - an error occured our side, "
-                          "please retry later")
+                               "please retry later")
         else:
             # error message
-            messages.warning(request, 'You have already subscribed to our newsletter')
+            messages.warning(request,
+                             'You have already subscribed to our newsletter')
     return HttpResponseRedirect(redirect_url)
