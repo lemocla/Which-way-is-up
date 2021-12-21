@@ -3,11 +3,14 @@ Views to render contact form content
 """
 
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import render_to_string
 from django.core.mail import BadHeaderError, send_mail
 from django.conf import settings
 
+from django.contrib.auth.models import User
+from profiles.models import UserProfile
 from .forms import ContactForm
 
 
@@ -17,6 +20,7 @@ from .forms import ContactForm
 def contact(request):
     """
     View to return the contact us page and create blank form
+    Autofill form if user is authenticated but not super user
     Post request to send email to shop owner
     Send courtesy response to sender
     Display success message if the form is valid
@@ -58,7 +62,19 @@ def contact(request):
                 messages.error(request, "Your message couldn't be sent")
 
             return redirect("contact")
-    # create a blank form
     else:
-        form = ContactForm()
+        # Autofill user details if authenticated but not super user
+        try:
+            user = User.objects.get(username=request.user)
+            if user.is_superuser:
+                form = ContactForm()
+            else:
+                user_profile = get_object_or_404(UserProfile, user=user)
+                form = ContactForm(
+                        initial={'email': user.email,
+                                 'full_name': user_profile.full_name,
+                                 })
+        except ObjectDoesNotExist:
+            form = ContactForm()
+
     return render(request, 'contact/contact.html', {'form': form})
