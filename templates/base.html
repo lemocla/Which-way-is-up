@@ -42,7 +42,7 @@
     <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-black py-3">
             <div class="container-fluid px-3 px-md-5">
-
+                
                 <!--collapsible button-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -94,14 +94,36 @@
                     </li>
                 </ul>
 
+                <div class="text-white"></div>
+
                 <!-- collapsible menu -->
                 <div class="collapse navbar-collapse order-lg-2" id="navbarNavDropdown">
                     <ul class="navbar-nav mx-lg-auto">
                         <!-- home page -->
+                        
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
+                        
+                        {% for portfolio in categories %}
                         <!-- collection -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="{{portfolio}}DropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ portfolio|title }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark px-3"
+                                aria-labelledby="{{portfolio}}DropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Doodle art</a></li>
+                                <li><a class="dropdown-item" href="#">Doodle landmarks</a></li>
+                                <li><a class="dropdown-item" href="#">Doodle furnitures</a></li>
+                                <li><a class="dropdown-item" href="#">Doodle blocks</a></li>
+                            </ul>
+                        </li>
+                        <!-- end collection -->
+                        {% endfor %}
+
+                        <!--
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="collectionDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -115,7 +137,9 @@
                                 <li><a class="dropdown-item" href="#">Doodle blocks</a></li>
                             </ul>
                         </li>
+                        -->
                         <!-- commission -->
+                        <!--
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="commissionDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -127,6 +151,7 @@
                                 <li><a class="dropdown-item" href="#">Furniture & items</a></li>
                             </ul>
                         </li>
+                        -->
                         <!-- about -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'about' %}">About</a>
