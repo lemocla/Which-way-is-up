@@ -23,6 +23,8 @@ class UserProfileForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
+        self.helper.form_action = 'profile'
+        self.helper.form_method = 'POST'
         self.helper.layout = Layout(
             Div(
                 Div(
@@ -60,7 +62,6 @@ class UserProfileForm(forms.ModelForm):
         placeholders = {
             'full_name': 'Full Name',
             'phone_number': 'Phone Number',
-            'newsletter': 'Subscribe to newsletter',
             'postcode': 'Postal Code',
             'town_or_city': 'Town or City',
             'street_address1': 'Street Address 1',
@@ -68,11 +69,12 @@ class UserProfileForm(forms.ModelForm):
             'county': 'County, State or Locality',
         }
 
+        no_placeholders = ['country', 'newsletter']
         for field in self.fields:
-            if field != 'country':
+            if field not in no_placeholders:
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
                     placeholder = placeholders[field]
-            self.fields[field].widget.attrs['placeholder'] = placeholder
+                self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'mb-3'

@@ -3,6 +3,7 @@
 
 {% load crispy_forms_tags %}
 
+
 {% load static %}
 {% load account %}
 
@@ -23,8 +24,8 @@
     </div>
 
     <div class="row">
-        {% csrf_token %}
-        {% crispy form %}
+    {% crispy form %}
+       
     </div>
 </div>
 
