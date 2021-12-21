@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'newsletter',
     'about',
     'profiles',
+    'portfolio',
     'crispy_bootstrap5',
     'crispy_forms',
 ]
