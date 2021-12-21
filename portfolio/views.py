@@ -1,11 +1,18 @@
 """
 Views to handle display and portfolio management
 """
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
+from .models import Portfolio
 
 
-def all(request):
+def portfolio_detail(request, portfolio_id):
     """
-    View to return all page
+    View portfolio detail
     """
-    return render(request, 'portfolio/all.html')
+    portfolio = get_object_or_404(Portfolio, id=portfolio_id)
+    context = {
+        'portfolio': portfolio,
+    }
+
+    return render(request, 'portfolio/portfolio.html', context)

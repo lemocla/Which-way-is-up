@@ -113,7 +113,7 @@
                                 aria-labelledby="{{category}}DropdownMenuLink">
                                 {% if category.col|length > 0 %}
                                 {% for collection in category.col %}
-                                <li><a class="dropdown-item" href="#">{{ collection|title }}</a></li>
+                                <li><a class="dropdown-item" href="{% url 'portfolio_detail' collection.id %}">{{ collection.name|title }}</a></li>
                                 {% endfor %}
                                 {% endif %}
                             </ul>
