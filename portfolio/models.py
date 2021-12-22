@@ -3,6 +3,7 @@ Models to manage portfolio and portfolios categories
 """
 
 from django.db import models
+from django.db import transaction
 from .fields import CaseInsensitiveCharField
 
 
@@ -53,3 +54,12 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.name
+
+    # https://stackoverflow.com/questions/1455126/unique-booleanfield-value-in-django
+    def save(self, *args, **kwargs):
+        if not self.homepage:
+            return super(Portfolio, self).save(*args, **kwargs)
+        with transaction.atomic():
+            Portfolio.objects.filter(
+                homepage=True).update(homepage=False)
+            return super(Portfolio, self).save(*args, **kwargs)
