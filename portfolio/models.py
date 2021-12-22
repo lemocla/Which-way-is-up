@@ -15,7 +15,7 @@ class PortfolioCategory(models.Model):
         ordering = ['name']
         verbose_name_plural = "Portfolio categories"
 
-    name = models.CharField(max_length=150)
+    name = CaseInsensitiveCharField(max_length=150, unique=True)
 
     def __str__(self):
         return self.name

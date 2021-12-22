@@ -11,8 +11,10 @@
             <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">{{ portfolio.name }}</h1>
             <!--https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template-->
             <p>{{ portfolio.description|linebreaks }}</p>
+            {% if portfolio.materials %}
             <h2 class="fs-4 py-3">Materials</h3>
             <p>{{ portfolio.materials|linebreaks}}</p>
+            {% endif %}
             {% if request.user.is_superuser %}
             <div class="mt-5">
             <a class="text-primary pe-3" href="{% url 'edit_portfolio' portfolio.id %}"><i class="far fa-edit fa-lg"></i></a>
