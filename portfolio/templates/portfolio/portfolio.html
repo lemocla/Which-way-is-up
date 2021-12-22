@@ -15,11 +15,30 @@
             <p>{{ portfolio.materials|linebreaks}}</p>
             {% if request.user.is_superuser %}
             <div class="mt-5">
-            <a class="text-primary" href="{% url 'edit_portfolio' portfolio.id %}"><i class="far fa-edit fa-lg"></i></a>
+            <a class="text-primary pe-3" href="{% url 'edit_portfolio' portfolio.id %}"><i class="far fa-edit fa-lg"></i></a>
+            <i class="far fa-trash-alt fa-lg text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
             </div>
             {% endif %}
         </div>
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete <strong>{{ portfolio.name}}</strong>?
+      </div>
+      <div class="modal-footer justify-content-start">
+        <button type="button" class="btn btn-white px-3" data-bs-dismiss="modal">Close</button>
+        <a class="btn btn-danger px-4" href="{% url 'delete_portfolio' portfolio.id %}">Yes</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

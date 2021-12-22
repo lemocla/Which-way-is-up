@@ -77,3 +77,14 @@ def edit_portfolio(request, portfolio_id):
     }
 
     return render(request, "portfolio/edit_portfolio.html", context)
+
+
+@login_required
+def delete_portfolio(request, portfolio_id):
+    """
+    Delete portfolio from the database
+    """
+    portfolio = get_object_or_404(Portfolio, id=portfolio_id)
+    portfolio.delete()
+    messages.success(request, 'Portfolio successfully deleted!')
+    return redirect(reverse('home'))
