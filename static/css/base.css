@@ -272,6 +272,30 @@ footer li a:hover,
     width: 120px;
 }
 
+/*--------------[ FORM IMAGE WIDGET ]------------*/
+.widget{
+max-width: 645px !important
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#image-clear_id~label{
+ padding-left: 0.25rem !important;
+}
+
 /*----------------[ ABOUT ]---------------*/
 
 .trapez-bg {

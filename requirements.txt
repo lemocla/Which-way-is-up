@@ -20,6 +20,7 @@ distlib==0.3.2
 Django==3.2.8
 django-allauth==0.41.0
 django-case-insensitive-field==1.0.3
+django-cleanup==5.2.0
 django-countries==7.2.1
 django-crispy-forms==1.13.0
 docutils==0.17.1

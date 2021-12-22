@@ -2,6 +2,7 @@
 Form definition for portfolio app
 """
 from django import forms
+from .widgets import CustomClearableFileInput
 from .models import PortfolioCategory, Portfolio
 
 
@@ -25,6 +26,10 @@ class PortfolioForm(forms.ModelForm):
                               'rows': '3',
                               'placeholder': 'Enter materials and mediums'})
     )
+
+    image = forms.ImageField(label='Image',
+                             required=False,
+                             widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
