@@ -28,5 +28,6 @@ urlpatterns = [
     path('about/', include('about.urls')),
     path('my_profile/', include('profiles.urls')),
     path('portfolio/', include('portfolio.urls')),
+    path('artworks/', include('artworks.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
