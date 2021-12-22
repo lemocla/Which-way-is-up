@@ -41,9 +41,39 @@ def add_portfolio(request):
     else:
         form = PortfolioForm()
 
-
     context = {
         'form': form,
     }
 
     return render(request, "portfolio/add_portfolio.html", context)
+
+
+@login_required
+def edit_portfolio(request, portfolio_id):
+    """
+    Edit portfolio in the database
+    """
+    portfolio = get_object_or_404(Portfolio, id=portfolio_id)
+
+    if request.method == 'POST':
+
+        form = PortfolioForm(request.POST, request.FILES, instance=portfolio)
+
+        if form.is_valid():
+            # Data from form
+            form.save()
+            messages.success(request, 'Portfolio successfully updated!')
+            return redirect(reverse('portfolio_detail', args=[portfolio.id]))
+        else:
+            messages.error(request, 'Portfolio couldn\'t be updated. '
+                           'Please ensure the form is valid.')
+    else:
+        form = PortfolioForm(instance=portfolio)
+        messages.info(request, f'Editing {portfolio.name}')
+
+    context = {
+        'form': form,
+        'portfolio': portfolio
+    }
+
+    return render(request, "portfolio/edit_portfolio.html", context)

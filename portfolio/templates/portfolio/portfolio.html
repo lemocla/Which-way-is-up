@@ -7,12 +7,17 @@
 
 <div class="container pt-md-5 pt-4 pb-3">
     <div class="row pb-md-3 mb-4">
-        
         <div class="col-lg-4 border-end border-dark">
             <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">{{ portfolio.name }}</h1>
-            <p>{{ portfolio.description }}</p>
+            <!--https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template-->
+            <p>{{ portfolio.description|linebreaks }}</p>
             <h2 class="fs-4 py-3">Materials</h3>
-            <p>{{ portfolio.materials}}</p>
+            <p>{{ portfolio.materials|linebreaks}}</p>
+            {% if request.user.is_superuser %}
+            <div class="mt-5">
+            <a class="text-primary" href="{% url 'edit_portfolio' portfolio.id %}"><i class="far fa-edit fa-lg"></i></a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
