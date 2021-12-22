@@ -3,6 +3,7 @@ Models to manage portfolio and portfolios categories
 """
 
 from django.db import models
+from .fields import CaseInsensitiveCharField
 
 
 class PortfolioCategory(models.Model):
@@ -38,14 +39,13 @@ class Portfolio(models.Model):
         (INACTIVE, 'inactive'),
     ]
 
-    name = models.CharField(max_length=150)
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
+    name = CaseInsensitiveCharField(max_length=150, unique=True)
     image = models.ImageField(null=True, blank=True)
     description = models.TextField(max_length=1500)
     materials = models.TextField(max_length=500, null=True, blank=True)
     category = models.ForeignKey('PortfolioCategory',
                                  null=True,
-                                 blank=True,
+                                 blank=False,
                                  on_delete=models.SET_NULL)
     status = models.CharField(max_length=10, choices=STATUS, default=ACTIVE)
     created_at = models.DateTimeField(auto_now_add=True)
