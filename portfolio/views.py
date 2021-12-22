@@ -26,6 +26,11 @@ def add_portfolio(request):
     """
     Add portfolio to database
     """
+    # Additional security to restrict access to shop owner
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, access restricted to shop owner')
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
 
         form = PortfolioForm(request.POST, request.FILES)
@@ -53,6 +58,11 @@ def edit_portfolio(request, portfolio_id):
     """
     Edit portfolio in the database
     """
+    # Additional security to restrict access to shop owner
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, access restricted to shop owner')
+        return redirect(reverse('home'))
+
     portfolio = get_object_or_404(Portfolio, id=portfolio_id)
 
     if request.method == 'POST':
@@ -84,6 +94,11 @@ def delete_portfolio(request, portfolio_id):
     """
     Delete portfolio from the database
     """
+    # Additional security to restrict access to shop owner
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, access restricted to shop owner')
+        return redirect(reverse('home'))
+
     portfolio = get_object_or_404(Portfolio, id=portfolio_id)
     portfolio.delete()
     messages.success(request, 'Portfolio successfully deleted!')
