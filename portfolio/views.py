@@ -1,8 +1,11 @@
 """
 Views to handle display and portfolio management
 """
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+from .forms import PortfolioForm
 from .models import Portfolio
 
 
@@ -16,3 +19,31 @@ def portfolio_detail(request, portfolio_id):
     }
 
     return render(request, 'portfolio/portfolio.html', context)
+
+
+@login_required
+def add_portfolio(request):
+    """
+    Add portfolio to database
+    """
+    if request.method == 'POST':
+
+        form = PortfolioForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            # Data from form
+            portfolio = form.save()
+            messages.success(request, 'Portfolio successfully added!')
+            return redirect(reverse('portfolio_detail', args=[portfolio.id]))
+        else:
+            messages.error(request, 'Portfolio couldn\'t be added. '
+                           'Please ensure the form is valid.')
+    else:
+        form = PortfolioForm()
+
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, "portfolio/add_portfolio.html", context)
