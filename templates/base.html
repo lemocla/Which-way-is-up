@@ -42,7 +42,7 @@
     <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-black py-3">
             <div class="container-fluid px-3 px-md-5">
-                
+
                 <!--collapsible button-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -76,7 +76,7 @@
                             {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
                             <!-- super user / admin -->
-                            <li><a class="dropdown-item" href="#">Add collection</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_portfolio' %}">Add collection</a></li>
                             <li><a class="dropdown-item" href="#">Add artwork</a></li>
                             {% else %}
                             <!-- authenticated users -->
@@ -97,7 +97,7 @@
                 <!-- collapsible menu -->
                 <div class="collapse navbar-collapse order-lg-2" id="navbarNavDropdown">
                     <ul class="navbar-nav mx-lg-auto">
-                        <!-- home page -->                
+                        <!-- home page -->
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
@@ -112,9 +112,11 @@
                             <ul class="dropdown-menu dropdown-menu-dark px-3"
                                 aria-labelledby="{{category}}DropdownMenuLink">
                                 {% if category.col|length > 0 %}
-                                {% for collection in category.col %}
-                                <li><a class="dropdown-item" href="{% url 'portfolio_detail' collection.id %}">{{ collection.name|title }}</a></li>
-                                {% endfor %}
+                                    {% for collection in category.col %}
+                                        {% if collection.status == 'active' %}
+                                            <li><a class="dropdown-item" href="{% url 'portfolio_detail' collection.id %}">{{collection.name|title }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endif %}
                             </ul>
                         </li>
@@ -226,7 +228,7 @@
                         <button type="submit" class="btn bg-white text-black text-uppercase footer-btn">Sign up</button>
                     </div>
                 </form>
-                
+
             </div>
         </div>
 
@@ -240,7 +242,7 @@
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+        </script>
     <!-- script.js -->
     <script src="{% static 'js/script.js' %}"></script>
 
