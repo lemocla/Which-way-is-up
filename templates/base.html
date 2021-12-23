@@ -136,9 +136,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="shopDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Browse all</a></li>
-                                <li><a class="dropdown-item" href="#">Original artwork</a></li>
-                                <li><a class="dropdown-item" href="#">Prints</a></li>
-                                <li><a class="dropdown-item" href="#">Furniture and items</a></li>
+                                <!-- dynamic shop categories -->
+                                {% if shop_categories|length > 0 %}
+                                {% for shop in shop_categories %}
+                                <li><a class="dropdown-item" href="#">{{ shop.name|title }}</a></li>
+                                {% endfor %}
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>

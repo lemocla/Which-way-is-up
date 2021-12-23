@@ -86,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'newsletter.context_form.subscribe_form',
                 'portfolio.context_categories.categories',
+                'artworks.context_shop_categories.shop_categories',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
