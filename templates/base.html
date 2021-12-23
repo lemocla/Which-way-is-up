@@ -138,8 +138,8 @@
                                 <li><a class="dropdown-item" href="#">Browse all</a></li>
                                 <!-- dynamic shop categories -->
                                 {% if shop_categories|length > 0 %}
-                                {% for shop in shop_categories %}
-                                <li><a class="dropdown-item" href="#">{{ shop.name|title }}</a></li>
+                                {% for cat in shop_categories %}
+                                <li><a class="dropdown-item" href="{% url 'shop'%}?shop_category={{cat.backend_name}}">{{ cat.name|title }}</a></li>
                                 {% endfor %}
                                 {% endif %}
                             </ul>

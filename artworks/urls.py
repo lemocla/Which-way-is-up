@@ -7,5 +7,5 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.artworks, name="artworks"),
+    path("", views.artworks, name="shop"),
 ]
