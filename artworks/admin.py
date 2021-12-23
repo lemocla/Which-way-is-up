@@ -14,6 +14,7 @@ class ShopCategoryAdmin(admin.ModelAdmin):
     model = ShopCategory
     list_display = (
         "name",
+        "backend_name"
     )
     ordering = ('created_at',)
 
