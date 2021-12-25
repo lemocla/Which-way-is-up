@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from artworks.models import Artwork
 from .forms import PortfolioForm
 from .models import Portfolio
 
@@ -14,8 +15,10 @@ def portfolio_detail(request, portfolio_id):
     View portfolio detail
     """
     portfolio = get_object_or_404(Portfolio, id=portfolio_id)
+    artworks = Artwork.objects.filter(portfolio=portfolio).values()
     context = {
         'portfolio': portfolio,
+        'artworks': artworks
     }
 
     return render(request, 'portfolio/portfolio.html', context)

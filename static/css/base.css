@@ -219,11 +219,11 @@ footer li a:hover,
 
 /*-----------[ ALL AUTH / FORMS]-------------*/
 
-.form-group{
+.form-group {
     margin-bottom: 1rem;
 }
 
-.form-group label{
+.form-group label {
     margin-bottom: 0.35rem;
 }
 
@@ -232,7 +232,7 @@ footer li a:hover,
     z-index: -1;
 }
 
-.custom-checkbox label{
+.custom-checkbox label {
     padding-left: 0.75rem;
 }
 
@@ -273,8 +273,8 @@ footer li a:hover,
 }
 
 /*--------------[ FORM IMAGE WIDGET ]------------*/
-.widget{
-max-width: 645px !important
+.widget {
+    max-width: 645px !important
 }
 
 .btn-file {
@@ -292,8 +292,8 @@ max-width: 645px !important
     cursor: pointer;
 }
 
-#image-clear_id~label{
- padding-left: 0.25rem !important;
+#image-clear_id~label {
+    padding-left: 0.25rem !important;
 }
 
 /*----------------[ ABOUT ]---------------*/
@@ -356,6 +356,75 @@ max-width: 645px !important
     border-radius: 15px;
     content: '';
     background: var(--black);
+}
+
+/*-----------------[ PORTFOLIO ]------------------*/
+
+#photos {
+    clear: both;
+    column-count: 3;
+    column-gap: 1.95rem;
+    column-fill: auto;
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 1.65rem;
+    position: relative;
+}
+
+
+.modal-gallery {
+    background-color: rgba(0, 0, 0, .65)
+}
+
+.modal-gallery-cont {
+    width: 90%;
+    max-width: 1350px;
+}
+
+.modal-gallery-cont .btn-close {
+    background: none;
+    color: white !important;
+    opacity: 1;
+}
+
+.modal-gallery-cont .modal-content {
+    background-color: transparent !important;
+    color: var(--white);
+}
+
+.modal-gallery img {
+    max-height: 78vh !important;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.4);
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.round-btn {
+    width: 2.3rem;
+    height: 2.3rem;
+    font-size: 1rem;
+    border-radius: 2rem !important;
+    border: none;
+    box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.20);
+    line-height: 1rem;
+}
+
+.gallery-item:hover>#overlay {
+    display: block;
+}
+
+.portfolio-noimg {
+    width: 60%;
 }
 
 /*-----------------[ FOOTER ]----------------*/

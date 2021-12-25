@@ -1,36 +1,93 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load i18n %}
 {% block extra_title %}- {{ portfolio.name }} {% endblock %}
 
 {% block content %}
 
 <div class="container pt-md-5 pt-4 pb-3">
-    <div class="row pb-md-3 mb-4">
-        <div class="col-lg-4 border-end border-dark">
-            <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">{{ portfolio.name }}</h1>
-            <!--https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template-->
-            <p>{{ portfolio.description|linebreaks }}</p>
-            {% if portfolio.materials %}
-            <h2 class="fs-4 py-3">Materials</h3>
-            <p>{{ portfolio.materials|linebreaks}}</p>
-            {% endif %}
-            {% if request.user.is_superuser %}
-            <div class="mt-5">
-            <a class="text-primary pe-3" href="{% url 'edit_portfolio' portfolio.id %}"><i class="far fa-edit fa-lg"></i></a>
-            <i class="far fa-trash-alt fa-lg text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
-            </div>
-            {% endif %}
-        </div>
-    </div>
-</div>
+  <div class="row pb-md-3 mb-4">
 
+    <div class="col-lg-4 border-end border-dark">
+      <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">{{ portfolio.name }}</h1>
+      <!--https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template-->
+      {{ portfolio.description|linebreaks }}
+      {% if portfolio.materials %}
+      <h2 class="fs-4 py-3">Materials</h2>
+      {{ portfolio.materials|linebreaks}}
+      {% endif %}
+      {% if request.user.is_superuser %}
+      <div class="mt-4">
+        <h2 class="fs-4 py-2">Admin</h2>
+        <a class="text-primary pe-3" href="{% url 'edit_portfolio' portfolio.id %}"><i
+            class="far fa-edit fa-lg"></i></a>
+        <i class="far fa-trash-alt fa-lg text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
+      </div>
+      {% endif %}
+    </div>
+    <div class="col-lg-8 ps-lg-4">
+
+      {% if artworks.count > 0 %}
+      <div id="photos" class="ms-lg-2">
+
+        {% for artwork in artworks %}
+        <div class="gallery-item">
+
+          <div class="overlay">
+            <div class="p-2 text-end">
+              <button type="button" class="round-btn btn-light me-2 p-0 m-0" data-bs-toggle="modal"
+                data-bs-target="#modal-{{artwork.id}}"><i class="fas fa-search-plus fs-5"></i></button>
+              <button type="button" class="round-btn btn-light me-2 p-0 m-0"><i class="fas fa-info fs-5"></i></button>
+              <button type="button" class="round-btn btn-light p-0 m-0"> <i class="fa-lg far fa-heart"></i></button>
+            </div>
+          </div>
+
+          <img src="{{MEDIA_URL}}{{ artwork.image }}" class="img-fluid shadow" alt="{{artwork.name}}">
+          <div class="mt-3">
+            <h3 class="fs-6 py-1">{{ artwork.name }}</h3>
+            <p class="fw-lighter my-0 fs-6 text-muted">{{artwork.materials}}</p>
+            <p class="fw-lighter my-0 fs-6 text-muted">{{ artwork.year }}</p>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal mt-5 pt-4 fade modal-gallery" id="modal-{{artwork.id}}" tabindex="-1"
+          aria-labelledby="ModalLabel-{{artwork.id}}" aria-hidden="true">
+          <div class="modal-dialog modal-gallery-cont">
+            <div class="modal-content border-0">
+              <div class="modal-header border-0 text-uppercase">
+                <h3 class="modal-title fs-5" id="ModalLabel-{{artwork.id}}">{{artwork.name}}</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                    class="fas fa-times fa-2x"></i></button>
+              </div>
+              <div class="modal-body text-center">
+                <img src="{{MEDIA_URL}}{{ artwork.image }}" class="img-fluid shadow" alt="{{artwork.name}}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end modal -->
+
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="row ms-lg-5 pb-5 justify-content-center">
+        <h3 class="py-5 text-center">Exciting stuff coming soon!</h3>
+        <img src="{{MEDIA_URL}}default_image.png" class="p-2 portfolio-noimg shadow rounded"
+                alt="default image"/>
+      </div>
+      {% endif %}
+
+
+    </div>
+  </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete</h5>
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -43,4 +100,5 @@
     </div>
   </div>
 </div>
+
 {% endblock %}
