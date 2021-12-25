@@ -53,11 +53,11 @@ class Artwork(models.Model):
 
     name = CaseInsensitiveCharField(max_length=150, unique=True)
     image = models.ImageField(null=True, blank=True)
-    description = models.TextField(max_length=1500, null=True, blank=True)
-    materials = models.CharField(max_length=500)
     size = models.CharField(max_length=500)
+    materials = models.CharField(max_length=500)
+    year = models.CharField(max_length=4)
     price = models.DecimalField(max_digits=6, decimal_places=2,
-                                validators=[MinValueValidator('0.00')])
+                                validators=[MinValueValidator(0.00)])
     # https://stackoverflow.com/questions/849142/how-to-limit-the-maximum-value-of-a-numeric-field-in-a-django-model
     stock = models.PositiveSmallIntegerField(default=1,
                                              validators=[
@@ -72,15 +72,14 @@ class Artwork(models.Model):
                                       null=True,
                                       blank=True,
                                       on_delete=models.SET_NULL)
-    related_items = models.ForeignKey("self", null=True,
-                                      blank=True, on_delete=models.SET_NULL)
+    related_items = models.ManyToManyField("self", blank=True)
     on_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(max_digits=6,
                                      decimal_places=2,
                                      null=True,
                                      blank=True,
                                      validators=[
-                                        MinValueValidator('0.00')
+                                        MinValueValidator(0.00)
                                      ])
     rating = models.DecimalField(max_digits=4,
                                  decimal_places=2,
