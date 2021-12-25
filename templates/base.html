@@ -105,12 +105,12 @@
                         {% for category in categories %}
                         <!-- portfolio -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="{{category}}DropdownMenuLink" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdowncat-{{category.id}}" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ category.name|title }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark px-3"
-                                aria-labelledby="{{category}}DropdownMenuLink">
+                                aria-labelledby="dropdowncat-{{category.id}}">
                                 {% if category.col|length > 0 %}
                                     {% for collection in category.col %}
                                         {% if collection.status == 'active' %}
