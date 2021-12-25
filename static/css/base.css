@@ -360,19 +360,10 @@ footer li a:hover,
 
 /*-----------------[ PORTFOLIO ]------------------*/
 
-#photos {
-    clear: both;
-    column-count: 3;
-    column-gap: 1.95rem;
-    column-fill: auto;
-}
-
 .gallery-item {
-    break-inside: avoid;
     margin-bottom: 1.65rem;
     position: relative;
 }
-
 
 .modal-gallery {
     background-color: rgba(0, 0, 0, .65)
@@ -419,12 +410,29 @@ footer li a:hover,
     line-height: 1rem;
 }
 
-.gallery-item:hover>#overlay {
+.gallery-item:hover > .overlay {
     display: block;
 }
 
 .portfolio-noimg {
     width: 60%;
+}
+
+/*--------------[ ARTWORKS ]-----------------*/
+
+.card {
+    border: none;
+}
+
+.card>img {
+    /*height: 240px;*/
+    width: auto;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.price {
+    font-weight: 800 !important;
 }
 
 /*-----------------[ FOOTER ]----------------*/
@@ -454,6 +462,10 @@ footer li a:hover,
         clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
         padding: 3rem 3.25rem 0.75rem 17.5%;
     }
+
+    .card>img {
+    height: 250px;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -467,6 +479,24 @@ footer li a:hover,
     .message-container {
         right: 6vw;
     }
+
+    #photos {
+        clear: both;
+        column-count: 2;
+        column-gap: 1.95rem;
+        column-fill: auto;
+    }
+
+    .gallery-item {
+        break-inside: avoid;
+    }
+
+    .card>img {
+    height: 200px;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom;
+}
 }
 
 @media only screen and (min-width: 992px) {
@@ -478,7 +508,6 @@ footer li a:hover,
     .hero-trapezoid {
         clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
         width: 51%;
-        /*padding: 2rem 3.25rem 0.75rem 5%;*/
         padding: 3rem 3.25rem 0.75rem 10%;
     }
 
@@ -493,6 +522,26 @@ footer li a:hover,
     .img-abs {
         display: none;
     }
+
+    #photos {
+        column-count: 3;
+    }
+
+/*
+    .section-divider {
+        display: none;
+    }*/
+
+    .portfolio-cont {
+        border-right: 1px solid var(--darkgrey);
+    }
+
+.card>img {
+    height: 240px;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom;
+}
 }
 
 @media only screen and (min-width: 1200px) {
@@ -516,6 +565,7 @@ footer li a:hover,
         clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
         padding: 3.5rem 3.25rem 0.75rem 20%;
     }
+
 }
 
 @media only screen and (min-width: 1750px) {

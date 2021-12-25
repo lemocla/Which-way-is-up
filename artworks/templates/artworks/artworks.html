@@ -1,14 +1,83 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_title %}- all artworks {% endblock %}
+{% block extra_title %}- shop {% if category.name %} {{category.name}}{% else %} all {% endif %}{% endblock %}
 
 {% block content %}
 
-    <div class="container pt-md-5 pt-4 pb-3">
-        <div class="row pb-md-3 mb-4">
-            <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">{{ category.name }}</h1>
+<div class="container pt-md-5 pt-4 pb-3">
+
+    <div class="row ">
+        <h1 class="col-12 col-md-7 col-lg-8 col-xl-9 pb-3">Shop {% if category.name %}{{ category.name }}{% else %} all {% endif %}</h1>
+        <div class="col text-end py-2">
+            <select class="d-inline-block py-1 px-2 w-100">
+                <option selected>Sort by ...</option>
+                <option value="price_asc">Price (low to high)</option>
+                <option value="price_desc">Price(high to low)</option>
+                <option value="rating_asc">Rating (low to high)</option>
+                <option value="rating_desc">Rating (high to low)</option>
+                <option value="name_asc">Name (A-Z)</option>
+                <option value="name_desc">Name (Z-A)</option>
+                <option value="collection_asc">Collection (A-Z)</option>
+            </select>
         </div>
     </div>
+
+    <div class="row gx-md-5 {% if category.name|lower == 'prints' %} pt-3 {% else %} pt-5 {% endif %}">
+        <!-- gy-5 -->
+        {% for artwork in artworks %}
+        <a class="card pb-0 col-12 col-sm-6 col-md-4 col-xl-3" href="#">
+
+            <img src="{{ MEDIA_URL }}{{ artwork.image }}" class="card-img-top" alt="{{ artwork.name }}">
+
+            <div class="card-body px-1 mt-1 pb-0">
+                <!-- artwork name-->
+                <h3 class="card-title fs-5 mb-0 text-truncate">{{ artwork.name }}</h3>
+                <!-- artwork details -->
+                <p class="mt-2 mb-0 text-muted small">{{ artwork.materials }}</p>
+                <p class="mb-0 text-muted small">Size: {{ artwork.size }} cm</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <!--artwork price-->
+                    <p class="mt-2 mb-0 fs-5 price align-self-end">£{{ artwork.price }}</p>
+                    <!--action buttons -->
+                    <div class="btn-group pe-1" role="group" aria-label="Basic example">
+                        <button type="button" class="round-btn btn-light me-2 p-0 m-0"><i
+                                class="fas fa-cart-plus"></i></button>
+                        <button type="button" class="round-btn btn-light p-0 m-0"> <i
+                                class="fa-lg far fa-heart"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+        <!-- end artwork -->
+        <!-- separator -->
+        {% if forloop.counter|divisibleby:1 %}
+        <div class="col-12 d-sm-none my-5">
+            <hr>
+        </div class="section-divider">
+        {% endif %}
+
+        {% if forloop.counter|divisibleby:2 %}
+        <div class="col-12 d-none d-sm-block d-md-none d-lg-none my-4">
+            <hr class="section-divider">
+        </div>
+        {% endif %}
+
+        {% if forloop.counter|divisibleby:3 %}
+        <div class="col-12 d-none d-md-block d-xl-none my-4">
+            <hr class="section-divider">
+        </div>
+        {% endif %}
+        {% if forloop.counter|divisibleby:4 %}
+        <div class="col-12 d-none d-xl-block my-4">
+            <hr class="section-divider">
+        </div>
+        {% endif %}
+        <!-- end separator -->
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

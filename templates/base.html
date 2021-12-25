@@ -135,7 +135,7 @@
                                 Shop
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="shopDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Browse all</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop'%}">Browse all</a></li>
                                 <!-- dynamic shop categories -->
                                 {% if shop_categories|length > 0 %}
                                 {% for cat in shop_categories %}
