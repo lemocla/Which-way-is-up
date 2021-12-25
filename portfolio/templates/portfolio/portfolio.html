@@ -8,7 +8,7 @@
 <div class="container pt-md-5 pt-4 pb-3">
   <div class="row pb-md-3 mb-4">
 
-    <div class="col-lg-4 border-end border-dark">
+    <div class="col-lg-4 portfolio-cont">
       <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">{{ portfolio.name }}</h1>
       <!--https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template-->
       {{ portfolio.description|linebreaks }}
@@ -24,7 +24,9 @@
         <i class="far fa-trash-alt fa-lg text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
       </div>
       {% endif %}
+     <hr class="section-divider my-5 my-lg-0">
     </div>
+
     <div class="col-lg-8 ps-lg-4">
 
       {% if artworks.count > 0 %}
