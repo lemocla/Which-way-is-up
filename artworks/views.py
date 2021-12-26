@@ -12,10 +12,10 @@ def artworks(request):
     """
     shop_category = None
     items = Artwork.objects.filter(display_shop=True,
-                                   status="active")
+                                   status="active").values()
     sort = None
     direction = None
-    current_sorting = 'None_None'
+    # current_sorting = 'None_None'
 
     if request.GET:
         if 'shop_category' in request.GET:
@@ -29,12 +29,10 @@ def artworks(request):
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
+
             if sortkey == 'name':
                 sortkey = 'lower_name'
                 items = items.annotate(lower_name=Lower('name'))
-
-            if sortkey == 'category':
-                sortkey = 'category__name'
 
             if 'direction' in request.GET:
                 direction = request.GET['direction']
@@ -42,7 +40,8 @@ def artworks(request):
                     sortkey = f'-{sortkey}'
             items = items.order_by(sortkey)
 
-        current_sorting = f'{sort}_{direction}'
+    current_sorting = f'{sort}_{direction}'
+    print(current_sorting)
 
     context = {
         'category': shop_category,
