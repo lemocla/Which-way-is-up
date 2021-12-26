@@ -10,15 +10,14 @@
     <div class="row ">
         <h1 class="col-12 col-md-7 col-lg-8 col-xl-9 pb-3">Shop {% if category.name %}{{ category.name }}{% else %} all {% endif %}</h1>
         <div class="col text-end py-2">
-            <select class="d-inline-block py-1 px-2 w-100">
-                <option selected>Sort by ...</option>
-                <option value="price_asc">Price (low to high)</option>
-                <option value="price_desc">Price(high to low)</option>
-                <option value="rating_asc">Rating (low to high)</option>
-                <option value="rating_desc">Rating (high to low)</option>
-                <option value="name_asc">Name (A-Z)</option>
-                <option value="name_desc">Name (Z-A)</option>
-                <option value="collection_asc">Collection (A-Z)</option>
+            <select class="d-inline-block py-1 px-2 w-100" id="sort-selector">
+                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price(high to low)</option>
+                <option value="name_asc {% if current_sorting == 'name_asc' %}selected{% endif %}">Name (A-Z)</option>
+                <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                <option value="portfolio_asc" {% if current_sorting == 'portfolio_asc' %}selected{% endif %}>Collection (A-Z)</option>
+                <option value="portfolio_desc" {% if current_sorting == 'portfolio_desc' %}selected{% endif %}>Collection (Z-A)</option>
             </select>
         </div>
     </div>
@@ -80,4 +79,31 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+
+<script type="text/javascript">
+    $('#sort-selector').change(function () {
+        var selector = $(this);
+        var currentUrl = new URL(window.location);
+
+        var selectedVal = selector.val();
+        if (selectedVal != "reset") {
+            var sort = selectedVal.split("_")[0];
+            var direction = selectedVal.split("_")[1];
+
+            currentUrl.searchParams.set("sort", sort);
+            currentUrl.searchParams.set("direction", direction);
+
+            window.location.replace(currentUrl);
+        } else {
+            currentUrl.searchParams.delete("sort");
+            currentUrl.searchParams.delete("direction");
+
+            window.location.replace(currentUrl);
+        }
+    })
+</script>
 {% endblock %}
