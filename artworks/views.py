@@ -1,7 +1,7 @@
 """
 Views to manage artworks CRUD operations
 """
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.db.models.functions import Lower
 from .models import ShopCategory, Artwork
 
@@ -50,3 +50,15 @@ def artworks(request):
     }
 
     return render(request, 'artworks/artworks.html', context)
+
+
+def artwork_detail(request, artwork_id):
+    """
+    View portfolio detail
+    """
+    artwork = get_object_or_404(Artwork, id=artwork_id)
+    context = {
+        'artwork': artwork
+    }
+
+    return render(request, 'artworks/artwork_detail.html', context)
