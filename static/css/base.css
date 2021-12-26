@@ -445,6 +445,18 @@ footer li a:hover,
     font-weight: 800 !important;
 }
 
+/*-------------[ ARTWORK DETAILS ]-----------*/
+
+.img-detail {
+    max-height: 650px;
+}
+
+.card-rel-items > img{
+    max-height: 240px;
+    object-fit: contain;
+}
+
+
 /*-----------------[ FOOTER ]----------------*/
 
 .footer-header {
@@ -478,7 +490,9 @@ footer li a:hover,
     }
 }
 
+
 @media only screen and (min-width: 768px) {
+   
     .img-abs {
         position: absolute;
         top: 85px;
@@ -504,7 +518,9 @@ footer li a:hover,
     .shop-link>img {
         height: 200px;
     }
+
 }
+
 
 @media only screen and (min-width: 992px) {
 

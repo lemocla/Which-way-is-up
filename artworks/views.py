@@ -57,8 +57,11 @@ def artwork_detail(request, artwork_id):
     View portfolio detail
     """
     artwork = get_object_or_404(Artwork, id=artwork_id)
+    related_items = Artwork.objects.filter(related_items=artwork.id)
+
     context = {
-        'artwork': artwork
+        'artwork': artwork,
+        'related_items': related_items
     }
 
     return render(request, 'artworks/artwork_detail.html', context)

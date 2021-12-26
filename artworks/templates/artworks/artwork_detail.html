@@ -6,9 +6,146 @@
 {% block content %}
 
 <div class="container pt-md-5 pt-4 pb-3">
+    <div class="row gx-lg-5">
+        <div class="col-md-6 col-lg-6 pe-xl-5 text-center d-lg-flex align-items-center"><!-- d-lg-flex align-items-center-->
+            <img src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
+                class="img-fluid shadow rounded img-detail"
+                alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
+        </div>
+        <div class="col-md-6 col-lg-6 ps-md-4 mt-4 pe-0 mt-md-0">
+            <!--Artwork title-->
+            <h1 class="">{{ artwork.name }}</h1>
+            <!---Price-->
+            <p class="fs-5 m-0 fw-bolder text-secondary">£ {{ artwork.price }}</p>
+            <!--Description-->
+            <p class="mt-4 mb-1">{{ artwork.materials }}</p>
+            <p class='mb-1'>Size: {{ artwork.size }} cm</p>
+            <p class='mb-1'>Year: {{ artwork.year }}</p>
+            <p class="mt-4 mb-1">Type: {{ artwork.shop_category}}</p>
+            <p class="mb-1">Collection: {{ artwork.portfolio }}</p>
+            {% if artwork.display_shop and artwork.status == 'active' %}
+            <!--Quantity-->
+            <p class="fs-5 fw-bold mt-4 mb-2">Quantity</p>
+            <select class="px-4 py-2 mb-1" aria-label="Select quantity">
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value=5">5</option>
+            </select>
+            <!--Buttons-->
+            <div class="mt-4 pb-2">
+                <button class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
+                <input type="submit" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
+            </div>
+            {% endif %}
+            {% if artwork.shop_category|lower != 'prints' %}
+            <div class="d-none d-lg-block m-0 p-0 "><!-- d-lg-block  -->
+                <hr class="my-5">
+                <div class="offset-lg-6 ps-lg-5">
+                    <!--offset-md-6 -->
+                    <p class="mb-2"><i class="fas fa-lg fa-truck pe-3"></i> Free delivery</p>
+                    <p class="mb-2"><i class="fas fa-lg fa-gift pe-3"></i> Gift otpions</p>
+                    <p class="m-0"><i class="fas fa-lg fa-sign-out-alt pe-3"></i> Return accepted</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
 
-<h1>{{artwork.name}}</h1>
+    <div class="d-block {% if artwork.shop_category|lower != 'prints' %}d-lg-none{% endif %} m-0 p-0"><!--   -->
+        <hr class="my-5">
+        <div class=""><!--offset-lg-8 ps-lg-5-->
+            <!--offset-md-6 -->
+            <p class="mb-2"><i class="fas fa-lg fa-truck pe-3"></i> Free delivery</p>
+            <p class="mb-2"><i class="fas fa-lg fa-gift pe-3"></i> Gift otpions</p>
+            <p class="m-0"><i class="fas fa-lg fa-sign-out-alt pe-3"></i> Return accepted</p>
+        </div>
+    </div>
 
+    <hr class="my-5">
+    <div class="row">
+        <h2 class="pb-5{% if artwork.shop_category|lower == 'prints' %}pb-3{% endif %}">You may also like</h2>
+        {% if related_items.count > 0 %}
+        
+        {% for item in related_items %}
+        <div class="card pb-0 col-6 col-sm-6 col-md-4 col-xl-3">
+            <a href="{% url 'artwork_details' item.id %}" class="shop-link card-img-top">
+                <img class="card-img-top"
+                    src="{{ MEDIA_URL }}{% if item.image %}{{ item.image }}{% else %}default_image.png{% endif %}"
+                    alt="{% if not item.image %}default for {% endif %}{{ item.name }}">
+            </a>
+            <div class="card-body px-1 mt-1 pb-0">
+                <!-- artwork name-->
+                <h3 class="card-title fs-6 fs-sm-5 mb-0 text-truncate">{{ item.name }}</h3>
+                <!--text-truncate-->
+                <!-- artwork details -->
+                <p class="mt-2 mb-0 text-muted small">{{item.materials }}</p>
+                <p class="d-none d-sm-block mb-0 text-muted small">Size: {{ item.size }} cm</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <!--artwork price-->
+                    <p class="mt-2 mb-0 fs-5 price align-self-end">£{{ item.price }}</p>
+                    <!--action buttons -->
+                    <div class="d-none d-sm-block btn-group pe-1" role="group" aria-label="Basic example">
+                        <button type="button" class="round-btn btn-light me-2 p-0 m-0"><i
+                                class="fas fa-cart-plus"></i></button>
+                        <button type="button" class="round-btn btn-light p-0 m-0"> <i
+                                class="fa-lg far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+       
+        {% else %} 
+        <div class="col">
+        <p>There are no related products</p>
+        </div>
+        {% endif %}
+
+
+    </div>
+
+
+    <hr class="my-5">
+    <div class="row">
+        <h2 class="pb-2">Reviews</h2>
+        <div class="col-12 my-3">
+            <h3 class='fs-6 my-1'>By Jessie James</h3>
+            <p class='my-1'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
+                    class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
+                    class="fas fa-star yellow"></i></p>
+            <p class='my-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod pretium
+                purus.
+            </p>
+        </div>
+        <div class="col-12 my-3">
+            <h3 class='fs-6 my-1'>By Jessie James</h3>
+            <p class='my-1'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
+                    class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
+                    class="fas fa-star yellow"></i></p>
+            <p class='my-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod pretium
+                purus.
+            </p>
+        </div>
+        <div class="col-12 my-3">
+            <h3 class='fs-6 my-1'>By Jessie James</h3>
+            <p class='my-1'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
+                    class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
+                    class="fas fa-star yellow"></i></p>
+            <p class='my-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod pretium
+                purus.
+            </p>
+        </div>
+    </div>
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+
+</script>
 {% endblock %}
