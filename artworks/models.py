@@ -91,3 +91,13 @@ class Artwork(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if self.portfolio:
+            if str(self.portfolio.category) == 'commission':
+                self.display_shop = False
+                return super(Artwork, self).save(*args, **kwargs)
+            else:
+                return super(Artwork, self).save(*args, **kwargs)
+        else:
+            return super(Artwork, self).save(*args, **kwargs)
