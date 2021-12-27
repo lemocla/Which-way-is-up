@@ -5,7 +5,31 @@
 
 {% block content %}
 
-<div class="container pt-md-5 pt-4 pb-3">
+<div class="container-fluid mg-top bg-ivory">
+    <div class="container container-crumbs py-2">
+        <div class="row align-middle align-items-center crumb-text">
+            <a href="{{ request.META.HTTP_REFERER }}" class='col-auto bg-white py-2 px-2 border border-secondary'><i
+                    class="fas fa-chevron-left pe-1"></i> Back</a>
+            <nav class="col pe-0" style="--bs-breadcrumb-divider: ' / ';" aria-label="breadcrumb">
+
+                <ol class="breadcrumb align-items-center align-middle mb-0">
+                    <li class="breadcrumb-item "><a href="{% url 'home' %}"><i class="fas fa-home pe-1"></i><span class="d-none d-md-inline-block "> Home</span></a></li>
+                    {% if 'portfolio' in request.META.HTTP_REFERER %}
+                    <li class="breadcrumb-item">{{ category.category|title }}</li>
+                    <li class="breadcrumb-item"><a href="{% url 'portfolio' category.id %}">{{ category.name|title }}</a></li>
+                    {% else %}
+                    <li class="breadcrumb-item">Shop</li>              
+                    <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ artwork.shop_category|title }}</a></li>                    
+                    {% endif %}
+                    <li class="d-none d-sm-inline-block breadcrumb-item active" aria-current="page"><span class="truncate">{{ artwork.name|title }}</span></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="container artwork-cont pb-3"><!--pt-md-5 pt-4-->
+
     <div class="row gx-lg-5">
         <div class="col-md-6 col-lg-6 pe-xl-5 text-center d-lg-flex align-items-center">
             <!-- d-lg-flex align-items-center-->
@@ -22,7 +46,7 @@
             <p class="mt-4 mb-1">{{ artwork.materials }}</p>
             <p class='mb-1'>Size: {{ artwork.size }} cm</p>
             <p class='mb-1'>Year: {{ artwork.year }}</p>
-            <p class="mt-4 mb-1">Type: {{ artwork.shop_category}}</p>
+            <p class="mt-4 mb-1">Type: {% if artwork.display_shop %}{{ artwork.shop_category|title}}{% else %} {{category.category|title}} {% endif %}</p>
             <p class="mb-1">Collection: {{ artwork.portfolio }}</p>
             {% if artwork.display_shop and artwork.status == 'active' %}
             <!--Quantity-->
