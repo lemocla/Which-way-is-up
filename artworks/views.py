@@ -1,10 +1,13 @@
 """
 Views to manage artworks CRUD operations
 """
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
 from portfolio.models import Portfolio
 from .models import ShopCategory, Artwork
+from .forms import ArtworkForm
 
 
 def artworks(request):
@@ -59,7 +62,10 @@ def artwork_detail(request, artwork_id):
     """
     artwork = get_object_or_404(Artwork, id=artwork_id)
     related_items = Artwork.objects.filter(related_items=artwork.id)
-    category = Portfolio.objects.get(artwork=artwork.id)
+    if artwork.portfolio:
+        category = Portfolio.objects.get(artwork=artwork.id)
+    else:
+        category = None
 
     context = {
         'artwork': artwork,
@@ -68,3 +74,35 @@ def artwork_detail(request, artwork_id):
     }
 
     return render(request, 'artworks/artwork_detail.html', context)
+
+
+@login_required
+def add_artwork(request):
+    """
+    Add artwork to database
+    """
+    # Additional security to restrict access to shop owner
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, access restricted to shop owner')
+        return redirect(reverse('home'))
+
+    if request.method == 'POST':
+
+        form = ArtworkForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            # Data from form
+            artwork = form.save()
+            messages.success(request, 'Artwork successfully added!')
+            return redirect(reverse('artwork_details', args=[artwork.id]))
+        else:
+            messages.error(request, 'Artwork couldn\'t be added. '
+                           'Please ensure the form is valid.')
+    else:
+        form = ArtworkForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, "artworks/add_artwork.html", context)

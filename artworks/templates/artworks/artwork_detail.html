@@ -14,10 +14,11 @@
 
                 <ol class="breadcrumb align-items-center align-middle mb-0">
                     <li class="breadcrumb-item "><a href="{% url 'home' %}"><i class="fas fa-home pe-1"></i><span class="d-none d-md-inline-block "> Home</span></a></li>
-                    {% if 'portfolio' in request.META.HTTP_REFERER %}
+                    {% if 'portfolio' in request.META.HTTP_REFERER or category.category|lower == "commission" %}
                     <li class="breadcrumb-item">{{ category.category|title }}</li>
                     <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ category.name|title }}</a></li>
                     {% else %}
+                    
                     <li class="breadcrumb-item">Shop</li>              
                     <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ artwork.shop_category|title }}</a></li>                    
                     {% endif %}

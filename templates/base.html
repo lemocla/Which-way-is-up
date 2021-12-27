@@ -77,7 +77,7 @@
                             {% if request.user.is_superuser %}
                             <!-- super user / admin -->
                             <li><a class="dropdown-item" href="{% url 'add_portfolio' %}">Add collection</a></li>
-                            <li><a class="dropdown-item" href="#">Add artwork</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_artwork' %}">Add artwork</a></li>
                             {% else %}
                             <!-- authenticated users -->
                             <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
