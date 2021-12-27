@@ -60,9 +60,10 @@ def wishlist(request):
     """
 
     user = get_object_or_404(UserProfile, user=request.user)
-
+    wishlist = user.wishlist_items.all()
     context = {
         'user': user,
+        'wishlist': wishlist
     }
 
     return render(request, 'profiles/wishlist.html', context)

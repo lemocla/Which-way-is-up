@@ -469,6 +469,16 @@ footer li a:hover,
     font-size: 0.9rem !important;
 }
 
+/*----------------[ WISHLIST ]---------------*/
+
+.wishlist-img {
+    text-align: center;
+}
+
+.wishlist-img>img {
+    object-fit: contain;
+}
+
 /*-------------[ ARTWORK DETAILS ]-----------*/
 
 .img-detail {
@@ -526,6 +536,10 @@ footer li a:hover,
         display: inline-block;
         vertical-align: bottom;
     }
+
+    .wishlist-img>img {
+        max-height: 375px;
+    }
 }
 
 
@@ -559,6 +573,10 @@ footer li a:hover,
 
     .truncate {
         max-width: 100%;
+    }
+
+    .wishlist-img>img {
+        max-height: 180px;
     }
 }
 
