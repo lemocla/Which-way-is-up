@@ -16,7 +16,7 @@
                     <li class="breadcrumb-item "><a href="{% url 'home' %}"><i class="fas fa-home pe-1"></i><span class="d-none d-md-inline-block "> Home</span></a></li>
                     {% if 'portfolio' in request.META.HTTP_REFERER %}
                     <li class="breadcrumb-item">{{ category.category|title }}</li>
-                    <li class="breadcrumb-item"><a href="{% url 'portfolio' category.id %}">{{ category.name|title }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ category.name|title }}</a></li>
                     {% else %}
                     <li class="breadcrumb-item">Shop</li>              
                     <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ artwork.shop_category|title }}</a></li>                    
@@ -48,7 +48,7 @@
             <p class='mb-1'>Year: {{ artwork.year }}</p>
             <p class="mt-4 mb-1">Type: {% if artwork.display_shop %}{{ artwork.shop_category|title}}{% else %} {{category.category|title}} {% endif %}</p>
             <p class="mb-1">Collection: {{ artwork.portfolio }}</p>
-            {% if artwork.display_shop and artwork.status == 'active' %}
+            {% if artwork.display_shop %}
             <!--Quantity-->
             <p class="fs-5 fw-bold mt-4 mb-2">Quantity</p>
             <select class="px-4 py-2 mb-1" aria-label="Select quantity">
@@ -63,7 +63,7 @@
                 <button class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
                 <input type="submit" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
             </div>
-            {% endif %}
+            
             {% if artwork.shop_category|lower != 'prints' %}
             <div class="d-none d-lg-block m-0 p-0 ">
                 <!-- d-lg-block  -->
@@ -76,9 +76,17 @@
                 </div>
             </div>
             {% endif %}
+            {% else %}
+            <p class="mt-3 mt-xl-4 fw-bold">Interested in a commission?</p>
+                        <div class="mt-4 pb-2">
+                <button class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
+                <a href="{% url 'contact' %}" class="btn btn-black px-xl-5 py-2 text-uppercase">Contact us</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 
+    {% if artwork.display_shop %}
     <div class="d-block {% if artwork.shop_category|lower != 'prints' %}d-lg-none{% endif %} m-0 p-0">
         <!--   -->
         <hr class="my-5">
@@ -90,7 +98,8 @@
             <p class="m-0"><i class="fas fa-lg fa-sign-out-alt pe-3"></i> Return accepted</p>
         </div>
     </div>
-
+    {% endif %}
+    
     <hr class="my-5">
     <div class="row">
         <h2 class="pb-5{% if artwork.shop_category|lower == 'prints' %}pb-3{% endif %}">You may also like</h2>

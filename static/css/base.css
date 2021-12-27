@@ -524,7 +524,7 @@ footer li a:hover,
         text-overflow: ellipsis;
         max-width: 13rem;
         display: inline-block;
-        line-height: 0.75;
+        vertical-align: bottom;
     }
 }
 
