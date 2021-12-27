@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}- Edit artwork {% endblock %}
+
+{% block content %}
+
+<div class="container pt-md-5 pt-4 pb-3">
+    <div class="row pb-md-3 mb-4">
+        <h1 class="h1-page pb-4 mt-md-0">Edit artwork</h1>
+
+        <form method="POST" action="{% url 'edit_artwork' artwork.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            {% if field.name != 'image' %}
+            {{ field | as_crispy_field }}
+            {% else %}
+            {{ field }}
+            {% endif %}
+            {% endfor %}
+            <div class="mt-5">
+                <a class="btn btn-white py-2 px-5" href="{% url 'artwork_details' artwork.id %}">Cancel</a>
+                <button class="btn btn-black py-2 px-5" type="submit">Update</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script type="text/javascript">
+    $('#new-image').change(function () {
+        var file = $('#new-image')[0].files[0];
+        $('#filename').text(`Image will be set to: ${file.name}`);
+    });
+</script>
+{% endblock %}

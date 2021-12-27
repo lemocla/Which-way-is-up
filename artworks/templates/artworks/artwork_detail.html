@@ -13,30 +13,42 @@
             <nav class="col pe-0" style="--bs-breadcrumb-divider: ' / ';" aria-label="breadcrumb">
 
                 <ol class="breadcrumb align-items-center align-middle mb-0">
-                    <li class="breadcrumb-item "><a href="{% url 'home' %}"><i class="fas fa-home pe-1"></i><span class="d-none d-md-inline-block "> Home</span></a></li>
+                    <li class="breadcrumb-item "><a href="{% url 'home' %}"><i class="fas fa-home pe-1"></i><span
+                                class="d-none d-md-inline-block "> Home</span></a></li>
                     {% if 'portfolio' in request.META.HTTP_REFERER or category.category|lower == "commission" %}
                     <li class="breadcrumb-item">{{ category.category|title }}</li>
-                    <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ category.name|title }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ category.name|title }}</a>
+                    </li>
                     {% else %}
-                    
-                    <li class="breadcrumb-item">Shop</li>              
-                    <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ artwork.shop_category|title }}</a></li>                    
+
+                    <li class="breadcrumb-item">Shop</li>
+                    <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ artwork.shop_category|title}}</a></li>
                     {% endif %}
-                    <li class="d-none d-sm-inline-block breadcrumb-item active" aria-current="page"><span class="truncate">{{ artwork.name|title }}</span></li>
+                    <li class="d-none d-sm-inline-block breadcrumb-item active" aria-current="page"><span
+                            class="truncate">{{ artwork.name|title }}</span></li>
                 </ol>
             </nav>
         </div>
     </div>
 </div>
 
-<div class="container artwork-cont pb-3"><!--pt-md-5 pt-4-->
+<div class="container artwork-cont pb-3">
+    <!--pt-md-5 pt-4-->
 
     <div class="row gx-lg-5">
-        <div class="col-md-6 col-lg-6 pe-xl-5 text-center d-lg-flex align-items-center">
+        <div class="col-md-6 col-lg-6 pe-xl-5 text-center d-lg-flex flex-column"><!--align-items-center-->
             <!-- d-lg-flex align-items-center-->
             <img src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
                 class="img-fluid shadow rounded img-detail"
                 alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
+            {% if request.user.is_superuser %}
+            <div class="mt-4">
+                <h2 class="fs-4 py-2">Admin</h2>
+                <a class="text-primary pe-3" href="{% url 'edit_artwork' artwork.id %}"><i
+                        class="far fa-edit fa-lg"></i></a>
+                <i class="far fa-trash-alt fa-lg text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
+            </div>
+            {% endif %}
         </div>
         <div class="col-md-6 ps-md-4 pe-0">
             <!--Artwork title-->
@@ -47,7 +59,8 @@
             <p class="mt-4 mb-1">{{ artwork.materials }}</p>
             <p class='mb-1'>Size: {{ artwork.size }} cm</p>
             <p class='mb-1'>Year: {{ artwork.year }}</p>
-            <p class="mt-4 mb-1">Type: {% if artwork.display_shop %}{{ artwork.shop_category|title}}{% else %} {{category.category|title}} {% endif %}</p>
+            <p class="mt-4 mb-1">Type: {% if artwork.display_shop %}{{ artwork.shop_category|title}}{% else %}
+                {{category.category|title}} {% endif %}</p>
             <p class="mb-1">Collection: {{ artwork.portfolio }}</p>
             {% if artwork.display_shop %}
             <!--Quantity-->
@@ -64,7 +77,7 @@
                 <button class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
                 <input type="submit" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
             </div>
-            
+
             {% if artwork.shop_category|lower != 'prints' %}
             <div class="d-none d-lg-block m-0 p-0 ">
                 <!-- d-lg-block  -->
@@ -79,7 +92,7 @@
             {% endif %}
             {% else %}
             <p class="mt-3 mt-xl-4 fw-bold">Interested in a commission?</p>
-                        <div class="mt-4 pb-2">
+            <div class="mt-4 pb-2">
                 <button class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
                 <a href="{% url 'contact' %}" class="btn btn-black px-xl-5 py-2 text-uppercase">Contact us</a>
             </div>
@@ -100,7 +113,7 @@
         </div>
     </div>
     {% endif %}
-    
+
     <hr class="my-5">
     <div class="row">
         <h2 class="pb-5{% if artwork.shop_category|lower == 'prints' %}pb-3{% endif %}">You may also like</h2>

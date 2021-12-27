@@ -96,8 +96,5 @@ class Artwork(models.Model):
         if self.portfolio:
             if str(self.portfolio.category) == 'commission':
                 self.display_shop = False
-                return super(Artwork, self).save(*args, **kwargs)
-            else:
-                return super(Artwork, self).save(*args, **kwargs)
-        else:
-            return super(Artwork, self).save(*args, **kwargs)
+
+        return super(Artwork, self).save(*args, **kwargs)

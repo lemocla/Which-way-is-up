@@ -106,3 +106,39 @@ def add_artwork(request):
     }
 
     return render(request, "artworks/add_artwork.html", context)
+
+
+@login_required
+def edit_artwork(request, artwork_id):
+    """
+    Edit artwork in the database
+    """
+    # Additional security to restrict access to shop owner
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, access restricted to shop owner')
+        return redirect(reverse('home'))
+
+    artwork = get_object_or_404(Artwork, id=artwork_id)
+
+    if request.method == 'POST':
+
+        form = ArtworkForm(request.POST, request.FILES, instance=artwork)
+
+        if form.is_valid():
+            # Data from form
+            form.save()
+            messages.success(request, 'Artwork successfully updated!')
+            return redirect(reverse('artwork_details', args=[artwork.id]))
+        else:
+            messages.error(request, 'Portfolio couldn\'t be updated. '
+                           'Please ensure the form is valid.')
+    else:
+        form = ArtworkForm(instance=artwork)
+        messages.info(request, f'Editing {artwork.name}')
+
+    context = {
+        'form': form,
+        'artwork': artwork
+    }
+
+    return render(request, "artworks/edit_artwork.html", context)

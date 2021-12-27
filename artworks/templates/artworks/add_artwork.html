@@ -9,7 +9,7 @@
     <div class="row pb-md-3 mb-4">
         <h1 class="h1-page pb-4 mt-md-0">Add artwork</h1>
 
-        <form method="POST" action="#" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'add_artwork' %}" enctype="multipart/form-data">
             {% csrf_token %}
                     {% for field in form %}
                     {% if field.name != 'image' %}
