@@ -2,6 +2,7 @@
 Views to manage artworks CRUD operations
 """
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
@@ -130,7 +131,7 @@ def edit_artwork(request, artwork_id):
             messages.success(request, 'Artwork successfully updated!')
             return redirect(reverse('artwork_details', args=[artwork.id]))
         else:
-            messages.error(request, 'Portfolio couldn\'t be updated. '
+            messages.error(request, 'Artwork couldn\'t be updated. '
                            'Please ensure the form is valid.')
     else:
         form = ArtworkForm(instance=artwork)
@@ -142,3 +143,25 @@ def edit_artwork(request, artwork_id):
     }
 
     return render(request, "artworks/edit_artwork.html", context)
+
+
+@login_required
+def delete_artwork(request, artwork_id):
+    """
+    Delete artwork from the database
+    """
+    # Additional security to restrict access to shop owner
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, access restricted to shop owner')
+        return redirect(reverse('home'))
+
+    # Redirect url
+    if 'ref' in request.GET:
+        redirect_url= request.GET['ref']
+    else:
+        redirect_url = request.META.get('HTTP_REFERER')
+
+    artwork = get_object_or_404(Artwork, id=artwork_id)
+    artwork.delete()
+    messages.success(request, 'Artwork successfully deleted!')
+    return HttpResponseRedirect(redirect_url)
