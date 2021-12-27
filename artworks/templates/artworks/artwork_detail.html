@@ -22,7 +22,13 @@
                     {% else %}
 
                     <li class="breadcrumb-item">Shop</li>
-                    <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ artwork.shop_category|title}}</a></li>
+
+                    <li class="breadcrumb-item">
+                    <a href="{{ request.META.HTTP_REFERER }}">
+                        {{artwork.shop_category|title}}
+                    </a>
+                    </li>
+                    
                     {% endif %}
                     <li class="d-none d-sm-inline-block breadcrumb-item active" aria-current="page"><span
                             class="truncate">{{ artwork.name|title }}</span></li>
@@ -32,29 +38,36 @@
     </div>
 </div>
 
+
 <div class="container artwork-cont pb-3">
     <!--pt-md-5 pt-4-->
 
     <div class="row gx-lg-5">
-        <div class="col-md-6 col-lg-6 pe-xl-5 text-center d-lg-flex flex-column"><!--align-items-center-->
+        <div class="col-md-6 col-lg-6 pe-xl-5 text-center d-lg-flex flex-column">
+            <!--align-items-center-->
             <!-- d-lg-flex align-items-center-->
             <img src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
                 class="img-fluid shadow rounded img-detail"
                 alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
-            {% if request.user.is_superuser %}
-            <div class="mt-4">
-                <h2 class="fs-4 py-2">Admin</h2>
-                <a class="text-primary pe-3" href="{% url 'edit_artwork' artwork.id %}"><i
-                        class="far fa-edit fa-lg"></i></a>
-                <i class="far fa-trash-alt fa-lg text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
-            </div>
-            {% endif %}
+
         </div>
         <div class="col-md-6 ps-md-4 pe-0">
             <!--Artwork title-->
             <h1 class="mt-4 mt-md-0 pt-1 pt-md-0">{{ artwork.name }}</h1>
             <!---Price-->
-            <p class="fs-5 m-0 fw-bolder text-secondary">£ {{ artwork.price }}</p>
+            <div class="d-flex justify-content-between">
+                <p class="fs-5 m-0 fw-bolder text-secondary">£ {{ artwork.price }}</p>
+
+                {% if request.user.is_superuser %}
+                <div class="text-end pe-md-5">
+                    <a class="text-primary px-3" href="{% url 'edit_artwork' artwork.id %}"><i
+                            class="far fa-edit fa-lg"></i></a>
+                    <i class="far fa-trash-alt text-danger fa-lg" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal"></i>
+                </div>
+                {% endif %}
+            </div>
+
             <!--Description-->
             <p class="mt-4 mb-1">{{ artwork.materials }}</p>
             <p class='mb-1'>Size: {{ artwork.size }} cm</p>
@@ -202,21 +215,22 @@
 
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete <strong>{{ artwork.name}}</strong>?
-      </div>
-      <div class="modal-footer justify-content-start">
-        <button type="button" class="btn btn-white px-3" data-bs-dismiss="modal">Close</button>
-        <a class="btn btn-danger px-4" href="{% url 'delete_artwork' artwork.id %}?ref={{request.META.HTTP_REFERER}}">Yes</a>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong>{{ artwork.name}}</strong>?
+            </div>
+            <div class="modal-footer justify-content-start">
+                <button type="button" class="btn btn-white px-3" data-bs-dismiss="modal">Close</button>
+                <a class="btn btn-danger px-4"
+                    href="{% url 'delete_artwork' artwork.id %}?ref={{request.META.HTTP_REFERER}}">Yes</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
