@@ -445,6 +445,11 @@ footer li a:hover,
     font-weight: 800 !important;
 }
 
+.container-related{
+flex-wrap: nowrap !important;
+overflow: hidden !important;
+}
+
 /*-------------[ ARTWORK DETAILS ]-----------*/
 
 .img-detail {
