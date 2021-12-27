@@ -51,3 +51,18 @@ def profile(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def wishlist(request):
+    """
+    A view to return a user's favourites
+    """
+
+    user = get_object_or_404(UserProfile, user=request.user)
+
+    context = {
+        'user': user,
+    }
+
+    return render(request, 'profiles/wishlist.html', context)

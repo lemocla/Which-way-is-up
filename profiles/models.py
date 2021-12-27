@@ -1,11 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from django.shortcuts import get_object_or_404
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
 from django_countries.fields import CountryField
+from artworks.models import Artwork
 
 
 class UserProfile(models.Model):
@@ -22,6 +21,7 @@ class UserProfile(models.Model):
     postcode = models.CharField(max_length=20, null=True, blank=True)
     country = CountryField(blank_label='Country', null=True, blank=True)
     newsletter = models.BooleanField(default=False)
+    wishlist_items = models.ManyToManyField(Artwork)
 
     def __str__(self):
         return self.user.username
@@ -32,7 +32,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     Create or update the user profile
     """
-    if User.is_superuser == False:
+    if not User.is_superuser:
         if created:
             UserProfile.objects.create(user=instance)
         # Existing users: just save the profile
