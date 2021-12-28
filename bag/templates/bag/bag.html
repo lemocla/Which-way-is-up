@@ -7,14 +7,132 @@
 
 <div class="container pt-md-5 pt-4 pb-3">
   <div class="row pb-md-3 mb-4">
-  <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">Shopping bag</h1>
+    <h1 class="h1-page mt-md-0">Shopping bag</h1>
   </div>
 
   {% if bag_items %}
-  <p>There is items in the bag </p>
-  {% for item in bag_items %}
-  <p>{{ item.artwork.name }} {{ item.quantity }}
-  {% endfor %}
+  <div class="row">
+    <!--Grid column-->
+    <div class="col-lg-8 pe-lg-2 pe-xl-5">
+      <h5 class="mb-4">Cart (<span>{{ total_count }}</span> items)</h5>
+      <!-- bag items -->
+      {% for item in bag_items %}
+      <div class="card mb-3">
+        <div class="row gx-md-1 gx-3 gx-xl-2">
+          <div class="col-sm-3 col-xl-3 bag-img-cont">
+              <img class="img-fluid shadow rounded" src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
+              alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}"
+              >
+          </div>
+          <div class="col mt-4 mt-md-0">
+            <div class="card-body py-0">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h2 class="fs-5">{{ item.artwork.name }}</h2>
+                  <p class="mt-3 mb-0 text-muted">{{ item.artwork.materials }}</p>
+                  <p class="mb-3 text-muted">Size: {{ item.artwork.size }} cm</p>
+                </div>
+                <div>
+                  <p class="fs-5 fw-bold mb-2">Quantity</p>
+                  <select class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
+                    <option selected value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value=5">5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="d-md-flex justify-content-between align-items-center">
+                <div>
+                  <a href="#!" type="button" class="small text-muted text-uppercase me-4"><i
+                      class="fas fa-trash-alt mr-1"></i> Remove item </a>
+                  <a href="#!" type="button" class="text-muted small text-uppercase"><i class="fas fa-heart mr-1"></i>
+                    Move to wish list </a>
+                </div>
+                <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">{{ item.artwork.price }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      {% endfor %}
+      <!-- end bag items -->
+      
+    </div>
+
+    <!--Grid column-->
+    <div class="col-lg-4 gy-md-4 gy-5 px-md-1">
+      <!-- Card -->
+      <div class="card border py-4 px-lg-1 p-xl-3 shadow rounded mb-3 border-lg-secondary">
+        <div class="card-body px-md-5 px-lg-3 px-xl-4">
+          <h2 class="fs-3 mb-4 pb-2 text-center">Order summary</h2>
+          <div class="d-flex justify-content-between text-muted px-0 pb-2">
+            Subtotal
+            <span>{{ total }}</span>
+          </div>
+          <div class="d-flex justify-content-between text-muted px-0">
+            Delivery
+            <span>Free</span>
+          </div>
+          <hr class="mt-3 mb-2">
+          <div class="d-flex justify-content-between border-0 px-0 my-3">
+            <div>
+              <strong>Total</strong>
+              <p class="mb-0">(including VAT)</p>
+            </div>
+            <span><strong>{{ total }}</strong></span>
+          </div>
+          </ul>
+          <div class="mt-5">
+          <a type="button"
+            class="mb-2 w-100 btn btn-black py-2 px-5 text-uppercase">
+            checkout</a>
+          <a type="button"
+            class="w-100 btn btn-white py-2 px-5 text-uppercase">
+            keep shopping</a>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-3 mt-4 mt-lg-2">
+    <p class="text-dark mb-3"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase,
+      adding
+      items to your cart does not mean booking them.
+    </p>
+        <p class="red-text mb-5"><i class="fas fa-info-circle mr-1"></i>
+        Please note that at this moment in time we deliver in the UK only.
+    </p>
+    </div>
+  </div>
+
+
+  <div class="row px-3 px-md-2 px-lg-3">
+    <div class="col-12 rounded shadow px-3 py-3">
+      <h5 class="pb-2 fw-bold">Expected shipping delivery</h5>
+      <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
+    </div>
+    <div class="col-12 mt-4 mt-md-5 rounded shadow px-3 py-3">
+      <h5 class=" pb-2">Payment accepted</h5>
+      <div>
+        <img class="mr-2" width="45px"
+          src="{{MEDIA_URL}}visa.svg" alt="Visa">
+        <img class="mr-2" width="45px"
+          src="{{MEDIA_URL}}mastercard.svg"
+          alt="Mastercard">
+        <img class="mr-2" width="45px"
+          src="{{MEDIA_URL}}amex.svg"
+          alt="American Express">
+
+      </div>
+    </div>
+  </div>
+  {% else %}
+                    <p class="my-5">Your shoppting bag is empty.</p>
+                    <a href="{% url 'artworks' %}" class="btn btn-black px-5 py-2">  
+                        <span class="text-uppercase">Keep Shopping</span>
+                    </a>
   {% endif %}
 </div>
 

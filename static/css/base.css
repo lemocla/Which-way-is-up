@@ -496,6 +496,17 @@ footer li a:hover,
     color: var(--red);
 }
 
+/*--------------[ SHOPPING BAG ]-------------*/
+
+.bag-img-cont {
+    text-align: center;
+}
+
+.bag-img-cont>img {
+    object-fit: contain;
+    max-height: 250px;
+}
+
 /*-----------------[ FOOTER ]----------------*/
 
 .footer-header {
@@ -542,9 +553,11 @@ footer li a:hover,
         vertical-align: bottom;
     }
 
-    .wishlist-img>img {
+    .wishlist-img>img,
+    .bag-img-cont>img {
         max-height: 375px;
     }
+
 }
 
 
@@ -583,6 +596,15 @@ footer li a:hover,
     .wishlist-img>img {
         max-height: 180px;
     }
+
+    .bag-img-cont {
+        text-align: start;
+    }
+
+    .bag-img-cont>img {
+        max-height: 135px;
+    }
+
 }
 
 
