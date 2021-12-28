@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
 from portfolio.models import Portfolio
+from profiles.models import UserProfile
 from .models import ShopCategory, Artwork
 from .forms import ArtworkForm
 
@@ -20,7 +21,12 @@ def artworks(request):
                                    status="active").values()
     sort = None
     direction = None
-    # current_sorting = 'None_None'
+    user = None
+    wishlist = None
+
+    if request.user.is_authenticated:
+        user = get_object_or_404(UserProfile, user=request.user)
+        wishlist = user.wishlist_items.values()
 
     if request.GET:
         if 'shop_category' in request.GET:
@@ -46,12 +52,13 @@ def artworks(request):
             items = items.order_by(sortkey)
 
     current_sorting = f'{sort}_{direction}'
-    print(current_sorting)
 
     context = {
         'category': shop_category,
         'artworks': items,
-        'current_sorting': current_sorting
+        'current_sorting': current_sorting,
+        'user': user,
+        'wishlist': wishlist
     }
 
     return render(request, 'artworks/artworks.html', context)
@@ -63,6 +70,14 @@ def artwork_detail(request, artwork_id):
     """
     artwork = get_object_or_404(Artwork, id=artwork_id)
     related_items = Artwork.objects.filter(related_items=artwork.id)
+    user = None
+    wishlist = None
+
+    if request.user.is_authenticated:
+        user = get_object_or_404(UserProfile, user=request.user)
+        wishlist = user.wishlist_items.all()
+        is_wishlist = user.wishlist_items.filter(pk=artwork_id).exists()
+
     if artwork.portfolio:
         category = Portfolio.objects.get(artwork=artwork.id)
     else:
@@ -71,7 +86,10 @@ def artwork_detail(request, artwork_id):
     context = {
         'artwork': artwork,
         'related_items': related_items,
-        'category': category
+        'category': category,
+        'user': user,
+        'wishlist': wishlist,
+        'is_wishlist': is_wishlist
     }
 
     return render(request, 'artworks/artwork_detail.html', context)
@@ -157,7 +175,7 @@ def delete_artwork(request, artwork_id):
 
     # Redirect url
     if 'ref' in request.GET:
-        redirect_url= request.GET['ref']
+        redirect_url = request.GET['ref']
     else:
         redirect_url = request.META.get('HTTP_REFERER')
 

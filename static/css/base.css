@@ -469,6 +469,18 @@ footer li a:hover,
     font-size: 0.9rem !important;
 }
 
+/*-------------[ ARTWORK DETAILS ]-----------*/
+
+.img-detail {
+    max-height: 650px;
+    object-fit: contain;
+}
+
+.card-rel-items>img {
+    max-height: 240px;
+    object-fit: contain;
+}
+
 /*----------------[ WISHLIST ]---------------*/
 
 .wishlist-img {
@@ -479,17 +491,9 @@ footer li a:hover,
     object-fit: contain;
 }
 
-/*-------------[ ARTWORK DETAILS ]-----------*/
-
-.img-detail {
-    max-height: 650px;
+.red-text {
+    color: var(--red);
 }
-
-.card-rel-items>img {
-    max-height: 240px;
-    object-fit: contain;
-}
-
 
 /*-----------------[ FOOTER ]----------------*/
 

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from artworks.models import Artwork
+from profiles.models import UserProfile
 from .forms import PortfolioForm
 from .models import Portfolio
 
@@ -14,11 +15,20 @@ def portfolio_detail(request, portfolio_id):
     """
     View portfolio detail
     """
+    user = None
+    wishlist = None
+
+    if request.user.is_authenticated:
+        user = get_object_or_404(UserProfile, user=request.user)
+        wishlist = user.wishlist_items.values()
+
     portfolio = get_object_or_404(Portfolio, id=portfolio_id)
     artworks = Artwork.objects.filter(portfolio=portfolio).values()
     context = {
         'portfolio': portfolio,
-        'artworks': artworks
+        'artworks': artworks,
+        'user': user,
+        "wishlist": wishlist
     }
 
     return render(request, 'portfolio/portfolio.html', context)
