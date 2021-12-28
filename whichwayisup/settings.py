@@ -88,6 +88,7 @@ TEMPLATES = [
                 'newsletter.context_form.subscribe_form',
                 'portfolio.context_categories.categories',
                 'artworks.context_shop_categories.shop_categories',
+                'bag.bag_contexts.bag_content',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',

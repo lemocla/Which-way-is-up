@@ -78,10 +78,13 @@
                 {{category.category|title}} {% endif %}</p>
             <p class="mb-1">Collection: {{ artwork.portfolio }}</p>
             
+           
             {% if artwork.display_shop %}
+             <form class="form" action="{% url 'add_to_bag' artwork.id %} " method="POST">
+             {% csrf_token %}
             <!--Quantity-->
             <p class="fs-5 fw-bold mt-4 mb-2">Quantity</p>
-            <select class="px-4 py-2 mb-1" aria-label="Select quantity">
+            <select class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -98,6 +101,7 @@
                 {% endif %}
                 <input type="submit" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
             </div>
+            </form>
 
             {% if artwork.shop_category|lower != 'prints' %}
             <div class="d-none d-lg-block m-0 p-0 ">

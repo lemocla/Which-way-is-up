@@ -430,7 +430,8 @@ footer li a:hover,
     border-radius: 2rem !important;
     border: none;
     box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.20);
-    line-height: 1rem;
+    /*line-height: 1rem;*/
+    text-align: center;
 }
 
 .gallery-item:hover>.overlay {

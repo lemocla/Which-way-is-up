@@ -9,6 +9,13 @@
   <div class="row pb-md-3 mb-4">
   <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">Shopping bag</h1>
   </div>
+
+  {% if bag_items %}
+  <p>There is items in the bag </p>
+  {% for item in bag_items %}
+  <p>{{ item.artwork.name }} {{ item.quantity }}
+  {% endfor %}
+  {% endif %}
 </div>
 
 {% endblock %}
