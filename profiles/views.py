@@ -91,3 +91,24 @@ def add_to_wishlist(request, artwork_id):
                          'wishlist')
 
     return HttpResponse(status=200)
+
+
+@login_required
+def remove_from_wishlist(request, artwork_id):
+    """
+    Remove artwortk from user wishlist using ajax request
+    """
+
+    user = get_object_or_404(UserProfile, user=request.user)
+    artwork = get_object_or_404(Artwork, pk=artwork_id)
+
+    if user.wishlist_items.filter(pk=artwork_id).exists():
+        user.wishlist_items.remove(artwork)
+        messages.success(request, f'{artwork.name.capitalize()} successfully '
+                         'removed from wishlist')
+    else:
+        # Toast
+        messages.error(request, f'{artwork.name.capitalize()} is not '
+                       'in your wishlit')
+
+    return HttpResponse(status=200)

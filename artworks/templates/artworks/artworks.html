@@ -61,7 +61,7 @@
                                 class="fas fa-cart-plus"></i></button>
                         {% csrf_token %}
                         {% if request.user.is_authenticated and artwork in wishlist %}
-                        <button type="button" class="round-btn btn-light p-0 m-0"><i class="fa-lg fas fa-heart red-text"></i></button>
+                        <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light p-0 m-0"><i class="fa-lg fas fa-heart red-text"></i></button>
                         {% else %}
                         <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light p-0 m-0"> <i
                                 class="fa-lg far fa-heart"></i></button>

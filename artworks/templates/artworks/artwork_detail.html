@@ -92,7 +92,7 @@
             <!--Buttons-->
             <div class="mt-4 pb-2">
                 {% if request.user.is_authenticated and is_wishlist %}
-                <button class="btn btn-white px-xl-5 py-2 text-uppercase">Remove from wishlist</button>
+                <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" class="btn btn-white px-xl-5 py-2 text-uppercase">Remove from wishlist</button>
                 {% else %}
                 <button data-action="add-wishlist" data-item="{{artwork.id}}" class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
                 {% endif %}
@@ -114,7 +114,11 @@
             {% else %}
             <p class="mt-3 mt-xl-4 fw-bold">Interested in a commission?</p>
             <div class="mt-4 pb-2">
+                {% if request.user.is_authenticated and is_wishlist %}
+                <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" class="btn btn-white px-xl-5 py-2 text-uppercase">Remove from wishlist</button>
+                {% else %}
                 <button data-action="add-wishlist" data-item="{{artwork.id}}" class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
+                {% endif %}
                 <a href="{% url 'contact' %}" class="btn btn-black px-xl-5 py-2 text-uppercase">Contact us</a>
             </div>
             {% endif %}
@@ -164,7 +168,7 @@
                         <div class="d-none d-sm-block btn-group pe-1" role="group" aria-label="Basic example">
                          <button type="button" class="round-btn btn-light me-2 p-0 m-0"><i class="fas fa-cart-plus"></i></button>   
                         {% if request.user.is_authenticated and item in wishlist.all %}
-                             <button type="button" class="round-btn btn-light me-2 p-0 m-0"><i class="fa-lg fas fa-heart red-text"></i></button>                                               
+                             <button data-action="remove-from-wishlist" data-item="{{item.id}}" type="button" class="round-btn btn-light me-2 p-0 m-0"><i class="fa-lg fas fa-heart red-text"></i></button>                                               
                          {% else %}
                             <button data-action="add-wishlist" data-item="{{item.id}}" type="button" class="round-btn btn-light p-0 m-0"> <i
                                     class="fa-lg far fa-heart"></i></button>
