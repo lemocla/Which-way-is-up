@@ -1,13 +1,14 @@
 """
 Views to render my profile page content
 """
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
 from newsletter.models import Mailing
+from artworks.models import Artwork
 from .models import UserProfile
 
 from .forms import UserProfileForm
@@ -67,3 +68,26 @@ def wishlist(request):
     }
 
     return render(request, 'profiles/wishlist.html', context)
+
+
+@login_required
+def add_to_wishlist(request, artwork_id):
+    """
+    Add artwortk to user wishlist using ajax request
+    """
+    print(artwork_id)
+    print(request.user)
+
+    user = get_object_or_404(UserProfile, user=request.user)
+    artwork = get_object_or_404(Artwork, pk=artwork_id)
+
+    if user.wishlist_items.filter(pk=artwork_id).exists():
+        # Toast
+        messages.error(request, f'{artwork.name.capitalize()} already added '
+                       'to wishlist')
+    else:
+        user.wishlist_items.add(artwork)
+        messages.success(request, f'{artwork.name.capitalize()} added to '
+                         'wishlist')
+
+    return HttpResponse(status=200)
