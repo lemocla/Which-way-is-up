@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'profiles',
     'portfolio',
     'artworks',
+    'bag',
     'crispy_bootstrap5',
     'crispy_forms',
 ]
