@@ -172,6 +172,9 @@ footer li a:hover,
     color: inherit;
 }
 
+.toast-img > img{
+max-height: 65px;
+}
 /*-------------[ NAVIGATION ]----------------*/
 
 .nav-link {

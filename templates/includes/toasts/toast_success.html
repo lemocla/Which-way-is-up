@@ -1,4 +1,5 @@
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+{% load bag_tools %}
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
     <div class="arrow-up"></div>
     <div class="toast-header">
         <p class="me-auto my-0">Success!</p>
@@ -11,5 +12,41 @@
                 {{ message }}
             </div>
         </div>
+        <!-- shopping bag success-->
+        {% if grand_total and not on_profile_page %}
+        <div class="my-3 border-top border-bottom border-secondary">
+            <p class="py-2 mb-0 fw-bold fs-6 text-uppercase">Your Bag ({{ total_count }})</p>
+        </div>
+        <div class="row">
+            {% for item in bag_items %}
+            
+                <div class="col-3 my-1 pe-1 toast-img">
+                    <img class="img-fluid shadow rounded"
+                        src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
+                        alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}">
+                </div>
+                <div class="col-9 mb-3">
+                    <p class="my-0 mb-1"><strong>{{ item.artwork.name|title }}</strong></p>
+                    <p class="my-0 text-muted small"><span class="pe-3">Quantity:</span> {{ item.quantity }}</p>
+                    <p class="my-0 text-muted small"><span class="pe-3">Subtotal:</span> £{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
+                </div>
+            
+            {% endfor %}
+
+            <div class="col">
+                <div class="d-flex justify-content-between px-0 pb-2">
+                    <p class="my-3"><strong>Total (Exc. delivery):</strong></p>
+                    <p class="my-3"><strong>£{{ total|floatformat:2 }}</strong></p>
+                </div>
+                <a href="{% url 'bag' %}" class="btn btn-black w-100">
+                    <span class="text-uppercase">Go To Secure Checkout</span>
+                    <span class="icon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 </div>
