@@ -4,6 +4,7 @@ View to return  a context with all information needed to display the cart
 
 from django.shortcuts import get_object_or_404
 from artworks.models import Artwork
+from profiles.models import UserProfile
 
 
 def bag_content(request):
@@ -15,25 +16,37 @@ def bag_content(request):
     total_count = 0
     bag = request.session.get('bag', {})
 
+    if request.user.is_authenticated:
+        user = get_object_or_404(UserProfile, user=request.user)
+
     for artwork_id, artwork_data in bag.items():
+        is_wishlist = False
         if isinstance(artwork_data, int):
             artwork = get_object_or_404(Artwork, pk=artwork_id)
             total += artwork_data * artwork.price
             total_count += artwork_data
+            if request.user.is_authenticated:
+                is_wishlist = user.wishlist_items.filter(
+                              pk=artwork_id).exists()
             bag_items.append({
                 'item_id': artwork_id,
                 'quantity': artwork_data,
                 'artwork': artwork,
+                'is_wishlist': is_wishlist,
             })
         else:
             artwork = get_object_or_404(Artwork, pk=artwork_id)
             for quantity in artwork_data.items():
                 total += quantity * artwork.price
                 total_count += quantity
+                if request.user.is_authenticated:
+                    is_wishlist = user.wishlist_items.filter(
+                                  pk=artwork_id).exists()
                 bag_items.append({
                     'artwork_id': artwork_id,
                     'quantity': quantity,
                     'artwork': artwork,
+                    'is_wishlist': is_wishlist,
                 })
 
     delivery = 0

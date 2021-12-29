@@ -197,6 +197,25 @@ footer li a:hover,
     background-color: transparent;
 }
 
+.cart-li{
+position: relative
+}
+
+nav .list-inline-item i{
+font-size: 1.45rem;
+}
+
+.bag-count{
+    position: absolute;
+    padding: 0 0.15rem;
+    top: 1rem;
+    left: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: bolder;
+    line-height: 0.85rem;
+    z-index: 2;
+    background-color: white;
+}
 /*--------------[ HERO IMAGE ]----------------*/
 
 .hero-image {

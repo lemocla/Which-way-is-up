@@ -60,7 +60,8 @@
                         </a>
                     </li>
                     <!-- shopping bag-->
-                    <li class="list-inline-item">
+                    <li class="cart-li list-inline-item">
+                        <div class="bag-count"><span>{{ total_count }}</span></div>
                         <a class="text-white nav-link" href="{% url 'bag' %}" aria-label="view shopping bag">
                             <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
                         </a>
