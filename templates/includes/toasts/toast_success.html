@@ -38,7 +38,10 @@
                     <p class="my-3"><strong>Total (Exc. delivery):</strong></p>
                     <p class="my-3"><strong>£{{ total|floatformat:2 }}</strong></p>
                 </div>
-                <a href="{% url 'bag' %}" class="btn btn-black w-100">
+                                <a href="{% url 'bag' %}" class="mb-2 btn btn-white w-100">
+                    <span class="text-uppercase">Edit bag</span>
+                </a>
+                <a href="{% url 'checkout' %}" class="btn btn-black w-100">
                     <span class="text-uppercase">Go To Secure Checkout</span>
                     <span class="icon">
                         <i class="fas fa-lock"></i>
