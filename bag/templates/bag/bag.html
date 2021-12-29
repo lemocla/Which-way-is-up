@@ -11,7 +11,7 @@
   <div class="row pb-md-3 mb-4">
     <h1 class="h1-page mt-md-0">Shopping bag</h1>
   </div>
-
+ 
   {% if bag_items %}
   <div class="row">
     <!--Grid column-->
@@ -22,9 +22,9 @@
       <div class="card mb-3">
         <div class="row gx-md-1 gx-3 gx-xl-2">
           <div class="col-sm-3 col-xl-3 bag-img-cont">
-              <img class="img-fluid shadow rounded" src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
-              alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}"
-              >
+            <img class="img-fluid shadow rounded"
+              src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
+              alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}">
           </div>
           <div class="col mt-4 mt-md-0">
             <div class="card-body py-0">
@@ -37,24 +37,29 @@
                 <div>
                   <p class="fs-5 fw-bold mb-2">Quantity</p>
 
-                  <select data-action="update-bag" data-item="{{item.artwork.id}}" class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
+                  <select data-action="update-bag" data-item="{{item.artwork.id}}" class="px-4 py-2 mb-1"
+                    aria-label="Select quantity" name="quantity">
                     <option {% if item.quantity == 1 %}selected{% endif %} value="1">1</option>
                     <option {% if item.quantity == 2 %}selected{% endif %} value="2">2</option>
                     <option {% if item.quantity == 3 %}selected{% endif %} value="3">3</option>
                     <option {% if item.quantity == 4 %}selected{% endif %} value="4">4</option>
                     <option {% if item.quantity == 5 %}selected{% endif %} value="5">5</option>
                   </select>
+
                 </div>
               </div>
               <div class="d-md-flex justify-content-between align-items-center">
                 <div>
-                  <button data-action="remove-from-bag" data-item="{{item.artwork.id}}" type="button" class="btn-bag small text-muted text-uppercase me-4"><i
-                      class="fas fa-trash-alt mr-1"></i> Remove item </button>
+                  <button data-action="remove-from-bag" data-item="{{item.artwork.id}}" type="button"
+                    class="btn-bag small text-muted text-uppercase me-4"><i class="fas fa-trash-alt mr-1"></i> Remove
+                    item </button>
                   {% if request.user.is_authenticated and item.is_wishlist %}
-                  <button data-action="remove-from-wishlist" data-item="{{item.artwork.id}}" type="button" class="btn-bag red-text small text-uppercase"><i class="fas fa-heart mr-1"></i>
+                  <button data-action="remove-from-wishlist" data-item="{{item.artwork.id}}" type="button"
+                    class="btn-bag red-text small text-uppercase"><i class="fas fa-heart mr-1"></i>
                     Remove from wishlist </button>
                   {% else %}
-                  <button data-action="add-wishlist" data-item="{{item.artwork.id}}" type="button" class="btn-bag text-muted small text-uppercase"><i class="fas fa-heart mr-1"></i>
+                  <button data-action="add-wishlist" data-item="{{item.artwork.id}}" type="button"
+                    class="btn-bag text-muted small text-uppercase"><i class="fas fa-heart mr-1"></i>
                     Move to wish list </button>
                   {% endif %}
                 </div>
@@ -67,7 +72,7 @@
       <hr class="my-4">
       {% endfor %}
       <!-- end bag items -->
-      
+
     </div>
 
     <!--Grid column-->
@@ -92,26 +97,38 @@
             </div>
             <span><strong>{{ total }}</strong></span>
           </div>
-          </ul>
-          <div class="mt-5">
-          <a href="{% url 'checkout' %}"
-            class="mb-2 w-100 btn btn-black py-2 px-5 text-uppercase">
-            checkout</a>
-          <a href="{% url 'shop' %}"
-            class="w-100 btn btn-white py-2 px-5 text-uppercase">
-            keep shopping</a>
-            </div>
+          <hr class="my-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="order-is-gift" data-session="{{ is_gift }}"
+              name="is_gift">
+            <label class="form-check-label" for="order-is-gift">
+              This order is a gift
+            </label>
+          </div>
+          <div id="gift-container" class="mt-3 gift-display">
+            <label class="gift-label" for="gift-message">Enter gift message</label>
+            <textarea class="form-control" id="gift-message" name="gift_message" rows="3"
+              placeholder="Enter your gift message - make sure to include to / from names">{{ gift_message }}</textarea>
+
+          </div>
+
+          <div class="mt-4">
+            <a href="{% url 'checkout' %}" class="mb-2 w-100 btn btn-black py-2 px-5 text-uppercase">
+              checkout</a>
+            <a href="{% url 'shop' %}" class="w-100 btn btn-white py-2 px-5 text-uppercase">
+              keep shopping</a>
+          </div>
         </div>
       </div>
     </div>
     <div class="px-3 mt-4 mt-lg-2">
-    <p class="text-dark mb-3"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase,
-      adding
-      items to your cart does not mean booking them.
-    </p>
-        <p class="red-text mb-5"><i class="fas fa-info-circle mr-1"></i>
+      <p class="text-dark mb-3"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase,
+        adding
+        items to your cart does not mean booking them.
+      </p>
+      <p class="red-text mb-5"><i class="fas fa-info-circle mr-1"></i>
         Please note that at this moment in time we deliver in the UK only.
-    </p>
+      </p>
     </div>
   </div>
 
@@ -124,23 +141,18 @@
     <div class="col-12 mt-4 mt-md-5 rounded shadow px-3 py-3">
       <h5 class=" pb-2">Payment accepted</h5>
       <div>
-        <img class="mr-2" width="45px"
-          src="{{MEDIA_URL}}visa.svg" alt="Visa">
-        <img class="mr-2" width="45px"
-          src="{{MEDIA_URL}}mastercard.svg"
-          alt="Mastercard">
-        <img class="mr-2" width="45px"
-          src="{{MEDIA_URL}}amex.svg"
-          alt="American Express">
+        <img class="mr-2" width="45" src="{{MEDIA_URL}}visa.svg" alt="Visa">
+        <img class="mr-2" width="45" src="{{MEDIA_URL}}mastercard.svg" alt="Mastercard">
+        <img class="mr-2" width="45" src="{{MEDIA_URL}}amex.svg" alt="American Express">
 
       </div>
     </div>
   </div>
   {% else %}
-                    <p class="my-5">Your shoppting bag is empty.</p>
-                    <a href="{% url 'artworks' %}" class="btn btn-black px-5 py-2">  
-                        <span class="text-uppercase">Keep Shopping</span>
-                    </a>
+  <p class="my-5">Your shoppting bag is empty.</p>
+  <a href="{% url 'artworks' %}" class="btn btn-black px-5 py-2">
+    <span class="text-uppercase">Keep Shopping</span>
+  </a>
   {% endif %}
 </div>
 
@@ -150,42 +162,107 @@
 {{ block.super }}
 <script>
 
-    // Update quantity
-    $('select[data-action=update-bag]').change(function (e) {
-         let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
-         let artworkId = $(this).attr('data-item');
+  // Update quantity
+  $('select[data-action=update-bag]').change(function (e) {
+    let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+    let artworkId = $(this).attr('data-item');
 
-         let url = `/bag/adjust/${artworkId}/`;
+    let url = `/bag/adjust/${artworkId}/`;
 
-         let data = {
-             'csrfmiddlewaretoken': csrfToken,
-             'quantity': $(this).val()
-         };
+    let data = {
+      'csrfmiddlewaretoken': csrfToken,
+      'quantity': $(this).val()
+    };
+    $.post(url, data)
+      .done(function () {
+        location.reload();
+      });
+  })
 
-         $.post(url, data)
-             .done(function () {
-                 location.reload();
-             });
-     })
+  // Remove from bag
+  $('button[data-action=remove-from-bag]').click(function (e) {
+    let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+    let artworkId = $(this).attr('data-item');
+    let url = `/bag/remove/${artworkId}/`;
+    let data = {
+      'csrfmiddlewaretoken': csrfToken,
+    };
 
-    // Remove from bag
-    $('button[data-action=remove-from-bag]').click(function (e) {
-         let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
-         let artworkId = $(this).attr('data-item');
-         let url = `/bag/remove/${artworkId}/`;
-         let data = {
-             'csrfmiddlewaretoken': csrfToken,
-         };
+    $.post(url, data)
+      .done(function () {
+        location.reload();
+      });
+  })
 
-         $.post(url, data)
-             .done(function () {
-                 location.reload();
-             });
-     })
+  // Gift option on load - if in session
+  if ($('#order-is-gift').attr('data-session') == 'on') {
+    $('#order-is-gift').attr("checked", true);
+    $('#gift-container').removeClass('gift-display')
+    if ($('#gift-message').val() == 'None'){
+      $('#gift-message').val("")
+    }
+  }
 
-    // Move to wishlist 
+  // Display gift message when gift option is true
+  $('#order-is-gift').change(function () {
+    if ($('#order-is-gift').is(":checked")) {
+      // display gift message
+      $('#gift-container').removeClass('gift-display')
+      // add gift option to session
+      let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+      let url = `/bag/gift_option/`;
+      let data = {
+        'csrfmiddlewaretoken': csrfToken,
+        'is_gift': $("#order-is-gift").val(),
+        'gift_message': $('#gift-message').val()
+      };
+      $.post(url, data)
+    }
+    else {
+      // hide gift message
+      $('#gift-container').addClass('gift-display')
+      $("#gift-message").val("");
+      // add to session
+      let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+      let url = `/bag/gift_option/`;
+      let data = {
+        'csrfmiddlewaretoken': csrfToken,
+        'is_gift': false,
+      };
+      $.post(url, data)
+    }
 
-    // Remove from wishlist
+    // Put message and gift option in session when message is entered
+    $("#gift-message").focusout(function () {
+      // add to session
+      let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+      let url = `/bag/gift_option/`;
+      let data = {
+        'csrfmiddlewaretoken': csrfToken,
+        'is_gift': $("#order-is-gift").val(),
+        'gift_message': $('#gift-message').val()
+      };
+      $.post(url, data)
+    });
+  })
+ 
+  // Edit gift message
+  $("#gift-message").focusout(function () {
+    if ($('#order-is-gift').attr('data-session') == 'on') {
+      console.log("editing typing")
+      // add to session
+      let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+
+      let url = `/bag/gift_option/`;
+      let data = {
+        'csrfmiddlewaretoken': csrfToken,
+        'is_gift': $("#order-is-gift").val(),
+        'gift_message': $('#gift-message').val()
+      };
+      $.post(url, data)
+    }
+  })
+
 
 </script>
 {% endblock %}

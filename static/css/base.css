@@ -172,9 +172,10 @@ footer li a:hover,
     color: inherit;
 }
 
-.toast-img > img{
-max-height: 65px;
+.toast-img>img {
+    max-height: 65px;
 }
+
 /*-------------[ NAVIGATION ]----------------*/
 
 .nav-link {
@@ -200,15 +201,15 @@ max-height: 65px;
     background-color: transparent;
 }
 
-.cart-li{
-position: relative
+.cart-li {
+    position: relative
 }
 
-nav .list-inline-item i{
-font-size: 1.45rem;
+nav .list-inline-item i {
+    font-size: 1.45rem;
 }
 
-.bag-count{
+.bag-count {
     position: absolute;
     padding: 0 0.15rem;
     top: 1rem;
@@ -219,6 +220,7 @@ font-size: 1.45rem;
     z-index: 2;
     background-color: white;
 }
+
 /*--------------[ HERO IMAGE ]----------------*/
 
 .hero-image {
@@ -272,7 +274,9 @@ font-size: 1.45rem;
     margin-bottom: 0.35rem;
 }
 
-#profile-form label, #checkout-form label {
+#profile-form label,
+#checkout-form label,
+.gift-label {
     position: absolute;
     z-index: -1;
 }
@@ -529,9 +533,13 @@ font-size: 1.45rem;
     max-height: 250px;
 }
 
-.btn-bag{
+.btn-bag {
     border: transparent !important;
     background-color: transparent;
+}
+
+.gift-display{
+    display:none;
 }
 
 /*-----------------[ FOOTER ]----------------*/

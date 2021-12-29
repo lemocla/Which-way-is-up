@@ -49,6 +49,14 @@ def bag_content(request):
                     'is_wishlist': is_wishlist,
                 })
 
+    if request.session.get('gift'):
+        for key, value in request.session['gift'].items():
+            is_gift = key
+            gift_message = value
+    else:
+        is_gift = None
+        gift_message = None
+
     delivery = 0
 
     grand_total = total + delivery
@@ -59,6 +67,8 @@ def bag_content(request):
         'total_count': total_count,
         'delivery': delivery,
         'grand_total': grand_total,
+        'is_gift': is_gift,
+        'gift_message': gift_message,
         }
 
     return context
