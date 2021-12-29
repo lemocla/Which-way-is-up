@@ -67,3 +67,23 @@ def ajdust_bag(request, artwork_id):
 
     request.session['bag'] = bag
     return HttpResponse(status=200)
+
+
+def remove_from_bag(request, artwork_id):
+    """Remove the item from the shopping bag"""
+
+    try:
+        artwork = get_object_or_404(Artwork, pk=artwork_id)
+
+        bag = request.session.get('bag', {})
+
+        bag.pop(artwork_id)
+        messages.success(request, f'{artwork.name} has been removed from '
+                         'your bag')
+
+        request.session['bag'] = bag
+        return HttpResponse(status=200)
+
+    except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
+        return HttpResponse(status=500)

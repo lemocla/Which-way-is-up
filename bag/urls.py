@@ -10,4 +10,6 @@ urlpatterns = [
     path("", views.bag, name="bag"),
     path("add/<int:artwork_id>/", views.add_to_bag, name="add_to_bag"),
     path("adjust/<artwork_id>/", views.ajdust_bag, name="adjust_bag"),
+    path("remove/<artwork_id>/", views.remove_from_bag,
+         name="remove_from_bag"),
 ]

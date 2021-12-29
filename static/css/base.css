@@ -507,6 +507,11 @@ footer li a:hover,
     max-height: 250px;
 }
 
+.btn-bag{
+    border: transparent !important;
+    background-color: transparent;
+}
+
 /*-----------------[ FOOTER ]----------------*/
 
 .footer-header {

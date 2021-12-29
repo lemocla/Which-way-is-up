@@ -48,10 +48,10 @@
               </div>
               <div class="d-md-flex justify-content-between align-items-center">
                 <div>
-                  <a href="#!" type="button" class="small text-muted text-uppercase me-4"><i
-                      class="fas fa-trash-alt mr-1"></i> Remove item </a>
-                  <a href="#!" type="button" class="text-muted small text-uppercase"><i class="fas fa-heart mr-1"></i>
-                    Move to wish list </a>
+                  <button data-action="remove-from-bag" data-item="{{item.artwork.id}}" type="button" class="btn-bag small text-muted text-uppercase me-4"><i
+                      class="fas fa-trash-alt mr-1"></i> Remove item </button>
+                  <button data-action="add-wishlist" data-item="{{item.artwork.id}}" type="button" class="btn-bag text-muted small text-uppercase"><i class="fas fa-heart mr-1"></i>
+                    Move to wish list </button>
                 </div>
                 <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
               </div>
@@ -149,9 +149,9 @@
     $('select[data-action=update-bag]').change(function (e) {
          let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
          let artworkId = $(this).attr('data-item');
-         console.log(artworkId)
+
          let url = `/bag/adjust/${artworkId}/`;
-         console.log($(this).val())
+
          let data = {
              'csrfmiddlewaretoken': csrfToken,
              'quantity': $(this).val()
@@ -162,6 +162,22 @@
                  location.reload();
              });
      })
+
+    // Remove from bag
+    $('button[data-action=remove-from-bag]').click(function (e) {
+         let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+         let artworkId = $(this).attr('data-item');
+         let url = `/bag/remove/${artworkId}/`;
+         let data = {
+             'csrfmiddlewaretoken': csrfToken,
+         };
+
+         $.post(url, data)
+             .done(function () {
+                 location.reload();
+             });
+     })
+
 
 </script>
 {% endblock %}
