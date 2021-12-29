@@ -272,7 +272,7 @@ font-size: 1.45rem;
     margin-bottom: 0.35rem;
 }
 
-#profile-form label {
+#profile-form label, #checkout-form label {
     position: absolute;
     z-index: -1;
 }
