@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
+{% load bag_tools %}
+
 {% block extra_title %}- shopping bag {% endblock %}
 
 {% block content %}
@@ -34,12 +36,13 @@
                 </div>
                 <div>
                   <p class="fs-5 fw-bold mb-2">Quantity</p>
-                  <select class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
-                    <option selected value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value=5">5</option>
+
+                  <select data-action="update-bag" data-item="{{item.artwork.id}}" class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
+                    <option {% if item.quantity == 1 %}selected{% endif %} value="1">1</option>
+                    <option {% if item.quantity == 2 %}selected{% endif %} value="2">2</option>
+                    <option {% if item.quantity == 3 %}selected{% endif %} value="3">3</option>
+                    <option {% if item.quantity == 4 %}selected{% endif %} value="4">4</option>
+                    <option {% if item.quantity == 5 %}selected{% endif %} value="5">5</option>
                   </select>
                 </div>
               </div>
@@ -50,7 +53,7 @@
                   <a href="#!" type="button" class="text-muted small text-uppercase"><i class="fas fa-heart mr-1"></i>
                     Move to wish list </a>
                 </div>
-                <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">{{ item.artwork.price }}</p>
+                <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
               </div>
             </div>
           </div>
@@ -136,4 +139,29 @@
   {% endif %}
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+
+    // Update quantity
+    $('select[data-action=update-bag]').change(function (e) {
+         let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+         let artworkId = $(this).attr('data-item');
+         console.log(artworkId)
+         let url = `/bag/adjust/${artworkId}/`;
+         console.log($(this).val())
+         let data = {
+             'csrfmiddlewaretoken': csrfToken,
+             'quantity': $(this).val()
+         };
+
+         $.post(url, data)
+             .done(function () {
+                 location.reload();
+             });
+     })
+
+</script>
 {% endblock %}

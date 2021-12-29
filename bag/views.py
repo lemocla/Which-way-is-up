@@ -1,7 +1,8 @@
 """
 Views to handle shopping bag functionalities
 """
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import (render, redirect, get_object_or_404,
+                              HttpResponse)
 from django.contrib import messages
 from artworks.models import Artwork
 
@@ -31,14 +32,38 @@ def add_to_bag(request, artwork_id):
 
     bag = request.session.get('bag', {})
 
-    if artwork_id in list(bag.keys()):
-        bag[artwork_id] += quantity
-        messages.success(request, f'Updated {artwork.name} quantity '
-                         f'to {bag[artwork_id]}')
+    if str(artwork_id) in list(bag.keys()):
+        bag[str(artwork_id)] += quantity
+        messages.success(request, f'{artwork.name}\'s quantity updated '
+                         f'to {bag[str(artwork_id)]}')
     else:
         bag[artwork_id] = quantity
-        messages.success(request, f'Added {artwork.name} to your bag')
+        messages.success(request, f'Added {artwork.name} has been added to '
+                         'your bag')
 
     request.session['bag'] = bag
-    print(request.session['bag'])
+
     return redirect(redirect_url)
+
+
+def ajdust_bag(request, artwork_id):
+    """
+    Adjust the quantity of a specified item to the specified amount
+    """
+    artwork = get_object_or_404(Artwork, pk=artwork_id)
+
+    quantity = int(request.POST.get('quantity'))
+
+    bag = request.session.get('bag', {})
+
+    if quantity > 0:
+        bag[artwork_id] = quantity
+        messages.success(request, f'{artwork.name}\'s quantity updated '
+                         f'to {bag[artwork_id]}')
+    else:
+        bag.pop(artwork_id)
+        messages.success(request, f'{artwork.name} has been removed from '
+                         'your bag')
+
+    request.session['bag'] = bag
+    return HttpResponse(status=200)
