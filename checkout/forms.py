@@ -13,6 +13,9 @@ class OrderForm(forms.ModelForm):
         model = Order
         exclude = ('order_number', 'date', 'bag',
                    'user_profile', 'total', 'status')
+        widgets = {
+          'gift_message': forms.Textarea(attrs={'rows': 4, }),
+        }
 
     def __init__(self, *args, **kwargs):
         """
@@ -28,14 +31,19 @@ class OrderForm(forms.ModelForm):
             'gift_option': 'This order is a gift',
             'gift_recipient': 'Enter gift recipient',
             'gift_message': 'Personalise your message',
-            'postcode': 'Postal Code',
-            'town_or_city': 'Town or City',
-            'street_address1': 'Street Address 1',
-            'street_address2': 'Street Address 2',
-            'county': 'County, State or Locality',
+            'delivery_street_address1': 'Street Address 1',
+            'delivery_street_address2': 'Street Address 2',
+            'delivery_town_or_city': 'Town or City',
+            'delivery_postcode': 'Postal Code',
+            'delivery_county': 'County, State or Locality',
+            'billing_street_address1': 'Street Address 1',
+            'billing_street_address2': 'Street Address 2',
+            'billing_town_or_city': 'Town or City',
+            'billing_postcode': 'Postal Code',
+            'billing_county': 'County, State or Locality',
         }
 
-        no_placeholders = ['country']
+        no_placeholders = ['delivery_country', 'billing_country']
         for field in self.fields:
             if field not in no_placeholders:
                 if self.fields[field].required:

@@ -36,19 +36,34 @@ class Order(models.Model):
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     # delivery address
-    street_address1 = models.CharField(max_length=80, null=False, blank=False)
-    street_address2 = models.CharField(max_length=80, null=True, blank=True)
-    town_or_city = models.CharField(max_length=40, null=False, blank=False)
-    county = models.CharField(max_length=80, null=True, blank=True)
-    country = CountryField(blank_label='Country *', null=False, blank=False)
-    postcode = models.CharField(max_length=20, null=True, blank=True)
+    delivery_street_address1 = models.CharField(max_length=80, null=False,
+                                                blank=False)
+    delivery_street_address2 = models.CharField(max_length=80, null=True,
+                                                blank=True)
+    delivery_town_or_city = models.CharField(max_length=40, null=False,
+                                             blank=False)
+    delivery_county = models.CharField(max_length=80, null=True, blank=True)
+    delivery_country = CountryField(blank_label='Country *', null=False,
+                                    blank=False)
+    delivery_postcode = models.CharField(max_length=20, null=True, blank=True)
+    # billing address
+    billing_street_address1 = models.CharField(max_length=80, null=False,
+                                               blank=False)
+    billing_street_address2 = models.CharField(max_length=80, null=True,
+                                               blank=True)
+    billing_town_or_city = models.CharField(max_length=40, null=False,
+                                            blank=False)
+    billing_county = models.CharField(max_length=80, null=True, blank=True)
+    billing_country = CountryField(blank_label='Country *', null=False,
+                                   blank=False)
+    billing_postcode = models.CharField(max_length=20, null=True, blank=True)
     # gift option
     gift_option = models.BooleanField(default=False)
     gift_recipient = models.CharField(max_length=50, null=True, blank=True)
     gift_message = models.TextField(max_length=1000, null=True, blank=True)
     # totals
     total = models.DecimalField(max_digits=10, decimal_places=2,
-                                      null=False, default=0)
+                                null=False, default=0)
     # shopping bag
     bag = models.TextField(null=False, blank=False, default='')
     # status
