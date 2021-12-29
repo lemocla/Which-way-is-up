@@ -542,6 +542,13 @@ nav .list-inline-item i {
     display:none;
 }
 
+/*---------------[ CHECKOUT ]----------------*/
+
+.img-checkout>img{
+    object-fit: contain;
+    max-height: 50px;
+}
+
 /*-----------------[ FOOTER ]----------------*/
 
 .footer-header {
