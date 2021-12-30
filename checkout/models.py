@@ -8,6 +8,7 @@ import uuid
 from django.db import models
 from django_countries.fields import CountryField
 from profiles.models import UserProfile
+from artworks.models import Artwork
 
 
 class Order(models.Model):
@@ -47,6 +48,7 @@ class Order(models.Model):
                                     blank=False)
     delivery_postcode = models.CharField(max_length=20, null=True, blank=True)
     # billing address
+    billing_same_as_delivery = models.BooleanField(default=True)
     billing_street_address1 = models.CharField(max_length=80, null=False,
                                                blank=False)
     billing_street_address2 = models.CharField(max_length=80, null=True,
@@ -87,3 +89,29 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_number
+
+
+class OrderLineItem(models.Model):
+    """
+    Model for each line of products attached to the order
+    """
+    order = models.ForeignKey(Order, null=False, blank=False,
+                              on_delete=models.CASCADE,
+                              related_name='lineitems')
+    artwork = models.ForeignKey(Artwork, null=False, blank=False,
+                                on_delete=models.CASCADE)
+    quantity = models.IntegerField(null=False, blank=False, default=0)
+    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2,
+                                         null=False, blank=False,
+                                         editable=False)
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the lineitem total
+        and update the order total.
+        """
+        self.lineitem_total = self.artwork.price * self.quantity
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.artwork.name} on order {self.order.order_number}'

@@ -3,7 +3,17 @@ Admin models for artwork app
 """
 
 from django.contrib import admin
-from .models import Order
+from .models import Order, OrderLineItem
+
+
+class OrderLineItemAdminInline(admin.TabularInline):
+    """
+    Admin model to display line of items for each order
+    """
+    model = OrderLineItem
+    # https://stackoverflow.com/questions/37338925/django-tabularinline-discard-empty-rows
+    extra = 0
+    readonly_fields = ('lineitem_total',)
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -12,7 +22,7 @@ class OrderAdmin(admin.ModelAdmin):
     """
 
     model = Order
-    
+    inlines = (OrderLineItemAdminInline,)
     readonly_fields = ('order_number', 'date', 'total',
                        'bag',)
 

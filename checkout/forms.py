@@ -10,6 +10,9 @@ class OrderForm(forms.ModelForm):
     Form field for personal information
     """
     class Meta:
+        """
+        Define form meta properties
+        """
         model = Order
         exclude = ('order_number', 'date', 'bag',
                    'user_profile', 'total', 'status')
@@ -28,9 +31,9 @@ class OrderForm(forms.ModelForm):
             'full_name': 'Full Name',
             'email': 'Email',
             'phone_number': 'Phone Number',
-            'gift_option': 'This order is a gift',
             'gift_recipient': 'Enter gift recipient',
-            'gift_message': 'Personalise your message',
+            'gift_message': ('Enter your gift message - make sure to '
+                             'include to / from names'),
             'delivery_street_address1': 'Street Address 1',
             'delivery_street_address2': 'Street Address 2',
             'delivery_town_or_city': 'Town or City',
@@ -43,7 +46,9 @@ class OrderForm(forms.ModelForm):
             'billing_county': 'County, State or Locality',
         }
 
-        no_placeholders = ['delivery_country', 'billing_country']
+        no_placeholders = ['delivery_country', 'billing_country',
+                           'billing_same_as_delivery', 'gift_option'
+                           ]
 
         for field in self.fields:
             if field not in no_placeholders:
@@ -53,3 +58,6 @@ class OrderForm(forms.ModelForm):
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'mb-3'
+        self.fields['gift_option'].label = "Add gift option"
+        self.fields['billing_same_as_delivery'].label = (
+            'My billing address is the same as my delivery address')
