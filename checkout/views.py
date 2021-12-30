@@ -2,13 +2,13 @@
 Views to handle checkout functionalities
 """
 import json
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from bag.bag_contexts import bag_content
 from profiles.models import UserProfile
 from artworks.models import Artwork
-from .models import OrderLineItem
+from .models import Order, OrderLineItem
 from .forms import OrderForm
 
 
@@ -93,7 +93,7 @@ def checkout(request):
             messages.success(request, f'Order successful - '
                              f'Order Number: {order.order_number}')
             # return home for now
-            return redirect(reverse('home'))
+            return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -145,3 +145,15 @@ def checkout(request):
         "form": form,
     }
     return render(request, 'checkout/checkout.html', context)
+
+
+def checkout_success(request, order_number):
+    """
+    Display when checkout is successful
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+
+    context = {
+        'order': order,
+    }
+    return render(request, 'checkout/checkout_success.html', context)

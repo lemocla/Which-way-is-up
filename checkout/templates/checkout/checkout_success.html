@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load bag_tools %}
+
+{% block extra_title %}- order successful {% endblock %}
+
+{% block content %}
+
+<div class="container pt-md-5 pt-4 pb-3">
+  <div class="row pb-md-3 mb-4">
+    <h1 class="h1-page mt-md-0">Order Successful</h1>
+    {{ order.order_number }}
+  </div>
+</div>
+
+{% endblock %}
