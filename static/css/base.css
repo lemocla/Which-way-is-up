@@ -291,7 +291,6 @@ nav .list-inline-item i {
 .form-select {
     color: inherit;
     border: 1px solid var(--darkgrey);
-    max-width: 635px;
 }
 
 .form-control:focus {
@@ -538,15 +537,19 @@ nav .list-inline-item i {
     background-color: transparent;
 }
 
-.gift-display{
-    display:none;
+.gift-display {
+    display: none;
 }
 
 /*---------------[ CHECKOUT ]----------------*/
 
-.img-checkout>img{
+.img-checkout>img {
     object-fit: contain;
-    max-height: 50px;
+    max-height: 65px;
+}
+
+.hide {
+    display: none;
 }
 
 /*-----------------[ FOOTER ]----------------*/
@@ -684,6 +687,13 @@ nav .list-inline-item i {
 
     .shop-link>img {
         height: 240px;
+    }
+
+    .form-control,
+    .checkboxinput,
+    .form-check-input,
+    .form-select {
+        max-width: 635px;
     }
 }
 

@@ -44,6 +44,7 @@ class OrderForm(forms.ModelForm):
         }
 
         no_placeholders = ['delivery_country', 'billing_country']
+
         for field in self.fields:
             if field not in no_placeholders:
                 if self.fields[field].required:

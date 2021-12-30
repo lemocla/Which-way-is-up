@@ -19,16 +19,16 @@
     <div class="col-12 col-lg-6 order-lg-last ps-lg-5 mb-5">
       <div class="border shadow rounded border-lg-secondary">
         <div class="card-body row p-4 p-xl-5">
-          <h2 class="fs-3 mb-4 pb-2 text-center">Order summary</h2>
+          <h2 class="fs-3 mb-3 pb-2 text-center">Order summary</h2>
           <div class="d-flex justify-content-between">
             <span class="fw-bold">Item</span>
             <span class="fw-bold">Subtotal</span>
           </div>
-          <hr class="mt-3 mb-4">
+          <hr class="mt-3 mb-3">
           <!-- shopping bag details -->
           {% for item in bag_items %}
           <div class="d-flex justify-content-between text-muted">
-            <div class="row w-100 mb-3">
+            <div class="row w-100">
               <div class="col-3 pe-0">
                 <a class="img-checkout" href="{% url 'artwork_details' item.artwork.id %}">
                   <img class="img-fluid shadow rounded"
@@ -46,10 +46,10 @@
               <p class="my-0">£{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
             </div>
           </div>
-          <hr>
+          <hr class="my-2">
           {% endfor %}
           <!--totals summary-->
-          <div class="d-flex justify-content-between fw-bold">
+          <div class="d-flex justify-content-between fw-bold mt-2">
             <p class="my-0">Order Total: </p>
             <p class="mb-1">£{{ total | floatformat:2 }}</p>
           </div>
@@ -69,33 +69,60 @@
     <div class="col-12 col-lg-6">
       <form action="{% url 'checkout' %}" method="POST" id="checkout-form">
         {% csrf_token %}
-        <div class="mb-5">
+        <div class="mb-3">
+          <!-- personal details -->
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Contact details</h2>
           {{ form.full_name | as_crispy_field }}
           {{ form.email | as_crispy_field }}
           {{ form.phone_number | as_crispy_field }}
         </div>
-        <div class="mb-5">
+        <!-- gift options -->
+        <div class="form-check mb-3 hide">
+          <label class="form-check-label" for="is-gift">is_gift</label>
+          <input class="form-check-input" type="checkbox" id="is_gift" {% if is_gift == 'on' %}checked{% endif %}>
+        </div>
+
+        <div id="add-gift-container" class="form-check mb-5 hide">
+          <label class="form-check-label" for="add-gift-option">Add gift option</label>
+          <input class="form-check-input" type="checkbox" id="add-gift-option">
+        </div>
+
+        <div id="gift-option-container" class="my-5 hide">
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Gift option</h2>
           {{ form.gift_recipient | as_crispy_field }}
-         <div class="form-check mb-3">
-            <label class="form-check-label" for="billing-checkbox">Review the gift message
+          <div class="form-check mb-3">
+            <label class="form-check-label" for="gift-checkbox">Review the gift message
               address</label>
-            <input class="form-check-input" type="checkbox" id="billing-checkbox">
+            <input class="form-check-input" type="checkbox" id="gift-checkbox">
           </div>
-          {{ form.gift_message | as_crispy_field }}
+          <div id="form-message-container" class="hide">
+            {{ form.gift_message | as_crispy_field }}
+          </div>
+          <div class="form-check mb-3">
+            <label class="form-check-label" for="remove-gift-option">Remove gift option
+              address</label>
+            <input class="form-check-input" type="checkbox" id="remove-gift-option">
+          </div>
         </div>
-        <div class="mb-5">
+
+        <!-- delivery details-->
+        <div id="delivery-details-container" class="mb-5">
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Delivery details</h2>
           {{ form.delivery_street_address1 | as_crispy_field }}
           {{ form.delivery_street_address2 | as_crispy_field }}
-          {{ form.delivery_town_or_city | as_crispy_field }}
+          <div class="row">
+            <div class="col-7">
+              {{ form.delivery_town_or_city | as_crispy_field }}
+            </div>
+            <div class="col-5">
+              {{ form.delivery_postcode | as_crispy_field }}
+            </div>
+          </div>
           {{ form.delivery_county | as_crispy_field }}
-          {{ form.delivery_postcode | as_crispy_field }}
           {{ form.delivery_country | as_crispy_field }}
         </div>
         <!-- paiement-->
-        <div class="mb-5">
+        <div id="billing-container" class="mb-5">
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Payment</h2>
           <div class="form-check mb-3">
             <label class="form-check-label" for="billing-checkbox">My billing address is the same as my delivery
@@ -108,46 +135,140 @@
             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Card number">
           </div>
           <!-- billing address -->
-          {{ form.billing_street_address1 | as_crispy_field }}
-          {{ form.billing_street_address2 | as_crispy_field }}
-          {{ form.billing_town_or_city | as_crispy_field }}
-          {{ form.billing_county | as_crispy_field }}
-          {{ form.billing_postcode | as_crispy_field }}
-          {{ form.billing_country | as_crispy_field }}
-          <!-- save details or login -->
-          <div class="form-check mb-3">
-            {% if user.is_authenticated %}
-            <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-            <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked>
-            {% else %}
-            <label class="form-check-label" for="id-save-info">
-              <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
-              <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-            </label>
-            {% endif %}
+          <div id="billing-details-container" class="hide">
+            {{ form.billing_street_address1 | as_crispy_field }}
+            {{ form.billing_street_address2 | as_crispy_field }}
+            <div class="row">
+              <div class="col-7">
+                {{ form.billing_town_or_city | as_crispy_field }}
+              </div>
+              <div class="col-5">
+                {{ form.billing_postcode| as_crispy_field }}
+              </div>
+            </div>
+               {{ form.billing_county | as_crispy_field }}
+              {{ form.billing_country | as_crispy_field }}
+            </div>
+            <!-- save details or login -->
+            <div class="form-check mb-3">
+              {% if user.is_authenticated %}
+              <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+              <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked>
+              {% else %}
+              <label class="form-check-label" for="id-save-info">
+                <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
+                <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+              </label>
+              {% endif %}
+            </div>
+            <p class="small red-text my-0">
+              <i class="fas fa-exclamation-circle"></i>
+              Your card will be charged <strong>${{ total|floatformat:2 }}</strong>
+            </p>
           </div>
-          <p class="small red-text my-0">
-            <i class="fas fa-exclamation-circle"></i>
-            Your card will be charged <strong>${{ total|floatformat:2 }}</strong>
-          </p>
-        </div>
-        <!-- buttons -->
-        <div class="mt-5 mb-2">
-          <a href="{% url 'bag' %}" class="btn btn-white px-5 py-2 text-uppercase">
-            <i class="fas fa-chevron-left pe-3"></i>Adjust Bag
-          </a>
-          <button id="submit-button" class="btn btn-black px-5 py-2 text-uppercase">
-            Complete Order<i class="fas fa-lock ps-3"></i>
-          </button>
-        </div>
+          <!-- buttons -->
+          <div class="mt-5 mb-2">
+            <a href="{% url 'bag' %}" class="btn btn-white px-4 py-2 text-uppercase">
+              <i class="fas fa-chevron-left pe-3"></i>Adjust Bag
+            </a>
+            <button id="submit-button" class="btn btn-black px-4 py-2 text-uppercase">
+              Complete Order<i class="fas fa-lock ps-3"></i>
+            </button>
+          </div>
       </form>
     </div>
-
   </div>
+
 </div>
 {% endblock %}
 
 {% block extra_js %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'profiles/js/profile.js' %}"></script>
+<script>
+
+  // on load - display gift option
+  if ($('#is_gift').is(":checked")) {
+    $('#gift-option-container').removeClass("hide");
+  }
+  else {
+    $('#add-gift-container').removeClass("hide");
+  }
+
+  // toggle billing container if delivery details are different than billing details 
+  $('#billing-checkbox').change(function () {
+    if ($('#billing-checkbox').is(":checked")) {
+      $('#billing-details-container').addClass('hide');
+      $('#id_billing_street_address1').val($('#id_delivery_street_address1').val());
+      $('#id_billing_street_address2').val($('#id_delivery_street_address2').val());
+      $('#id_billing_town_or_city').val($('#id_delivery_town_or_city').val());
+      $('#id_billing_postcode').val($('#id_delivery_postcode').val());
+      $('#id_billing_county').val($('#id_delivery_county').val());
+      $('#id_billing_country').val($('#id_delivery_country').val());
+    }
+    else {
+      $('#billing-details-container').removeClass('hide');
+
+      $('#id_billing_street_address1').val("");
+      $('#id_billing_street_address2').val("");
+      $('#id_billing_town_or_city').val("");
+      $('#id_billing_postcode').val("");
+      $('#id_billing_county').val("");
+      $('#id_billing_country').val("");
+    }
+  })
+
+  // display gift message container
+  $('#gift-checkbox').change(function () {
+    if ($('#gift-checkbox').is(":checked")) {
+      $('#form-message-container').removeClass('hide');
+    }
+    else {
+      $('#form-message-container').addClass('hide');
+    }
+  })
+
+  // add gift option
+  $('#add-gift-option').change(function () {
+    if ($('#add-gift-option').is(":checked")) {
+      // display gift option container
+      $('#gift-option-container').removeClass("hide");
+      // reset remove gift option to false
+      $("#remove-gift-option").prop('checked', false);
+      // set is gift to true
+      $('#is_gift').prop('checked', true);
+    }
+    else {
+      $('#gift-option-container').addClass("hide");
+      $('#form-message-container').addClass('hide');
+      // remove values of field 
+      $('#is_gift').prop('checked', false);
+      $('#gift-checkbox').prop('checked', false);
+      $('#id_gift_recipient').val("");
+      $('#id_gift_message').val("");
+    }
+  })
+
+
+  // remove gift option
+  $('#remove-gift-option').change(function () {
+    if ($('#remove-gift-option').is(":checked")) {
+      // hide gift option container and reset fields values
+      $('#gift-option-container').addClass("hide");
+      $('#is_gift').prop('checked', false);
+      $('#gift-checkbox').prop('checked', false);
+      $('#id_gift_recipient').val("");
+      $('#id_gift_message').val("");
+      $('#form-message-container').addClass('hide');
+      // display add gift option
+      $('#add-gift-option').prop('checked', false);
+      $('#add-gift-container').removeClass("hide");
+    }
+    else {
+      $('#gift-option-container').removeClass("hide");
+      $('#add-gift-container').addClass("hide");
+    }
+  })
+
+</script>
 {% endblock %}
