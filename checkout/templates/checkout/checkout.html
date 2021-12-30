@@ -67,46 +67,35 @@
 
     <!-- checkout form -->
     <div class="col-12 col-lg-6">
-      <form action="{% url 'checkout' %}" method="POST" id="checkout-form">
+      <form method="POST" action="{% url 'checkout' %}" id="checkout-form">
         {% csrf_token %}
-        <div class="mb-3">
+        <div class="mb-4">
           <!-- personal details -->
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Contact details</h2>
           {{ form.full_name | as_crispy_field }}
           {{ form.email | as_crispy_field }}
           {{ form.phone_number | as_crispy_field }}
         </div>
-        <!-- gift options -->
-        <div class="form-check mb-3 hide">
-          <label class="form-check-label" for="is-gift">is_gift</label>
-          <input class="form-check-input" type="checkbox" id="is_gift" {% if is_gift == 'on' %}checked{% endif %}>
-        </div>
+        <!-- hidden fields -->
+         <input type="hidden" id="is_gift" value="{{ is_gift }}">
+          <input type="hidden" id="gift-message" value="{{ gift_message }}">
+        {{ form.gift_option | as_crispy_field }}
 
-        <div id="add-gift-container" class="form-check mb-5 hide">
-          <label class="form-check-label" for="add-gift-option">Add gift option</label>
-          <input class="form-check-input" type="checkbox" id="add-gift-option">
-        </div>
-
-        <div id="gift-option-container" class="my-5 hide">
+        <div id="gift-option-container" class="mt-3 hide">
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Gift option</h2>
           {{ form.gift_recipient | as_crispy_field }}
           <div class="form-check mb-3">
-            <label class="form-check-label" for="gift-checkbox">Review the gift message
+            <label class="form-check-label" for="gift-checkbox">Add / review your gift message
               address</label>
             <input class="form-check-input" type="checkbox" id="gift-checkbox">
           </div>
           <div id="form-message-container" class="hide">
             {{ form.gift_message | as_crispy_field }}
           </div>
-          <div class="form-check mb-3">
-            <label class="form-check-label" for="remove-gift-option">Remove gift option
-              address</label>
-            <input class="form-check-input" type="checkbox" id="remove-gift-option">
-          </div>
         </div>
 
         <!-- delivery details-->
-        <div id="delivery-details-container" class="mb-5">
+        <div id="delivery-details-container" class="my-5">
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Delivery details</h2>
           {{ form.delivery_street_address1 | as_crispy_field }}
           {{ form.delivery_street_address2 | as_crispy_field }}
@@ -124,11 +113,7 @@
         <!-- paiement-->
         <div id="billing-container" class="mb-5">
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Payment</h2>
-          <div class="form-check mb-3">
-            <label class="form-check-label" for="billing-checkbox">My billing address is the same as my delivery
-              address</label>
-            <input class="form-check-input" type="checkbox" id="billing-checkbox" checked>
-          </div>
+          {{ form.billing_same_as_delivery | as_crispy_field }}
           <!-- paiement card placeholder-->
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Card details</label>
@@ -155,10 +140,8 @@
               <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
               <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked>
               {% else %}
-              <label class="form-check-label" for="id-save-info">
-                <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
-                <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-              </label>
+                <a class="form-link" href="{% url 'account_signup' %}">Create an account</a> or
+                <a class="form-link" href="{% url 'account_login' %}">login</a> to save this information
               {% endif %}
             </div>
             <p class="small red-text my-0">
@@ -171,14 +154,13 @@
             <a href="{% url 'bag' %}" class="btn btn-white px-4 py-2 text-uppercase">
               <i class="fas fa-chevron-left pe-3"></i>Adjust Bag
             </a>
-            <button id="submit-button" class="btn btn-black px-4 py-2 text-uppercase">
+            <button type="submit" class="btn btn-black px-4 py-2 text-uppercase">
               Complete Order<i class="fas fa-lock ps-3"></i>
             </button>
           </div>
       </form>
     </div>
   </div>
-
 </div>
 {% endblock %}
 
@@ -187,34 +169,52 @@
 <script type="text/javascript" src="{% static 'profiles/js/profile.js' %}"></script>
 <script>
 
-  // on load - display gift option
-  if ($('#is_gift').is(":checked")) {
+
+  // on load - display gift option if option is checked
+  if ($('#is_gift').val() == 'on') {
+    console.log('is gift scrpits')
+    $('#id_gift_option').attr('checked', true)
     $('#gift-option-container').removeClass("hide");
-  }
-  else {
-    $('#add-gift-container').removeClass("hide");
+    if ($('#gift-message').val() != "None"){
+      let msg = $('#gift-message').val();
+      $('#id_gift_message').val(msg)
+    }
   }
 
+// default display for billing address block
+  if ($('#id_billing_same_as_delivery').is(":checked")){
+  $('#billing-details-container').addClass('hide');
+  }
+  else{
+  $('#billing-details-container').removeClass('hide');
+  }
+   
+  // remove default required attribute
+   $('#id_billing_street_address1').prop('required', false);
+   $('#id_billing_town_or_city').prop('required', false);
+   $('#id_billing_postcode').prop('required', false);
+   $('#id_billing_country').prop('required', false);
+    
   // toggle billing container if delivery details are different than billing details 
-  $('#billing-checkbox').change(function () {
-    if ($('#billing-checkbox').is(":checked")) {
+  $('#id_billing_same_as_delivery').change(function () {
+    console.log('billing option is change')
+    if ($('#id_billing_same_as_delivery').is(":checked")) {
       $('#billing-details-container').addClass('hide');
-      $('#id_billing_street_address1').val($('#id_delivery_street_address1').val());
+      $('#id_billing_street_address1').val($('#id_delivery_street_address1').val()).prop('required', false);
       $('#id_billing_street_address2').val($('#id_delivery_street_address2').val());
-      $('#id_billing_town_or_city').val($('#id_delivery_town_or_city').val());
-      $('#id_billing_postcode').val($('#id_delivery_postcode').val());
+      $('#id_billing_town_or_city').val($('#id_delivery_town_or_city').val()).prop('required', false);
+      $('#id_billing_postcode').val($('#id_delivery_postcode').val()).prop('required', false);
       $('#id_billing_county').val($('#id_delivery_county').val());
-      $('#id_billing_country').val($('#id_delivery_country').val());
+      $('#id_billing_country').val($('#id_delivery_country').val()).prop('required', false);
     }
     else {
       $('#billing-details-container').removeClass('hide');
-
-      $('#id_billing_street_address1').val("");
+      $('#id_billing_street_address1').val("").prop('required', true);
       $('#id_billing_street_address2').val("");
-      $('#id_billing_town_or_city').val("");
-      $('#id_billing_postcode').val("");
+      $('#id_billing_town_or_city').val("").prop('required', true);
+      $('#id_billing_postcode').val("").prop('required', true);
       $('#id_billing_county').val("");
-      $('#id_billing_country').val("");
+      $('#id_billing_country').val("").prop('required', true);
     }
   })
 
@@ -229,12 +229,10 @@
   })
 
   // add gift option
-  $('#add-gift-option').change(function () {
-    if ($('#add-gift-option').is(":checked")) {
+  $('#id_gift_option').change(function () {
+    if ($('#id_gift_option').is(":checked")) {
       // display gift option container
       $('#gift-option-container').removeClass("hide");
-      // reset remove gift option to false
-      $("#remove-gift-option").prop('checked', false);
       // set is gift to true
       $('#is_gift').prop('checked', true);
     }
@@ -246,27 +244,6 @@
       $('#gift-checkbox').prop('checked', false);
       $('#id_gift_recipient').val("");
       $('#id_gift_message').val("");
-    }
-  })
-
-
-  // remove gift option
-  $('#remove-gift-option').change(function () {
-    if ($('#remove-gift-option').is(":checked")) {
-      // hide gift option container and reset fields values
-      $('#gift-option-container').addClass("hide");
-      $('#is_gift').prop('checked', false);
-      $('#gift-checkbox').prop('checked', false);
-      $('#id_gift_recipient').val("");
-      $('#id_gift_message').val("");
-      $('#form-message-container').addClass('hide');
-      // display add gift option
-      $('#add-gift-option').prop('checked', false);
-      $('#add-gift-container').removeClass("hide");
-    }
-    else {
-      $('#gift-option-container').removeClass("hide");
-      $('#add-gift-container').addClass("hide");
     }
   })
 
