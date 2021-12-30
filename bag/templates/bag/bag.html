@@ -63,7 +63,7 @@
                     Move to wish list </button>
                   {% endif %}
                 </div>
-                <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
+                <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">£{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
               </div>
             </div>
           </div>
@@ -93,9 +93,9 @@
           <div class="d-flex justify-content-between border-0 px-0 my-3">
             <div>
               <strong>Total</strong>
-              <p class="mb-0">(including VAT)</p>
+              <p class="mb-0">£(including VAT)</p>
             </div>
-            <span><strong>{{ total }}</strong></span>
+            <span><strong>£{{ total }}</strong></span>
           </div>
           <hr class="my-4">
           <div class="form-check">
@@ -108,8 +108,7 @@
           <div id="gift-container" class="mt-3 gift-display">
             <label class="gift-label" for="gift-message">Enter gift message</label>
             <textarea class="form-control" id="gift-message" name="gift_message" rows="3"
-              placeholder="Enter your gift message - make sure to include to / from names">{{ gift_message }}</textarea>
-
+              placeholder="Enter your gift message - make sure to include to / from names">{% if gift_message %}{{ gift_message }}{% endif %}</textarea>
           </div>
 
           <div class="mt-4">
@@ -150,7 +149,7 @@
   </div>
   {% else %}
   <p class="my-5">Your shoppting bag is empty.</p>
-  <a href="{% url 'artworks' %}" class="btn btn-black px-5 py-2">
+  <a href="{% url 'shop' %}" class="btn btn-black px-5 py-2">
     <span class="text-uppercase">Keep Shopping</span>
   </a>
   {% endif %}
@@ -198,9 +197,6 @@
   if ($('#order-is-gift').attr('data-session') == 'on') {
     $('#order-is-gift').attr("checked", true);
     $('#gift-container').removeClass('gift-display')
-    if ($('#gift-message').val() == 'None'){
-      $('#gift-message').val("")
-    }
   }
 
   // Display gift message when gift option is true
