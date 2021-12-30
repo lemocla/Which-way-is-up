@@ -61,6 +61,7 @@ def checkout(request):
             'gift_option': gift_option,
             'gift_message': request.POST['gift_message'],
             'gift_recipient': request.POST['gift_recipient'],
+            'total': bag.grand_total
         }
 
         form = OrderForm(form_data)
