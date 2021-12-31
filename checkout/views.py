@@ -3,9 +3,10 @@ Views to handle checkout functionalities
 """
 import json
 from django.conf import settings
-
+from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.contrib import messages
 from bag.bag_contexts import bag_content
 from profiles.models import UserProfile
@@ -102,6 +103,9 @@ def checkout(request):
                 # if payment success - save form
                 order = form.save(commit=False)
                 order.bag = json.dumps(bag)
+                order.transaction_id = result.transaction.id
+                order.paid = True
+                
                 order.save()
 
                 # create order line for each items in the bag
@@ -118,6 +122,20 @@ def checkout(request):
                 del request.session['bag']
                 if request.session.get('gift', {}):
                     del request.session['gift']
+
+                # Send user an order confirmation email
+                cust_email = order.email
+                subject = f'Which Is Up - Order Confirmation: {order.order_number}'
+                body = render_to_string(
+                    'checkout/confirmation_email/confirmation_body.txt',
+                    {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+                send_mail(
+                    subject,
+                    body,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [order.email]
+                )
 
                 # message
                 messages.success(request, f'Order successful - '

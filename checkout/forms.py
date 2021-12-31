@@ -15,7 +15,8 @@ class OrderForm(forms.ModelForm):
         """
         model = Order
         exclude = ('order_number', 'date', 'bag',
-                   'user_profile', 'total', 'status')
+                   'user_profile', 'total', 'status',
+                   'paid', 'transaction_id')
         widgets = {
           'gift_message': forms.Textarea(attrs={'rows': 4, }),
         }

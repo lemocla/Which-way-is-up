@@ -69,6 +69,9 @@ class Order(models.Model):
                                 null=False, default=0)
     # shopping bag
     bag = models.TextField(null=False, blank=False, default='')
+    # paiement
+    transaction_id = models.CharField(max_length=1000, null=True, blank=True)
+    paid = models.BooleanField(default=False)
     # status
     status = models.CharField(max_length=15, choices=STATUS,
                               default=IN_PROGRESS)
