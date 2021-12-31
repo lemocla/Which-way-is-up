@@ -11,9 +11,11 @@ from django.contrib import messages
 from bag.bag_contexts import bag_content
 from profiles.models import UserProfile
 from artworks.models import Artwork
-from .models import Order, OrderLineItem
+from profiles.forms import UserProfileForm
 
+from .models import Order, OrderLineItem
 from .forms import OrderForm
+
 
 gateway = settings.BRAINTREE_GATEWAY
 
@@ -105,7 +107,11 @@ def checkout(request):
                 order.bag = json.dumps(bag)
                 order.transaction_id = result.transaction.id
                 order.paid = True
-                
+
+                # Put save-info in session for signal
+                request.session['save_info'] = request.POST.get('save_info')
+
+                # Save order
                 order.save()
 
                 # create order line for each items in the bag
@@ -124,11 +130,12 @@ def checkout(request):
                     del request.session['gift']
 
                 # Send user an order confirmation email
-                cust_email = order.email
-                subject = f'Which Is Up - Order Confirmation: {order.order_number}'
+                subject = (f'Which Is Up - Order Confirmation: '
+                           f'{order.order_number}')
                 body = render_to_string(
                     'checkout/confirmation_email/confirmation_body.txt',
-                    {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+                    {'order': order,
+                     'contact_email': settings.DEFAULT_FROM_EMAIL})
 
                 send_mail(
                     subject,
@@ -217,6 +224,29 @@ def checkout_success(request, order_number):
     Display when checkout is successful
     """
     order = get_object_or_404(Order, order_number=order_number)
+    save_info = request.session.get('save_info')
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+
+        # Save the user's info
+        if save_info:
+            profile_data = {
+                'full_name': order.full_name,
+                'phone_number': order.phone_number,
+                'street_address1': order.billing_street_address1,
+                'street_address2': order.billing_street_address2,
+                'town_or_city': order.billing_town_or_city,
+                'postcode': order.billing_postcode,
+                'county': order.billing_county,
+                'country': order.billing_country,
+            }
+            user_profile_form = UserProfileForm(profile_data, instance=profile)
+            if user_profile_form.is_valid():
+                user_profile_form.save()
 
     context = {
         'order': order,

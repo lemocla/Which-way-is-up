@@ -74,6 +74,7 @@
           <!-- personal details -->
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Contact details</h2>
           {{ form.full_name | as_crispy_field }}
+           <input type="hidden" id="is_auth" {% if user.is_authenticated %}value="true"{% else %}value="false"{% endif %}>
           {{ form.email | as_crispy_field }}
           {{ form.phone_number | as_crispy_field }}
         </div>
@@ -152,7 +153,7 @@
           <div class="form-check mb-3">
             {% if user.is_authenticated %}
             <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-            <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked>
+            <input class="form-check-input" type="checkbox" id="id-save-info" name="save_info" checked>
             {% else %}
             <a class="form-link" href="{% url 'account_signup' %}">Create an account</a> or
             <a class="form-link" href="{% url 'account_login' %}">login</a> to save this information
@@ -267,8 +268,11 @@
 
 
   // on load - display gift option if option is checked
+  if ($('#is_auth').val() == 'true'){
+    $('#id_email').prop('disabled', true);
+  }
+
   if ($('#is_gift').val() == 'on') {
-    console.log('is gift scrpits')
     $('#id_gift_option').attr('checked', true)
     $('#gift-option-container').removeClass("hide");
     if ($('#gift-message').val() != "None") {
