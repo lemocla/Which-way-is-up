@@ -344,6 +344,25 @@ nav .list-inline-item i {
     padding-left: 0.25rem !important;
 }
 
+/*---------------[ BRAINTREE ]-----------*/
+
+.braintree-field {
+    height: 38px;
+}
+
+.braintree-hosted-fields-focused {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.braintree-hosted-fields-focused.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
 /*----------------[ ABOUT ]---------------*/
 
 .trapez-bg {

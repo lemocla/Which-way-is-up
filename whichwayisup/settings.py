@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import braintree
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -134,6 +135,18 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
+# BRAINTREE
+BRAINTREE_MERCHANT_ID = os.environ.get('BRAINTREE_MERCHANT_ID')
+BRAINTREE_PUBLIC_KEY = os.environ.get('BRAINTREE_PUBLIC_KEY')
+BRAINTREE_PRIVATE_KEY = os.environ.get('BRAINTREE_PRIVATE_KEY')
+BRAINTREE_GATEWAY = braintree.BraintreeGateway(
+    braintree.Configuration(
+        braintree.Environment.Sandbox,
+        BRAINTREE_MERCHANT_ID,
+        BRAINTREE_PUBLIC_KEY,
+        BRAINTREE_PRIVATE_KEY
+    )
+)
 
 WSGI_APPLICATION = 'whichwayisup.wsgi.application'
 

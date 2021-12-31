@@ -2,6 +2,8 @@
 Views to handle checkout functionalities
 """
 import json
+from django.conf import settings
+
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -9,7 +11,10 @@ from bag.bag_contexts import bag_content
 from profiles.models import UserProfile
 from artworks.models import Artwork
 from .models import Order, OrderLineItem
+
 from .forms import OrderForm
+
+gateway = settings.BRAINTREE_GATEWAY
 
 
 def checkout(request):
@@ -19,6 +24,8 @@ def checkout(request):
     if request.method == 'POST':
 
         bag = request.session.get('bag', {})
+        current_bag = bag_content(request)
+        total = current_bag['grand_total']
 
         if request.POST.get('billing_same_as_delivery') == 'on':
             billing_street_address1 = request.POST['delivery_street_address1']
@@ -61,17 +68,44 @@ def checkout(request):
             'gift_option': gift_option,
             'gift_message': request.POST['gift_message'],
             'gift_recipient': request.POST['gift_recipient'],
-            'total': bag.grand_total
         }
 
         form = OrderForm(form_data)
 
-        if form.is_valid():
-            order = form.save(commit=False)
-            order.bag = json.dumps(bag)
-            order.save()
-            for item_id, item_data in bag.items():
-                try:
+        # check if all items in the bag are available before processing order
+        check = []
+        for item_id, item_data in bag.items():
+            try:
+                artwork = Artwork.objects.get(id=item_id)
+                check.append(True)
+            except ObjectDoesNotExist:
+                messages.error(request, (
+                    "One of the artworks in your bag is not available. "
+                    "Please call us for assistance!")
+                )
+                return redirect(reverse('view_bag'))
+
+        if form.is_valid() and False not in check:
+            # request nonce from client
+            nonce_from_the_client = request.POST.get(
+                                    'payment_method_nonce', None)
+            # process paiement
+            result = gateway.transaction.sale({
+                     "amount": total,
+                     "payment_method_nonce": nonce_from_the_client,
+                     "options": {
+                        "submit_for_settlement": True}
+            })
+
+            if result.is_success:
+
+                # if payment success - save form
+                order = form.save(commit=False)
+                order.bag = json.dumps(bag)
+                order.save()
+
+                # create order line for each items in the bag
+                for item_id, item_data in bag.items():
                     artwork = Artwork.objects.get(id=item_id)
                     order_line_item = OrderLineItem(
                         order=order,
@@ -79,25 +113,30 @@ def checkout(request):
                         quantity=item_data,
                     )
                     order_line_item.save()
-                except ObjectDoesNotExist:
-                    messages.error(request, (
-                        "One of the artworks in your bag is not available. "
-                        "Please call us for assistance!")
-                    )
-                    order.delete()
-                    return redirect(reverse('view_bag'))
-            # emptpy bag
-            del request.session['bag']
-            if request.session.get('gift', {}):
-                del request.session['gift']
-            # message
-            messages.success(request, f'Order successful - '
-                             f'Order Number: {order.order_number}')
-            # return home for now
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+
+                # delete bag and gift session
+                del request.session['bag']
+                if request.session.get('gift', {}):
+                    del request.session['gift']
+
+                # message
+                messages.success(request, f'Order successful - '
+                                 f'Order Number: {order.order_number}')
+
+                # redirect to checkout sucess
+                return redirect(reverse('checkout_success',
+                                args=[order.order_number]))
+
+            else:
+                messages.error(request, (
+                        'We couldn\t process your paiement'
+                        '- please check your paiement details')
+                               )
+                return redirect(reverse('checkout'))
+
         else:
-            messages.error(request, 'There was an error with your form. \
-                Please double check your information.')
+            messages.error(request, 'There was an error with your form.'
+                           'Please double check your information.')
     else:
         bag = request.session.get('bag', {})
 
@@ -107,15 +146,19 @@ def checkout(request):
             return redirect(reverse('shop'))
 
         current_bag = bag_content(request)
-        is_gift = current_bag['is_gift']
 
+        # Check if gift option in session
+        is_gift = current_bag['is_gift']
         if str(is_gift) == 'on':
             is_gift_bool = True
-
         else:
             is_gift_bool = False
         gift_message = current_bag['gift_message']
 
+        # Braintree client token
+        client_token = gateway.client_token.generate()
+
+        # Autofill checkout form if user authenticated
         if request.user.is_authenticated:
             try:
                 profile = UserProfile.objects.get(user=request.user)
@@ -142,9 +185,12 @@ def checkout(request):
                 form = OrderForm()
         else:
             form = OrderForm()
+
     context = {
         "form": form,
+        'client_token': client_token,
     }
+
     return render(request, 'checkout/checkout.html', context)
 
 

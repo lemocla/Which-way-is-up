@@ -67,6 +67,7 @@
 
     <!-- checkout form -->
     <div class="col-12 col-lg-6">
+
       <form method="POST" action="{% url 'checkout' %}" id="checkout-form">
         {% csrf_token %}
         <div class="mb-4">
@@ -77,8 +78,8 @@
           {{ form.phone_number | as_crispy_field }}
         </div>
         <!-- hidden fields -->
-         <input type="hidden" id="is_gift" value="{{ is_gift }}">
-          <input type="hidden" id="gift-message" value="{{ gift_message }}">
+        <input type="hidden" id="is_gift" value="{{ is_gift }}">
+        <input type="hidden" id="gift-message" value="{{ gift_message }}">
         {{ form.gift_option | as_crispy_field }}
 
         <div id="gift-option-container" class="mt-3 hide">
@@ -114,11 +115,23 @@
         <div id="billing-container" class="mb-5">
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Payment</h2>
           {{ form.billing_same_as_delivery | as_crispy_field }}
-          <!-- paiement card placeholder-->
-          <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">Card details</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Card number">
-          </div>
+
+          <!-- Braintree hosted fields-->
+                <div class="mb-3">
+                <label for="card-number">Card Number</label>
+                <div id="card-number" class="form-control braintree-field"></div>
+                </div>
+
+                <div class="mb-3">
+                <label for="cvv" class="field">CVV</label>
+                <div id="cvv" class="form-control braintree-field"></div>
+                </div>
+
+                 <div class="mb-3">
+                <label for="expiration-date">Expiration Date</label>
+                <div id="expiration-date" class="form-control braintree-field"></div>
+                </div>
+
           <!-- billing address -->
           <div id="billing-details-container" class="hide">
             {{ form.billing_street_address1 | as_crispy_field }}
@@ -131,43 +144,126 @@
                 {{ form.billing_postcode| as_crispy_field }}
               </div>
             </div>
-               {{ form.billing_county | as_crispy_field }}
-              {{ form.billing_country | as_crispy_field }}
-            </div>
-            <!-- save details or login -->
-            <div class="form-check mb-3">
-              {% if user.is_authenticated %}
-              <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-              <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked>
-              {% else %}
-                <a class="form-link" href="{% url 'account_signup' %}">Create an account</a> or
-                <a class="form-link" href="{% url 'account_login' %}">login</a> to save this information
-              {% endif %}
-            </div>
-            <p class="small red-text my-0">
-              <i class="fas fa-exclamation-circle"></i>
-              Your card will be charged <strong>${{ total|floatformat:2 }}</strong>
-            </p>
+            {{ form.billing_county | as_crispy_field }}
+            {{ form.billing_country | as_crispy_field }}
           </div>
-          <!-- buttons -->
-          <div class="mt-5 mb-2">
-            <a href="{% url 'bag' %}" class="btn btn-white px-4 py-2 text-uppercase">
-              <i class="fas fa-chevron-left pe-3"></i>Adjust Bag
-            </a>
-            <button type="submit" class="btn btn-black px-4 py-2 text-uppercase">
-              Complete Order<i class="fas fa-lock ps-3"></i>
-            </button>
+
+          <!-- save details or login -->
+          <div class="form-check mb-3">
+            {% if user.is_authenticated %}
+            <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+            <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked>
+            {% else %}
+            <a class="form-link" href="{% url 'account_signup' %}">Create an account</a> or
+            <a class="form-link" href="{% url 'account_login' %}">login</a> to save this information
+            {% endif %}
           </div>
+          <p class="small red-text my-0">
+            <i class="fas fa-exclamation-circle"></i>
+            Your card will be charged <strong>£{{ total|floatformat:2 }}</strong>
+          </p>
+        </div>
+
+        <!-- buttons -->
+        <div class="mt-5 mb-2">
+          <a href="{% url 'bag' %}" class="btn btn-white px-4 py-2 text-uppercase">
+            <i class="fas fa-chevron-left pe-3"></i>Adjust Bag
+          </a>
+          <!-- hidden field - braintree -->
+          <input type="hidden" name="payment_method_nonce">
+          <!--https://stackoverflow.com/questions/43990154/braintree-jsv3-payment-method-nonce-value-bad-with-hostedfields?rq=1-->
+          <button id="checkout-submit" type="submit" class="btn btn-black px-4 py-2 text-uppercase">
+            Complete Order<i class="fas fa-lock ps-3"></i>
+          </button>
+        </div>
       </form>
-    </div>
+
+  </div>
   </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 {{ block.super }}
+    <script src="https://js.braintreegateway.com/web/3.84.0/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.84.0/js/hosted-fields.min.js"></script>
 <script type="text/javascript" src="{% static 'profiles/js/profile.js' %}"></script>
+
+
+    <script>
+      var form = document.querySelector('#checkout-form');
+      var submit = document.querySelector('#checkout-submit');
+
+      braintree.client.create({
+        authorization: '{{ client_token }}'
+      }, function (clientErr, clientInstance) {
+        if (clientErr) {
+          console.error(clientErr);
+          return;
+        }
+
+        // This example shows Hosted Fields, but you can also use this
+        // client instance to create additional components here, such as
+        // PayPal or Data Collector.
+
+        braintree.hostedFields.create({
+          client: clientInstance,
+          styles: {
+            'input': {
+              'font-size': '14px',
+              'border-color': 'black',
+            },
+            'input.invalid': {
+              'color': 'red'
+            },
+            'input.valid': {
+              'color': 'green'
+            }
+          },
+          fields: {
+            number: {
+              container: '#card-number',
+              placeholder: '4111 1111 1111 1111',
+            },
+            cvv: {
+              container: '#cvv',
+              placeholder: '123'
+            },
+            expirationDate: {
+              container: '#expiration-date',
+              placeholder: '10/2022'
+            }
+          }
+        }, function (hostedFieldsErr, hostedFieldsInstance) {
+          if (hostedFieldsErr) {
+            console.error(hostedFieldsErr);
+            return;
+          }
+
+          submit.removeAttribute('disabled');
+
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+              if (tokenizeErr) {
+                console.error(tokenizeErr);
+                return;
+              }
+              // If this was a real integration, this is where you would
+              // send the nonce to your server.
+              document.querySelector('input[name="payment_method_nonce"]').value = payload.nonce;
+              document.getElementById('checkout-form').submit();
+            });
+          }, false);
+        });
+      });
+    </script>
+
+
+
 <script>
+
 
 
   // on load - display gift option if option is checked
@@ -175,26 +271,26 @@
     console.log('is gift scrpits')
     $('#id_gift_option').attr('checked', true)
     $('#gift-option-container').removeClass("hide");
-    if ($('#gift-message').val() != "None"){
+    if ($('#gift-message').val() != "None") {
       let msg = $('#gift-message').val();
       $('#id_gift_message').val(msg)
     }
   }
 
-// default display for billing address block
-  if ($('#id_billing_same_as_delivery').is(":checked")){
-  $('#billing-details-container').addClass('hide');
+  // default display for billing address block
+  if ($('#id_billing_same_as_delivery').is(":checked")) {
+    $('#billing-details-container').addClass('hide');
   }
-  else{
-  $('#billing-details-container').removeClass('hide');
+  else {
+    $('#billing-details-container').removeClass('hide');
   }
-   
+
   // remove default required attribute
-   $('#id_billing_street_address1').prop('required', false);
-   $('#id_billing_town_or_city').prop('required', false);
-   $('#id_billing_postcode').prop('required', false);
-   $('#id_billing_country').prop('required', false);
-    
+  $('#id_billing_street_address1').prop('required', false);
+  $('#id_billing_town_or_city').prop('required', false);
+  $('#id_billing_postcode').prop('required', false);
+  $('#id_billing_country').prop('required', false);
+
   // toggle billing container if delivery details are different than billing details 
   $('#id_billing_same_as_delivery').change(function () {
     console.log('billing option is change')
@@ -248,4 +344,5 @@
   })
 
 </script>
+
 {% endblock %}

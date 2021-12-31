@@ -6,6 +6,7 @@ Models for checkout app
 import uuid
 
 from django.db import models
+from django.db.models import Sum
 from django_countries.fields import CountryField
 from profiles.models import UserProfile
 from artworks.models import Artwork
@@ -77,6 +78,14 @@ class Order(models.Model):
         Generate a random, unique order number using UUID
         """
         return uuid.uuid4().hex.upper()
+
+    def update_total(self):
+        """
+        Update grand total each time a line item is added,
+        accounting for delivery costs.
+        """
+        self.total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        self.save()
 
     def save(self, *args, **kwargs):
         """
