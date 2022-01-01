@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 
-
-{% load crispy_forms_tags %}
-
-
 {% load static %}
 {% load account %}
 
@@ -13,12 +9,52 @@
 {% block content %}
 
 <div class="container pt-md-5 pt-4 pb-3">
-    <div class="row pb-md-3 mb-4">
-        <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">Order History</h1>
-        <div>Hello {{ user.full_name }}</div>
-        {% for order in orders %}
-        <p>{{ order.order_number }}</p>
-        {% endfor %}
+
+    <div class="row">
+        <h1 class="h1-page mt-md-0 mb-4">Order History</h1>
+        <p class="px-3">Hello <strong>{{ user.full_name|title }}</strong>,</p>
+        <p class="mb-4 px-3">Please find below your order history:</p>
+        <div class="row w-100 mx-auto">
+            {% for order in orders %}
+            <div class="col-lg-9 shadow border border-muted rounded p-3 my-2">
+                <div class="mb-3 mt-1">
+                    <span class="fw-bold">REF: </span>
+                    <a href="#" class="small">{{ order.order_number }}</a>
+                </div>
+
+                <hr class="my-2">
+                <div class="row mx-auto">
+                    <div class="col-3 col-md-2 px-0 fw-bold">Date</div>
+                    <div class="col-9 cold-md-10  px-0 fw-bold">Items</div>
+                </div>
+                <hr class="my-2">
+
+                <div class="row mx-auto">
+                    <div class="col-3 col-md-2  small px-0">{{ order.date|date:"d/m/y" }}</div>
+                    <div class="col-7 col-md-8 px-0">
+                        {% for item in order.lineitems.all %}
+                        <div class="px-0 d-md-flex justify-content-md-between small">
+                            <!-- d-md-flex justify-content-between small-->
+                            <p class="mb-1 me-5">{{ item.quantity }} x {{ item.artwork|title}}</p>
+                            <p class="mb-1">
+                                <a href="#" class="text-muted text-uppercase me-4">
+                                    <i class="far fa-comment-alt me-1"></i>
+                                    <span class="small">Leave a review</span>
+                                </a>
+                            </p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <hr class="my-2">
+                <div class="row mx-auto">
+                    <div class="col pe-md-4 px-0">
+                        <span class="fw-bold">Total: £{{ order.total }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
