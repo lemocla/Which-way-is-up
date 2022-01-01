@@ -59,11 +59,12 @@ class Artwork(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2,
                                 validators=[MinValueValidator(0.00)])
     # https://stackoverflow.com/questions/849142/how-to-limit-the-maximum-value-of-a-numeric-field-in-a-django-model
-    stock = models.PositiveSmallIntegerField(default=1,
+    stock = models.PositiveSmallIntegerField(default=0,
                                              validators=[
                                                 MaxValueValidator(500),
-                                                MinValueValidator(1)
+                                                MinValueValidator(0)
                                              ])
+    stock_alert = models.PositiveSmallIntegerField(null=True, blank=True)
     portfolio = models.ForeignKey(Portfolio,
                                   null=True,
                                   blank=True,

@@ -1,0 +1,11 @@
+Hello {{ order.full_name }}!
+
+This is an automated low stock notification for {{artwork}}:
+
+Stock for {{artwork}} is below {{stock_alert}} with current stock level at {{stock}} units
+
+Please reorder to replenish the stock
+
+Kind regards,
+
+Which Way Is Up

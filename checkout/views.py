@@ -133,7 +133,7 @@ def checkout(request):
                 subject = (f'Which Is Up - Order Confirmation: '
                            f'{order.order_number}')
                 body = render_to_string(
-                    'checkout/confirmation_email/confirmation_body.txt',
+                    'checkout/emails/confirmation_body.txt',
                     {'order': order,
                      'contact_email': settings.DEFAULT_FROM_EMAIL})
 
@@ -143,6 +143,27 @@ def checkout(request):
                     settings.DEFAULT_FROM_EMAIL,
                     [order.email]
                 )
+
+                # Adjust stock level
+                line_items = OrderLineItem.objects.filter(
+                             pk__in=order.lineitems.all()).all()
+
+                for item in line_items:
+                    artwork = Artwork.objects.get(name=item.artwork)
+                    artwork.stock -= item.quantity
+                    artwork.save()
+                    if artwork.stock_alert:
+                        if artwork.stock <= artwork.stock_alert:
+                            # email shop owner
+                            subject = f"Low stock alert for: {artwork.name}"
+                            body = render_to_string(
+                                 'checkout/emails/stock_alert_body.txt',
+                                 {'artwork': artwork.name,
+                                  'stock': artwork.stock,
+                                  'stock_alert': artwork.stock_alert})
+                            sender = settings.EMAIL_HOST_USER
+                            recipients = [sender]
+                            send_mail(subject, body, sender, recipients)
 
                 # message
                 messages.success(request, f'Order successful - '
@@ -226,6 +247,7 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
     save_info = request.session.get('save_info')
 
+    # Update user profile
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         # Attach the user's profile to the order

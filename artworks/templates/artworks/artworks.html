@@ -39,6 +39,9 @@
         {% if artworks.count > 0 %}
         {% for artwork in artworks %}
         <div class="card pb-0 col-12 col-sm-6 col-md-4 col-xl-3" data-item="{{artwork.id}}">
+            {%if artwork.stock == 0 %}
+            <div class="out-of-stock-label px-3">out of stock</div>
+            {% endif %}
             <a href="{% url 'artwork_details' artwork.id %}" class="shop-link border-danger card-img-top">
                 <img class="card-img-top"
                     src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
@@ -58,7 +61,9 @@
                     <!--action buttons -->
                     <div class="btn-group pe-1" role="group" aria-label="Basic example">
                     {% csrf_token %}
+                        {% if artwork.stock > 0 %}
                         <a href="{% url 'add_to_bag' artwork.id %}" class="btn round-btn btn-light px-0 me-2"><i class="fas fa-cart-plus"></i></a>
+                        {% endif %}
                         {% if request.user.is_authenticated and artwork in wishlist %}
                         <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" class="btn round-btn btn-light p-0 pt-1 m-0"><i class="fa-lg fas fa-heart red-text"></i></button>
                         {% else %}

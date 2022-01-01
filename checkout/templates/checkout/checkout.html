@@ -269,7 +269,7 @@
 
   // on load - display gift option if option is checked
   if ($('#is_auth').val() == 'true'){
-    $('#id_email').prop('disabled', true);
+    $('#id_email').prop('readonly', 'readonly');
   }
 
   if ($('#is_gift').val() == 'on') {

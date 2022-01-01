@@ -72,6 +72,7 @@ def artwork_detail(request, artwork_id):
     related_items = Artwork.objects.filter(related_items=artwork.id)
     user = None
     wishlist = None
+    is_wishlist = None
 
     if request.user.is_authenticated:
         user = get_object_or_404(UserProfile, user=request.user)
