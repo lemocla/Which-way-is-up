@@ -21,6 +21,9 @@
         <div class="card">
             <div class="row g-md-1">
                 <div class="col-md-4 col-lg-3 p-3">
+                    {% if artwork.stock == 0 %}
+                        <div class="out-of-stock-label px-5 py-1">out of stock</div>
+                    {% endif %}
                     <a class="wishlist-img" href="{% url 'artwork_details' artwork.id %}">
                      <img class="img-fluid shadow rounded" src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}">
                     </a>
@@ -54,8 +57,10 @@
                                     class="btn btn-white fs-md-5 px-4 px-lg-5 py-2 text-uppercase">Remove item</button>
                                 {% csrf_token %}
                                 {% if artwork.display_shop %}
+                                {% if artwork.stock > 0 %}
                                 <button type="button"
                                     class="btn btn-black fs-md-5 px-4 px-lg-5 py-2 text-uppercase">Add to bag</button>
+                                {% endif %}
                                 {% else %}
                                 <a href="{% url 'contact' %}" class="btn btn-black px-xl-5 py-2 text-uppercase">Contact us</a>
                                 {% endif %}

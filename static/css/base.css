@@ -184,7 +184,7 @@ footer li a:hover,
     background-color: var(--black);
     color: var(--white);
     text-transform: uppercase;
-    top: 0.5rem;
+    top: 1.75rem;
 }
 
 /*-------------[ NAVIGATION ]----------------*/
