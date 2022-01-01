@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from newsletter.models import Mailing
 from artworks.models import Artwork
+from checkout.models import Order
 from .models import UserProfile
 
 from .forms import UserProfileForm
@@ -112,3 +113,20 @@ def remove_from_wishlist(request, artwork_id):
                        'in your wishlit')
 
     return HttpResponse(status=200)
+
+
+@login_required
+def order_history(request):
+    """
+    A view to return a user's favourites
+    """
+
+    user = get_object_or_404(UserProfile, user=request.user)
+    orders = Order.objects.filter(user_profile=user).all()
+
+    context = {
+        'user': user,
+        'orders': orders,
+    }
+
+    return render(request, 'profiles/order_history.html', context)

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+
+
+{% load static %}
+{% load account %}
+
+
+{% block extra_title %}- order history {% endblock %}
+
+{% block content %}
+
+<div class="container pt-md-5 pt-4 pb-3">
+    <div class="row pb-md-3 mb-4">
+        <h1 class="h1-page pb-mb-5 pb-4 mt-md-0">Order History</h1>
+        <div>Hello {{ user.full_name }}</div>
+        {% for order in orders %}
+        <p>{{ order.order_number }}</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
