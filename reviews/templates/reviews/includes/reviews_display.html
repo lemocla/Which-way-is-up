@@ -1,0 +1,26 @@
+<h3 class='fs-6 my-1'>{{ review.user_profile.full_name }}</h3>
+            <ul id="ratings" class="list-group list-group-horizontal mt-3">
+                <li class="list-group-item {% if review.ratings >= 1 %}starred{% endif %}"><i class="fas fa-star"></i>
+                </li>
+                <li class="list-group-item {% if review.ratings >= 2 %}starred{% endif %}"><i class="fas fa-star"></i>
+                </li>
+                <li class="list-group-item {% if review.ratings >= 3 %}starred{% endif %}"><i class="fas fa-star"></i>
+                </li>
+                <li class="list-group-item {% if review.ratings >= 4 %}starred{% endif %}"><i class="fas fa-star"></i>
+                </li>
+                <li class="list-group-item {% if review.ratings >= 5 %}starred{% endif %}"><i class="fas fa-star"></i>
+                </li>
+            </ul>
+
+            <p class='my-2'>{{ review.comments }}
+            </p>
+
+            <div class="card mt-3">
+                <div class="row g-0">
+                    <p class="small text-muted mb-1">Purchased item:</p>
+                    <a class="d-flex align-middle text-muted" href="{% url 'artwork_details' review.artwork.id %}">
+                        <img src="{{MEDIA_URL}}{{ review.artwork.image }}" class="review-img" alt="{{ review.artwork }}">
+                        <p class="ps-3 my-2 text-decoration-underline">{{ review.artwork|title }}</p>
+                    </a>
+                </div>
+            </div>

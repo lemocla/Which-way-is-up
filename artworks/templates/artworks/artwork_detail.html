@@ -26,11 +26,11 @@
                     <li class="breadcrumb-item">Shop</li>
 
                     <li class="breadcrumb-item">
-                    <a href="{{ request.META.HTTP_REFERER }}">
-                        {{artwork.shop_category|title}}
-                    </a>
+                        <a href="{{ request.META.HTTP_REFERER }}">
+                            {{artwork.shop_category|title}}
+                        </a>
                     </li>
-                    
+
                     {% endif %}
                     <li class="d-none d-sm-inline-block breadcrumb-item active" aria-current="page"><span
                             class="truncate">{{ artwork.name|title }}</span></li>
@@ -47,12 +47,13 @@
     <div class="row gx-lg-5">
         <div class="col-md-6 col-lg-6 pe-xl-5 text-center d-lg-flex flex-column">
             <div class="img-detail-container">
-            {% if artwork.stock == 0 %}
-             <div class="out-of-stock-label px-5 py-1">out of stock</div>
-            {% endif %}
-            <img src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
-                class="img-fluid img-detail"
-                alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}"><!--shadow rounded -->
+                {% if artwork.stock == 0 %}
+                <div class="out-of-stock-label px-5 py-1">out of stock</div>
+                {% endif %}
+                <img src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
+                    class="img-fluid img-detail"
+                    alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
+                <!--shadow rounded -->
             </div>
         </div>
         <div class="col-md-6 ps-md-4 pe-0">
@@ -79,32 +80,34 @@
             <p class="mt-4 mb-1">Type: {% if artwork.display_shop %}{{ artwork.shop_category|title}}{% else %}
                 {{category.category|title}} {% endif %}</p>
             <p class="mb-1">Collection: {{ artwork.portfolio }}</p>
-            
-           
-            {% if artwork.display_shop %}
-             <form class="form" action="{% url 'add_to_bag' artwork.id %} " method="POST">
-             {% csrf_token %}
-            <!--Quantity-->
-            <p class="fs-5 fw-bold mt-4 mb-2">Quantity</p>
-            <select class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
-                <option selected value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value=5">5</option>
-            </select>
 
-            <!--Buttons-->
-            <div class="mt-4 pb-2">
-                {% if request.user.is_authenticated and is_wishlist %}
-                <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" class="btn btn-white px-xl-5 py-2 text-uppercase">Remove from wishlist</button>
-                {% else %}
-                <button data-action="add-wishlist" data-item="{{artwork.id}}" class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
-                {% endif %}
-                {% if artwork.stock > 0 %}
-                <input type="submit" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
-                {% endif %}
-            </div>
+
+            {% if artwork.display_shop %}
+            <form class="form" action="{% url 'add_to_bag' artwork.id %} " method="POST">
+                {% csrf_token %}
+                <!--Quantity-->
+                <p class="fs-5 fw-bold mt-4 mb-2">Quantity</p>
+                <select class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
+                    <option selected value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value=5">5</option>
+                </select>
+
+                <!--Buttons-->
+                <div class="mt-4 pb-2">
+                    {% if request.user.is_authenticated and is_wishlist %}
+                    <button data-action="remove-from-wishlist" data-item="{{artwork.id}}"
+                        class="btn btn-white px-xl-5 py-2 text-uppercase">Remove from wishlist</button>
+                    {% else %}
+                    <button data-action="add-wishlist" data-item="{{artwork.id}}"
+                        class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
+                    {% endif %}
+                    {% if artwork.stock > 0 %}
+                    <input type="submit" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
+                    {% endif %}
+                </div>
             </form>
 
             {% if artwork.shop_category|lower != 'prints' %}
@@ -123,9 +126,11 @@
             <p class="mt-3 mt-xl-4 fw-bold">Interested in a commission?</p>
             <div class="mt-4 pb-2">
                 {% if request.user.is_authenticated and is_wishlist %}
-                <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" class="btn btn-white px-xl-5 py-2 text-uppercase">Remove from wishlist</button>
+                <button data-action="remove-from-wishlist" data-item="{{artwork.id}}"
+                    class="btn btn-white px-xl-5 py-2 text-uppercase">Remove from wishlist</button>
                 {% else %}
-                <button data-action="add-wishlist" data-item="{{artwork.id}}" class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
+                <button data-action="add-wishlist" data-item="{{artwork.id}}"
+                    class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
                 {% endif %}
                 <a href="{% url 'contact' %}" class="btn btn-black px-xl-5 py-2 text-uppercase">Contact us</a>
             </div>
@@ -157,7 +162,7 @@
             <div class="card card-items pb-0 col-6 col-sm-6 col-md-4 col-xl-3">
                 <a href="{% url 'artwork_details' item.id %}" class="shop-link card-img-top">
                     {% if item.stock == 0 %}
-                        <div class="out-of-stock-label px-5 py-1">out of stock</div>
+                    <div class="out-of-stock-label px-5 py-1">out of stock</div>
                     {% endif %}
                     <img class="card-img-top"
                         src="{{ MEDIA_URL }}{% if item.image %}{{ item.image }}{% else %}default_image.png{% endif %}"
@@ -166,7 +171,7 @@
                 <div class="card-body px-1 mt-1 pb-0">
                     <!-- artwork name-->
                     <h3 class="card-title fs-6 fs-sm-5 mb-0 text-truncate">{{ item.name }}</h3>
-                  
+
                     <!-- artwork details -->
                     <p class="mt-2 mb-0 text-muted small">{{item.materials }}</p>
                     <p class="d-none d-sm-block mb-0 text-muted small">Size: {{ item.size }} cm</p>
@@ -177,15 +182,18 @@
 
                         <!--action buttons -->
                         <div class="d-none d-sm-block btn-group pe-1" role="group" aria-label="Basic example">
-                        {% if item.stock > 0 %}
-                         <button type="button" class="round-btn btn-light me-2 p-0 m-0"><i class="fas fa-cart-plus"></i></button>
-                        {% endif %}
-                        {% if request.user.is_authenticated and item.artwork in wishlist.all %}
-                             <button data-action="remove-from-wishlist" data-item="{{item.id}}" type="button" class="round-btn btn-light me-2 p-0 m-0"><i class="fa-lg fas fa-heart red-text"></i></button>                                               
-                         {% else %}
-                            <button data-action="add-wishlist" data-item="{{item.id}}" type="button" class="round-btn btn-light p-0 m-0"> <i
-                                    class="fa-lg far fa-heart"></i></button>
-                        {% endif %}
+                            {% if item.stock > 0 %}
+                            <button type="button" class="round-btn btn-light me-2 p-0 m-0"><i
+                                    class="fas fa-cart-plus"></i></button>
+                            {% endif %}
+                            {% if request.user.is_authenticated and item.artwork in wishlist.all %}
+                            <button data-action="remove-from-wishlist" data-item="{{item.id}}" type="button"
+                                class="round-btn btn-light me-2 p-0 m-0"><i
+                                    class="fa-lg fas fa-heart red-text"></i></button>
+                            {% else %}
+                            <button data-action="add-wishlist" data-item="{{item.id}}" type="button"
+                                class="round-btn btn-light p-0 m-0"> <i class="fa-lg far fa-heart"></i></button>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -212,34 +220,19 @@
 
     <hr class="my-5">
     <div class="row">
-        <h2 class="pb-2">Reviews</h2>
-        <div class="col-12 my-3">
-            <h3 class='fs-6 my-1'>By Jessie James</h3>
-            <p class='my-1'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                    class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                    class="fas fa-star yellow"></i></p>
-            <p class='my-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod pretium
-                purus.
-            </p>
+        <h2 class="pb-4">Reviews</h2>
+        <p class="text-muted text-uppercase"> {{ reviews|length }} shop reviews</p>
+        {% if reviews|length > 0 %}
+        {% for review in reviews %}
+        <div class="col-12 my-4">
+            {% include 'reviews/includes/reviews_display.html' %}
         </div>
-        <div class="col-12 my-3">
-            <h3 class='fs-6 my-1'>By Jessie James</h3>
-            <p class='my-1'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                    class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                    class="fas fa-star yellow"></i></p>
-            <p class='my-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod pretium
-                purus.
-            </p>
+        {% endfor %}
+        {% else %}
+        <div class="col-12 my-4">
+        <p>There are no reviews available for this item.</p>
         </div>
-        <div class="col-12 my-3">
-            <h3 class='fs-6 my-1'>By Jessie James</h3>
-            <p class='my-1'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                    class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                    class="fas fa-star yellow"></i></p>
-            <p class='my-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod pretium
-                purus.
-            </p>
-        </div>
+        {% endif %}
     </div>
 </div>
 

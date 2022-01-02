@@ -586,6 +586,26 @@ nav .list-inline-item i {
     display: none;
 }
 
+/*----------------[ REVIEWS ]----------------*/
+
+#ratings .list-group-item {
+    border: none !important;
+    padding: 0rem 0.15rem;
+}
+
+.starred {
+    color: #fdc00d;
+}
+
+.review-img{
+max-width: 100%;
+object-fit: cover;
+width: 40px;
+height: 40px;
+border-radius: 2px;
+}
+
+
 /*-----------------[ FOOTER ]----------------*/
 
 .footer-header {
