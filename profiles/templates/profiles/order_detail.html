@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load bag_tools %}
+
+{% block extra_title %}- order details {% endblock %}
+
+{% block content %}
+
+<div class="container pt-md-5 pt-4 pb-3">
+  <div class="row pb-md-3 mb-4">
+    <div class="col 8 offset-1">
+    <h1 class="h1-page mt-md-0">Order details</h1>
+    </div>
+    <div class="col-3">
+    <button id="btn-back" onclick="history.back()" class="btn btn-black text-uppercase px-5 py-2">back</button>
+    </div>
+  </div>
+  {% include 'checkout/includes/order_details.html' %}
+</div>
+
+{% endblock %}

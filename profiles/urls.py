@@ -15,4 +15,6 @@ urlpatterns = [
          name="remove_from_wishlist"),
     path('order_history', views.order_history, name='order_history'),
     path('my_reviews', views.my_reviews, name='my_reviews'),
+    path('order_details/<order_number>', views.order_details,
+         name='order_details'),
 ]

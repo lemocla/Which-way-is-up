@@ -133,6 +133,7 @@ def order_history(request):
     context = {
         'user': user,
         'orders': orders,
+        'reviews': reviews,
         'list_orderline': list_orderline
     }
 
@@ -154,3 +155,23 @@ def my_reviews(request):
     }
 
     return render(request, 'profiles/my_reviews.html', context)
+
+
+@login_required
+def order_details(request, order_number):
+    """
+    A view to return a user's favourites
+    """
+
+    user = get_object_or_404(UserProfile, user=request.user)
+    order = get_object_or_404(Order, order_number=order_number)
+
+    if user.id != order.user_profile.id:
+        messages.error(request, 'You don\'t have the credentials to '
+                       'access this page')        
+
+    context = {
+        'order': order,
+    }
+
+    return render(request, 'profiles/order_detail.html', context)
