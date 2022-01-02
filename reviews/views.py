@@ -3,6 +3,7 @@ Views for reviews app
 """
 
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from artworks.models import Artwork
@@ -79,3 +80,37 @@ def add_reviews(request, artwork_id, orderline_id):
         'order': order
     }
     return render(request, 'reviews/add_reviews.html', context)
+
+
+@login_required
+def edit_reviews(request, review_id):
+    """
+    View to return the all the reviews page
+    """
+
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    review = get_object_or_404(Review, pk=review_id)
+
+    redirect_url = request.POST.get('next', 'my_reviews')
+    if user_profile.id != review.user_profile.id:
+        messages.error(request, 'You don\'t have the credentials to add a'
+                           ' review for this item')
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your review for {review.artwork.name}'
+                             f' has been successfully edited!')
+            return HttpResponseRedirect(redirect_url)
+
+    else:
+        form = ReviewForm(instance=review)
+
+    context = {
+        'form': form,
+        'review': review,
+    }
+
+    return render(request, 'reviews/edit_reviews.html', context)

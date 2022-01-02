@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block extra_title %}- edit a review {% endblock %}
+
+{% block content %}
+
+<div class="container pt-md-5 pt-4 pb-3">
+    <div class="row pb-md-3 mb-4">
+        <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">reviews</h1>
+        <p>You are leaving a review for <strong>{{ review.artwork.name|title }}</strong>:</p>
+        <div class="col-12">
+            <form method="POST" action="{% url 'edit_reviews' review.id %}?ref={{request.META.HTTP_REFERER}}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="mt-5">
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    <button class="btn px-5 py-2 text-uppercase btn-black" type="submit">Edit review</button>
+                    <a href="{{ request.META.HTTP_REFERER }}" class="btn px-5 py-2 text-uppercase btn-white" type="submit">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
