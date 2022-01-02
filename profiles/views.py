@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from newsletter.models import Mailing
 from artworks.models import Artwork
 from checkout.models import Order
+from reviews.models import Review
 from .models import UserProfile
 
 from .forms import UserProfileForm
@@ -123,10 +124,16 @@ def order_history(request):
 
     user = get_object_or_404(UserProfile, user=request.user)
     orders = Order.objects.filter(user_profile=user).all()
+    reviews = Review.objects.filter(user_profile=user).all()
+    list_orderline = []
+
+    for review in reviews:
+        list_orderline.append(review.order_line.id)
 
     context = {
         'user': user,
         'orders': orders,
+        'list_orderline': list_orderline
     }
 
     return render(request, 'profiles/order_history.html', context)

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
-{% block extra_title %}- all reviews {% endblock %}
+{% block extra_title %}- add a review {% endblock %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
         <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">reviews</h1>
         <p>You are leaving a review for <strong>{{ artwork.name|title }}</strong> purchased on {{ order.date|date:"d/m/y" }} with order reference: {{ order.order_number }}</p>
         <div class="col-12">
-            <form>
+            <form method="POST" action="{% url 'add_reviews' artwork.id order_line.id %}">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="mt-5">

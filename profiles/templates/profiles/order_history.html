@@ -14,6 +14,8 @@
         <h1 class="h1-page mt-md-0 mb-4">Order History</h1>
         <p class="px-3">Hello <strong>{{ user.full_name|title }}</strong>,</p>
         <p class="mb-4 px-3">Please find below your order history:</p>
+
+        
         <div class="row w-100 mx-auto">
             {% for order in orders %}
             <div class="col-lg-9 shadow border border-muted rounded p-3 my-2">
@@ -31,16 +33,27 @@
 
                 <div class="row mx-auto">
                     <div class="col-3 col-md-2  small px-0">{{ order.date|date:"d/m/y" }}</div>
-                    <div class="col-7 col-md-8 px-0">
+                    <div class="col-9 col-md-10 px-0">
                         {% for item in order.lineitems.all %}
                         <div class="px-0 d-md-flex justify-content-md-between small">
-                            <!-- d-md-flex justify-content-between small-->
-                            <p class="mb-1 me-5">{{ item.quantity }} x {{ item.artwork|title}}</p>
+                            <p class="mb-1 me-5">{{ item.quantity }} x {{ item.artwork|title}} {{item.id}} {{item.artwork.id}}</p>
+                            <!-- reviews action links -->
                             <p class="mb-1">
+                                {% if item.id in list_orderline %}
+                                <a href="#" class="text-muted text-uppercase me-4">
+                                    <i class="far fa-comment-alt me-1"></i>
+                                    <span class="small">Edit review</span>
+                                </a>
+                                <a href="#" class="text-muted text-uppercase me-4">
+                                    <i class="far fa-trash-alt"></i>
+                                    <span class="small">Delete review</span>
+                                </a>                                
+                                {% else %}
                                 <a href="{% url 'add_reviews' item.artwork.id item.id %}" class="text-muted text-uppercase me-4">
                                     <i class="far fa-comment-alt me-1"></i>
                                     <span class="small">Leave a review</span>
                                 </a>
+                                {% endif %}
                             </p>
                         </div>
                         {% endfor %}

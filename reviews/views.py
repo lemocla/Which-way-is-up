@@ -2,7 +2,7 @@
 Views for reviews app
 """
 
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from artworks.models import Artwork
@@ -29,23 +29,47 @@ def add_reviews(request, artwork_id, orderline_id):
     View to return the all the reviews page
     """
 
-    form = ReviewForm()
-    artwork = Artwork.objects.get(id=artwork_id)
     user_profile = get_object_or_404(UserProfile, user=request.user)
+    artwork = get_object_or_404(Artwork, id=artwork_id)
     order_line = None
     order = None
 
-    if request.method == 'GET':
-        if orderline_id:
-            order_line = OrderLineItem.objects.get(id=orderline_id)
-            order = Order.objects.get(id=order_line.order.id)
+    if orderline_id:
+        order_line = get_object_or_404(OrderLineItem, id=orderline_id)
+        order = Order.objects.get(id=order_line.order.id)
 
-        if order.user_profile == user_profile and artwork == order_line.artwork:
-            print('good to go')
+    if request.method == 'POST':
 
-        else:
-            messages.error(request, 'You don\'t have the credentials to add a review for this item')
+        form_data = {
+            'ratings': request.POST['ratings'],
+            'comments': request.POST['comments'],
+        }
+
+        form = ReviewForm(form_data)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user_profile = user_profile
+            review.order_line = order_line
+            review.artwork = artwork
+            form.save()
+            messages.success(request, f'Your review for {artwork.name} has '
+                             f'been successfully added!')
+            return redirect('order_history')
+
+    else:
+        review = Review.objects.filter(artwork=artwork)
+
+        if review:
+            messages.error(request, 'You\'ve already added a review for this'
+                           ' item. You can edit your review')
+            return redirect('order_history')
+
+        if order.user_profile != user_profile or artwork != order_line.artwork:
+            messages.error(request, 'You don\'t have the credentials to add a'
+                           ' review for this item')
             return redirect('home')
+
+        form = ReviewForm()
 
     context = {
         'form': form,
