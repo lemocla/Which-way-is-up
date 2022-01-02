@@ -88,6 +88,10 @@ a {
     color: inherit
 }
 
+.form-link {
+    color: #0d6efd;
+}
+
 /*-------------[ BUTTONS ]--------------------*/
 
 a.btn,

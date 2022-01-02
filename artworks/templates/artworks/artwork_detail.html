@@ -221,7 +221,20 @@
     <hr class="my-5">
     <div class="row">
         <h2 class="pb-4">Reviews</h2>
+        <div class="d-flex justify-content-between">
         <p class="text-muted text-uppercase"> {{ reviews|length }} shop reviews</p>
+        <!-- reviews action links -->
+        {% if request.user.is_authenticated %}
+        <p class="mb-1">
+            {% if order_line_add %}
+            <a href="{% url 'add_reviews' artwork.id order_line_add.id %}" class="text-primary fw-bold text-uppercase">
+                <i class="far fa-comment-alt me-1"></i>
+                <span class="small">Leave a review</span>
+            </a>
+            {% endif %}
+        </p>
+        {% endif %}
+        </div>
         {% if reviews|length > 0 %}
         {% for review in reviews %}
         <div class="col-12 my-4">
@@ -230,7 +243,7 @@
         {% endfor %}
         {% else %}
         <div class="col-12 my-4">
-        <p>There are no reviews available for this item.</p>
+            <p>There are no reviews available for this item.</p>
         </div>
         {% endif %}
     </div>
