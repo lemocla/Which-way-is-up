@@ -94,6 +94,11 @@ a {
 
 /*-------------[ BUTTONS ]--------------------*/
 
+.btn-review{
+border: none;
+background: transparent;
+}
+
 a.btn,
 .btn {
     text-decoration: none;

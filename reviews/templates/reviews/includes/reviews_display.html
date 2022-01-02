@@ -1,34 +1,57 @@
 <h3 class='fs-6 my-1'>{{ review.user_profile.full_name }}</h3>
-            <ul id="ratings" class="list-group list-group-horizontal mt-3">
-                <li class="list-group-item {% if review.ratings >= 1 %}starred{% endif %}"><i class="fas fa-star"></i>
-                </li>
-                <li class="list-group-item {% if review.ratings >= 2 %}starred{% endif %}"><i class="fas fa-star"></i>
-                </li>
-                <li class="list-group-item {% if review.ratings >= 3 %}starred{% endif %}"><i class="fas fa-star"></i>
-                </li>
-                <li class="list-group-item {% if review.ratings >= 4 %}starred{% endif %}"><i class="fas fa-star"></i>
-                </li>
-                <li class="list-group-item {% if review.ratings >= 5 %}starred{% endif %}"><i class="fas fa-star"></i>
-                </li>
-            </ul>
+<ul id="ratings" class="list-group list-group-horizontal mt-3">
+    <li class="list-group-item {% if review.ratings >= 1 %}starred{% endif %}"><i class="fas fa-star"></i>
+    </li>
+    <li class="list-group-item {% if review.ratings >= 2 %}starred{% endif %}"><i class="fas fa-star"></i>
+    </li>
+    <li class="list-group-item {% if review.ratings >= 3 %}starred{% endif %}"><i class="fas fa-star"></i>
+    </li>
+    <li class="list-group-item {% if review.ratings >= 4 %}starred{% endif %}"><i class="fas fa-star"></i>
+    </li>
+    <li class="list-group-item {% if review.ratings >= 5 %}starred{% endif %}"><i class="fas fa-star"></i>
+    </li>
+</ul>
 
-            <p class='my-2'>{{ review.comments }}
-            </p>
+<p class='my-2'>{{ review.comments }}
+</p>
 
-            <div class="card mt-3">
-                <div class="row g-0">
-                    <p class="small text-muted mb-1">Purchased item:</p>
-                    <a class="d-flex align-middle text-muted" href="{% url 'artwork_details' review.artwork.id %}">
-                        <img src="{{MEDIA_URL}}{{ review.artwork.image }}" class="review-img" alt="{{ review.artwork }}">
-                        <p class="ps-3 my-2 text-decoration-underline">{{ review.artwork|title }}</p>
-                    </a>
-                </div>
-                {% if request.user.is_authenticated %}
-                <div class="mt-3">
-                <a href="{% url 'edit_reviews' review.id %}?next={{ request.path|urlencode }}" class="text-primary small text-uppercase me-3">
-                <i class="far fa-edit me-1"></i> Edit review
-                </a>
-                <a href="#" class="text-danger small text-uppercase"><i class="far fa-trash-alt me-1"></i> Delete review</a>
-                </div>
-                {% endif %}
+<div class="card mt-3">
+    <div class="row g-0">
+        <p class="small text-muted mb-1">Purchased item:</p>
+        <a class="d-flex align-middle text-muted" href="{% url 'artwork_details' review.artwork.id %}">
+            <img src="{{MEDIA_URL}}{{ review.artwork.image }}" class="review-img" alt="{{ review.artwork }}">
+            <p class="ps-3 my-2 text-decoration-underline">{{ review.artwork|title }}</p>
+        </a>
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="mt-3">
+        <a href="{% url 'edit_reviews' review.id %}?next={{ request.path|urlencode }}"
+            class="text-primary small text-uppercase me-3">
+            <i class="far fa-edit me-1"></i> Edit review
+        </a>
+        <button class="btn-bag text-danger small text-uppercase" data-bs-toggle="modal" data-bs-target="#deleteReview-{{review.id}}">
+        <i class="far fa-trash-alt me-1"></i> Delete review
+        </button>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="deleteReview-{{review.id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                Are you sure you want to delete your review <strong>{{ review.artwork.name}}</strong>?
+            </div>
+            <div class="modal-footer justify-content-start">
+                <button type="button" class="btn btn-white px-3" data-bs-dismiss="modal">Close</button>
+                <a class="btn btn-danger px-4"
+                    href="{% url 'delete_reviews' review.id %}?next={{ request.path|urlencode }}">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@
 Views for reviews app
 """
 
-from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -94,7 +94,7 @@ def edit_reviews(request, review_id):
     redirect_url = request.POST.get('next', 'my_reviews')
     if user_profile.id != review.user_profile.id:
         messages.error(request, 'You don\'t have the credentials to add a'
-                           ' review for this item')
+                       ' review for this item')
         return redirect('home')
 
     if request.method == 'POST':
@@ -114,3 +114,23 @@ def edit_reviews(request, review_id):
     }
 
     return render(request, 'reviews/edit_reviews.html', context)
+
+
+@login_required
+def delete_reviews(request, review_id):
+    """
+    View to return the all the reviews page
+    """
+
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    review = get_object_or_404(Review, pk=review_id)
+
+    redirect_url = request.GET.get('next', 'my_reviews')
+    if user_profile.id != review.user_profile.id:
+        messages.error(request, 'You don\'t have the credentials to add a'
+                       ' review for this item')
+        return redirect('home')
+
+    review.delete()
+    messages.success(request, 'Review successfully deleted!')
+    return HttpResponseRedirect(redirect_url)
