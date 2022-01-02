@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block extra_title %}- all reviews {% endblock %}
+
+{% block content %}
+
+<div class="container pt-md-5 pt-4 pb-3">
+    <div class="row pb-md-3 mb-4">
+        <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">reviews</h1>
+        <p>You are leaving a review for <strong>{{ artwork.name|title }}</strong> purchased on {{ order.date|date:"d/m/y" }} with order reference: {{ order.order_number }}</p>
+        <div class="col-12">
+            <form>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="mt-5">
+                    <button class="btn px-5 py-2 text-uppercase btn-black" type="submit">Add review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

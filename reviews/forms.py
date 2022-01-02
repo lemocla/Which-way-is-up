@@ -1,13 +1,13 @@
 """
-Form definition for portfolio app
+Form definition for review app
 """
 from django import forms
 from .models import Review
 
 
-class PortfolioForm(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     """
-    Model form to add a portfolio
+    Model form to add a review
     """
     class Meta:
         """Set up form for review model """

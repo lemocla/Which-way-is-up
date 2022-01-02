@@ -37,7 +37,7 @@
                             <!-- d-md-flex justify-content-between small-->
                             <p class="mb-1 me-5">{{ item.quantity }} x {{ item.artwork|title}}</p>
                             <p class="mb-1">
-                                <a href="#" class="text-muted text-uppercase me-4">
+                                <a href="{% url 'add_reviews' item.artwork.id item.id %}" class="text-muted text-uppercase me-4">
                                     <i class="far fa-comment-alt me-1"></i>
                                     <span class="small">Leave a review</span>
                                 </a>

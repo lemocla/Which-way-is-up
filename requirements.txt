@@ -20,10 +20,12 @@ defusedxml==0.7.1
 distlib==0.3.2
 Django==3.2.8
 django-allauth==0.41.0
+django-braces==1.15.0
 django-case-insensitive-field==1.0.3
 django-cleanup==5.2.0
 django-countries==7.2.1
 django-crispy-forms==1.13.0
+django-model-utils==4.2.0
 docutils==0.17.1
 entrypoints==0.3
 filelock==3.0.12
@@ -102,6 +104,7 @@ smmap==4.0.0
 snowballstemmer==2.1.0
 sqlparse==0.4.2
 stevedore==3.4.0
+swapper==1.3.0
 terminado==0.12.1
 testpath==0.5.0
 toml==0.10.2
