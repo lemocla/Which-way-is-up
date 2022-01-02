@@ -13,5 +13,6 @@ urlpatterns = [
          name="add_to_wishlist"),
     path("remove_from_wishlist/<artwork_id>", views.remove_from_wishlist,
          name="remove_from_wishlist"),
-    path('order_history', views.order_history, name='order_history')
+    path('order_history', views.order_history, name='order_history'),
+    path('my_reviews', views.my_reviews, name='my_reviews'),
 ]

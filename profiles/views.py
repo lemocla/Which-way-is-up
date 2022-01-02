@@ -137,3 +137,20 @@ def order_history(request):
     }
 
     return render(request, 'profiles/order_history.html', context)
+
+
+@login_required
+def my_reviews(request):
+    """
+    A view to return a user's favourites
+    """
+
+    user = get_object_or_404(UserProfile, user=request.user)
+    reviews = Review.objects.filter(user_profile=user).all()
+
+    context = {
+        'user': user,
+        'reviews': reviews
+    }
+
+    return render(request, 'profiles/my_reviews.html', context)
