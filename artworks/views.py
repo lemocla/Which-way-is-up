@@ -33,11 +33,18 @@ def artworks(request):
     if request.GET:
         if 'shop_category' in request.GET:
             shop_category = request.GET['shop_category']
-            shop_category = ShopCategory.objects.filter(
-                            backend_name=shop_category)[0]
-            items = Artwork.objects.filter(shop_category=shop_category,
-                                           display_shop=True,
-                                           status="active").values()
+            if shop_category == 'sale':
+                shop_category = 'sale'
+                print(shop_category)
+                items = Artwork.objects.filter(on_sale=True,
+                                               display_shop=True,
+                                               status="active").values()
+            else:
+                shop_category = ShopCategory.objects.filter(
+                                backend_name=shop_category)[0]
+                items = Artwork.objects.filter(shop_category=shop_category,
+                                               display_shop=True,
+                                               status="active").values()
 
         if 'sort' in request.GET:
             sortkey = request.GET['sort']

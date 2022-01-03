@@ -135,7 +135,7 @@ footer a.btn:hover,
 }
 
 nav i:hover,
-.bag-count:hover + i,
+.bag-count:hover+i,
 .cart-li:hover i,
 footer li a:hover,
 .sm-icon:hover {
@@ -144,7 +144,8 @@ footer li a:hover,
 }
 
 
-.cart-li:hover .bag-count, .bag-count:hover {
+.cart-li:hover .bag-count,
+.bag-count:hover {
     background-color: var(--ivory);
 }
 
@@ -202,6 +203,21 @@ footer li a:hover,
     color: var(--white);
     text-transform: uppercase;
     top: 1.75rem;
+}
+
+.sale-label {
+    position: absolute;
+    background-color: var(--red);
+    color: var(--white);
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding-top: 0.75rem;
+    right: 1.25rem;
+    top: 1rem;
 }
 
 /*-------------[ NAVIGATION ]----------------*/
@@ -528,6 +544,11 @@ nav .list-inline-item i {
 }
 
 /*--------------[ ARTWORKS ]-----------------*/
+
+.striked {
+    text-decoration: line-through;
+    font-size: 0.85rem;
+}
 
 .card {
     border: none;

@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_title %}- shop {% if category.name %} {{category.name}}{% else %} all {% endif %}{% endblock %}
+{% block extra_title %}- shop {% if category.name %} {{category.name}}
+{% elif shop_category == sale %} sale{% else %} all {% endif %}
+{% endblock %}
 
 {% block content %}
 
 <div class="container pt-md-5 pt-4 pb-3">
 
     <div class="row ">
-        <h1 class="col-12 col-md-7 col-lg-8 col-xl-9 pb-3">Shop {% if category.name %}{{ category.name }}{% else %} all
-            {% endif %}</h1>
-        <!-- sort  -->
+        <h1 class="col-12 col-md-7 col-lg-8 col-xl-9 pb-3">
+            Shop {% if category.name %}{{ category.name }}{% elif shop_category == sale %} sale
+            {% else %} all {% endif %}
+        </h1>
 
+        <!-- sort  -->
         {% if artworks.count > 0 %}
         <div class="col text-end py-2">
             <select class="d-inline-block py-1 px-2 w-100" id="sort-selector">
@@ -42,6 +46,9 @@
             {%if artwork.stock == 0 %}
             <div class="out-of-stock-label px-3">out of stock</div>
             {% endif %}
+            {% if artwork.on_sale %}
+            <div class="sale-label text-uppercase">sale</div>
+            {% endif %}
             <a href="{% url 'artwork_details' artwork.id %}" class="shop-link border-danger card-img-top">
                 <img class="card-img-top"
                     src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
@@ -56,7 +63,13 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                     <!--artwork price-->
-                    <p class="mt-2 mb-0 fs-5 price align-self-end">£{{ artwork.price }}</p>
+                    <p class="mt-2 mb-0 fs-5 price align-self-end">
+                        {%if artwork.on_sale %}<span class="striked text-muted">£{{ artwork.price }}</span>
+                        <span class="red-text fs-5">£{{ artwork.sale_price }}</span>
+                        {% else %}
+                        £{{ artwork.price }}
+                        {% endif %}
+                    </p>
                    
                     <!--action buttons -->
                     <div class="btn-group pe-1" role="group" aria-label="Basic example">
@@ -85,8 +98,8 @@
 
             </div>
         </div>
-        <!-- end artwork -->
-        <!-- separator -->
+
+        <!-- separators -->
         {% if forloop.counter|divisibleby:1 %}
         <div class="col-12 d-sm-none my-5">
             <hr>

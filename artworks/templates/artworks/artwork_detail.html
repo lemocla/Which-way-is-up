@@ -45,6 +45,9 @@
                 {% if artwork.stock == 0 %}
                 <div class="out-of-stock-label px-5 py-1">out of stock</div>
                 {% endif %}
+                {% if artwork.on_sale %}
+                <div class="sale-label text-uppercase">sale</div>
+                {% endif %}
                 <img src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
                     class="img-fluid img-detail"
                     alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}"
@@ -57,7 +60,15 @@
             <h1 class="mt-4 mt-md-0 pt-1 pt-md-0">{{ artwork.name }}</h1>
             <!---Price-->
             <div class="d-flex justify-content-between">
-                <p class="fs-5 m-0 fw-bolder text-secondary">£ {{ artwork.price }}</p>
+
+                <p class="fs-5 m-0 fw-bolder text-secondary">
+                {%if artwork.on_sale %}<span class="striked">£{{ artwork.price }}</span>
+                <span class="red-text ps-2">£{{ artwork.sale_price }}</span>{{artwork.on_sale}}
+                {% else %}
+                £{{ artwork.price }}
+                {% endif %}
+                
+                </p>
                 <!-- super user buttons -->
                 {% if request.user.is_superuser %}
                 <div class="text-end pe-md-5">

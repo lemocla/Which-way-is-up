@@ -149,6 +149,10 @@
                                         {{ cat.name|title }}
                                 </a></li>
                                 {% endfor %}
+                                <li><a class="dropdown-item text-danger fw-bold text-uppercase"
+                                        href="{% url 'shop'%}?shop_category=sale">
+                                        <span class="text-danger fw-bold text-uppercase">Sale</span>
+                                </a></li>                                
                                 {% endif %}
                             </ul>
                         </li>
