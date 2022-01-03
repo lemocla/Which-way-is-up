@@ -35,7 +35,7 @@ def add_to_mailing_list(request):
             msg = 'Thank you for signing up to our newsletter!'
             # acknowledgment email variables
             sender = settings.EMAIL_HOST_USER
-            recipients = [form.cleaned_data['email']]
+            recipients = [form.cleaned_data['email_newsletter']]
             subject = msg
             body = render_to_string('newsletter/email/body.txt')
 

@@ -32,12 +32,12 @@ def profile(request):
             user = User.objects.get(username=user_profile)
             check = form.cleaned_data['newsletter']
             try:
-                subscribe = Mailing.objects.get(email=user.email)
+                subscribe = Mailing.objects.get(email_newsletter=user.email)
                 if not check:
                     subscribe.delete()
             except ObjectDoesNotExist:
                 if check:
-                    add = Mailing(email=user.email)
+                    add = Mailing(email_newsletter=user.email)
                     add.save()
             # Toast
             messages.success(request, 'Profile updated successfully')
@@ -168,7 +168,7 @@ def order_details(request, order_number):
 
     if user.id != order.user_profile.id:
         messages.error(request, 'You don\'t have the credentials to '
-                       'access this page')        
+                       'access this page')   
 
     context = {
         'order': order,

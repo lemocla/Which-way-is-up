@@ -12,7 +12,11 @@ class SubscribeForm(forms.ModelForm):
     Set fields for newsletter subscription form
     based on Mailing model
     """
+
     class Meta:
+        """
+        Newsletter form configuration
+        """
         model = Mailing
         fields = '__all__'
 
@@ -22,10 +26,9 @@ class SubscribeForm(forms.ModelForm):
         labels and set autofocus on first field
         """
         super().__init__(*args, **kwargs)
-        self.fields["email"].widget.attrs["placeholder"] =  "name@example.com"
-        self.fields["email"].widget.attrs["class"] = "form-control"
-        self.fields["email"].error_messages["required"] = "Please enter a valid email address"
-
-
-
- 
+        self.fields["email_newsletter"].widget.attrs[
+         "placeholder"] = "name@example.com"
+        self.fields["email_newsletter"].widget.attrs[
+         "class"] = "form-control"
+        self.fields["email_newsletter"].error_messages[
+         "required"] = "Please enter a valid email address"

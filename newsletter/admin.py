@@ -9,7 +9,8 @@ class MailingAdmin(admin.ModelAdmin):
     """
     model = Mailing
     list_display = (
-        "email",
+        "email_newsletter",
     )
+
 
 admin.site.register(Mailing, MailingAdmin)
