@@ -94,9 +94,9 @@ a {
 
 /*-------------[ BUTTONS ]--------------------*/
 
-.btn-review{
-border: none;
-background: transparent;
+.btn-review {
+    border: none;
+    background: transparent;
 }
 
 a.btn,
@@ -338,6 +338,7 @@ nav .list-inline-item i {
     top: 85px;
     right: 0px;
     width: 120px;
+    height: 120px;
 }
 
 /*--------------[ FORM IMAGE WIDGET ]------------*/
@@ -391,6 +392,10 @@ nav .list-inline-item i {
     color: var(--white);
 }
 
+.about-portrait-cont {
+    text-align: center;
+}
+
 .img-square {
     object-fit: cover;
     width: 375px;
@@ -399,12 +404,6 @@ nav .list-inline-item i {
 
 .relative {
     position: relative;
-}
-
-.img-drawing {
-    position: absolute;
-    bottom: -100px;
-    right: 0px
 }
 
 /* adapted from https://github.com/Code-Institute-Solutions/resume-miniproject-bootstrap4/tree/master/16-adding-work-history*/
@@ -606,12 +605,12 @@ nav .list-inline-item i {
     color: #fdc00d;
 }
 
-.review-img{
-max-width: 100%;
-object-fit: cover;
-width: 40px;
-height: 40px;
-border-radius: 2px;
+.review-img {
+    max-width: 100%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
 }
 
 
@@ -676,6 +675,7 @@ border-radius: 2px;
         top: 85px;
         right: 0px;
         width: 200px;
+        height: auto;
     }
 
     .message-container {
@@ -711,6 +711,22 @@ border-radius: 2px;
 
     .bag-img-cont>img {
         max-height: 135px;
+    }
+
+    .about-portrait-cont {
+        text-align: start;
+    }
+
+    .img-square {
+        height: 320px;
+    }
+
+    .img-drawing {
+        position: absolute;
+        top: 9rem;
+        right: -3rem;
+        width: 76%;
+        height: auto;
     }
 
 }
@@ -758,46 +774,61 @@ border-radius: 2px;
     .form-select {
         max-width: 635px;
     }
+
+    .img-drawing {
+        top: 2rem;
+        right: -2rem;
+        width: 65%;
+    }
 }
 
 @media only screen and (min-width: 1200px) {
     .message-container {
         right: 3vw;
     }
-}
 
-@media only screen and (min-width: 1399px) {
-    .img-sizing {
-        width: 90%;
-    }
-}
-
-@media only screen and (min-width: 1450px) {
-    .container-home {
-        width: 90% !important;
+    .img-drawing {
+        top: 0rem;
+        right: -1rem;
+        width: 60%;
     }
 
-    .hero-trapezoid {
-        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-        padding: 3.5rem 3.25rem 0.75rem 20%;
+    @media only screen and (min-width: 1399px) {
+        .img-sizing {
+            width: 90%;
+        }
+
+        .img-square {
+            height: 375px;
+        }
     }
 
-}
+    @media only screen and (min-width: 1450px) {
+        .container-home {
+            width: 90% !important;
+        }
 
-@media only screen and (min-width: 1750px) {
-    .img-home {
-        max-height: 90% !important;
-    }
-}
+        .hero-trapezoid {
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+            padding: 3.5rem 3.25rem 0.75rem 20%;
+        }
 
-@media only screen and (min-width: 2000px) {
-    .container-home {
-        width: 90% !important;
-    }
-
-    .hero-trapezoid {
-        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-        padding: 3.5rem 5% 0.75rem 25%;
     }
 
-}
+    @media only screen and (min-width: 1750px) {
+        .img-home {
+            max-height: 90% !important;
+        }
+    }
+
+    @media only screen and (min-width: 2000px) {
+        .container-home {
+            width: 90% !important;
+        }
+
+        .hero-trapezoid {
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+            padding: 3.5rem 5% 0.75rem 25%;
+        }
+
+    }
