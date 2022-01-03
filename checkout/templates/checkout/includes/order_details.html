@@ -1,24 +1,6 @@
-{% extends "base.html" %}
-{% load static %}
-{% load i18n %}
-{% load bag_tools %}
-
-{% block extra_title %}- order successful {% endblock %}
-
-{% block content %}
-
-<div class="container pt-md-5 pt-4 pb-3">
-  <div class="row pb-md-3 mb-4">
-    <h1 class="h1-page mt-md-0 text-center">Order Successful !</h1>
-  </div>
-      <div class="col-12 offset-md-2 col-md-8">
-    <p class="fs-6 text-center mb-4">Thank for your order. An email confirmation will also be sent to: {{ order.email }}</p>
-    </div>
-  {% include 'checkout/includes/order_details.html' %}
-  <!--
+  {% load bag_tools %}
   <div class="row">
     <div class="col-12 offset-md-2 col-md-8">
-    <p class="fs-6 text-center mb-4">Thank for your order. An email confirmation will also be sent to: {{ order.email }}</p>
       <div class="border shadow rounded border-lg-secondary">
         <div class="card-body row p-4 p-xl-5">
           <h2 class="fs-3 mb-3 pb-2 text-center">Order summary</h2>
@@ -58,9 +40,7 @@
           </div>
 
           <hr class="mt-3 mb-3">
-          -->
           <!-- shopping bag details -->
-          <!---
           {% for item in order.lineitems.all %}
           <div class="d-flex justify-content-between text-muted">
             <div class="row w-100">
@@ -83,9 +63,7 @@
           </div>
           <hr class="my-2">
           {% endfor %}
-          -->
           <!--totals summary-->
-          <!--
           <div class="d-flex justify-content-between fw-bold mt-2">
             <p class="my-0">Order Total: </p>
             <p class="mb-1">£{{ order.total | floatformat:2 }}</p>
@@ -109,7 +87,3 @@
     </div>
 
   </div>
-  -->
-</div>
-
-{% endblock %}

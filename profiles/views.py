@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from newsletter.models import Mailing
 from artworks.models import Artwork
 from checkout.models import Order
+from reviews.models import Review
 from .models import UserProfile
 
 from .forms import UserProfileForm
@@ -123,10 +124,54 @@ def order_history(request):
 
     user = get_object_or_404(UserProfile, user=request.user)
     orders = Order.objects.filter(user_profile=user).all()
+    reviews = Review.objects.filter(user_profile=user).all()
+    list_orderline = []
+
+    for review in reviews:
+        list_orderline.append(review.order_line.id)
 
     context = {
         'user': user,
         'orders': orders,
+        'reviews': reviews,
+        'list_orderline': list_orderline
     }
 
     return render(request, 'profiles/order_history.html', context)
+
+
+@login_required
+def my_reviews(request):
+    """
+    A view to return a user's favourites
+    """
+
+    user = get_object_or_404(UserProfile, user=request.user)
+    reviews = Review.objects.filter(user_profile=user).all()
+
+    context = {
+        'user': user,
+        'reviews': reviews
+    }
+
+    return render(request, 'profiles/my_reviews.html', context)
+
+
+@login_required
+def order_details(request, order_number):
+    """
+    A view to return a user's favourites
+    """
+
+    user = get_object_or_404(UserProfile, user=request.user)
+    order = get_object_or_404(Order, order_number=order_number)
+
+    if user.id != order.user_profile.id:
+        messages.error(request, 'You don\'t have the credentials to '
+                       'access this page')        
+
+    context = {
+        'order': order,
+    }
+
+    return render(request, 'profiles/order_detail.html', context)

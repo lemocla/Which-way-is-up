@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
-{% block extra_title %}- all reviews {% endblock %}
+{% block extra_title %}- my reviews {% endblock %}
 
 {% block content %}
 
@@ -17,7 +17,7 @@
     {% endfor %}
     {% else %}
     <div class="col-12 my-4">
-    <p>There are no reviews available for this website.</p>
+    <p>You haven't left any reviews for any items purchased on this website.</p>
     </div>
     {% endif %}
 

@@ -14,12 +14,14 @@
         <h1 class="h1-page mt-md-0 mb-4">Order History</h1>
         <p class="px-3">Hello <strong>{{ user.full_name|title }}</strong>,</p>
         <p class="mb-4 px-3">Please find below your order history:</p>
+
+
         <div class="row w-100 mx-auto">
             {% for order in orders %}
             <div class="col-lg-9 shadow border border-muted rounded p-3 my-2">
                 <div class="mb-3 mt-1">
                     <span class="fw-bold">REF: </span>
-                    <a href="#" class="small">{{ order.order_number }}</a>
+                    <a href="{% url 'order_details' order.order_number %}" class="small">{{ order.order_number }}</a>
                 </div>
 
                 <hr class="my-2">
@@ -31,17 +33,61 @@
 
                 <div class="row mx-auto">
                     <div class="col-3 col-md-2  small px-0">{{ order.date|date:"d/m/y" }}</div>
-                    <div class="col-7 col-md-8 px-0">
+                    <div class="col-9 col-md-10 px-0">
                         {% for item in order.lineitems.all %}
                         <div class="px-0 d-md-flex justify-content-md-between small">
-                            <!-- d-md-flex justify-content-between small-->
                             <p class="mb-1 me-5">{{ item.quantity }} x {{ item.artwork|title}}</p>
-                            <p class="mb-1">
-                                <a href="#" class="text-muted text-uppercase me-4">
+                            <!-- reviews action links -->
+                            {% if item.id in list_orderline %}
+                            <div class="mb-1">
+                                {% for review in reviews %}
+                                {% if review.order_line.id == item.id %}
+                                <a href="{% url 'edit_reviews' review.id %}?next={{ request.path|urlencode }}"
+                                    class="text-muted text-uppercase me-4">
+                                    <i class="far fa-comment-alt me-1"></i>
+                                    <span class="small">Edit review</span>
+                                </a>
+                                <button class="btn-bag text-muted small text-uppercase" data-bs-toggle="modal"
+                                    data-bs-target="#deleteReview-{{review.id}}">
+                                    <i class="far fa-trash-alt me-1"></i> Delete review
+                                </button>
+                                <!-- Modal delete -->
+                                <div class="modal fade" id="deleteReview-{{review.id}}" tabindex="-1"
+                                    aria-labelledby="deleteModalLabel-{{review.id}}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="deleteModalLabel-{{review.id}}">Confirm
+                                                    delete</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete your review <strong>
+                                                    {{review.artwork.name}}</strong>?
+                                            </div>
+                                            <div class="modal-footer justify-content-start">
+                                                <button type="button" class="btn btn-white px-3"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <a class="btn btn-danger px-4"
+                                                    href="{% url 'delete_reviews' review.id %}?next={{ request.path|urlencode }}">Yes</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div>
+                                <a href="{% url 'add_reviews' item.artwork.id item.id %}"
+                                    class="text-muted text-uppercase me-4">
                                     <i class="far fa-comment-alt me-1"></i>
                                     <span class="small">Leave a review</span>
                                 </a>
-                            </p>
+                            </div>
+                            {% endif %}
+
                         </div>
                         {% endfor %}
                     </div>

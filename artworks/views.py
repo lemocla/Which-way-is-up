@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
 from portfolio.models import Portfolio
 from profiles.models import UserProfile
+from checkout.models import Order, OrderLineItem
+from reviews.models import Review
 from .models import ShopCategory, Artwork
 from .forms import ArtworkForm
 
@@ -73,11 +75,20 @@ def artwork_detail(request, artwork_id):
     user = None
     wishlist = None
     is_wishlist = None
+    reviews = Review.objects.filter(artwork=artwork.id)
+    orderlist = []
+    order_line_add = None
 
     if request.user.is_authenticated:
         user = get_object_or_404(UserProfile, user=request.user)
         wishlist = user.wishlist_items.all()
         is_wishlist = user.wishlist_items.filter(pk=artwork_id).exists()
+        orders = Order.objects.filter(user_profile=user)
+        for line in reviews:
+            orderlist.append(line.order_line.id)
+        order_line_add = OrderLineItem.objects.filter(
+                         order_id__in=orders).filter(artwork=artwork).exclude(
+                         id__in=orderlist).first()
 
     if artwork.portfolio:
         category = Portfolio.objects.get(artwork=artwork.id)
@@ -90,7 +101,9 @@ def artwork_detail(request, artwork_id):
         'category': category,
         'user': user,
         'wishlist': wishlist,
-        'is_wishlist': is_wishlist
+        'is_wishlist': is_wishlist,
+        'reviews': reviews,
+        'order_line_add': order_line_add,
     }
 
     return render(request, 'artworks/artwork_detail.html', context)

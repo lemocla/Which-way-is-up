@@ -6,7 +6,7 @@
 <div class="container-fluid hero-image mb-5 mg-top">
     <div class="hero-trapezoid">
         <h1 class="hero-header text-end text-black">Which Way Is Up?</h1>
-        <h2 class="hero-tagline text-end">Urban art by Peter Charalambides</h2>    
+        <h2 class="hero-tagline text-end">Urban art by Peter Charalambides</h2>
     </div>
 </div>
 
@@ -39,12 +39,13 @@
             <h3 class="pb-4">{{ portfolio.name }}</h3>
             <p>{{ portfolio.description|linebreaks }}</p>
             <p>{{ portfolio.materials|linebreaks }}</p>
-            
+
             <div class="mt-3 py-3">
-                <a href="{% url 'portfolio_detail' portfolio.id %}" class="btn btn-black px-5 py-2 text-uppercase">View collection</a>
+                <a href="{% url 'portfolio_detail' portfolio.id %}" class="btn btn-black px-5 py-2 text-uppercase">View
+                    collection</a>
             </div>
             {% else %}
-            <!-- back up text -->            
+            <!-- back up text -->
             <h3 class="pb-4">Local Landmarks</h3>
             <p>"Think local- we are shaped by our surroundings after all…"</p>
             <p>Colour: Using colour and line to form distinctive images of local landmarks, the works contain hidden
@@ -57,7 +58,7 @@
                 <li>Black & White Medium: Pen on card</li>
                 <li>Prints: Unframed A4 Art Print on Somerset Enhanced Velvet 255gsm Paper.</li>
             </ul>
-            
+
             <div class="mt-3 py-3">
                 <a href="#" class="btn btn-black px-5 py-2 text-uppercase">View collection</a>
             </div>
@@ -78,7 +79,7 @@
                 <p class="">Enjoy a bit of mindfulness and unleash your creativity by colouring this illustration.</p>
                 <p class="">But Which Way is Up? The only way you want it to be!</p>
                 <p class="">Share your work on Instagram or Facebook by using the hashtag #whichwayisup</p>
-                
+
                 <div class="mt-3 py-3">
                     <a href="{% static 'download/colouring_page.pdf' %}" target="_blank"
                         class="btn btn-white px-5 py-2 text-uppercase ">DOWLOAD</a>
@@ -93,43 +94,33 @@
 </div>
 
 <!-- Reviews section -->
-<div class="container-fluid px-3 px-md-5 mb-5">
-   <div class="row px-2 justify-content-between">
-       <div class="col-12">
-           <h2 class="homepage-h2 pb-4 mb-0">Reviews</h2>
-       </div>
-       <div class="col-12 col-lg-4 my-3 reviews-container">
-           <h3 class='fs-6 my-1'>By Jessie James</h3>
-           <p class='my-1 my-lg-3'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                   class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                   class="fas fa-star yellow"></i>
-           </p>
-           <p class='my-1 mt-lg-4'>I love this print! I used to live next to Trellick Tower and it brings back lots of memories
-               of my West London adventures when I see this awesome building on my wall. Thank you for creating it :)
-           </p>
-       </div>
-       <div class="col-12 col-lg-4 my-3 reviews-container">
-           <h3 class='fs-6 my-1'>By Jessie James</h3>
-           <p class='my-1 my-lg-3'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                   class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                   class="fas fa-star yellow"></i>
-           </p>
-           <p class='my-1 mt-lg-4'>Absolutely stunning table. Can't recommend the seller enough. Fantastic product, super quick
-               delivery and packaged superbly.
-           </p>
-       </div>
-       <div class="col-12 col-lg-4 my-3 reviews-container">
-           <h3 class='fs-6 my-1'>By Jessie James</h3>
-           <p class='my-1 my-lg-3'><i class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                   class="fas fa-star yellow"></i> <i class="fas fa-star yellow"></i> <i
-                   class="fas fa-star yellow"></i>
-           </p>
-           <p class='my-1 mt-lg-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod pretium purus.
-           </p>
-       </div>
-       <div class="mt-3 py-4 text-center">
-           <a href="{% url 'reviews' %}" class="btn btn-black px-5 py-2 text-uppercase">View all reviews</a>
-       </div>
-   </div>
+<div class="container-fluid px-3 px-md-5 mb-5 py-3">
+    <div class="row px-2 justify-content-between">
+        <div class="col-12">
+            <h2 class="homepage-h2 pb-4 mb-0">Reviews</h2>
+        </div>
+
+        {% if reviews|length > 0 %}
+        {% for review in reviews %}
+        <div class="col-12 col-lg-4 my-4 reviews-container">
+        {% include 'reviews/includes/reviews_display.html' %}
+        </div>
+        {% endfor %}
+        <div class="mt-3 py-4 text-center">
+            <a href="{% url 'reviews' %}" class="btn btn-black px-5 py-2 text-uppercase">View all reviews</a>
+        </div>
+        {% else %}
+        <div class="col-12 my-4">
+        <p>There are no reviews available for this website.</p>
+        </div>
+        {% endif %}
+
+    </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    console.log('home')
+</script>
 {% endblock %}

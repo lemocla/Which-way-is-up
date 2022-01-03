@@ -88,7 +88,16 @@ a {
     color: inherit
 }
 
+.form-link {
+    color: #0d6efd;
+}
+
 /*-------------[ BUTTONS ]--------------------*/
+
+.btn-review{
+border: none;
+background: transparent;
+}
 
 a.btn,
 .btn {
@@ -585,6 +594,26 @@ nav .list-inline-item i {
 .hide {
     display: none;
 }
+
+/*----------------[ REVIEWS ]----------------*/
+
+#ratings .list-group-item {
+    border: none !important;
+    padding: 0rem 0.15rem;
+}
+
+.starred {
+    color: #fdc00d;
+}
+
+.review-img{
+max-width: 100%;
+object-fit: cover;
+width: 40px;
+height: 40px;
+border-radius: 2px;
+}
+
 
 /*-----------------[ FOOTER ]----------------*/
 
