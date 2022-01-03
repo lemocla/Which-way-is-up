@@ -4,16 +4,15 @@
 {% block extra_title %}- {{ artwork.name }} {% endblock %}
 
 {% block content %}
-
 {% csrf_token %}
 
+<!-- Breadcrumb menu -->
 <div class="container-fluid mg-top bg-ivory">
     <div class="container container-crumbs py-2">
         <div class="row align-middle align-items-center crumb-text">
             <a href="{{ request.META.HTTP_REFERER }}" class='col-auto bg-white py-2 px-2 border border-secondary'><i
                     class="fas fa-chevron-left pe-1"></i> Back</a>
             <nav class="col pe-0" style="--bs-breadcrumb-divider: ' / ';" aria-label="breadcrumb">
-
                 <ol class="breadcrumb align-items-center align-middle mb-0">
                     <li class="breadcrumb-item "><a href="{% url 'home' %}"><i class="fas fa-home pe-1"></i><span
                                 class="d-none d-md-inline-block "> Home</span></a></li>
@@ -22,15 +21,12 @@
                     <li class="breadcrumb-item"><a href="{{ request.META.HTTP_REFERER }}">{{ category.name|title }}</a>
                     </li>
                     {% else %}
-
                     <li class="breadcrumb-item">Shop</li>
-
                     <li class="breadcrumb-item">
                         <a href="{{ request.META.HTTP_REFERER }}">
                             {{artwork.shop_category|title}}
                         </a>
                     </li>
-
                     {% endif %}
                     <li class="d-none d-sm-inline-block breadcrumb-item active" aria-current="page"><span
                             class="truncate">{{ artwork.name|title }}</span></li>
@@ -40,11 +36,10 @@
     </div>
 </div>
 
-
+<!-- Artwork details -->
 <div class="container artwork-cont pb-3">
-    <!--pt-md-5 pt-4-->
-
     <div class="row gx-lg-5">
+        <!-- Artwork image -->
         <div class="col-md-6 col-lg-6 pe-xl-5 text-center d-lg-flex flex-column">
             <div class="img-detail-container">
                 {% if artwork.stock == 0 %}
@@ -52,8 +47,9 @@
                 {% endif %}
                 <img src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
                     class="img-fluid img-detail"
-                    alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
-                <!--shadow rounded -->
+                    alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}"
+                    width="500" height="500"
+                    >
             </div>
         </div>
         <div class="col-md-6 ps-md-4 pe-0">
@@ -62,7 +58,7 @@
             <!---Price-->
             <div class="d-flex justify-content-between">
                 <p class="fs-5 m-0 fw-bolder text-secondary">£ {{ artwork.price }}</p>
-
+                <!-- super user buttons -->
                 {% if request.user.is_superuser %}
                 <div class="text-end pe-md-5">
                     <a class="text-primary px-3" href="{% url 'edit_artwork' artwork.id %}"><i
@@ -79,8 +75,7 @@
             <p class='mb-1'>Year: {{ artwork.year }}</p>
             <p class="mt-4 mb-1">Type: {% if artwork.display_shop %}{{ artwork.shop_category|title}}{% else %}
                 {{category.category|title}} {% endif %}</p>
-            <p class="mb-1">Collection: {{ artwork.portfolio }}</p>
-
+            <p class="mb-1">Collection: {{ artwork.portfolio|title }}</p>
 
             {% if artwork.display_shop %}
             <form class="form" action="{% url 'add_to_bag' artwork.id %} " method="POST">
@@ -89,10 +84,18 @@
                 <p class="fs-5 fw-bold mt-4 mb-2">Quantity</p>
                 <select class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
                     <option selected value="1">1</option>
+                    {% if artwork.stock >= 2 %}
                     <option value="2">2</option>
+                    {% endif %}
+                    {% if artwork.stock >= 3 %}
                     <option value="3">3</option>
+                    {% endif %}
+                    {% if artwork.stock >= 4 %}
                     <option value="4">4</option>
+                    {% endif %}
+                    {% if artwork.stock >= 5 %}
                     <option value=5">5</option>
+                    {% endif %}
                 </select>
 
                 <!--Buttons-->
@@ -108,14 +111,12 @@
                     <input type="submit" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
                     {% endif %}
                 </div>
-            </form>
 
+            </form>
             {% if artwork.shop_category|lower != 'prints' %}
             <div class="d-none d-lg-block m-0 p-0 ">
-                <!-- d-lg-block  -->
                 <hr class="my-5">
                 <div class="offset-lg-6 ps-lg-5">
-                    <!--offset-md-6 -->
                     <p class="mb-2"><i class="fas fa-lg fa-truck pe-3"></i> Free delivery</p>
                     <p class="mb-2"><i class="fas fa-lg fa-gift pe-3"></i> Gift otpions</p>
                     <p class="m-0"><i class="fas fa-lg fa-sign-out-alt pe-3"></i> Return accepted</p>
@@ -137,14 +138,10 @@
             {% endif %}
         </div>
     </div>
-
     {% if artwork.display_shop %}
     <div class="d-block {% if artwork.shop_category|lower != 'prints' %}d-lg-none{% endif %} m-0 p-0">
-        <!--   -->
         <hr class="my-5">
-        <div class="">
-            <!--offset-lg-8 ps-lg-5-->
-            <!--offset-md-6 -->
+        <div>
             <p class="mb-2"><i class="fas fa-lg fa-truck pe-3"></i> Free delivery</p>
             <p class="mb-2"><i class="fas fa-lg fa-gift pe-3"></i> Gift otpions</p>
             <p class="m-0"><i class="fas fa-lg fa-sign-out-alt pe-3"></i> Return accepted</p>
@@ -153,34 +150,35 @@
     {% endif %}
 
     <hr class="my-5">
+
+    <!-- Related items -->
     <div class="row">
         <h2 class="pb-5{% if artwork.shop_category|lower == 'prints' %}pb-3{% endif %}">You may also like</h2>
         {% if related_items.count > 0 %}
+        <!-- carousel -->
         <div id="custom-carousel" class="row container-related m-0 px-0 py-2">
-
             {% for item in related_items %}
             <div class="card card-items pb-0 col-6 col-sm-6 col-md-4 col-xl-3">
-                <a href="{% url 'artwork_details' item.id %}" class="shop-link card-img-top">
+                <!-- related items image -->
+                <a href="{% url 'artwork_details' item.id %}" class="shop-link">
                     {% if item.stock == 0 %}
                     <div class="out-of-stock-label px-5 py-1">out of stock</div>
                     {% endif %}
                     <img class="card-img-top"
                         src="{{ MEDIA_URL }}{% if item.image %}{{ item.image }}{% else %}default_image.png{% endif %}"
-                        alt="{% if not item.image %}default for {% endif %}{{ item.name }}">
+                        alt="{% if not item.image %}default for {% endif %}{{ item.name }}"
+                        width="350" height="250">
                 </a>
                 <div class="card-body px-1 mt-1 pb-0">
-                    <!-- artwork name-->
+                    <!-- related artwork name-->
                     <h3 class="card-title fs-6 fs-sm-5 mb-0 text-truncate">{{ item.name }}</h3>
-
-                    <!-- artwork details -->
+                    <!-- related artwork details -->
                     <p class="mt-2 mb-0 text-muted small">{{item.materials }}</p>
                     <p class="d-none d-sm-block mb-0 text-muted small">Size: {{ item.size }} cm</p>
-
                     <div class="d-flex justify-content-between align-items-center">
-                        <!--artwork price-->
+                        <!--related artwork price-->
                         <p class="mt-2 mb-0 fs-5 price align-self-end">£{{ item.price }}</p>
-
-                        <!--action buttons -->
+                        <!--related action buttons -->
                         <div class="d-none d-sm-block btn-group pe-1" role="group" aria-label="Basic example">
                             {% if item.stock > 0 %}
                             <button type="button" class="round-btn btn-light me-2 p-0 m-0"><i
@@ -194,15 +192,13 @@
                             <button data-action="add-wishlist" data-item="{{item.id}}" type="button"
                                 class="round-btn btn-light p-0 m-0"> <i class="fa-lg far fa-heart"></i></button>
                             {% endif %}
-
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
-            <!-- Next and previous buttons -->
-
         </div>
+        <!-- Carousel next and previous buttons -->
         <div class="btn-group mt-3">
             <button class="btn text-start" type="button" id="previous"><i
                     class="fas fa-chevron-left fa-lg"></i></button>
@@ -213,12 +209,11 @@
             <p>There are no related products</p>
         </div>
         {% endif %}
-
-
     </div>
 
-
     <hr class="my-5">
+
+    <!-- Reviews -->
     <div class="row">
         <h2 class="pb-4">Reviews</h2>
         <div class="d-flex justify-content-between">
@@ -249,7 +244,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal delete artwork-->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

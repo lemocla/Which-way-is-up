@@ -14,7 +14,7 @@
  
   {% if bag_items %}
   <div class="row">
-    <!--Grid column-->
+
     <div class="col-lg-8 pe-lg-2 pe-xl-5">
       <h5 class="mb-4">Cart (<span>{{ total_count }}</span> items)</h5>
       <!-- bag items -->
@@ -39,11 +39,27 @@
 
                   <select data-action="update-bag" data-item="{{item.artwork.id}}" class="px-4 py-2 mb-1"
                     aria-label="Select quantity" name="quantity">
-                    <option {% if item.quantity == 1 %}selected{% endif %} value="1">1</option>
-                    <option {% if item.quantity == 2 %}selected{% endif %} value="2">2</option>
-                    <option {% if item.quantity == 3 %}selected{% endif %} value="3">3</option>
-                    <option {% if item.quantity == 4 %}selected{% endif %} value="4">4</option>
-                    <option {% if item.quantity == 5 %}selected{% endif %} value="5">5</option>
+                    <option selected value="1">1</option>
+                    {% if item.quantity == 2 %}
+                    <option selected value="2">2</option>
+                    {% elif item.quantity != 2 and item.artwork.stock >= 2 %}
+                    <option value="2">2</option>
+                    {% endif %}
+                    {% if item.quantity == 3 %}
+                    <option selected value="3">3</option>
+                    {% elif item.quantity != 3 and item.artwork.stock >= 3 %}
+                    <option value="3">3</option>
+                    {% endif %}
+                    {% if item.quantity == 4 %}
+                    <option selected value="4">4</option>
+                    {% elif item.quantity != 4 and item.artwork.stock >= 4 %}
+                    <option value="4">4</option>
+                    {% endif %}
+                    {% if item.quantity == 5 %}
+                    <option selected value="5">5</option>
+                    {% elif item.quantity != 5 and item.artwork.stock >= 5 %}
+                    <option value="5">5</option>                    
+                    {% endif %}
                   </select>
 
                 </div>
@@ -63,7 +79,8 @@
                     Move to wish list </button>
                   {% endif %}
                 </div>
-                <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">£{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
+                <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">
+                £{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
               </div>
             </div>
           </div>
@@ -75,7 +92,7 @@
 
     </div>
 
-    <!--Grid column-->
+    <!-- Order summary -->
     <div class="col-lg-4 gy-md-4 gy-5 px-md-1">
       <!-- Card -->
       <div class="card border py-4 px-lg-1 p-xl-3 shadow rounded mb-3 border-lg-secondary">
@@ -93,7 +110,7 @@
           <div class="d-flex justify-content-between border-0 px-0 my-3">
             <div>
               <strong>Total</strong>
-              <p class="mb-0">£(including VAT)</p>
+              <p class="mb-0 small">(including VAT)</p>
             </div>
             <span><strong>£{{ total }}</strong></span>
           </div>
@@ -108,7 +125,8 @@
           <div id="gift-container" class="mt-3 gift-display">
             <label class="gift-label" for="gift-message">Enter gift message</label>
             <textarea class="form-control" id="gift-message" name="gift_message" rows="3"
-              placeholder="Enter your gift message - make sure to include to / from names">{% if gift_message %}{{ gift_message }}{% endif %}</textarea>
+              placeholder="Enter your gift message - make sure to include to / from names">
+              {% if gift_message %}{{ gift_message }}{% endif %}</textarea>
           </div>
 
           <div class="mt-4">
@@ -126,7 +144,7 @@
         items to your cart does not mean booking them.
       </p>
       <p class="red-text mb-5"><i class="fas fa-info-circle mr-1"></i>
-        Please note that at this moment in time we deliver in the UK only.
+        Please note that at this moment in time we ONLY delivery to the UK.
       </p>
     </div>
   </div>
@@ -135,7 +153,9 @@
   <div class="row px-3 px-md-2 px-lg-3">
     <div class="col-12 rounded shadow px-3 py-3">
       <h5 class="pb-2 fw-bold">Expected shipping delivery</h5>
-      <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
+      <p class="mb-0">
+         {% now "D., d.m" %} - {{ 3|calc_est_delivery|date:"D., d.m" }}
+      </p>
     </div>
     <div class="col-12 mt-4 mt-md-5 rounded shadow px-3 py-3">
       <h5 class=" pb-2">Payment accepted</h5>
@@ -143,12 +163,11 @@
         <img class="mr-2" width="45" src="{{MEDIA_URL}}visa.svg" alt="Visa">
         <img class="mr-2" width="45" src="{{MEDIA_URL}}mastercard.svg" alt="Mastercard">
         <img class="mr-2" width="45" src="{{MEDIA_URL}}amex.svg" alt="American Express">
-
       </div>
     </div>
   </div>
   {% else %}
-  <p class="my-5">Your shoppting bag is empty.</p>
+  <p class="my-5">Your shopping bag is empty.</p>
   <a href="{% url 'shop' %}" class="btn btn-black px-5 py-2">
     <span class="text-uppercase">Keep Shopping</span>
   </a>
@@ -248,7 +267,6 @@
       console.log("editing typing")
       // add to session
       let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
-
       let url = `/bag/gift_option/`;
       let data = {
         'csrfmiddlewaretoken': csrfToken,
@@ -258,7 +276,6 @@
       $.post(url, data)
     }
   })
-
 
 </script>
 {% endblock %}
