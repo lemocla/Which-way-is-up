@@ -60,11 +60,11 @@
                         </a>
                     </li>
                     <!-- shopping bag-->
-                    <li class="cart-li list-inline-item">
-                        {% if total_count > 0 %}
-                        <div class="bag-count"><span>{{ total_count }}</span></div>
-                        {% endif %}
-                        <a class="text-white nav-link" href="{% url 'bag' %}" aria-label="view shopping bag">
+                    <li class="list-inline-item">
+                        <a class="cart-li text-white nav-link" href="{% url 'bag' %}" aria-label="view shopping bag">
+                            {% if total_count > 0 %}
+                            <span class="bag-count">{{ total_count }}</span>
+                            {% endif %}
                             <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
                         </a>
                     </li>
@@ -115,11 +115,13 @@
                             <ul class="dropdown-menu dropdown-menu-dark px-3"
                                 aria-labelledby="dropdowncat-{{category.id}}">
                                 {% if category.col|length > 0 %}
-                                    {% for collection in category.col %}
-                                        {% if collection.status == 'active' %}
-                                            <li><a class="dropdown-item" href="{% url 'portfolio_detail' collection.id %}">{{collection.name|title }}</a></li>
-                                        {% endif %}
-                                    {% endfor %}
+                                {% for collection in category.col %}
+                                {% if collection.status == 'active' %}
+                                <li><a class="dropdown-item"
+                                        href="{% url 'portfolio_detail' collection.id %}">{{collection.name|title }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
                                 {% endif %}
                             </ul>
                         </li>
@@ -142,7 +144,10 @@
                                 <!-- dynamic shop categories -->
                                 {% if shop_categories|length > 0 %}
                                 {% for cat in shop_categories %}
-                                <li><a class="dropdown-item" href="{% url 'shop'%}?shop_category={{cat.backend_name}}">{{ cat.name|title }}</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{% url 'shop'%}?shop_category={{cat.backend_name}}">
+                                        {{ cat.name|title }}
+                                </a></li>
                                 {% endfor %}
                                 {% endif %}
                             </ul>

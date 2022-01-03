@@ -135,11 +135,19 @@ footer a.btn:hover,
 }
 
 nav i:hover,
+.bag-count:hover + i,
+.cart-li:hover i,
 footer li a:hover,
 .sm-icon:hover {
     transform: scale(1.1);
     color: var(--ivory);
 }
+
+
+.cart-li:hover .bag-count, .bag-count:hover {
+    background-color: var(--ivory);
+}
+
 
 /*---------------[ TOASTS ]------------------*/
 
@@ -231,6 +239,7 @@ nav .list-inline-item i {
 
 .bag-count {
     position: absolute;
+    color: var(--black);
     padding: 0 0.15rem;
     top: 1rem;
     left: 0.6rem;
@@ -341,7 +350,9 @@ nav .list-inline-item i {
     height: 120px;
 }
 
-#div_id_password, #div_id_password1, #div_id_password2 {
+#div_id_password,
+#div_id_password1,
+#div_id_password2 {
     position: relative;
 }
 
