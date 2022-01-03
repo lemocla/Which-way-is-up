@@ -33,4 +33,23 @@
              });
      })
 
+     //togle password
+
+     // login page
+     $('#div_id_password').append('<i class="password-visible far fa-eye" data-target="id_password"></i>')
+     // register page
+     $('#div_id_password1').append('<i class="password-visible far fa-eye" data-target="id_password1"></i>')
+     $('#div_id_password2').append('<i class="password-visible far fa-eye" data-target="id_password2"></i>')
+
+     $(".password-visible").click(function () {
+         id = $(this).attr("data-target");
+         if ($(`#${id}`).attr("type") == "password") {
+             $(`#${id}`).attr("type", "text");
+             $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+         } else if ($(`#${id}`).attr("type") == "text") {
+             $(`#${id}`).attr("type", "password");
+             $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+         }
+     });
+     //end file
  })

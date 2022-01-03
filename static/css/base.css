@@ -341,6 +341,17 @@ nav .list-inline-item i {
     height: 120px;
 }
 
+#div_id_password, #div_id_password1, #div_id_password2 {
+    position: relative;
+}
+
+.password-visible {
+    position: absolute;
+    top: 2.5rem;
+    right: 1rem;
+    z-index: 1;
+}
+
 /*--------------[ FORM IMAGE WIDGET ]------------*/
 .widget {
     max-width: 645px !important
@@ -794,42 +805,41 @@ nav .list-inline-item i {
     }
 }
 
-    @media only screen and (min-width: 1399px) {
-        .img-sizing {
-            width: 90%;
-        }
-
-        .img-square {
-            height: 375px;
-        }
+@media only screen and (min-width: 1399px) {
+    .img-sizing {
+        width: 90%;
     }
 
-    @media only screen and (min-width: 1450px) {
-        .container-home {
-            width: 90% !important;
-        }
+    .img-square {
+        height: 375px;
+    }
+}
 
-        .hero-trapezoid {
-            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-            padding: 3.5rem 3.25rem 0.75rem 20%;
-        }
-
+@media only screen and (min-width: 1450px) {
+    .container-home {
+        width: 90% !important;
     }
 
-    @media only screen and (min-width: 1750px) {
-        .img-home {
-            max-height: 90% !important;
-        }
+    .hero-trapezoid {
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        padding: 3.5rem 3.25rem 0.75rem 20%;
     }
 
-    @media only screen and (min-width: 2000px) {
-        .container-home {
-            width: 90% !important;
-        }
+}
 
-        .hero-trapezoid {
-            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-            padding: 3.5rem 5% 0.75rem 25%;
-        }
+@media only screen and (min-width: 1750px) {
+    .img-home {
+        max-height: 90% !important;
     }
-    
+}
+
+@media only screen and (min-width: 2000px) {
+    .container-home {
+        width: 90% !important;
+    }
+
+    .hero-trapezoid {
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        padding: 3.5rem 5% 0.75rem 25%;
+    }
+}
