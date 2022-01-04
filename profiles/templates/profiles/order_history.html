@@ -45,11 +45,12 @@
                                 <a href="{% url 'edit_reviews' review.id %}?next={{ request.path|urlencode }}"
                                     class="text-muted text-uppercase me-4">
                                     <i class="far fa-comment-alt me-1" aria-hidden="true"></i>
-                                    <span class="small">Edit review</span>
+                                    <span class="small text-link">Edit review</span>
                                 </a>
                                 <button class="btn-bag text-muted small text-uppercase" data-bs-toggle="modal"
                                     data-bs-target="#deleteReview-{{review.id}}">
-                                    <i class="far fa-trash-alt me-1" aria-hidden="true"></i> Delete review
+                                    <i class="far fa-trash-alt me-1" aria-hidden="true"></i>
+                                    <span class="text-link">Delete review</span>
                                 </button>
                                 <!-- Modal delete -->
                                 <div class="modal fade" id="deleteReview-{{review.id}}" tabindex="-1"
@@ -83,7 +84,7 @@
                                 <a href="{% url 'add_reviews' item.artwork.id item.id %}"
                                     class="text-muted text-uppercase me-4">
                                     <i class="far fa-comment-alt me-1" aria-hidden="true"></i>
-                                    <span class="small">Leave a review</span>
+                                    <span class="small text-link">Leave a review</span>
                                 </a>
                             </div>
                             {% endif %}

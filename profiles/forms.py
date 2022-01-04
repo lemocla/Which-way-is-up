@@ -50,7 +50,7 @@ class UserProfileForm(forms.ModelForm):
                     Submit(
                          'update',
                          'Update',
-                         css_class="btn border-0 btn-black px-5 py-2 "
+                         css_class="btn border-dark btn-black px-5 py-2 "
                          "text-uppercase"),
                     HTML("<a class='btn btn-white px-5 py-2 text-uppercase' "
                          "href='{% url \"profile\" %}'>Cancel</a>"),

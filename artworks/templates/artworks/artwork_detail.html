@@ -122,7 +122,7 @@
                         class="btn btn-white px-xl-5 py-2 text-uppercase">Add to wishlist</button>
                     {% endif %}
                     {% if artwork.stock > 0 %}
-                    <input type="submit" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
+                    <input type="submit" id="add-to-bag" class="btn btn-black px-xl-5 py-2 text-uppercase" value="Add to Bag">
                     {% endif %}
                 </div>
 
@@ -240,7 +240,7 @@
             {% if order_line_add %}
             <a href="{% url 'add_reviews' artwork.id order_line_add.id %}" class="text-primary fw-bold text-uppercase">
                 <i class="far fa-comment-alt me-1" aria-hdden="True"></i>
-                <span class="small">Leave a review</span>
+                <span class="small text-link">Leave a review</span>
             </a>
             {% endif %}
         </p>

@@ -22,15 +22,19 @@
       <div class="card mb-3">
         <div class="row gx-md-1 gx-3 gx-xl-2">
           <div class="col-sm-3 col-xl-3 bag-img-cont">
-            <img class="img-fluid shadow rounded" width="350" height="350"
+          <a href="{% url 'artwork_details' item.artwork.id %}" class="text-link">
+            <img class="img-fluid rounded" width="350" height="350"
               src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
               alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}">
+          </a>
           </div>
           <div class="col mt-4 mt-md-0">
             <div class="card-body py-0">
               <div class="d-flex justify-content-between">
                 <div>
+                  <a href="{% url 'artwork_details' item.artwork.id %}" class="text-link">
                   <h2 class="fs-5">{{ item.artwork.name }}</h2>
+                  </a>
                   <p class="mt-3 mb-0 text-muted">{{ item.artwork.materials }}</p>
                   <p class="mb-3 text-muted">Size: {{ item.artwork.size }} cm</p>
                 </div>
@@ -67,16 +71,16 @@
               <div class="d-md-flex justify-content-between align-items-center">
                 <div>
                   <button data-action="remove-from-bag" data-item="{{item.artwork.id}}" type="button"
-                    class="btn-bag small text-muted text-uppercase me-4"><i class="fas fa-trash-alt mr-1" aria-hidden="true"></i> Remove
-                    item </button>
+                    class="btn-bag small text-muted text-uppercase me-4"><i class="fas fa-trash-alt mr-1" aria-hidden="true"></i> 
+                    <span class="text-link"> Remove item</span></button>
                   {% if request.user.is_authenticated and item.is_wishlist %}
                   <button data-action="remove-from-wishlist" data-item="{{item.artwork.id}}" type="button"
                     class="btn-bag red-text small text-uppercase"><i class="fas fa-heart mr-1"  aria-hidden="true"></i>
-                    Remove from wishlist </button>
+                    <span class="text-link"> Remove from wishlist</span></button>
                   {% else %}
                   <button data-action="add-wishlist" data-item="{{item.artwork.id}}" type="button"
                     class="btn-bag text-muted small text-uppercase"><i class="fas fa-heart mr-1"  aria-hidden="true"></i>
-                    Move to wish list </button>
+                    <span class="text-link"> Move to wish list</span></button>
                   {% endif %}
                 </div>
                 <p class="fs-5 mt-2 mb-0 m-md-0 fw-bolder">
@@ -130,7 +134,7 @@
           </div>
 
           <div class="mt-4">
-            <a href="{% url 'checkout' %}" class="mb-2 w-100 btn btn-black py-2 px-5 text-uppercase">
+            <a id="checkout" href="{% url 'checkout' %}" class="mb-2 w-100 btn btn-black py-2 px-5 text-uppercase">
               checkout</a>
             <a href="{% url 'shop' %}" class="w-100 btn btn-white py-2 px-5 text-uppercase">
               keep shopping</a>

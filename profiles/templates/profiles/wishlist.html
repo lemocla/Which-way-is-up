@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <a href="{% url 'artwork_details' artwork.id %}">
+                                <a href="{% url 'artwork_details' artwork.id %}" class="text-link">
                                 <h2 class="fs-3">{{ artwork.name }}</h2>
                                 </a>
                                 <p class="mt-3 mb-0 text-muted">{{ artwork.materials }}</p>
@@ -60,7 +60,7 @@
                                 {% csrf_token %}
                                 {% if artwork.display_shop %}
                                 {% if artwork.stock > 0 %}
-                                <button type="button"
+                                <button type="button" id="add-to-bag"
                                     class="btn btn-black fs-md-5 px-4 px-lg-5 py-2 text-uppercase">Add to bag</button>
                                 {% endif %}
                                 {% else %}

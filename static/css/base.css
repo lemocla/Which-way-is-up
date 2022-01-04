@@ -11,14 +11,13 @@
     --darkgrey: #5f5f61;
     --ivory: #c2c2c2;
     --red: #B30730;
-    --green: #4CA649;
+    --green: #12702f;
     --black: #0D0000;
     --white: #ffffff;
 }
 
 body {
     font-family: Mulish;
-    /*font-size: 1rem;*/
     color: var(--black);
 }
 
@@ -85,14 +84,34 @@ h3,
 
 a {
     text-decoration: none;
-    color: inherit
+    color: inherit;
 }
 
 .form-link {
     color: #0d6efd;
 }
 
+.text-link:hover {
+    text-decoration: underline;
+    color: inherit;
+}
+
 /*-------------[ BUTTONS ]--------------------*/
+
+.round-btn {
+    width: 2.3rem;
+    height: 2.3rem;
+    font-size: 1rem;
+    border-radius: 2rem !important;
+    border: none;
+    box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.20);
+    text-align: center;
+}
+
+.round-btn:hover{
+    background-color: #c2c2c240;
+    box-shadow: 0px 0px 12px 0px rgb(0 0 0 / 30%);
+}
 
 .btn-review {
     border: none;
@@ -143,12 +162,19 @@ footer li a:hover,
     color: var(--ivory);
 }
 
-
 .cart-li:hover .bag-count,
 .bag-count:hover {
     background-color: var(--ivory);
 }
 
+#add-to-bag:hover,
+#checkout:hover,
+#go-checkout:hover,
+form .btn-black:hover {
+    color: var(--white);
+    border: 1px solid var(--green) !important;
+    background-color: var(--green) !important;
+}
 
 /*---------------[ TOASTS ]------------------*/
 
@@ -380,6 +406,7 @@ nav .list-inline-item i {
 }
 
 /*--------------[ FORM IMAGE WIDGET ]------------*/
+
 .widget {
     max-width: 645px !important
 }
@@ -522,17 +549,6 @@ nav .list-inline-item i {
     height: 80%;
     width: 100%;
     z-index: 1;
-}
-
-.round-btn {
-    width: 2.3rem;
-    height: 2.3rem;
-    font-size: 1rem;
-    border-radius: 2rem !important;
-    border: none;
-    box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.20);
-    /*line-height: 1rem;*/
-    text-align: center;
 }
 
 .gallery-item:hover>.overlay {
