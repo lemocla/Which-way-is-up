@@ -63,11 +63,10 @@
 
                 <p class="fs-5 m-0 fw-bolder text-secondary">
                 {%if artwork.on_sale %}<span class="striked">£{{ artwork.price }}</span>
-                <span class="red-text ps-2">£{{ artwork.sale_price }}</span>{{artwork.on_sale}}
+                <span class="red-text ps-2">£{{ artwork.sale_price }}</span>
                 {% else %}
                 £{{ artwork.price }}
                 {% endif %}
-                
                 </p>
                 <!-- super user buttons -->
                 {% if request.user.is_superuser %}
@@ -131,14 +130,14 @@
             <div class="d-none d-lg-block m-0 p-0 ">
                 <hr class="my-5">
                 <div class="offset-lg-6 ps-lg-5">
-                    <p class="mb-2"><i class="fas fa-lg fa-truck pe-3" aria-hidden="true"></i> Free delivery</p>
+                    <p class="mb-2"><i class="fas fa-lg fa-truck pe-3" aria-hidden="true"></i>Free delivery</p>
                     <p class="mb-2"><i class="fas fa-lg fa-gift pe-3" aria-hidden="true"></i> Gift otpions</p>
                     <p class="m-0"><i class="fas fa-lg fa-sign-out-alt pe-3" aria-hidden="true"></i> Return accepted</p>
                 </div>
             </div>
             {% endif %}
             {% else %}
-            <p class="mt-3 mt-xl-4 fw-bold">Interested in a commission?</p>
+            <p class="mt-3 mt-xl-4 fs-5 fw-bolder">Interested in a commission?</p>
             <div class="mt-4 pb-2">
                 {% if request.user.is_authenticated and is_wishlist %}
                 <button data-action="remove-from-wishlist" data-item="{{artwork.id}}"
@@ -156,7 +155,7 @@
     <div class="d-block {% if artwork.shop_category|lower != 'prints' %}d-lg-none{% endif %} m-0 p-0">
         <hr class="my-5">
         <div>
-            <p class="mb-2"><i class="fas fa-lg fa-truck pe-3" aria-hidden="true"></i> Free delivery</p>
+            <p class="mb-2"><i class="fas fa-lg fa-truck pe-3" aria-hidden="true"></i>Free delivery</p>
             <p class="mb-2"><i class="fas fa-lg fa-gift pe-3" aria-hidden="true"></i> Gift otpions</p>
             <p class="m-0"><i class="fas fa-lg fa-sign-out-alt pe-3" aria-hidden="true"></i> Return accepted</p>
         </div>
