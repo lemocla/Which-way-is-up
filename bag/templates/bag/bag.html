@@ -22,7 +22,7 @@
       <div class="card mb-3">
         <div class="row gx-md-1 gx-3 gx-xl-2">
           <div class="col-sm-3 col-xl-3 bag-img-cont">
-            <img class="img-fluid shadow rounded"
+            <img class="img-fluid shadow rounded" width="350" height="350"
               src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
               alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}">
           </div>
@@ -160,9 +160,9 @@
     <div class="col-12 mt-4 mt-md-5 rounded shadow px-3 py-3">
       <h5 class=" pb-2">Payment accepted</h5>
       <div>
-        <img class="mr-2" width="45" src="{{MEDIA_URL}}visa.svg" alt="Visa">
-        <img class="mr-2" width="45" src="{{MEDIA_URL}}mastercard.svg" alt="Mastercard">
-        <img class="mr-2" width="45" src="{{MEDIA_URL}}amex.svg" alt="American Express">
+        <img class="mr-2" width="45" height="28" src="{{MEDIA_URL}}visa.svg" alt="Visa card">
+        <img class="mr-2" width="45" height="28" src="{{MEDIA_URL}}mastercard.svg" alt="Mastercard">
+        <img class="mr-2" width="45" height="28" src="{{MEDIA_URL}}amex.svg" alt="American Express card">
       </div>
     </div>
   </div>

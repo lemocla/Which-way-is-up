@@ -34,7 +34,7 @@ class ArtworkAdmin(admin.ModelAdmin):
         Render image in admin panel
         """
         return mark_safe(
-            '<img src="/media/%s" width="50" height="50"/>' % model.image)
+            '<img src="/media/%s" width="50" height="50" alt="product image"/>' % model.image)
     admin_image.allow_tags = True
 
     list_display = (

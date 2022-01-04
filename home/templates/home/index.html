@@ -21,16 +21,16 @@
             {% if portfolio.image %}
             <!-- portfolio image -->
             <img src="{{MEDIA_URL}}{{ portfolio.image }}" class="p-2 img-fluid img-home shadow rounded mb-5 mb-lg-2"
-                alt="example of {{ portfolio.name }}">
+                alt="example of {{ portfolio.name }}" width="650" height="650">
             {% else %}
             <!-- default no image -->
             <img src="{{MEDIA_URL}}default_image.png" class="p-2 img-fluid img-home shadow rounded mb-5 mb-lg-2"
-                alt="default image">
+                alt="default image" width="650" height="650">
             {% endif %}
             {% else %}
             <!-- default image -->
             <img src="{{MEDIA_URL}}default_lexi_cinema.jpg" class="p-2 img-fluid img-home shadow rounded mb-5 mb-lg-2"
-                alt="lexi cinema">
+                alt="lexi cinema" width="650" height="650">
             {% endif %}
         </div>
         <div class="col-sm-12 col-lg-6 d-flex flex-column justify-content-center">
@@ -87,7 +87,7 @@
             </div>
             <div class="col-sm-12 col-lg-6 text-center order-1 order-lg-2">
                 <img src="{{MEDIA_URL}}colouring_page.jpeg" class="img-fluid img-home rounded mb-5 mb-lg-2 "
-                    alt="colouring sheet to download">
+                    alt="colouring sheet to download" width="650" height="650">
             </div>
         </div>
     </div>

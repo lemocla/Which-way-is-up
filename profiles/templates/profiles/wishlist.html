@@ -25,7 +25,9 @@
                         <div class="out-of-stock-label px-5 py-1">out of stock</div>
                     {% endif %}
                     <a class="wishlist-img" href="{% url 'artwork_details' artwork.id %}">
-                     <img class="img-fluid shadow rounded" src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}">
+                     <img class="img-fluid shadow rounded" src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
+                        width="350" height="350"
+                        alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
                     </a>
                 </div>
                 <div class="col">
