@@ -17,11 +17,11 @@ class Review(models.Model):
         ordering = ['created_at']
 
     RATINGS = [
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
     ]
 
     ratings = models.IntegerField(choices=RATINGS, default=5)
