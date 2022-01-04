@@ -56,7 +56,9 @@
             </a>
             <div class="card-body px-1 mt-1 pb-0">
                 <!-- artwork name-->
-                <h3 class="card-title fs-5 mb-0 text-truncate">{{ artwork.name }}</h3>
+                <a href="{% url 'artwork_details' artwork.id %}" class="text-link">
+                <h2 class="card-title fs-5 mb-0 text-truncate">{{ artwork.name }}</h2>
+                </a>
                 <!-- artwork details -->
                 <p class="mt-2 mb-0 text-muted small">{{ artwork.materials }}</p>
                 <p class="mb-0 text-muted small">Size: {{ artwork.size }} cm</p>

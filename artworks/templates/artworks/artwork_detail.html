@@ -185,7 +185,9 @@
                 </a>
                 <div class="card-body px-1 mt-1 pb-0">
                     <!-- related artwork name-->
+                    <a href="{% url 'artwork_details' item.id %}" class="text-link">
                     <h3 class="card-title fs-6 fs-sm-5 mb-0 text-truncate">{{ item.name }}</h3>
+                    </a>
                     <!-- related artwork details -->
                     <p class="mt-2 mb-0 text-muted small">{{item.materials }}</p>
                     <p class="d-none d-sm-block mb-0 text-muted small">Size: {{ item.size }} cm</p>
