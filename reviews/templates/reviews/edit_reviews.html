@@ -16,7 +16,7 @@
                 <div class="mt-5">
                     <input type="hidden" name="next" value="{{ request.GET.next }}">
                     <button class="btn px-5 py-2 text-uppercase btn-black" type="submit">Edit review</button>
-                    <a href="{{ request.META.HTTP_REFERER }}" class="btn px-5 py-2 text-uppercase btn-white" type="submit">Cancel</a>
+                    <button type="button" onclick="history.back()" class="btn btn-white text-uppercase px-5 py-2">Cancel</button>
                 </div>
             </form>
         </div>

@@ -7,20 +7,26 @@
 
 <div class="container pt-md-5 pt-4 pb-3">
   <div class="row pb-md-3 mb-4">
-    <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">reviews</h1>
-    <p class="fs-4 text-muted text-uppercase"> {{ reviews|length }} shop reviews</p>
-    {% if reviews|length > 0 %}
-    {% for review in reviews %}
-    <div class="col-12 my-4">
-      {% include 'reviews/includes/reviews_display.html' %}
+    <div class="col-12 col-sm-3 mb-4 mb-sm-0 order-sm-2">
+      <button id="btn-back" onclick="history.back()" class="btn btn-white text-uppercase px-5 py-2">back</button>
     </div>
-    {% endfor %}
-    {% else %}
-    <div class="col-12 my-4">
-    <p>There are no reviews available for this website.</p>
+    <div class="col-12 col-sm-9 order-sm-1">
+      <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">reviews</h1>
     </div>
-    {% endif %}
-
+    <div class="col-12 order-sm-3">
+      <p class="fs-4 text-muted text-uppercase"> {{ reviews|length }} shop reviews</p>
+      {% if reviews|length > 0 %}
+      {% for review in reviews %}
+      <div class="col-12 my-4">
+        {% include 'reviews/includes/reviews_display.html' %}
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-12 my-4">
+        <p>There are no reviews available for this website.</p>
+      </div>
+      {% endif %}
+    </div>
   </div>
 
 
