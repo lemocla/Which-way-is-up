@@ -36,10 +36,16 @@
      //togle password
 
      // login page
-     $('#div_id_password').append('<i class="password-visible far fa-eye" data-target="id_password"></i>')
+     $('#div_id_password').append(
+         '<i class="password-visible far fa-eye" data-target="id_password" aria-hidden="true"></i><span class="sr-only">toggle password</span>'
+     )
      // register page
-     $('#div_id_password1').append('<i class="password-visible far fa-eye" data-target="id_password1"></i>')
-     $('#div_id_password2').append('<i class="password-visible far fa-eye" data-target="id_password2"></i>')
+     $('#div_id_password1').append(
+         '<i class="password-visible far fa-eye" data-target="id_password1" aria-hidden="true"></i><span class="sr-only">toggle password</span>'
+     )
+     $('#div_id_password2').append(
+         '<i class="password-visible far fa-eye" data-target="id_password2" aria-hidden="true"></i><span class="sr-only">toggle password</span>'
+     )
 
      $(".password-visible").click(function () {
          id = $(this).attr("data-target");

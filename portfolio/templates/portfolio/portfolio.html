@@ -19,9 +19,13 @@
       {% if request.user.is_superuser %}
       <div class="mt-4">
         <h2 class="fs-4 py-2">Admin</h2>
-        <a class="text-primary pe-3" href="{% url 'edit_portfolio' portfolio.id %}"><i
-            class="far fa-edit fa-lg"></i></a>
-        <i class="far fa-trash-alt fa-lg text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
+        <a class="text-primary pe-3" href="{% url 'edit_portfolio' portfolio.id %}" aria-label="edit portfolio">
+          <i class="far fa-edit fa-lg" aria-hidden="true"></i></a>
+          <span class="sr-only">edit portfolio</span>
+        <button class="btn-bag" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          <i class="far fa-trash-alt fa-lg text-danger" aria-label="true"></i>
+          <span class="sr-only">delete portfolio</span>
+        </button>   
       </div>
       {% endif %}
 
@@ -40,14 +44,23 @@
           <div class="overlay">
             <div class="p-2 d-flex justify-content-end">
               <button type="button" class="round-btn btn-light me-2 " data-bs-toggle="modal"
-                data-bs-target="#modal-{{artwork.id}}"><i class="fas fa-search-plus fs-5"></i></button>
-              <a href="{% url 'artwork_details' artwork.id %}" class="btn round-btn btn-light me-2 m-0"><i
-                  class="fas fa-info fs-5"></i></a>
+                data-bs-target="#modal-{{artwork.id}}">
+                 <i class="fas fa-search-plus fs-5"></i>
+                 <span class="sr-only">view zoom of artwork</span>
+              </button>
+              <a href="{% url 'artwork_details' artwork.id %}" class="btn round-btn btn-light me-2 m-0">
+                <i class="fas fa-info fs-5" aria-hidden="true"></i></a>
+                <span class="sr-only">go to artwork details</span>
               {% csrf_token %}
               {% if request.user.is_authenticated and artwork in wishlist %}
-              <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light "> <i class="fa-lg fas fa-heart red-text"></i></button>
+              <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light ">
+                <i class="fa-lg fas fa-heart red-text" aria-hidden="true"></i></button>
+                <span class="sr-only">remove from wishlist</span>
               {% else %}
-              <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light"> <i class="fa-lg far fa-heart"></i></button>
+              <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light">
+               <i class="fa-lg far fa-heart" aria-hidden="true"></i>
+               <span class="sr-only">add to wishlist</span>
+              </button>
               {% endif %}
             </div>
           </div>
@@ -64,10 +77,11 @@
             <p class="fw-lighter my-0 fs-6 text-muted">{{ artwork.year }}</p>
             {% if request.user.is_superuser %}
             <div class="text-end">
-              <a class="pe-2 text-primary" href="{% url 'edit_artwork' artwork.id %}"><i
-                  class="far fa-edit fa-lg"></i></a>
-              <i class="far fa-trash-alt text-danger fa-lg" data-bs-toggle="modal"
-                data-bs-target="#deleteModal-{{artwork.id}}"></i>
+              <a class="pe-2 text-primary" href="{% url 'edit_artwork' artwork.id %}" aria-label="edit artwork"><i
+                  class="far fa-edit fa-lg" aria-hidden="true"></i></a>
+              <button class="btn-bag" data-bs-toggle="modal" data-bs-target="#deleteModal-{{artwork.id}}">
+              <i class="far fa-trash-alt text-danger fa-lg" aria-hidden="true"></i>
+              </button>
             </div>
             {% endif %}
           </div>

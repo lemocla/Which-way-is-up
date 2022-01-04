@@ -50,7 +50,7 @@
             <div class="sale-label text-uppercase">sale</div>
             {% endif %}
             <a href="{% url 'artwork_details' artwork.id %}" class="shop-link border-danger card-img-top">
-                <img class="card-img-top"
+                <img class="card-img-top" width="350" height="350" 
                     src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
                     alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
             </a>
@@ -75,13 +75,17 @@
                     <div class="btn-group pe-1" role="group" aria-label="Basic example">
                     {% csrf_token %}
                         {% if artwork.stock > 0 %}
-                        <a href="{% url 'add_to_bag' artwork.id %}" class="btn round-btn btn-light px-0 me-2"><i class="fas fa-cart-plus"></i></a>
+                        <a href="{% url 'add_to_bag' artwork.id %}" class="btn round-btn btn-light px-0 me-2" aria-label="add to cart">
+                        <i class="fas fa-cart-plus" aria-hidden="true"></i></a>
                         {% endif %}
                         {% if request.user.is_authenticated and artwork in wishlist %}
-                        <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" class="btn round-btn btn-light p-0 pt-1 m-0"><i class="fa-lg fas fa-heart red-text"></i></button>
+                        <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" class="btn round-btn btn-light p-0 pt-1 m-0"
+                            aria-label="remove-from-wishlist">
+                        <i class="fa-lg fas fa-heart red-text" aria-hidden="true"></i></button>
                         {% else %}
-                        <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light p-0 pt-1 m-0"> <i
-                                class="fa-lg far fa-heart"></i></button>
+                        <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light p-0 pt-1 m-0"
+                        aria-label="add to wishlist"> 
+                        <i class="fa-lg far fa-heart" aria-hidden="true"></i></button>
                         {% endif %}
                         
                     </div>
@@ -89,10 +93,13 @@
 
                 {% if request.user.is_superuser %}
                 <div class="mt-4 d-flex justify-content-between">
-                    <a class="pe-2 text-primary" href="{% url 'edit_artwork' artwork.id %}"><i
-                            class="far fa-edit fa-lg"></i></a>
-                    <i class="far fa-trash-alt text-danger fa-lg" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal-{{artwork.id}}"></i>
+                    <a class="pe-2 text-primary" href="{% url 'edit_artwork' artwork.id %}" aria-label="edit artwork">
+                        <i class="far fa-edit fa-lg" aria-hidden="true"></i>
+                    </a>
+                    <button class="btn-bag" data-bs-toggle="modal" data-bs-target="#deleteModal-{{artwork.id}}">
+                        <i class="far fa-trash-alt text-danger fa-lg" aria-hidden="true"></i>
+                        <span class="sr-only">delete artwork</span>
+                    </button>
                 </div>
                 {% endif %}
 
