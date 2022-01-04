@@ -7,11 +7,11 @@
           <hr class='my-3'>
           <div class="d-flex justify-content-between">
             <span class="fw-bold">Order number</span>
-            <span class="fw-bold">{{ order.order_number}}</span>
+            <span class="fw-bold text-truncate">{{ order.order_number}}</span>
           </div>
           <div class="d-flex justify-content-between">
             <span class="fw-bold">Ordered on</span>
-            <span class="fw-bold">{{ order.date }}</span>
+            <span class="fw-bold">{{ order.date|date:"d/m/Y" }}</span>
           </div>
           <hr class='my-3'>
           <div class="d-flex justify-content-between">

@@ -8,12 +8,12 @@
 {% block content %}
 
 <div class="container pt-md-5 pt-4 pb-3">
-  <div class="row pb-md-3 mb-4">
-    <div class="col 8 offset-1">
+  <div class="row pb-md-3 mb-4 px-1">
+    <div class="col-12 col-sm-8 offset-md-1">
     <h1 class="h1-page mt-md-0">Order details</h1>
     </div>
-    <div class="col-3">
-    <button id="btn-back" onclick="history.back()" class="btn btn-black text-uppercase px-5 py-2">back</button>
+    <div class="col-12 col-sm-3 my-3">
+    <a id="btn-back" href="{% url 'order_history' %}" class="btn btn-white text-uppercase px-5 py-2">back</a>
     </div>
   </div>
   {% include 'checkout/includes/order_details.html' %}
