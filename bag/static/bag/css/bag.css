@@ -1,5 +1,6 @@
 .bag-img-cont {
     text-align: center;
+    position: relative;
 }
 
 .bag-img-cont>img {

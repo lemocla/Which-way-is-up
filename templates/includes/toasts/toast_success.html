@@ -29,8 +29,13 @@
             <div class="col-9 mb-3">
                 <p class="my-0 mb-1"><strong>{{ item.artwork.name|title }}</strong></p>
                 <p class="my-0 text-muted small"><span class="pe-3">Quantity:</span> {{ item.quantity }}</p>
-                <p class="my-0 text-muted small"><span class="pe-3">Subtotal:
-                    </span> £{{ item.artwork.price|calc_subtotal:item.quantity }}</p>
+                <p class="my-0 text-muted small"><span class="pe-3">Subtotal: </span>
+                {% if item.artwork.on_sale %}
+                £{{ item.artwork.sale_price|calc_subtotal:item.quantity }}
+                {% else %}
+                £{{ item.artwork.price|calc_subtotal:item.quantity }}
+                {% endif %}
+                </p>
             </div>
 
             {% endfor %}

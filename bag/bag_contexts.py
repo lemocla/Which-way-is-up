@@ -9,7 +9,7 @@ from profiles.models import UserProfile
 
 def bag_content(request):
     """
-    View to return shopping bag information into a dictionary
+    Return shopping bag information into a dictionary
     """
     bag_items = []
     total = 0
@@ -23,8 +23,15 @@ def bag_content(request):
         is_wishlist = False
         if isinstance(artwork_data, int):
             artwork = get_object_or_404(Artwork, pk=artwork_id)
-            total += artwork_data * artwork.price
+            # price
+            if artwork.on_sale:
+                price = artwork.sale_price
+            else:
+                price = artwork.price
+            # total and total count
+            total += artwork_data * price
             total_count += artwork_data
+            # wishlist items
             if request.user.is_authenticated:
                 is_wishlist = user.wishlist_items.filter(
                               pk=artwork_id).exists()
@@ -37,8 +44,15 @@ def bag_content(request):
         else:
             artwork = get_object_or_404(Artwork, pk=artwork_id)
             for quantity in artwork_data.items():
+                # price
+                if artwork.on_sale:
+                    price = artwork.sale_price
+                else:
+                    price = artwork.price
+                # total and total count
                 total += quantity * artwork.price
                 total_count += quantity
+                # wishlist items
                 if request.user.is_authenticated:
                     is_wishlist = user.wishlist_items.filter(
                                   pk=artwork_id).exists()
