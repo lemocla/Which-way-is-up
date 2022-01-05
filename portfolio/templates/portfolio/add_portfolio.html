@@ -11,13 +11,13 @@
 
         <form method="POST" action="{% url 'add_portfolio' %}" enctype="multipart/form-data">
             {% csrf_token %}
-                    {% for field in form %}
-                    {% if field.name != 'image' %}
-                        {{ field | as_crispy_field }}
-                    {% else %}
-                        {{ field }}
-                    {% endif %}
-                    {% endfor %}
+            {% for field in form %}
+            {% if field.name != 'image' %}
+            {{ field | as_crispy_field }}
+            {% else %}
+            {{ field }}
+            {% endif %}
+            {% endfor %}
             <div class="mt-5">
                 <a class="btn btn-white py-2 px-5" href="{% url 'home' %}">Cancel</a>
                 <button id="add-portfolio" class="btn btn-black py-2 px-5" type="submit">Add Portfolio</button>
@@ -30,11 +30,6 @@
 {% endblock %}
 
 {% block extra_js %}
-    {{ block.super }}
-    <script type="text/javascript">
-        $('#new-image').change(function() {
-            var file = $('#new-image')[0].files[0];
-            $('#filename').text(`Image will be set to: ${file.name}`);
-        });
-    </script>
+{{ block.super }}
+<script src="{% static 'artworks/js/image.js' %}"></script>
 {% endblock %}
