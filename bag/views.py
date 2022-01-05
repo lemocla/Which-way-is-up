@@ -34,12 +34,12 @@ def add_to_bag(request, artwork_id):
 
     if str(artwork_id) in list(bag.keys()):
         bag[str(artwork_id)] += quantity
-        messages.success(request, f'{artwork.name}.capitalize()\'s quantity'
-                         f' updated to {bag[str(artwork_id)]}')
+        messages.success(request, f'{artwork.name.title()}\'s quantity'
+                         f' updated to {bag[str(artwork_id)]}.')
     else:
         bag[artwork_id] = quantity
-        messages.success(request, f'Added {artwork.name}.capitalize() has been'
-                         ' added to your bag')
+        messages.success(request, f'{artwork.name.title()} has been'
+                         ' added to your bag.')
 
     request.session['bag'] = bag
 
@@ -58,12 +58,12 @@ def ajdust_bag(request, artwork_id):
 
     if quantity > 0:
         bag[artwork_id] = quantity
-        messages.success(request, f'{artwork.name}.capitalize()\'s quantity '
-                         f'updated to {bag[artwork_id]}')
+        messages.success(request, f'{artwork.name.title()}\'s quantity '
+                         f'updated to {bag[artwork_id]}.')
     else:
         bag.pop(artwork_id)
-        messages.success(request, f'{artwork.name}.capitalize() has been '
-                         'removed from your bag')
+        messages.success(request, f'{artwork.name.title()} has been '
+                         'removed from your bag.')
 
     request.session['bag'] = bag
 
@@ -79,8 +79,8 @@ def remove_from_bag(request, artwork_id):
         bag = request.session.get('bag', {})
 
         bag.pop(artwork_id)
-        messages.success(request, f'{artwork.name}.capitalize() has been '
-                         'removed from your bag')
+        messages.success(request, f'{artwork.name.title()} has been '
+                         'removed from your bag.')
 
         request.session['bag'] = bag
         return HttpResponse(status=200)

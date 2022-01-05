@@ -85,11 +85,11 @@ def add_to_wishlist(request, artwork_id):
 
     if user.wishlist_items.filter(pk=artwork_id).exists():
         # Toast
-        messages.error(request, f'{artwork.name.capitalize()} already added '
+        messages.error(request, f'{artwork.name.title()} already added '
                        'to wishlist')
     else:
         user.wishlist_items.add(artwork)
-        messages.success(request, f'{artwork.name.capitalize()} added to '
+        messages.success(request, f'{artwork.name.title()} added to '
                          'wishlist')
 
     return HttpResponse(status=200)
@@ -106,11 +106,11 @@ def remove_from_wishlist(request, artwork_id):
 
     if user.wishlist_items.filter(pk=artwork_id).exists():
         user.wishlist_items.remove(artwork)
-        messages.success(request, f'{artwork.name.capitalize()} successfully '
+        messages.success(request, f'{artwork.name.title()} successfully '
                          'removed from wishlist')
     else:
         # Toast
-        messages.error(request, f'{artwork.name.capitalize()} is not '
+        messages.error(request, f'{artwork.name.title()} is not '
                        'in your wishlit')
 
     return HttpResponse(status=200)

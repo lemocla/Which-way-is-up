@@ -56,8 +56,9 @@ def add_reviews(request, artwork_id, orderline_id):
             review.artwork = artwork
             form.save()
 
-            messages.success(request, f'Your review for {artwork.name} has '
-                             f'been successfully added!')
+            messages.success(request, f'Your review for '
+                             f'{artwork.name.title()} has been '
+                             f'successfully added!')
             return redirect('order_history')
 
     else:
@@ -106,8 +107,9 @@ def edit_reviews(request, review_id):
         if form.is_valid():
             form.save()
 
-            messages.success(request, f'Your review for {review.artwork.name}'
-                             f' has been successfully edited!')
+            messages.success(request, f'Your review for '
+                             f'{review.artwork.name.title()} has been'
+                             f' successfully edited!')
             return HttpResponseRedirect(redirect_url)
 
     else:
