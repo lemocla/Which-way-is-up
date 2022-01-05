@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'artworks/css/artworks.css' %}">
+{% endblock %}
+
 {% block extra_title %}- {{ artwork.name }} {% endblock %}
 
 {% block content %}

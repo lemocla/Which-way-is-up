@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'portfolio/css/portfolio.css' %}">
+{% endblock %}
+
 {% block extra_title %}- {{ portfolio.name }} {% endblock %}
 
 {% block content %}

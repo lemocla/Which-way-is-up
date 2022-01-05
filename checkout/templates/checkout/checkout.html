@@ -3,6 +3,10 @@
 {% load i18n %}
 {% load bag_tools %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
 {% block extra_title %}- checkout {% endblock %}
 
 {% block content %}

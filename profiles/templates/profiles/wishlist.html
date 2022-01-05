@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
-
 {% load crispy_forms_tags %}
-
 
 {% load static %}
 {% load account %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}">
+{% endblock %}
 
 {% block extra_title %}- my wishlist {% endblock %}
 

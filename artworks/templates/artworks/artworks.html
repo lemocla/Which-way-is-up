@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'artworks/css/artworks.css' %}">
+{% endblock %}
+
 {% block extra_title %}- shop {% if category.name %} {{category.name}}
 {% elif shop_category == sale %} sale{% else %} all {% endif %}
 {% endblock %}

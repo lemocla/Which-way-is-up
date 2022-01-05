@@ -1,0 +1,97 @@
+/*----------[ ABOUT ]------------*/
+
+.about-portrait-cont {
+    text-align: center;
+}
+
+.img-square {
+    object-fit: cover;
+    width: 375px;
+    height: 375px;
+}
+
+.relative {
+    position: relative;
+}
+
+/*-----------[ EVENTS ]----------*/
+
+/* adapted from https://github.com/Code-Institute-Solutions/resume-miniproject-bootstrap4/tree/master/16-adding-work-history*/
+
+.timeline-item {
+    padding: 4em 2em 0em 3em;
+    position: relative;
+    color: var(--black);
+    border-left: 1px solid;
+}
+
+.timeline-item p {
+    padding: 0;
+    margin: 0;
+}
+
+.timeline-item::before {
+    content: attr(data-dates);
+    color: var(--darkgrey);
+    position: absolute;
+    left: 3em;
+    top: 2em;
+    display: block;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline-item::after {
+    width: 18px;
+    height: 18px;
+    display: block;
+    top: 2.25em;
+    position: absolute;
+    left: -9px;
+    border-radius: 15px;
+    content: '';
+    background: var(--black);
+}
+
+/*----------[ MEDIA QUERIES ]-------------*/
+
+@media only screen and (min-width: 768px) {
+    .about-portrait-cont {
+        text-align: start;
+    }
+
+    .img-square {
+        height: 320px;
+    }
+
+    .img-drawing {
+        position: absolute;
+        top: 9rem;
+        right: -3rem;
+        width: 76%;
+        height: auto;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .img-drawing {
+        top: 2rem;
+        right: -2rem;
+        width: 65%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .img-drawing {
+        top: 0rem;
+        right: -1rem;
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width: 1399px) {
+    .img-square {
+        height: 375px;
+    }
+}

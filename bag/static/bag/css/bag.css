@@ -1,0 +1,28 @@
+.bag-img-cont {
+    text-align: center;
+}
+
+.bag-img-cont>img {
+    object-fit: contain;
+    max-height: 250px;
+}
+
+.gift-display {
+    display: none;
+}
+
+@media only screen and (min-width: 576px) {
+    .bag-img-cont>img {
+        max-height: 375px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .bag-img-cont {
+        text-align: start;
+    }
+
+    .bag-img-cont>img {
+        max-height: 135px;
+    }
+}

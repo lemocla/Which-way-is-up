@@ -1,0 +1,23 @@
+/*----------------[ WISHLIST ]---------------*/
+
+.wishlist-img {
+    text-align: center;
+}
+
+.wishlist-img>img {
+    object-fit: contain;
+}
+
+/*-------------[ MEDIA QUERIES ]-------------*/
+
+@media only screen and (min-width: 576px) {
+    .wishlist-img>img {
+        max-height: 375px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .wishlist-img>img {
+        max-height: 180px;
+    }
+}

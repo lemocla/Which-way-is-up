@@ -1,0 +1,68 @@
+/*------------[ ARTWORKS ]-----------*/
+
+.shop-link {
+    text-align: center;
+}
+
+.shop-link>img {
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.price {
+    font-weight: 800 !important;
+}
+
+/*---------[ ARTWORKS DETAILS ]---------*/
+
+.container-crumbs {
+    min-height: initial !important;
+    margin-top: 0;
+}
+
+.container-related {
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+}
+
+.crumb-text {
+    font-size: 0.9rem !important;
+}
+
+.img-detail-container {
+    position: relative;
+}
+
+.img-detail {
+    max-height: 650px;
+    object-fit: contain;
+}
+
+.card-rel-items>img {
+    max-height: 240px;
+    object-fit: contain;
+}
+
+/*----------[ MEDIA QUERIES ]-----------*/
+
+@media only screen and (min-width: 576px) {
+    .shop-link>img {
+        height: 210px;
+    }
+
+    .crumb-text {
+        font-size: 1rem !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .shop-link>img {
+        height: 200px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .shop-link>img {
+        height: 240px;
+    }
+}
