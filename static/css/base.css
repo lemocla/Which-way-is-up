@@ -511,3 +511,16 @@ nav .list-inline-item i {
         width: 90%;
     }
 }
+
+@media only screen and (min-width: 1750px) {
+
+    body,
+    .btn,
+    .fs-6 {
+        font-size: 1.1rem;
+    }
+
+    .bag-count {
+        top: 1.1rem;
+    }
+}

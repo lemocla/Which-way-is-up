@@ -16,7 +16,7 @@
     clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
     background-color: var(--white);
     position: absolute;
-    bottom: 0rem;
+    bottom: -0.1rem;
     right: 0rem;
     width: 82.5%;
     padding: 2rem 1rem 0.5rem 12%;
@@ -38,6 +38,11 @@
     list-style-type: none;
 }
 
+.img-home {
+    object-fit: cover;
+}
+
+/*------------[ MEDIA QUERIES ]-------------*/
 @media only screen and (min-width: 576px) {
 
     .hero-header {
@@ -63,18 +68,22 @@
     }
 
     .img-home {
-        max-height: 425px !important;
+        min-height: 475px !important;
     }
 }
 
 @media only screen and (min-width: 1450px) {
     .container-home {
-        width: 90% !important;
+        width: 93% !important;
     }
 
     .hero-trapezoid {
         clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
         padding: 3.5rem 3.25rem 0.75rem 20%;
+    }
+
+    .img-home {
+        max-height: 530px !important;
     }
 }
 
@@ -86,7 +95,7 @@
 
 @media only screen and (min-width: 2000px) {
     .container-home {
-        width: 90% !important;
+        max-width: 1800px;
     }
 
     .hero-trapezoid {
