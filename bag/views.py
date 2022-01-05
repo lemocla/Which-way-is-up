@@ -3,6 +3,7 @@ Views to handle shopping bag functionalities
 """
 from django.shortcuts import (render, redirect, get_object_or_404,
                               HttpResponse)
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from artworks.models import Artwork
 
@@ -10,7 +11,28 @@ from artworks.models import Artwork
 def bag(request):
     """
     View to return shopping bag page
+    Remove out of stock and inactive items from bag
     """
+    if request.session['bag'] and len(request.session['bag']) > 0:
+        bag = request.session['bag']
+        for artwork_id in list(bag.keys()):
+            try:
+                artwork = Artwork.objects.get(id=artwork_id)
+                if artwork.stock == 0:
+                    bag.pop(artwork_id)
+                    request.session['bag'] = bag
+                    messages.error(request, f'{artwork.name.title()}'
+                                            f' is out of stock and has been '
+                                            f'from your bag.')
+                if artwork.status != 'active':
+                    bag.pop(artwork_id)
+                    request.session['bag'] = bag
+                    messages.error(request, f'{artwork.name.title()}'
+                                            f' is not longer available.')
+            except ObjectDoesNotExist:
+                bag.pop(artwork_id)
+                request.session['bag'] = bag
+                messages.error(request, 'This artwork is no longer available')
     return render(request, 'bag/bag.html')
 
 
@@ -21,7 +43,6 @@ def add_to_bag(request, artwork_id):
     artwork = get_object_or_404(Artwork, pk=artwork_id)
 
     if request.method == 'GET':
-        print("press add to cart button")
         quantity = 1
         redirect_url = request.META.get('HTTP_REFERER')
 
