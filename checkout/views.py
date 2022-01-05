@@ -81,6 +81,8 @@ def checkout(request):
             try:
                 artwork = Artwork.objects.get(id=item_id)
                 check.append(True)
+                if artwork.stock == 0 or artwork.status != 'active':
+                    check.append(False)
             except ObjectDoesNotExist:
                 messages.error(request, (
                     "One of the artworks in your bag is not available. "
@@ -190,6 +192,18 @@ def checkout(request):
             messages.error(request, 'There\'s nothing in your bag at the '
                            'moment')
             return redirect(reverse('shop'))
+
+        # Check for out of stock / inactive artwork
+        for artwork_id in list(bag.keys()):
+            try:
+                artwork = Artwork.objects.get(id=artwork_id)
+                if artwork.stock == 0 or artwork.status != 'active':
+                    messages.error(request, f'{artwork.name.title()}'
+                                            f' is no longer available.')
+                    return redirect(reverse('bag'))
+            except ObjectDoesNotExist:
+                messages.error(request, 'This artwork is no longer available')
+                return redirect(reverse('bag'))
 
         current_bag = bag_content(request)
 
