@@ -3,6 +3,7 @@ Models to manage artwork and shop categories
 """
 
 from django.db import models, transaction
+from django.db.models import Avg
 from django.core.validators import MaxValueValidator, MinValueValidator
 from portfolio.fields import CaseInsensitiveCharField
 from portfolio.models import Portfolio
@@ -89,6 +90,15 @@ class Artwork(models.Model):
     status = models.CharField(max_length=10, choices=STATUS, default=ACTIVE)
     display_shop = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def calculate_average_rating(self):
+        """
+        ratings
+        """
+        self.rating = self.artwork.all().aggregate(Avg("ratings"))[
+                              'ratings__avg']
+        print(self.rating)
+        self.save()
 
     def __str__(self):
         return self.name

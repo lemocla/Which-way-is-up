@@ -6,11 +6,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.db.models import Avg
+
 from artworks.models import Artwork
 from profiles.models import UserProfile
 from checkout.models import Order, OrderLineItem
 from .models import Review
+
 from .forms import ReviewForm
 
 
@@ -54,11 +55,6 @@ def add_reviews(request, artwork_id, orderline_id):
             review.order_line = order_line
             review.artwork = artwork
             form.save()
-            # Aggregate average reviews for artwork
-            rating = Review.objects.filter(artwork=artwork).aggregate(
-                     Avg('ratings'))
-            artwork.rating = rating['ratings__avg']
-            artwork.save()
 
             messages.success(request, f'Your review for {artwork.name} has '
                              f'been successfully added!')
@@ -98,7 +94,6 @@ def edit_reviews(request, review_id):
 
     user_profile = get_object_or_404(UserProfile, user=request.user)
     review = get_object_or_404(Review, pk=review_id)
-    artwork = Artwork.objects.get(id=review.artwork.id)
 
     redirect_url = request.POST.get('next', 'my_reviews')
     if user_profile.id != review.user_profile.id:
@@ -110,11 +105,7 @@ def edit_reviews(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            # Aggregate average reviews for artwork
-            rating = Review.objects.filter(artwork=artwork).aggregate(
-                     Avg('ratings'))
-            artwork.rating = rating['ratings__avg']
-            artwork.save()
+
             messages.success(request, f'Your review for {review.artwork.name}'
                              f' has been successfully edited!')
             return HttpResponseRedirect(redirect_url)
@@ -138,7 +129,6 @@ def delete_reviews(request, review_id):
 
     user_profile = get_object_or_404(UserProfile, user=request.user)
     review = get_object_or_404(Review, pk=review_id)
-    artwork = get_object_or_404(Artwork, id=review.artwork.id)
 
     redirect_url = request.GET.get('next', 'my_reviews')
     if user_profile.id != review.user_profile.id:
@@ -147,10 +137,6 @@ def delete_reviews(request, review_id):
         return redirect('home')
 
     review.delete()
-    # Aggregate average reviews for artwork
-    rating = Review.objects.filter(artwork=artwork).aggregate(
-             Avg('ratings'))
-    artwork.rating = rating['ratings__avg']
-    artwork.save()
+
     messages.success(request, 'Review successfully deleted!')
     return HttpResponseRedirect(redirect_url)
