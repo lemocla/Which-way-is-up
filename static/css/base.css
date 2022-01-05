@@ -92,6 +92,12 @@ h3,
     box-shadow: 1px 2px 5px var(--black);
 }
 
+/*-------------[ IMAGES ]---------------------*/
+
+.img-fluid {
+    width: 100%;
+}
+
 /*---------------[ LINKS ]--------------------*/
 
 a {
@@ -245,22 +251,23 @@ form .btn-black:hover {
     background-color: var(--black);
     color: var(--white);
     text-transform: uppercase;
-    top: 1.75rem;
+    top: 50px;
+    left:0;
 }
 
 .sale-label {
     position: absolute;
     background-color: var(--red);
     color: var(--white);
-    height: 45px;
-    width: 45px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: bold;
-    padding-top: 0.75rem;
-    right: 1.25rem;
-    top: 1rem;
+    padding-top: 0.9rem;
+    right: 10px;
+    top: 5px;
 }
 
 /*-------------[ NAVIGATION ]----------------*/

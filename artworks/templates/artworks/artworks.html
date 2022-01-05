@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block extra_title %}- shop {% if category.name %} {{category.name}}
-{% elif shop_category == sale %} sale{% else %} all {% endif %}
+{% elif category == 'sale' %} sale{% else %} all {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,7 @@
 
     <div class="row ">
         <h1 class="col-12 col-md-7 col-lg-8 col-xl-9 pb-3">
-            Shop {% if category.name %}{{ category.name }}{% elif shop_category == sale %} sale
+            Shop {% if category.name %}{{ category.name }}{% elif category == 'sale' %} sale
             {% else %} all {% endif %}
         </h1>
 

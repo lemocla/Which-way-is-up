@@ -24,7 +24,8 @@
 }
 
 .modal-gallery img {
-    max-height: 78vh !important;
+    width: auto;
+    height: 78vh !important;
 }
 
 .overlay {

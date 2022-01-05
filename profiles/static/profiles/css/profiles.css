@@ -8,6 +8,10 @@
     object-fit: contain;
 }
 
+.relative{
+position: relative;
+}
+
 /*-------------[ MEDIA QUERIES ]-------------*/
 
 @media only screen and (min-width: 576px) {
