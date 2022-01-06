@@ -30,7 +30,9 @@ def portfolio_detail(request, portfolio_id):
             messages.error(request, 'Sorry, access restricted to shop owner')
             return redirect(reverse('home'))
 
-    artworks = Artwork.objects.filter(portfolio=portfolio).values()
+    artworks = Artwork.objects.filter(portfolio=portfolio).filter(
+                status='active').values()
+
     context = {
         'portfolio': portfolio,
         'artworks': artworks,

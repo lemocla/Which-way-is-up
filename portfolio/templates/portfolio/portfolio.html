@@ -48,11 +48,13 @@
 
           <div class="overlay">
             <div class="p-2 d-flex justify-content-end">
+              {% if artwork.image %}
               <button type="button" class="round-btn btn-light me-2 " data-bs-toggle="modal"
                 data-bs-target="#modal-{{artwork.id}}">
                  <i class="fas fa-search-plus fs-5"></i>
                  <span class="sr-only">view zoom of artwork</span>
               </button>
+              {% endif %}
               <a href="{% url 'artwork_details' artwork.id %}" class="btn round-btn btn-light me-2 m-0">
                 <i class="fas fa-info fs-5" aria-hidden="true"></i></a>
                 <span class="sr-only">go to artwork details</span>
@@ -104,7 +106,8 @@
                     class="fas fa-times fa-2x"></i></button>
               </div>
               <div class="modal-body text-center">
-                <img src="{{MEDIA_URL}}{{ artwork.image }}" class="img-fluid shadow" alt="{{artwork.name}}" width="650" height="650">
+                <img src="{{MEDIA_URL}}{% if artwork.image %}{{ artwork.image }}{% else %}default.png{% endif%}" 
+                  class="img-fluid shadow" alt="{{artwork.name}}" width="650" height="650">
               </div>
             </div>
           </div>
