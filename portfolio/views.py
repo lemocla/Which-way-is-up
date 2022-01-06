@@ -23,6 +23,13 @@ def portfolio_detail(request, portfolio_id):
         wishlist = user.wishlist_items.values()
 
     portfolio = get_object_or_404(Portfolio, id=portfolio_id)
+
+    # restrict access to draft/inactive porfolio
+    if portfolio.status != 'active':
+        if not request.user.is_superuser:
+            messages.error(request, 'Sorry, access restricted to shop owner')
+            return redirect(reverse('home'))
+
     artworks = Artwork.objects.filter(portfolio=portfolio).values()
     context = {
         'portfolio': portfolio,

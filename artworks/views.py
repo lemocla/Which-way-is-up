@@ -35,7 +35,6 @@ def artworks(request):
             shop_category = request.GET['shop_category']
             if shop_category == 'sale':
                 shop_category = 'sale'
-                print(shop_category)
                 items = Artwork.objects.filter(on_sale=True,
                                                display_shop=True,
                                                status="active").values()
@@ -75,7 +74,8 @@ def artworks(request):
 
 def artwork_detail(request, artwork_id):
     """
-    View portfolio detail
+    View artwork detail
+    Restrict user's access to active items
     """
     artwork = get_object_or_404(Artwork, id=artwork_id)
     related_items = Artwork.objects.filter(related_items=artwork.id)
@@ -85,6 +85,12 @@ def artwork_detail(request, artwork_id):
     reviews = Review.objects.filter(artwork=artwork.id)
     orderlist = []
     order_line_add = None
+
+    # restrict access to draft/inactive artwork
+    if artwork.status != 'active':
+        if not request.user.is_superuser:
+            messages.error(request, 'Sorry, access restricted to shop owner')
+            return redirect(reverse('home'))
 
     if request.user.is_authenticated:
         user = get_object_or_404(UserProfile, user=request.user)
