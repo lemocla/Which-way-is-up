@@ -1,7 +1,8 @@
 """
 Views to render my profile page content
 """
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import (render, get_object_or_404, HttpResponse,
+                              redirect, reverse)
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -64,6 +65,7 @@ def wishlist(request):
 
     user = get_object_or_404(UserProfile, user=request.user)
     wishlist = user.wishlist_items.all()
+
     context = {
         'user': user,
         'wishlist': wishlist
@@ -77,11 +79,12 @@ def add_to_wishlist(request, artwork_id):
     """
     Add artwortk to user wishlist using ajax request
     """
-    print(artwork_id)
-    print(request.user)
-
     user = get_object_or_404(UserProfile, user=request.user)
     artwork = get_object_or_404(Artwork, pk=artwork_id)
+
+    if artwork.status != 'active':
+        messages.error(request, 'This item is no longer available.')
+        return redirect(reverse('shop'))
 
     if user.wishlist_items.filter(pk=artwork_id).exists():
         # Toast
@@ -168,7 +171,7 @@ def order_details(request, order_number):
 
     if user.id != order.user_profile.id:
         messages.error(request, 'You don\'t have the credentials to '
-                       'access this page')   
+                       'access this page')
 
     context = {
         'order': order,

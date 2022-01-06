@@ -173,6 +173,13 @@ def edit_artwork(request, artwork_id):
         if form.is_valid():
             # Data from form
             form.save()
+            # If status is not active, remove from wishlist
+            if artwork.status != 'active':
+                users_wishlist = UserProfile.objects.filter(
+                                 wishlist_items=artwork_id)
+                for profile in users_wishlist:
+                    profile.wishlist_items.remove(artwork_id)
+                    profile.save()
             messages.success(request, 'Artwork successfully updated!')
             return redirect(reverse('artwork_details', args=[artwork.id]))
         else:
