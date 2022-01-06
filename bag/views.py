@@ -2,7 +2,7 @@
 Views to handle shopping bag functionalities
 """
 from django.shortcuts import (render, redirect, get_object_or_404,
-                              HttpResponse)
+                              HttpResponse, reverse)
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from artworks.models import Artwork
@@ -42,6 +42,10 @@ def add_to_bag(request, artwork_id):
     """
     artwork = get_object_or_404(Artwork, pk=artwork_id)
 
+    if artwork.stock == 0 or artwork.status != 'active':
+        messages.error(request, 'This item is not available for purchase.')
+        return redirect(reverse('shop'))
+
     if request.method == 'GET':
         quantity = 1
         redirect_url = request.META.get('HTTP_REFERER')
@@ -73,9 +77,18 @@ def ajdust_bag(request, artwork_id):
     """
     artwork = get_object_or_404(Artwork, pk=artwork_id)
 
+    if artwork.stock == 0 or artwork.status != 'active':
+        messages.error(request, 'This item is not available for purchase.')
+        return redirect(reverse('shop'))
+
     quantity = int(request.POST.get('quantity'))
 
     bag = request.session.get('bag', {})
+
+    # Defensive design trying to update item not in shopping bag
+    if artwork_id not in list(bag.keys()):
+        messages.error(request, 'This item is not in your shopping bag')
+        return redirect(reverse('shop'))
 
     if quantity > 0:
         bag[artwork_id] = quantity
@@ -99,6 +112,12 @@ def remove_from_bag(request, artwork_id):
 
         bag = request.session.get('bag', {})
 
+        # Defensive design trying to update item not in shopping bag
+        if artwork_id not in list(bag.keys()):
+            messages.error(request, 'This item is not in your shopping bag')
+            return redirect(reverse('shop'))
+
+        # remove artwork from shopping bag
         bag.pop(artwork_id)
         messages.success(request, f'{artwork.name.title()} has been '
                          'removed from your bag.')
