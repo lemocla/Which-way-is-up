@@ -77,17 +77,16 @@
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark px-3"
                             aria-labelledby="accountMenuLink">
                             {% if request.user.is_authenticated %}
-                            {% if request.user.is_superuser %}
-                            <!-- super user / admin -->
-                            <li><a class="dropdown-item" href="{% url 'add_portfolio' %}">Add collection</a></li>
-                            <li><a class="dropdown-item" href="{% url 'add_artwork' %}">Add artwork</a></li>
-                            {% else %}
                             <!-- authenticated users -->
                             <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
                             <li><a class="dropdown-item" href="{% url 'order_history' %}">My Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'my_reviews' %}">My Reviews</a></li>
-                            {% endif %}
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                            {% if request.user.is_superuser %}
+                            <!-- super user / admin -->
+                            <li><a class="dropdown-item" href="{% url 'add_portfolio' %}">Add collection</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_artwork' %}">Add artwork</a></li>
+                            {% endif %}
                             {% else %}
                             <!-- non authenticated users-->
                             <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>

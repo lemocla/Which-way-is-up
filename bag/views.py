@@ -46,6 +46,10 @@ def add_to_bag(request, artwork_id):
         messages.error(request, 'This item is not available for purchase.')
         return redirect(reverse('shop'))
 
+    if not artwork.display_shop:
+        messages.error(request, 'This item is not available for purhcase.')
+        return redirect(reverse('shop'))
+
     if request.method == 'GET':
         quantity = 1
         redirect_url = request.META.get('HTTP_REFERER')
