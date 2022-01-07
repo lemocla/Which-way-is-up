@@ -45,6 +45,7 @@
 
 .portfolio-noimg {
     width: 60%;
+    height: auto;
 }
 
 /*----------[ MEDIA QUERIES ]----------*/

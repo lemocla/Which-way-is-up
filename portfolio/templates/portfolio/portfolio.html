@@ -26,11 +26,11 @@
         <h2 class="fs-4 py-2">Admin</h2>
         <a class="text-primary pe-3" href="{% url 'edit_portfolio' portfolio.id %}" aria-label="edit portfolio">
           <i class="far fa-edit fa-lg" aria-hidden="true"></i></a>
-          <span class="sr-only">edit portfolio</span>
+        <span class="sr-only">edit portfolio</span>
         <button class="btn-bag" data-bs-toggle="modal" data-bs-target="#deleteModal">
           <i class="far fa-trash-alt fa-lg text-danger" aria-label="true"></i>
           <span class="sr-only">delete portfolio</span>
-        </button>   
+        </button>
       </div>
       {% endif %}
 
@@ -48,50 +48,48 @@
 
           <div class="overlay">
             <div class="p-2 d-flex justify-content-end">
+              <!-- super user edit and delete buttons-->
+              {% if request.user.is_superuser %}
+              <a class="btn round-btn btn-light me-2 m-0 px-0" href="{% url 'edit_artwork' artwork.id %}" aria-label="edit artwork"><i
+                  class="far fa-edit fa-lg text-primary" aria-hidden="true"></i></a>
+              <button class="btn round-btn btn-light me-2 m-0 p-0" data-bs-toggle="modal" data-bs-target="#deleteModal-{{artwork.id}}">
+                <i class="far fa-trash-alt text-danger fa-lg" aria-hidden="true"></i>
+              </button>
+              {% endif %}
+              <!-- buttons -->
               {% if artwork.image %}
               <button type="button" class="round-btn btn-light me-2 " data-bs-toggle="modal"
                 data-bs-target="#modal-{{artwork.id}}">
-                 <i class="fas fa-search-plus fs-5"></i>
-                 <span class="sr-only">view zoom of artwork</span>
+                <i class="fas fa-search-plus fs-5"></i>
+                <span class="sr-only">view zoom of artwork</span>
               </button>
               {% endif %}
               <a href="{% url 'artwork_details' artwork.id %}" class="btn round-btn btn-light me-2 m-0">
                 <i class="fas fa-info fs-5" aria-hidden="true"></i></a>
-                <span class="sr-only">go to artwork details</span>
+              <span class="sr-only">go to artwork details</span>
               {% csrf_token %}
               {% if request.user.is_authenticated and artwork in wishlist %}
-              <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light ">
+              <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" type="button"
+                class="round-btn btn-light ">
                 <i class="fa-lg fas fa-heart red-text" aria-hidden="true"></i></button>
-                <span class="sr-only">remove from wishlist</span>
+              <span class="sr-only">remove from wishlist</span>
               {% else %}
               <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light">
-               <i class="fa-lg far fa-heart" aria-hidden="true"></i>
-               <span class="sr-only">add to wishlist</span>
+                <i class="fa-lg far fa-heart" aria-hidden="true"></i>
+                <span class="sr-only">add to wishlist</span>
               </button>
               {% endif %}
             </div>
           </div>
 
+          <!-- artwork details -->
           <img src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
             class="img-fluid shadow" alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}"
             width="350" height="350">
           <div class="mt-3">
             <h3 class="fs-6 py-1">{{ artwork.name }}</h3>
             <p class="fw-lighter my-0 fs-6 text-muted">{{artwork.materials}}</p>
-          </div>
-
-
-          <div class="d-flex justify-content-between">
             <p class="fw-lighter my-0 fs-6 text-muted">{{ artwork.year }}</p>
-            {% if request.user.is_superuser %}
-            <div class="text-end">
-              <a class="pe-2 text-primary" href="{% url 'edit_artwork' artwork.id %}" aria-label="edit artwork"><i
-                  class="far fa-edit fa-lg" aria-hidden="true"></i></a>
-              <button class="btn-bag" data-bs-toggle="modal" data-bs-target="#deleteModal-{{artwork.id}}">
-              <i class="far fa-trash-alt text-danger fa-lg" aria-hidden="true"></i>
-              </button>
-            </div>
-            {% endif %}
           </div>
         </div>
 
@@ -106,7 +104,7 @@
                     class="fas fa-times fa-2x"></i></button>
               </div>
               <div class="modal-body text-center">
-                <img src="{{MEDIA_URL}}{% if artwork.image %}{{ artwork.image }}{% else %}default.png{% endif%}" 
+                <img src="{{MEDIA_URL}}{% if artwork.image %}{{ artwork.image }}{% else %}default.png{% endif%}"
                   class="img-fluid shadow" alt="{{artwork.name}}" width="650" height="650">
               </div>
             </div>
@@ -128,8 +126,7 @@
               </div>
               <div class="modal-footer justify-content-start">
                 <button type="button" class="btn btn-white px-3" data-bs-dismiss="modal">Close</button>
-                <a class="btn btn-danger px-4"
-                  href="{% url 'delete_artwork' artwork.id %}">Yes</a>
+                <a class="btn btn-danger px-4" href="{% url 'delete_artwork' artwork.id %}">Yes</a>
               </div>
             </div>
           </div>
@@ -141,10 +138,10 @@
       {% else %}
       <div class="row ms-lg-5 pb-5 justify-content-center">
         <h3 class="py-5 text-center">Exciting stuff coming soon!</h3>
-        <img src="{{MEDIA_URL}}default_image.png" class="p-2 portfolio-noimg shadow rounded" alt="default image" width="650" height="650"/>
+        <img src="{{MEDIA_URL}}default_image.png" class="p-2 portfolio-noimg shadow rounded" alt="default image"
+          width="650" height="650" />
       </div>
       {% endif %}
-
 
     </div>
   </div>
