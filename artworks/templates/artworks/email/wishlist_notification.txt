@@ -1,0 +1,7 @@
+Hello, 
+
+This is an automated notification from Which Way is Up to let you know that {{ artwork }} is no longer available and has been removed from your wishlist. 
+
+Yours sincerely,
+
+Which Way Is Up

@@ -1,11 +1,16 @@
 """
 Views to manage artworks CRUD operations
 """
+from django.conf import settings
+
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponseRedirect
+from django.template.loader import render_to_string
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
+
 from portfolio.models import Portfolio
 from profiles.models import UserProfile
 from checkout.models import Order, OrderLineItem
@@ -179,8 +184,18 @@ def edit_artwork(request, artwork_id):
                 users_wishlist = UserProfile.objects.filter(
                                  wishlist_items=artwork_id)
                 for profile in users_wishlist:
+                    # Update user profile
                     profile.wishlist_items.remove(artwork_id)
                     profile.save()
+                    # Notify user
+                    subject = "Notification - wishlist item no longer available"
+                    body = render_to_string(
+                    'artworks/email/wishlist_notification.txt',
+                    {'artwork': artwork.name.capitalize() })
+                    sender = settings.EMAIL_HOST_USER
+                    recipients = [profile.user.email]
+                    send_mail(subject, body, sender, recipients)
+            # Message success
             messages.success(request, 'Artwork successfully updated!')
             return redirect(reverse('artwork_details', args=[artwork.id]))
         else:
