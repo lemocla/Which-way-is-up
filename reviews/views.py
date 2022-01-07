@@ -19,7 +19,7 @@ def all_reviews(request):
     """
     View to return the all the reviews page
     """
-    reviews = Review.objects.all()
+    reviews = Review.objects.all().order_by('-ratings', '-created_at')
     context = {
         'reviews': reviews,
     }
@@ -36,6 +36,24 @@ def add_reviews(request, artwork_id, orderline_id):
     artwork = get_object_or_404(Artwork, id=artwork_id)
     order_line = None
     order = None
+
+    if artwork.status != 'active':
+        messages.error(request, 'Sorry you cannot leave a review for this'
+                       ' item as it is no longer available.')
+        return redirect('my_reviews')
+
+    review = Review.objects.filter(artwork=artwork).filter(
+             order_line=orderline_id)
+
+    if review:
+        messages.error(request, 'You\'ve already added a review for this'
+                       ' item. You can edit your review')
+        return redirect('order_history')
+
+    if order.user_profile != user_profile or artwork != order_line.artwork:
+        messages.error(request, 'You don\'t have the credentials to add a'
+                       ' review for this item')
+        return redirect('home')
 
     if orderline_id:
         order_line = get_object_or_404(OrderLineItem, id=orderline_id)
@@ -62,19 +80,6 @@ def add_reviews(request, artwork_id, orderline_id):
             return redirect('order_history')
 
     else:
-        review = Review.objects.filter(artwork=artwork).filter(
-                 order_line=orderline_id)
-
-        if review:
-            messages.error(request, 'You\'ve already added a review for this'
-                           ' item. You can edit your review')
-            return redirect('order_history')
-
-        if order.user_profile != user_profile or artwork != order_line.artwork:
-            messages.error(request, 'You don\'t have the credentials to add a'
-                           ' review for this item')
-            return redirect('home')
-
         form = ReviewForm()
 
     context = {
@@ -97,6 +102,7 @@ def edit_reviews(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
 
     redirect_url = request.POST.get('next', 'my_reviews')
+
     if user_profile.id != review.user_profile.id:
         messages.error(request, 'You don\'t have the credentials to add a'
                        ' review for this item')

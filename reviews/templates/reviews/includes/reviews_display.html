@@ -23,11 +23,19 @@
 <div class="card mt-3">
     <div class="row g-0">
         <p class="small text-muted mb-1">Purchased item:</p>
+        {% if review.artwork.status == 'active' %}
         <a class="d-flex align-middle text-muted" href="{% url 'artwork_details' review.artwork.id %}">
             <img src="{{ MEDIA_URL }}{% if review.artwork.image %}{{ review.artwork.image }}{% else %}default_image.png{% endif %}" 
                 class="review-img" alt="{{ review.artwork }}" width="60" height="60">
             <p class="ps-3 my-2 text-decoration-underline">{{ review.artwork|title }}</p>
         </a>
+        {% else %}
+        <div class="d-flex align-middle text-muted">
+            <img src="{{ MEDIA_URL }}{% if review.artwork.image %}{{ review.artwork.image }}{% else %}default_image.png{% endif %}" 
+                class="review-img" alt="{{ review.artwork }}" width="60" height="60">
+            <p class="ps-3 my-2">{{ review.artwork|title }}</p>
+        </div>
+        {% endif %}
     </div>
     {% if request.user.is_authenticated %}
     <div class="mt-3">

@@ -12,12 +12,13 @@ class ReviewAdmin(admin.ModelAdmin):
     """
     model = Review
     list_display = (
+        "artwork",
+        "created_at",
         "ratings",
         "comments",
         "user_profile",
-        "artwork",
-        "created_at"
     )
+    ordering = ('-created_at', '-ratings', )
 
 
 admin.site.register(Review, ReviewAdmin)

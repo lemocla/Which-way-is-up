@@ -14,7 +14,7 @@ def index(request):
     portfolio = Portfolio.objects.filter(
                 homepage=True)[0]
     # https://stackoverflow.com/questions/20555673/django-query-get-last-n-records
-    reviews = Review.objects.all().order_by('-id')[:3]
+    reviews = Review.objects.all().order_by('-ratings', '-created_at')[:3]
     context = {
         'portfolio': portfolio,
         'reviews': reviews

@@ -26,13 +26,15 @@ class Review(models.Model):
 
     ratings = models.IntegerField(choices=RATINGS, default=5)
     comments = models.TextField(max_length=1500)
-    user_profile = models.ForeignKey(UserProfile, null=True,
-                                     on_delete=models.SET_NULL,
+    user_profile = models.ForeignKey(UserProfile, null=False,
+                                     blank=False,
+                                     on_delete=models.CASCADE,
                                      related_name='reviews')
-    order_line = models.ForeignKey(OrderLineItem, blank=True, null=True,
-                                   on_delete=models.SET_NULL,
+    order_line = models.ForeignKey(OrderLineItem, blank=False, null=False,
+                                   on_delete=models.CASCADE,
                                    related_name='orderline')
-    artwork = models.ForeignKey(Artwork, null=True, on_delete=models.SET_NULL,
+    artwork = models.ForeignKey(Artwork, null=False, blank=False,
+                                on_delete=models.CASCADE,
                                 related_name='artwork')
     created_at = models.DateTimeField(auto_now_add=True)
 

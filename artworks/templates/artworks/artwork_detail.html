@@ -242,7 +242,7 @@
     <div class="row">
         <h2 class="pb-4">Reviews</h2>
         <div class="d-flex justify-content-between">
-            <p class="text-muted text-uppercase"> {{ reviews|length }} shop reviews</p>
+            <p class="text-muted text-uppercase"> {{ reviews|length }} shop reviews - avg rating: {{ artwork.rating|floatformat:1 }}/5</p>
             <!-- reviews action links -->
             {% if request.user.is_authenticated %}
             <p class="mb-1">

@@ -126,7 +126,7 @@ def order_history(request):
     """
 
     user = get_object_or_404(UserProfile, user=request.user)
-    orders = Order.objects.filter(user_profile=user).all()
+    orders = Order.objects.filter(user_profile=user).all().order_by('-date')
     reviews = Review.objects.filter(user_profile=user).all()
     list_orderline = []
 
@@ -150,7 +150,8 @@ def my_reviews(request):
     """
 
     user = get_object_or_404(UserProfile, user=request.user)
-    reviews = Review.objects.filter(user_profile=user).all()
+    reviews = Review.objects.filter(user_profile=user).all().order_by(
+              '-ratings', '-created_at')
 
     context = {
         'user': user,

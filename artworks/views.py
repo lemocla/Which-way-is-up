@@ -82,7 +82,8 @@ def artwork_detail(request, artwork_id):
     user = None
     wishlist = None
     is_wishlist = None
-    reviews = Review.objects.filter(artwork=artwork.id)
+    reviews = Review.objects.filter(artwork=artwork.id).order_by(
+              '-ratings', '-created_at')
     orderlist = []
     order_line_add = None
 
