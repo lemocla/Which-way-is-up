@@ -20,53 +20,27 @@
     <p class="">Please fill out the form below to complete your order</p>
 
     <!-- order summary-->
-    <div class="col-12 col-lg-6 order-lg-last ps-lg-5 mb-5">
-      <div class="border shadow rounded border-lg-secondary">
-        <div class="card-body row p-4 p-xl-5">
-          <h2 class="fs-3 mb-3 pb-2 text-center">Order summary</h2>
-          <div class="d-flex justify-content-between">
-            <span class="fw-bold">Item</span>
-            <span class="fw-bold">Subtotal</span>
-          </div>
-          <hr class="mt-3 mb-3">
-          <!-- shopping bag details -->
-          {% for item in bag_items %}
-          <div class="d-flex justify-content-between text-muted">
-            <div class="row w-100">
-              <div class="col-3 pe-0">
-                <a class="img-checkout" href="{% url 'artwork_details' item.artwork.id %}">
-                  <img class="img-fluid rounded" width="250" height="250"
-                    src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
-                    alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}">
-                </a>
-              </div>
-              <div class="col">
-                <p class="my-0 ">{{ item.artwork.name|title }}</p>
-                <p class="mt-1 small mb-0">{{ item.artwork.materials }}</p>
-                <p class="my-0 small">Qty: {{ item.quantity }}</p>
-              </div>
-            </div>
-            <div class="">
-              <p class="my-0">£{{ item.artwork.price | calc_subtotal:item.quantity }}</p>
-            </div>
-          </div>
-          <hr class="my-2">
-          {% endfor %}
-          <!--totals summary-->
-          <div class="d-flex justify-content-between fw-bold mt-2">
-            <p class="my-0">Order Total: </p>
-            <p class="mb-1">£{{ total | floatformat:2 }}</p>
-          </div>
-          <div class="d-flex justify-content-between fw-bold">
-            <p class="my-0">Delivery:</p>
-            <p class="mb-1">FREE</p>
-          </div>
-          <div class="d-flex justify-content-between fw-bold">
-            <p class="my-0">Grand Total:</p>
-            <p class="mb-1">£{{ grand_total | floatformat:2 }}</p>
+    <div class="d-lg-none col-12 mb-5 accordion accordion-flush" id="order-summary">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="header-summary">
+          <button class="rounded accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fas fa-shopping-bag pe-2" aria-hidden="true"></i>
+            <span class="pe-3 pt-1">Order summary:</span>
+            <span class="pt-1">£{{ total }}</span>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="header-summary"
+          data-bs-parent="#order-summary">
+          <div class="accordion-body px-0">
+            {% include 'checkout/includes/order_summary.html' %}
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="d-none d-lg-block col-lg-6 order-lg-last ps-lg-5 mb-5">
+      {% include 'checkout/includes/order_summary.html' %}
     </div>
 
     <!-- checkout form -->
@@ -78,8 +52,7 @@
           <!-- personal details -->
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Contact details</h2>
           {{ form.full_name | as_crispy_field }}
-          <input type="hidden" id="is_auth" {% if user.is_authenticated %}value="true" 
-          {% else %}value="false" {% endif %}>
+          <input type="hidden" id="is_auth" {% if user.is_authenticated %}value="true" {% else %}value="false" {% endif %}>
           {{ form.email | as_crispy_field }}
           {{ form.phone_number | as_crispy_field }}
         </div>

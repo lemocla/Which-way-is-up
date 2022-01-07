@@ -1,4 +1,26 @@
+.accordion-button {
+    background-color: var(--black) !important;
+    color: var(--white) !important;
+}
 
+.accordion-button:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+    filter: brightness(5) sepia(0) hue-rotate(87deg) saturate(5);
+}
+
+.accordion-button::after {
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    background-size: 1.75rem;
+    transition: transform .2s ease-in-out;
+    filter: brightness(10) sepia(0) hue-rotate(87deg) saturate(5);
+}
 
 /*---------------[ BRAINTREE ]-----------*/
 
