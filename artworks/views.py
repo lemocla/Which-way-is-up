@@ -216,5 +216,9 @@ def delete_artwork(request, artwork_id):
 
     artwork = get_object_or_404(Artwork, id=artwork_id)
     artwork.delete()
-    messages.success(request, 'Artwork successfully deleted!')
+    if artwork.lineartworks:
+        messages.info(request, 'This item has been set has inactive, as there are'
+                      ' orders attached to it')
+    else:
+        messages.success(request, 'Artwork successfully deleted!')
     return HttpResponseRedirect(redirect_url)

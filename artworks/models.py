@@ -97,7 +97,6 @@ class Artwork(models.Model):
         """
         self.rating = self.artwork.all().aggregate(Avg("ratings"))[
                               'ratings__avg']
-        print(self.rating)
         self.save()
 
     def __str__(self):
@@ -109,3 +108,10 @@ class Artwork(models.Model):
                 self.display_shop = False
 
         return super(Artwork, self).save(*args, **kwargs)
+    
+    def delete (self):
+        if self.lineartworks:
+            self.status = 'inactive'
+            self.save()
+        else:
+            self.delete()
