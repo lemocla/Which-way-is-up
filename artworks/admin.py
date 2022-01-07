@@ -33,21 +33,40 @@ class ArtworkAdmin(admin.ModelAdmin):
         """
         Render image in admin panel
         """
-        return mark_safe(
-            '<img src="/media/%s" width="50" height="50" alt="product image"/>' % model.image)
+        if model.image:
+            return mark_safe(
+                '<img src="/media/%s" width="50" height="50" alt="product image"/>' % model.image)
+    
     admin_image.allow_tags = True
 
     list_display = (
-        "admin_image",
-        "name",
-        "size",
-        "price",
-        "stock",
-        "portfolio",
-        "shop_category",
-        "status"
+        'name',
+        'size',
+        'price',
+        'stock',
+        'portfolio',
+        'shop_category',
+        'display_shop',
+        'status',
+        'admin_image',
     )
+    list_filter = ('status', 'portfolio', 'shop_category', 'stock')
     ordering = ('name',)
+    search_fields = ['name', 'status', 'shop_category__name', 'portfolio__name']
+
+    @admin.action(description='Mark as draft')
+    def make_draft(modeladmin, request, queryset):
+        queryset.update(status='draft')
+
+    @admin.action(description='Mark as active')
+    def make_active(modeladmin, request, queryset):
+        queryset.update(status='active')
+
+    @admin.action(description='Mark as inactive')
+    def make_inactive(modeladmin, request, queryset):
+        queryset.update(status='inactive')
+
+    actions = [make_draft, make_active, make_inactive]
 
 
 admin.site.register(ShopCategory, ShopCategoryAdmin)

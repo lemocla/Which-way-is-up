@@ -16,6 +16,6 @@ class ProfileAdmin(admin.ModelAdmin):
         "postcode",
         "newsletter"
     )
-
+    search_fields = ['full_name', 'user__email']
 
 admin.site.register(UserProfile, ProfileAdmin)

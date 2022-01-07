@@ -2,12 +2,16 @@ asgiref==3.4.1
 braintree==4.13.1
 crispy-bootstrap5==0.6
 Django==3.2.8
+django-admin-interface==0.18.4
 django-allauth==0.41.0
 django-braces==1.15.0
 django-case-insensitive-field==1.0.3
 django-cleanup==5.2.0
+django-colorfield==0.6.3
 django-countries==7.2.1
 django-crispy-forms==1.13.0
+django-flat-responsive==2.0
+django-flat-theme==1.1.4
 django-model-utils==4.2.0
 oauthlib==3.1.1
 Pillow==8.4.0

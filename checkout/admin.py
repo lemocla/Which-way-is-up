@@ -26,15 +26,25 @@ class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ('order_number', 'date', 'total',
                        'bag',)
 
+    @admin.action(description='Mark as dispatched')
+    def dispatched(modeladmin, request, queryset):
+        queryset.update(status='dispatched')
+
     list_display = (
-        "order_number",
-        "date",
-        "full_name",
-        "gift_option",
-        "total",
-        "status",
+        'order_number',
+        'date',
+        'full_name',
+        'gift_option',
+        'total',
+        'paid',
+        'status',
     )
+    actions = [dispatched]
     ordering = ('-date',)
+    list_filter = ('status', 'paid')
+    search_fields = ['full_name', 'date', 'order_number', 'lineitems__artwork__name']
+
+
 
 
 admin.site.register(Order, OrderAdmin)

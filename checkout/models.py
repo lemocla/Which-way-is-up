@@ -25,7 +25,7 @@ class Order(models.Model):
 
     STATUS = [
         (IN_PROGRESS, 'in progress'),
-        (DISPATCHED, 'disptached'),
+        (DISPATCHED, 'dispatched'),
     ]
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
