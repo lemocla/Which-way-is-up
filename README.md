@@ -2,7 +2,7 @@
 
 ## **INTRODUCTION** 
 
-[include screenshots of project on responsive devices]
+![mockup](documentation/design/multi-screen.png)
 
 Which Way Is Up -  an online gallery and ecommerce website for artist Peter Charalambides - was created for educational purposes only as part of the Code Institute’s full stack development course.
 

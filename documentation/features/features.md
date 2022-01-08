@@ -5,11 +5,13 @@
  - ## **Responsive website**
  
     The layout and menu of website will resize according to the device used for better visibility and user experience. The navigation is collapsible on mobile devices for better visibility and automatically update according to the user's position on the page for better user experience.
-    
+
+    ![responsive design](screenshots/responsive.png)
+
     - ### **User stories**
-      > - As a site user, I want a responsive website so that I can access it on different devices.
-   
- 
+      > - As a site user, I want a responsive website so that I can access it on different devices.   
+  
+
  - ## **Dynamic and collapsible navigation bar**
    
     The website features a navigation menu on top of the page to allow users to easily navigate throughout the website. The navigation is also collapsible on mobile devices for better visibility.
@@ -20,57 +22,80 @@
     
     The navigation bar will be partly populated dynamically when the shop owner adds additional types of portfolio (in the same way as commission and collection). Each dropdown menu in each portfolio categories will also dynamically populated so that the shop owner can keep the website up-to-date.
 
+    ![navbar mobile](screenshots/navbar-mobile.png)
+
+    ![navbar admin](screenshots/navbar-admin.png)
+
     - ### **User stories**
       > - As a site user, I want to easily navigate across the site so that I can find the information I need.
 
- 
+
  - ## **Homepage**
     
     The homepage features a hero image giving a broad overview of the artist's work, as well as a featured collection and a section where user will be able to download a colourable sheet. The homepage also features a selection of reviews for the website with a button redirecting to a review page.
 
     The featured collection is populated dynamically according the shop owner selection when managing his portfolios and also feature a link redirecting the portfolio page.
 
+    ![home](screenshots/home.png)
+
+    ![home-feature](screenshots/home-feature.png)
+
+    ![home-feature](screenshots/home-colour.png)
+
+    ![home-feature](screenshots/home-review.png)
+
     - ### **User stories** 
       > - As site user, I want to engage with the artist work so that I can be part of the artist community
       > - As a shopper, I want to read reviews so that I can have a better understanding of the quality of the artist work
 
- 
+
  - ## **Footer**
     
     The footer features useful links to policies as well as a button opening a contact page allowing the user to contact the website owner by completing a form. 
     
     The footer also features icons with links to social media accounts opening in a different tab as well as a form to sign up to a newsletter to allow users to join the artist's online community.
 
+    ![footer](screenshots/footer.png)
+
     - ### **User stories** 
       > - As site user, I want to engage with the artist work so that I can be part of the artist community
       > - As a site user, I want to contact the site owner so that I can make queries about his work / request for a commission
       > - As a site user, I want to follow the artist on social media so that I can keep up to date with his work
-   
+
+
  - ## **Contact page**
    
     The contact page features a form allowing the user to send a email to the shop owner. If the user is already signed his email address will be populated automatically.  
     
     Upon submitting the form, an email should be sent to the site owner and a notification informing the user that the message has been successfully sent should display a the top of the page.
 
+    ![contact page](screenshots/contact-page.png)
+
    - ### **User stories**   
      > - As a site user, I want to contact the site owner so that I can make queries about his work / request for a commission
 
-  
+
  - ## **About page**
    
    The about page features an image and a biography about the artist as well as past and upcoming exhibitions to allow users to learn about the artist background and story.
    
+   ![about biography](screenshots/about-bio.png)
+   ![about events](screenshots/about-events.png)
+
    - ### **User stories**
      > - As a site user, I want to read about the artist so that I can learn about artist background and exhibitions
 
   
- - ## **Collection page**
+ - ## **Portfolio pages**
    
-   The collection page features a short desciption as well as an image library of the artwork attached to this collection. When hovering on each image in the library, a set of three buttons will be displayed as follows:
+   The porftolio pages, including collection and commission, feature a short desciption as well as an image library of the artwork attached to this collection. When hovering on each image in the library, a set of three buttons will be displayed as follows:
     - A zoom icon to display the image full screen 
     - A heart icon to allow users to add the artwork to their wishlist  wishlist 
     - An information icon to redirect users to the artwork detail page
    
+   ![portfolio page](screenshots/portfolio.png)
+   ![portfolio zoom](screenshots/portfolio-zoom.png)
+
    - ### **User stories**
      > - As a site user, I want to view the artist work so that can understand the artist work
  
@@ -81,13 +106,19 @@
   
    If the artwork is available from the store, the users will be a able to select from available quantity and add the artwork to their shopping bag. Out of stock items will feature a label and invite the users to contact the shop owner. 
    
+   ![artwork-detail](screenshots/artwork-detail.png)
+
    Commission artworks will feature a button inviting the users to contact the shop owner should they want to commission the artist for a bespoke work. 
    
+   ![artwork-commission](screenshots/artwork-commission.png)
+
    Users are also able to add any artworks - wether available in the shop or not - to their wishlist for future reference. 
    
    The artwork detail page also feature breadcrumbs at the top of the page, indicating the current page's location within a navigational hierarchy, to allow users to return to the previous page or to navigate to higher level menu item.
 
    This page also includes an edit and delete button, only accessible to the shop owner, to easily manage the artwork catalogue.
+   
+   
 
     - ### **User stories** 
       > - As a site user, I want to see the details for an artwork so that I can get a better appreciation and decide if I would want to buy it.
@@ -110,6 +141,8 @@
    Out of stock items will feature an out of stock label and the add to cart button will be disabled.
    
    These pages also include an edit and delete button for each items, only accessible to the shop owner, to easily manage the artwork catalogue.
+
+   ![shop](screenshots/shop.png)
    
    - ### **User stories**
      > - As a shopper, I want to view all the artwork available so that I can quickly have an overview of what is on offer
@@ -128,7 +161,10 @@
    When adjusting / removing an item in the shopping bag the totals and subtotals will adjust accoringly and toast message will inform the user about their action and the content of the shopping bag. 
 
    The site owner has decided that he will not apply a delivery charges and the delivery charges will be displayed as "Free". The shopping bag a also features a button "Continue shopping" to allow users to go back to the shop to browse / purchase further items. 
-  
+   
+   ![shopping bag](screenshots/bag.png)
+   ![shopping bag](screenshots/bag-toast.png)
+
    - ### **User stories** 
      > - As a shopper, I want to review items in my shopping bag so that I can adjust quantities ordered.
 
@@ -145,6 +181,7 @@
    
    At any stage of the process the user will be able to go back to the shopping bag for further adjustement and when all the information are complete, the user will be able to place the order and paiement will be processed. A notification will display at the top of the page to inform the user that the order has been processed successfully / or of any errors happening during the checkout process. 
 
+   ![checkout](screenshots/checkout.png)
 
    - ### **User stories**
      > - As a shopper, I want to have a gift option so I can buy a print / piece of art for a special occasion for a friend
@@ -154,6 +191,8 @@
  - ## **Order confirmation**
    
    Once the user has placed an order successfully, they will be redirected to an order confirmation page that displays summary of the order, contact details and delivery information provided. The user will also be sent a confirmation email with details about their order.
+
+   ![order confirmation](screenshots/checkout-success.png)
    
    - ### **User stories**
      > - As a shopper, I want to receive confirmation of my order so that I can have a proof of purchase
@@ -167,6 +206,8 @@
    
    Once signed in, the shop owner will be able to add, edit and delete collection and artwork.
 
+   ![login page](screenshots/login.png)
+
    - ### **User stories**
      > - As a site user, I want to login and logout so that I can access my profile safely 
      > - As a site user, I want to reset my password if I forgot it so that I can access my account
@@ -177,6 +218,8 @@
    The sign up page features a form asking the user for his email address, username and password. Once submitted the users will be asked to confirm their email address to complete the registration process. The users will be also be able to navigate to the login page, if they already have an account.
    
    Upon successfully registration to the website, the users will be informed via a notification displayed a the top of the page.
+
+   ![register page](screenshots/register.png)
    
    - ### **User stories**
      > - As a site user, I want to register for an account so that I can view my orders and my favourite items.
@@ -186,6 +229,8 @@
    
    The profile page features the personal details, order details as well as reviews left by the users and is only accessible once the user has logged-in onto the website. The user will be able to update / delete his profile, review past orders and amend/delete reviews.
    
+   ![profile page](screenshots/profile.png)
+
    - ### **User stories**
      > - As a site user, I want to edit my profile so that I can update my personal information
      > - As a site user, I want to delete my profile so that my personal information are removed from the website
@@ -193,12 +238,19 @@
 
  - ## **My orders**
    
-   My order page features user's order history and is only accessible once the user has logged-in onto the website. The user will be able to review past orders and view order details by clicking on the order reference number.
+   My order page features user's order history and is only accessible once the user has logged-in onto the website. The user will be able to review past orders and view order details by clicking on the order reference number. From this page, users will be able to leave reviews for items they have ordered.
    
+   ![order-history](screenshots/order-history.png)
+
+   ![my order details](screenshots/my-order-details.png)
+
+   ![add reviews](screenshots/add-review.png)
 
  - ## **My reviews**
    
    My reviews page features reviews left by the user and is only accessible once the user has logged-in onto the website. The user will be able to update / delete their reviews.
+
+   ![my reviews page](screenshots/my-reviews.png)
    
    - ### **User stories**
      > - As a site user, I want to leave a review so that I can let others know about my shopping experience
@@ -207,6 +259,8 @@
  - ## **Review page**
    
    The review page features a list of all the reviews left by users on items they have purchased / commissioned to allow user to have a shared understanding of other user experience of the website and artist's work.
+
+   ![review pages](screenshots/reviews.png)
    
    - ### **User stories**
      > - As a shopper, I want to read reviews so that I can have a better understanding of the quality of the artist work
@@ -215,6 +269,8 @@
  - ## **Wishlist**
    
    The saved item page features all the artwork saved by the user and is only accessible once the user is signed in. The user will be able to remove items for their wishlist or add the artwork to their shopping bag. 
+
+   ![wishlist](screenshots/wishlist.png)
    
    - ### **User stories**
      > - As a site user, I want to save artwork as my favourites so that I can buy it later or buy it again
@@ -229,6 +285,8 @@
    - to display the collection on the homepage (any other collection will be removed from the homepage upon adding the collection)
    
    According the category selected, the portfolio will either be added to the dropdown menu under collection/commission or any other relevant categories if any others have been added. 
+
+   ![add portfolio](screenshots/add-portfolio.png)
   
    - ### **User stories**
      > - As the site owner, I want to add, edit and delete a collection so that I can keep my portfolio and work up-to-date
@@ -238,7 +296,25 @@
  - ## **Add an item page**
   
    The "Add an item page" is only available to the site owner once logged-in and features a form to add an artwork to shop and attach an artwork to a collection. The site owner will be able to add an image, a title, a description, as well as stock, size and pricing information. Additional features allow the site owner to select related items, whether to display the artwork in the shop or not and whether to display the artwork on the site or not. 
-  
+
+   ![add artwork](screenshots/add-artwork.png)
+
    - ### **User stories**
      > - As the site owner, I want to add, edit and delete individual artwork and items to that I can link them to collection and keep my shop up-to-date
      > - As a site owner I want to add related product so that I can encourage multi-buy.
+
+- ## **Policy pages**
+
+    The policy pages inform users about the different delivery, terms and conditions as well as privacy policy and an accessibility statement. 
+
+    ![sampe policy](screenshots/policy-page.png)
+
+- ## **Error pages**
+
+   Error pages inform users about the type of error that have occured such as:
+   - Page not found 
+   - Internal server error
+   - Access denied
+   These pages will redirect users to the homepage.
+
+   ![error page](screenshots/error-page.png)
