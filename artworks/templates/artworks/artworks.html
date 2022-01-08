@@ -46,12 +46,12 @@
         <!-- artwork -->
         {% if artworks.count > 0 %}
         {% for artwork in artworks %}
-        <div class="card pb-0 col-12 col-sm-6 col-md-4 col-xl-3" data-item="{{artwork.id}}">
+        <div class="card card-shop pb-0 col-12 col-sm-6 col-md-4 col-xl-3" data-item="{{artwork.id}}">
             {%if artwork.stock == 0 %}
-            <div class="out-of-stock-label px-3">out of stock</div>
+            <div class="out-of-stock-label px-3 mx-3">out of stock</div>
             {% endif %}
             {% if artwork.on_sale %}
-            <div class="sale-label text-uppercase">sale</div>
+            <div class="sale-label text-uppercase mx-3">sale</div>
             {% endif %}
             <a href="{% url 'artwork_details' artwork.id %}" class="shop-link border-danger card-img-top">
                 <img class="card-img-top" width="350" height="350" 
@@ -114,7 +114,7 @@
 
         <!-- separators -->
         {% if forloop.counter|divisibleby:1 %}
-        <div class="col-12 d-sm-none my-5">
+        <div class="col-12 d-sm-none my-3">
             <hr>
         </div>
         {% endif %}

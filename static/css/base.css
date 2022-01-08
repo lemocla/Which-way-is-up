@@ -116,13 +116,14 @@ a {
 
 /*-------------[ BUTTONS ]--------------------*/
 
+
 .round-btn {
-    width: 2.3rem;
-    height: 2.3rem;
-    font-size: 1rem;
-    border-radius: 2rem !important;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 2.5rem !important;
     border: none;
-    box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.20);
+    box-shadow: 1px 1px 15px 0px rgb(0 0 0 / 30%);
     text-align: center;
 }
 
@@ -222,6 +223,10 @@ form .btn-black:hover {
     margin: 0 0.5rem;
 }
 
+.img-toast {
+    width: auto;
+}
+
 /* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
 .arrow-up {
     width: 0;
@@ -252,7 +257,8 @@ form .btn-black:hover {
     color: var(--white);
     text-transform: uppercase;
     top: 50px;
-    left:0;
+    left: 0;
+    z-index: 2;
 }
 
 .sale-label {
@@ -268,6 +274,7 @@ form .btn-black:hover {
     padding-top: 0.9rem;
     right: 10px;
     top: 5px;
+    z-index: 2;
 }
 
 /*-------------[ NAVIGATION ]----------------*/
@@ -317,6 +324,11 @@ nav .list-inline-item i {
 }
 
 /*-----------[ ALL AUTH / FORMS]-------------*/
+
+select {
+    min-width: 75px;
+    min-height: 38px;
+}
 
 .form-group {
     margin-bottom: 1rem;
@@ -454,6 +466,16 @@ nav .list-inline-item i {
 /*-------------[ MEDIA QUERIES ]-------------*/
 
 @media only screen and (min-width: 576px) {
+
+    .round-btn {
+        width: 2.3rem;
+        height: 2.3rem;
+        font-size: 1rem;
+        border-radius: 2rem !important;
+        border: none;
+        box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.20);
+        text-align: center;
+    }
 
     .truncate {
         white-space: nowrap;

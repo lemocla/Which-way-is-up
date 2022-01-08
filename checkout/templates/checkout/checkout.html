@@ -135,8 +135,10 @@
             <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
             <input class="form-check-input" type="checkbox" id="id-save-info" name="save_info" checked>
             {% else %}
+            <p class="pt-4">
             <a class="form-link" href="{% url 'account_signup' %}">Create an account</a> or
             <a class="form-link" href="{% url 'account_login' %}">login</a> to save this information
+            </p>
             {% endif %}
           </div>
           <p class="small red-text my-0">
@@ -146,15 +148,15 @@
         </div>
 
         <!-- buttons -->
-        <div class="mt-5 mb-2">
-          <a href="{% url 'bag' %}" class="btn btn-white px-4 py-2 text-uppercase">
-            <i class="fas fa-chevron-left pe-3" aria-hidden="true"></i>Adjust Bag
+        <div class="mt-5 mb-2 text-center">
+          <a href="{% url 'bag' %}" class="btn btn-white px-2 px-sm-5 py-2 text-uppercase">
+            <i class="fas fa-chevron-left pe-1" aria-hidden="true"></i>Adjust Bag
           </a>
           <!-- hidden field - braintree -->
           <input type="hidden" name="payment_method_nonce">
           <!--https://stackoverflow.com/questions/43990154/braintree-jsv3-payment-method-nonce-value-bad-with-hostedfields?rq=1-->
-          <button id="checkout-submit" type="submit" class="btn btn-black px-4 py-2 text-uppercase">
-            Complete Order<i class="fas fa-lock ps-3" aria-hidden="true"></i>
+          <button id="checkout-submit" type="submit" class="btn btn-black px-3 px-sm-5 py-2 text-uppercase">
+            Complete Order<i class="fas fa-lock ps-2" aria-hidden="true"></i>
           </button>
         </div>
       </form>

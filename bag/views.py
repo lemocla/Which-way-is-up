@@ -13,7 +13,7 @@ def bag(request):
     View to return shopping bag page
     Remove out of stock and inactive items from bag
     """
-    if request.session['bag'] and len(request.session['bag']) > 0:
+    if request.session.get('bag'):
         bag = request.session['bag']
         for artwork_id in list(bag.keys()):
             try:

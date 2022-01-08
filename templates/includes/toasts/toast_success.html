@@ -21,7 +21,7 @@
             {% for item in bag_items %}
 
             <div class="col-3 my-1 pe-1 toast-img">
-                <img class="img-fluid shadow rounded"
+                <img class="img-fluid shadow rounded img-toast"
                     src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
                     alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}"
                     width="50" height="50">
