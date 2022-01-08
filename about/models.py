@@ -1,7 +1,7 @@
 """
 Models for about app
 """
-
+from datetime import datetime
 from django.db import models
 
 
@@ -22,3 +22,9 @@ class Event(models.Model):
 
     def __str__(self):
         return f'{self.date_start} - {self.place}'
+
+    def save(self, *args, **kwargs):
+        self.date_start = datetime.strftime(self.date_start, '%Y-%m-%d')
+        if self.date_end:
+            self.date_end = datetime.strftime(self.date_end, '%Y-%m-%d')
+        return super(Event, self).save(*args, **kwargs)

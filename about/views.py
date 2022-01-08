@@ -1,7 +1,7 @@
 """
 Views to render about page content
 """
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Event
@@ -27,7 +27,7 @@ def add_event(request):
     # Additional security to restrict access to shop owner
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, access restricted to shop owner')
-        return redirect(reverse('home'))
+        return redirect('home')
 
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -47,3 +47,56 @@ def add_event(request):
     }
 
     return render(request, "about/add_event.html", context)
+
+
+@login_required
+def edit_event(request, event_id):
+    """
+    Edit portfolio in the database
+    """
+    # Additional security to restrict access to shop owner
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, access restricted to shop owner')
+        return redirect('home')
+
+    event = get_object_or_404(Event, id=event_id)
+    # event.date_start = datetime.strftime(event.date_start, '%Y-%m-%d')
+    # event.save()
+    if request.method == 'POST':
+
+        form = EventForm(request.POST, instance=event)
+
+        if form.is_valid():
+            # Data from form
+            form.save()
+            messages.success(request, 'Event successfully updated!')
+            return redirect('about')
+        else:
+            messages.error(request, 'The event couldn\'t be updated. '
+                           'Please ensure the form is valid.')
+    else:
+        form = EventForm(instance=event)
+        messages.info(request, f'Editing {event.place}')
+
+    context = {
+        'form': form,
+        'event': event
+    }
+
+    return render(request, "about/edit_event.html", context)
+
+
+@login_required
+def delete_event(request, event_id):
+    """
+    Delete portfolio from the database
+    """
+    # Additional security to restrict access to shop owner
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, access restricted to shop owner')
+        return redirect('home')
+
+    event = get_object_or_404(Event, id=event_id)
+    event.delete()
+    messages.success(request, 'Event successfully deleted!')
+    return redirect('about')

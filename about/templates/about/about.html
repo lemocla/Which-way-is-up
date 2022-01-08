@@ -62,9 +62,10 @@
         <div class="ps-4">
             {% if user.is_superuser %}
             <div class="mb-4">
-            <a href="{% url 'add_event' %}" class="text-primary text-uppercase me-3">
-                <i class="far fa-calendar-plus me-1" aria-hidden="true"></i><span class="text-link">Add an event</span>
-            </a>
+                <a href="{% url 'add_event' %}" class="text-primary text-uppercase me-3">
+                    <i class="far fa-calendar-plus me-1" aria-hidden="true"></i><span class="text-link">Add an
+                        event</span>
+                </a>
             </div>
             {% endif %}
             {% if events.count > 0 %}
@@ -73,53 +74,46 @@
                 data-dates="{{ event.date_start|date:'M Y' }} {% if event.date_end %}- {{event.date_end|date:'M Y'}}{% endif %}">
                 <h3 class="fs-4">{{ event.place }}</h3>
                 <p>{{ event.description }}</p>
+                {% if request.user.is_superuser %}
+                <div class="mt-2">
+                    <a href="{% url 'edit_event' event.id %}" class="text-primary small text-uppercase me-3">
+                        <i class="far fa-edit me-1" aria-hidden="true"></i><span class="text-link">Edit event</span>
+                    </a>
+                    <button class="btn-bag text-danger small text-uppercase" data-bs-toggle="modal"
+                        data-bs-target="#deleteEvent-{{event.id}}">
+                        <i class="far fa-trash-alt me-1" aria-hidden="true"></i><span class="text-link">Delete
+                            event</span>
+                    </button>
+                </div>
+
+                <!-- Modal delete -->
+                <div class="modal fade" id="deleteEvent-{{event.id}}" tabindex="-1" aria-labelledby="deleteModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete your review <strong>{{ event.place }}</strong>?
+                            </div>
+                            <div class="modal-footer justify-content-start">
+                                <button type="button" class="btn btn-white px-3" data-bs-dismiss="modal">Close</button>
+                                <a class="btn btn-danger px-4"
+                                    href="{% url 'delete_event' event.id %}">Yes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endif %}
             </div>
             {% endfor %}
             {% else %}
-            <p>There are no events at the present.</p>
+             <p>There are no events at the present.</p>
             {% endif %}
-            <!--
-            <div class="timeline-item" data-dates="May 2021">
-                <h3 class="fs-4">Cultivate presents Still</h3>
-                <p>Part of an online group exhibition</p>
-            </div>
-            <div class="timeline-item" data-dates="May 2021">
-                <h3 class="fs-4">Timelapse Studio</h3>
-                <p>Part of an online group exhibition</p>
-            </div>
-            <div class="timeline-item" data-dates="May 2021">
-                <h3 class="fs-4">Cultivate presents Still</h3>
-                <p>Featured on Instagram</p>
-            </div>
-            <div class="timeline-item" data-dates="April 2021">
-                <h3 class="fs-4">Letters from Nowhere</h3>
-                <p>Part of an online group exhibition with the Riverside Artists Group</p>
-            </div>
-            <div class="timeline-item" data-dates="February 2021">
-                <h3 class="fs-4">Willesden Gallery, London</h3>
-                <p>Featured Artist on Instagram</p>
-            </div>
-            <div class="timeline-item" data-dates="August 2020 - September 2020">
-                <h3 class="fs-4">Excess: Exhibition 104, Amina Malik Gallery, London</h3>
-                <p>Part of a group exhibition exploring the ideas of excess</p>
-            </div>
-            <div class="timeline-item" data-dates="May 2020">
-                <h3 class="fs-4">no barking aRt</h3>
-                <p>Part of an online group exhibition</p>
-            </div>
-            <div class="timeline-item" data-dates="April 2020">
-                <h3 class="fs-4">Thread Palette London Magazine</h3>
-                <p>Featured online in promotion recording Lock Down experiences through art</p>
-            </div>
-            <div class="timeline-item" data-dates="April 2020">
-                <h3 class="fs-4">Willesden Gallery, London</h3>
-                <p>Takeover of Instagram Account for one week</p>
-            </div>
-            <div class="timeline-item" data-dates="March 2020">
-                <h3 class="fs-4">Desperate Times Call For Desperate Measures</h3>
-                <p>Part of an online group exhibition</p>
-            </div>
-            -->
         </div>
     </div>
 </div>

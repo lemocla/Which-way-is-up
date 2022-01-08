@@ -22,7 +22,7 @@ class EventForm(forms.ModelForm):
     # https://stackoverflow.com/questions/61076688/django-form-dateinput-with-widget-in-update-loosing-the-initial-value
     date_start = forms.DateField(
         widget=forms.DateInput(
-            format=['%d-%m-%Y'],
+            format=('%d-%m-%Y'),
             attrs={'placeholder': 'Enter date ex. 10/01/2021',
                    'type': 'date'}))
     date_end = forms.DateField(
