@@ -33,6 +33,7 @@ def add_reviews(request, artwork_id, orderline_id):
     """
 
     user_profile = get_object_or_404(UserProfile, user=request.user)
+
     artwork = get_object_or_404(Artwork, id=artwork_id)
     order_line = None
     order = None
@@ -50,14 +51,18 @@ def add_reviews(request, artwork_id, orderline_id):
                        ' item. You can edit your review')
         return redirect('order_history')
 
-    if order.user_profile != user_profile or artwork != order_line.artwork:
-        messages.error(request, 'You don\'t have the credentials to add a'
-                       ' review for this item')
-        return redirect('home')
-
     if orderline_id:
         order_line = get_object_or_404(OrderLineItem, id=orderline_id)
         order = Order.objects.get(id=order_line.order.id)
+
+        if order.user_profile != user_profile or artwork != order_line.artwork:
+            messages.error(request, 'You don\'t have the credentials to add a'
+                           ' review for this item')
+            return redirect('home')
+    else:
+        messages.error(request, 'You don\'t have the credentials to add a'
+                       ' review for this item')
+        return redirect('home')
 
     if request.method == 'POST':
 
@@ -104,7 +109,7 @@ def edit_reviews(request, review_id):
     redirect_url = request.POST.get('next', 'my_reviews')
 
     if user_profile.id != review.user_profile.id:
-        messages.error(request, 'You don\'t have the credentials to add a'
+        messages.error(request, 'You don\'t have the credentials to edit a'
                        ' review for this item')
         return redirect('home')
 
@@ -140,7 +145,7 @@ def delete_reviews(request, review_id):
 
     redirect_url = request.GET.get('next', 'my_reviews')
     if user_profile.id != review.user_profile.id:
-        messages.error(request, 'You don\'t have the credentials to add a'
+        messages.error(request, 'You don\'t have the credentials to delete a'
                        ' review for this item')
         return redirect('home')
 

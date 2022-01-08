@@ -37,7 +37,7 @@
         </div>
         {% endif %}
     </div>
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated and request.user == review.user_profile.user %}
     <div class="mt-3">
         <a href="{% url 'edit_reviews' review.id %}?next={{ request.path|urlencode }}"
             class="text-primary small text-uppercase me-3">
