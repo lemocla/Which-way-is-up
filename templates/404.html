@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}- page 404 {% endblock %}
+
+{% block content %}
+<div class="container pt-md-5 pt-4 pb-3">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="h1-page fs-1 text-center">OOPS - Page not found!</h2>
+            <div class="text-center">
+                <img class="img-fluid error-img-fit" src="{{MEDIA_URL}}man.png" alt="man illustration" width="300"
+                    height="450">
+            </div>
+            <p class="fs-3 fw-bold text-center pt-4 mb-1">You seem to have lost your way...Story of my life!</p>
+            <p class="fs-3 fw-bold text-center py-4">At least you have a way out...</p>
+            <div class="text-center">
+                <a class="btn bg-black text-white px-5 py-2 text-uppercase" href="#">Go back home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}- page 403 {% endblock %}
+
+{% block content %}
+<div class="container pt-md-5 pt-4 pb-3">
+    <div class="row">
+        <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+            <h1 class="h1-page text-center">403</h1>
+            <h2 class="h1-page fs-1 text-center">Access Denied</h2>
+            <div class="text-center">
+                <img class="img-fluid error-img" src="{{{MEDIA_URL}}dog.png" alt="dog illustration" width="400"
+                    height="400">
+            </div>
+            <p class="fs-2 fw-bold text-center py-4">"Woof" shall not pass!</p>
+            <div class="text-center">
+                <a class="btn bg-black text-white px-5 py-2 text-uppercase" href="#">Go back home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

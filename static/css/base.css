@@ -463,9 +463,27 @@ select {
     font-size: 1.75rem;
 }
 
+/*------------[ ERROR PAGES ]----------------*/
+
+.error-img {
+    height: 300px;
+    object-fit: cover;
+}
+
+.error-img-fit {
+
+    height: 340px;
+    object-fit: scale-down;
+}
+
 /*-------------[ MEDIA QUERIES ]-------------*/
 
 @media only screen and (min-width: 576px) {
+
+    .error-img-fit {
+        object-fit: cover;
+        height: 450px;
+    }
 
     .round-btn {
         width: 2.3rem;
