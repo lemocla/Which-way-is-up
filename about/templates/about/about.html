@@ -60,6 +60,25 @@
             <h2 class='trapez-bg ps-4 py-1 mb-4 mb-md-5'>Events</h2>
         </div>
         <div class="ps-4">
+            {% if user.is_superuser %}
+            <div class="mb-4">
+            <a href="{% url 'add_event' %}" class="text-primary text-uppercase me-3">
+                <i class="far fa-calendar-plus me-1" aria-hidden="true"></i><span class="text-link">Add an event</span>
+            </a>
+            </div>
+            {% endif %}
+            {% if events.count > 0 %}
+            {% for event in events.all %}
+            <div class="timeline-item"
+                data-dates="{{ event.date_start|date:'M Y' }} {% if event.date_end %}- {{event.date_end|date:'M Y'}}{% endif %}">
+                <h3 class="fs-4">{{ event.place }}</h3>
+                <p>{{ event.description }}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>There are no events at the present.</p>
+            {% endif %}
+            <!--
             <div class="timeline-item" data-dates="May 2021">
                 <h3 class="fs-4">Cultivate presents Still</h3>
                 <p>Part of an online group exhibition</p>
@@ -100,6 +119,7 @@
                 <h3 class="fs-4">Desperate Times Call For Desperate Measures</h3>
                 <p>Part of an online group exhibition</p>
             </div>
+            -->
         </div>
     </div>
 </div>

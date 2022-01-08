@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}- Add an event {% endblock %}
+
+{% block content %}
+<div class="container pt-md-5 pt-4 pb-3">
+    <div class="row pb-md-3 mb-4">
+        <h1 class="h1-page pb-5 mt-md-0">Add an event</h1>
+        <form id="add-event" action="{% url 'add_event' %}" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="mt-5">
+                <button class="btn px-5 py-2 text-uppercase btn-black" type="submit">Add event</button>
+                <button id="btn-back" type="button" onclick="history.back()"
+                    class="btn btn-white text-uppercase px-5 py-2">cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
