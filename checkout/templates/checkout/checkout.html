@@ -130,17 +130,17 @@
           </div>
 
           <!-- save details or login -->
+          {% if user.is_authenticated %}
           <div class="form-check mb-3">
-            {% if user.is_authenticated %}
             <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
             <input class="form-check-input" type="checkbox" id="id-save-info" name="save_info" checked>
+          </div>
             {% else %}
-            <p class="pt-4">
+            <p class="mb-3">
             <a class="form-link" href="{% url 'account_signup' %}">Create an account</a> or
             <a class="form-link" href="{% url 'account_login' %}">login</a> to save this information
             </p>
             {% endif %}
-          </div>
           <p class="small red-text my-0">
             <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
             Your card will be charged <strong>£{{ total|floatformat:2 }}</strong>

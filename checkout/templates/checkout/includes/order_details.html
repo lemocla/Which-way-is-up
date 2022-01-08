@@ -18,19 +18,27 @@
             <div class="">
               <p class="fw-bold">Deliver to: </p>
               <p class="mb-0 lh-sm">{{ order.delivery_street_address1 }}</p>
+              {% if order.delivery_street_address2 %}
               <p class="mb-0 lh-sm">{{ order.delivery_street_address2 }}</p>
+              {% endif %}
               <p class="mb-0 lh-sm">{{ order.delivery_town_or_city }}</p>
               <p class="mb-0 lh-sm">{{ order.delivery_postcode }}</p>
+              {% if order.delivery_county %}
               <p class="mb-0 lh-sm">{{ order.delivery_county }}</p>
+              {% endif %}
               <p class="mb-0 lh-sm">{{ order.delivery_country }}</p>
             </div>
             <div class="">
             <p class="fw-bold">Billing to: </p>
               <p class="mb-0 lh-sm">{{ order.billing_street_address1 }}</p>
+              {% if order.billing_street_address2 %}
               <p class="mb-0 lh-sm">{{ order.billing_street_address2 }}</p>
+              {% endif %}
               <p class="mb-0 lh-sm">{{ order.billing_town_or_city }}</p>
               <p class="mb-0 lh-sm">{{ order.billing_postcode }}</p>
+              {% if order.billing_county %}
               <p class="mb-0 lh-sm">{{ order.billing_county }}</p>
+              {% endif %}
               <p class="mb-0 lh-sm">{{ order.billing_country }}</p>
             </div>
           </div>

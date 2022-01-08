@@ -45,14 +45,15 @@
 }
 
 .card-rel-items>img {
-    max-height: 240px;
+    height: 150px;
     object-fit: contain;
+    object-position: bottom;
 }
 
 /*----------[ MEDIA QUERIES ]-----------*/
 
 @media only screen and (min-width: 576px) {
-    .shop-link>img {
+    .shop-link>img, .card-rel-items>img {
         height: 210px;
     }
 
@@ -62,7 +63,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .shop-link>img {
+    .shop-link>img, .card-rel-items>img {
         height: 200px;
     }
 
@@ -73,7 +74,7 @@
 }
 
 @media only screen and (min-width: 992px) {
-    .shop-link>img {
+    .shop-link>img, .card-rel-items>img {
         height: 240px;
     }
 }

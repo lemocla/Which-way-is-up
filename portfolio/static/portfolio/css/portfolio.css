@@ -8,7 +8,7 @@
 }
 
 .modal-gallery-cont {
-    width: 90%;
+    /*width: 90%;*/
     max-width: 1350px;
 }
 
@@ -25,7 +25,8 @@
 
 .modal-gallery img {
     width: auto;
-    height: 78vh !important;
+    height: 100%;
+    max-height: 78vh !important;
 }
 
 .overlay {

@@ -134,7 +134,7 @@
             </form>
             {% if artwork.shop_category|lower != 'prints' %}
             <div class="d-none d-lg-block m-0 p-0 ">
-                <hr class="my-5">
+                <hr class="my-4 my-lg-5">
                 <div class="offset-lg-6 ps-lg-5">
                     <p class="mb-2"><i class="fas fa-lg fa-truck pe-3" aria-hidden="true"></i>Free delivery</p>
                     <p class="mb-2"><i class="fas fa-lg fa-gift pe-3" aria-hidden="true"></i> Gift otpions</p>
@@ -159,7 +159,7 @@
     </div>
     {% if artwork.display_shop %}
     <div class="d-block {% if artwork.shop_category|lower != 'prints' %}d-lg-none{% endif %} m-0 p-0">
-        <hr class="my-5">
+        <hr class="my-4 my-lg-5">
         <div>
             <p class="mb-2"><i class="fas fa-lg fa-truck pe-3" aria-hidden="true"></i>Free delivery</p>
             <p class="mb-2"><i class="fas fa-lg fa-gift pe-3" aria-hidden="true"></i> Gift otpions</p>
@@ -168,11 +168,11 @@
     </div>
     {% endif %}
 
-    <hr class="my-5">
+    <hr class="my-4 my-lg-5">
 
     <!-- Related items -->
     <div class="row">
-        <h2 class="pb-5{% if artwork.shop_category|lower == 'prints' %}pb-3{% endif %}">You may also like</h2>
+        <h2 class="pb-4 pb-lg-5{% if artwork.shop_category|lower == 'prints' %}pb-3{% endif %}">You may also like</h2>
         {% if related_items.count > 0 %}
         <!-- carousel -->
         <div id="custom-carousel" class="row container-related m-0 px-0 py-2">
@@ -180,7 +180,7 @@
             {% if item.status == 'active' %}
             <div class="card card-items pb-0 col-6 col-sm-6 col-md-4 col-xl-3">
                 <!-- related items image -->
-                <a href="{% url 'artwork_details' item.id %}" class="shop-link">
+                <a href="{% url 'artwork_details' item.id %}" class="card-rel-items">
                     {% if item.stock == 0 %}
                     <div class="out-of-stock-label px-5 py-1">out of stock</div>
                     {% endif %}
@@ -236,13 +236,15 @@
         {% endif %}
     </div>
 
-    <hr class="my-5">
+    <hr class="my-4 my-lg-5">
 
     <!-- Reviews -->
     <div class="row">
         <h2 class="pb-4">Reviews</h2>
-        <div class="d-flex justify-content-between">
-            <p class="text-muted text-uppercase"> {{ reviews|length }} shop reviews - avg rating: {{ artwork.rating|floatformat:1 }}/5</p>
+        <div class="d-sm-flex justify-content-between">
+            <p class="text-muted text-uppercase"> {{ reviews|length }} shop reviews 
+            {% if reviews|length > 0 %}- avg rating: {{ artwork.rating|floatformat:1 }}/5{% endif %}
+            </p>
             <!-- reviews action links -->
             {% if request.user.is_authenticated %}
             <p class="mb-1">
