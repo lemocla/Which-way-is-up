@@ -318,3 +318,53 @@
    These pages will redirect users to the homepage.
 
    ![error page](screenshots/error-page.png)
+
+- ## **Notifications and messages**
+
+  - ### **Notifications**
+
+    The following toast notifications are used throughout the website to provide users with feedback on actions carried out as follows:
+
+    - Success messages:
+      - Signing up sucessfully
+      - Signin in and out
+      - Adding artwork to shoppping bag
+      - Updating quantities in shopping bag
+      - Successfully completing an order
+      - Sucessfully completing the contact form
+      - Succesfully adding, updating or deleting artworks, portoflio and profiles information
+      ![example success message](screenshots/success_message.png)
+
+    - Errors
+      - User trying to add/edit/delete a portfolio, an artwork or an event and is not a superuser
+      - User has not got permission to add a review on an item which was not purchased by them
+      - When user tries to add a review and has already submitted a review
+      - When forms are not valid when adding/updating/deleting a portfolio, artwork, event as well an order and a review
+      - When user tries to place an order and the shopping bag is empty
+      - When user tries to place an order with an address outside the UK
+      - Error when trying to add email to newsletter subscribe list
+      - When an item has become unavailable in the shopping bag
+      ![error message](screenshots/error-message.png)
+
+    - Information
+      - Adding or editing a portfolio, an artwork or an event
+      - Completing the checkout to remind users to use a UK address
+      - Trying to delete items with orders attached to them and items have been set as inactive instead.
+      ![info message](screenshots/info-message.png)
+
+    - Warnings
+      - User has already subscribed to newletter
+
+  - ### **Messages**
+
+    User will receive emails when:
+      - Signing up for an account to verify their email 
+      - Resetting their passwords 
+      - Placing an order with an order confirmation
+      - Items in their wishlist has been removed
+      - Contacting the shop owner using the contact form
+      - Signing up for the newsletter
+
+    In addition the shop owner will receive an email when:
+      - A user contacts the shop owner with the user's query, full name and email address
+      - Stock level reaches alert level with a reminder to replenish the stock
