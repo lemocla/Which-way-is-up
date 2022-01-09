@@ -1,7 +1,9 @@
 """
 Models to manage artwork and shop categories
 """
-
+from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.db import models, transaction
 from django.db.models import Avg
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -25,7 +27,7 @@ class ShopCategory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def save(self, *args, **kwargs):
         with transaction.atomic():
@@ -54,7 +56,7 @@ class Artwork(models.Model):
 
     name = CaseInsensitiveCharField(max_length=150, unique=True)
     image = models.ImageField(null=True, blank=True)
-    size = models.CharField(max_length=500)
+    size = models.CharField(max_length=500, verbose_name='size(cm)')
     materials = models.CharField(max_length=500)
     year = models.CharField(max_length=4)
     price = models.DecimalField(max_digits=6, decimal_places=2,
@@ -100,16 +102,32 @@ class Artwork(models.Model):
         self.save()
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def save(self, *args, **kwargs):
         if self.portfolio:
             if str(self.portfolio.category) == 'commission':
                 self.display_shop = False
 
+            if str(self.status) != 'active':
+                with transaction.atomic():
+                    users_wishlist = self.wishlist_artwork.all()
+                    for profile in users_wishlist:
+                        # Update user profile
+                        profile.wishlist_items.remove(self)
+                        profile.save()
+                        # Notify user
+                        subject = ("Notification: wishlist item no longer "
+                                   "available")
+                        body = render_to_string(
+                            'artworks/email/wishlist_notification.txt',
+                            {'artwork': self.name.capitalize()})
+                        sender = settings.EMAIL_HOST_USER
+                        recipients = [profile.user.email]
+                        send_mail(subject, body, sender, recipients)
         return super(Artwork, self).save(*args, **kwargs)
-    
-    def delete (self):
+
+    def delete(self, *args, **kwargs):
         if self.lineartworks:
             self.status = 'inactive'
             self.save()

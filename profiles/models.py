@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     postcode = models.CharField(max_length=20, null=True, blank=True)
     country = CountryField(blank_label='Country', null=True, blank=True)
     newsletter = models.BooleanField(default=False)
-    wishlist_items = models.ManyToManyField(Artwork)
+    wishlist_items = models.ManyToManyField(Artwork, related_name='wishlist_artwork')
 
     def __str__(self):
         return self.user.username

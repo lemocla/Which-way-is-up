@@ -78,7 +78,7 @@
                                     class="btn btn-white fs-md-5 px-4 px-md-3 px-lg-5 py-2 text-uppercase">Remove item</button>
                                 {% csrf_token %}
                                 {% if artwork.display_shop %}
-                                {% if artwork.stock > 0 %}
+                                {% if artwork.stock > 0 and artwork.status == 'active' %}
                                 <button type="submit" id="add-to-bag"
                                     class="btn btn-black fs-md-5 px-4 px-md-3 px-lg-5 py-2 text-uppercase">Add to bag</button>
                                 {% endif %}

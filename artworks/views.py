@@ -1,13 +1,10 @@
 """
 Views to manage artworks CRUD operations
 """
-from django.conf import settings
-
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponseRedirect
-from django.template.loader import render_to_string
+
 from django.contrib import messages
-from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
 
@@ -179,22 +176,6 @@ def edit_artwork(request, artwork_id):
         if form.is_valid():
             # Data from form
             form.save()
-            # If status is not active, remove from wishlist
-            if artwork.status != 'active':
-                users_wishlist = UserProfile.objects.filter(
-                                 wishlist_items=artwork_id)
-                for profile in users_wishlist:
-                    # Update user profile
-                    profile.wishlist_items.remove(artwork_id)
-                    profile.save()
-                    # Notify user
-                    subject = "Notification - wishlist item no longer available"
-                    body = render_to_string(
-                    'artworks/email/wishlist_notification.txt',
-                    {'artwork': artwork.name.capitalize() })
-                    sender = settings.EMAIL_HOST_USER
-                    recipients = [profile.user.email]
-                    send_mail(subject, body, sender, recipients)
             # Message success
             messages.success(request, 'Artwork successfully updated!')
             return redirect(reverse('artwork_details', args=[artwork.id]))
@@ -232,8 +213,8 @@ def delete_artwork(request, artwork_id):
     artwork = get_object_or_404(Artwork, id=artwork_id)
     artwork.delete()
     if artwork.lineartworks:
-        messages.info(request, 'This item has been set has inactive, as there are'
-                      ' orders attached to it')
+        messages.info(request, 'This item has been set has inactive, as there '
+                      'are orders attached to it')
     else:
         messages.success(request, 'Artwork successfully deleted!')
     return HttpResponseRedirect(redirect_url)
