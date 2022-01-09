@@ -60,8 +60,8 @@ def edit_event(request, event_id):
         return redirect('home')
 
     event = get_object_or_404(Event, id=event_id)
-    # event.date_start = datetime.strftime(event.date_start, '%Y-%m-%d')
-    # event.save()
+    #event.date_start = datetime.strftime(event.date_start, '%Y-%m-%d')
+    #event.save()
     if request.method == 'POST':
 
         form = EventForm(request.POST, instance=event)
