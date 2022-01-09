@@ -22,6 +22,9 @@ View live project here [link to deployed link]
   - [Features](#features)
     - [Existing features](#existing-features)
     - [Features left to implement](#features-left-to-implement)
+  - [CRUD operations and defensive design](#crud-operations-and-defensive-design)
+    -[CRUD operations](#crud-operations)
+    -[defensive design](#defensive-design)
   - [Technologies Used](#technologies-used)
     - [Languages](#languages)
     - [Databases platform and cloud storage](#database-platform-and-cloud-storage)
@@ -144,8 +147,7 @@ View live project here [link to deployed link]
         - To receive feedback for important actions: create - update - delete
         - To handle errors: page 404 not found, page 500 Internal Server Error page and page 403/403 
 
-	 - #### **Non functional requirements**
-	
+	   - #### **Non functional requirements**
        - Display artwork images and information in engaging way
        - Intuitive navigation and structure
 
@@ -157,6 +159,13 @@ View live project here [link to deployed link]
        - Forms where user input is required
        - Engaging text and headings throughout to introduce main sections of the website
        - Icons for interactive and visual elements 
+
+     - #### **Business rules**
+       - Artwork can be added to a portfolio and not be available for purchase
+       - Artwork can be available for purchase and not feature in a portfolio
+       - Artwork and portoflio may be set as active, inactive or draft
+       - Orders will be set as in progress and the shop owner to action orders as dispatched
+       - Delivery are free and items can only be shipped to a UK address 
 
      - #### **Constraints**
 	
@@ -264,6 +273,71 @@ View live project here [link to deployed link]
   	- Improved user interface for the super admin to manage store, orders and content of the website
   	- Ability to share artwork on social media
   	- Add a blog where artist to add/edit/delete post about his creative process and other work.
+
+## **CRUD operations and defensive design**
+
+  - ### **CRUD operations**
+    Operations | all user | auth. user | super user |
+    --- | --- | --- | --- 
+    View homepage | Yes | Yes | Yes |
+    View about page | Yes | Yes | Yes |
+    Add event | No | No | Yes |
+    Edit event | No | No | Yes |
+    Delete event | No | No | Yes |
+    View portfolio pages | Yes | Yes | Yes |
+    Add/edit/delete categories | No | No | Yes |
+    Add/edit/delete a portfolio | No | No | Yes |
+    View artworks (shop) | Yes | Yes | Yes |
+    View artwork details | Yes | Yes | Yes |
+    Add/edit/delete shop categories | No | No | Yes |
+    Add/edit/delete artwork | No | No | Yes |
+    View add to bag | Yes | Yes | Yes |
+    Add item to bag | Yes | Yes | Yes |
+    Update item to bag | Yes | Yes | Yes |
+    Remove item to bag | Yes | Yes | Yes |
+    Checkout page | Yes | Yes | Yes |
+    Login | No | Yes | Yes |
+    Register | Yes | No | No |
+    View profile | Yes | Yes | Yes |
+    Edit profile | No | Yes | Yes |
+    Delete profile | No | Yes | Yes | 
+    View wishlist | No | Yes | Yes | 
+    Add to wishlist | No | Yes | Yes |
+    Remove from wishlist | No | Yes | Yes |
+    View order history | No | Yes | Yes |
+    View order details | No | Yes | Yes |
+    View my reviews | No | Yes | Yes |
+    View all reviews | Yes | Yes | Yes |
+    Add a review | No | Yes | Yes |
+    Edit a review | No | Yes | Yes |
+    Delete a review | No | Yes | Yes |
+
+  - ### **defensive design**
+    - #### **Delete operations**
+      Users first need to confirm that they are sure they want to delete the specifified item (artwork, portfolio, reviews and event)
+    - #### **Adding quantity of specified item to shopping bag**
+      - The options for quantity to be added to shopping bag are limited to stock availability 
+      - Users cannot add an item out of stock to their shopping cart and the button 'add to cart' to be removed from page
+      - Users cannot add an item who status is not active to their shopping bag
+    - #### **Artwork and portoflio status**
+      - If artwork is set as inactive / draft:
+        - Artwork will not be displayed in portfolio pages
+        - Artwork will not be displayed in shop pages
+        - Artwork detail page will not be accessible to users except the super admin
+        - Artwork cannot be added to shopping bag and wishlist
+        - Artwork will be removed from any wishlist they have been added to & users will be notified by email
+        - Artwork will be removed from shopping bag and users will be notified when they next access their shopping bag or checkout page.
+      - If portfolio is set as inactive / draft:
+        - Portfolio will not be displayed in the dynamically generated nav bar
+        - Portfolio page will not be accessible to users except for the super admin
+    - #### **Add/edit/delete artworks**
+      - Conditions in place to ensure that on superuser can add/edit/delte artworks
+      - If an artwork has been purchased, it cannot be deleted and status will be set as inactive instead
+    - #### **Add/edit/delete reviews**
+      - Users can only add reviews for items that they have purchased and reviews will also be related to the order line in checkout orders
+      - Users can also only add reviews for items still active, but can edit and delete reviews wehter the items is active or not
+    - #### **Checkout page**
+      - Users can only have a delivery address set in the UK and if the country selected is anything other than UK an error message will display.
 
 ## **TECHNOLOGIES USED**
 
