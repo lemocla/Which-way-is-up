@@ -89,6 +89,8 @@
           </div>
           {{ form.delivery_county | as_crispy_field }}
           {{ form.delivery_country | as_crispy_field }}
+          <p id='country-error' class="red-text hide">Please note that we only delivery to UK addresses. 
+             Please provide a UK address or contact us to see if we can help.</p>
         </div>
         <!-- paiement-->
         <div id="billing-container" class="mb-5">

@@ -33,6 +33,7 @@ def bag(request):
                 bag.pop(artwork_id)
                 request.session['bag'] = bag
                 messages.error(request, 'This artwork is no longer available')
+        messages.info(request, 'Please note that we only deliver in the UK')
     return render(request, 'bag/bag.html')
 
 

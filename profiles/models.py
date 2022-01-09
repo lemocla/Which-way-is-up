@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     town_or_city = models.CharField(max_length=40, null=True, blank=True)
     county = models.CharField(max_length=80, null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
-    country = CountryField(blank_label='Country', null=True, blank=True)
+    country = CountryField(blank_label='Country', null=True, blank=True, default='GB')
     newsletter = models.BooleanField(default=False)
     wishlist_items = models.ManyToManyField(Artwork, related_name='wishlist_artwork')
 

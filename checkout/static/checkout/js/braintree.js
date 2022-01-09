@@ -35,7 +35,7 @@ braintree.client.create({
             },
             cvv: {
                 container: '#cvv',
-                placeholder: 'cvv ex. 123'
+                placeholder: 'cvv ex. 123',
             },
             expirationDate: {
                 container: '#expiration-date',
@@ -64,4 +64,5 @@ braintree.client.create({
             });
         }, false);
     });
+
 });

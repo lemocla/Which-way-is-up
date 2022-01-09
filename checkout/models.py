@@ -47,7 +47,7 @@ class Order(models.Model):
     delivery_county = models.CharField(max_length=80, null=True, blank=True)
     delivery_country = CountryField(blank_label='Country *', null=False,
                                     blank=False)
-    delivery_postcode = models.CharField(max_length=20, null=True, blank=True)
+    delivery_postcode = models.CharField(max_length=20, null=True, blank=True, default='GB')
     # billing address
     billing_same_as_delivery = models.BooleanField(default=True)
     billing_street_address1 = models.CharField(max_length=80, null=False,
@@ -58,7 +58,7 @@ class Order(models.Model):
                                             blank=False)
     billing_county = models.CharField(max_length=80, null=True, blank=True)
     billing_country = CountryField(blank_label='Country *', null=False,
-                                   blank=False)
+                                   blank=False, default='GB')
     billing_postcode = models.CharField(max_length=20, null=True, blank=True)
     # gift option
     gift_option = models.BooleanField(default=False)

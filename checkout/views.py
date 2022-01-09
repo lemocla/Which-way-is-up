@@ -25,6 +25,10 @@ def checkout(request):
     Views to display checkout page
     """
     if request.method == 'POST':
+        if request.POST['delivery_country'] != 'GB':
+            messages.error(request, 'Sorry, we couldn\'t process your order.'
+                           ' Please provide a UK address')
+            return redirect(reverse('checkout'))
 
         bag = request.session.get('bag', {})
         current_bag = bag_content(request)
@@ -245,7 +249,8 @@ def checkout(request):
                 form = OrderForm()
         else:
             form = OrderForm()
-
+        messages.info(request, 'Please note that we only deliver to the UK'
+                      ' only')
     context = {
         "form": form,
         'client_token': client_token,
