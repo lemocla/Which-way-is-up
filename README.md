@@ -147,9 +147,9 @@ View live project here [link to deployed link]
         - To receive feedback for important actions: create - update - delete
         - To handle errors: page 404 not found, page 500 Internal Server Error page and page 403/403 
 
-	   - #### **Non functional requirements**
-       - Display artwork images and information in engaging way
-       - Intuitive navigation and structure
+	  - #### **Non functional requirements**
+         - Display artwork images and information in engaging way
+         - Intuitive navigation and structure
 
      - #### **Content requirements**
        - Artist biography and key events/exhibitions
@@ -164,6 +164,7 @@ View live project here [link to deployed link]
        - Artwork can be added to a portfolio and not be available for purchase
        - Artwork can be available for purchase and not feature in a portfolio
        - Artwork and portoflio may be set as active, inactive or draft
+       - Artwork cannot be deleted if it features in an order
        - Orders will be set as in progress and the shop owner to action orders as dispatched
        - Delivery are free and items can only be shipped to a UK address 
 
@@ -193,9 +194,65 @@ View live project here [link to deployed link]
 
      - #### **Database structure**
 
-        The diagram below illustrates the database structure used in this project, first managed using SQLite during the development process, then Postgres in production with Heroku. A pdf version can be seen [here](documentation/structure/db_structure.pdf).
+        The diagram below illustrates the database structure used in this project, first managed using SQLite during the development process, then Postgres in production with Heroku. A pdf version can be seen [here](documentation/structure/db_revised_structure.pdf).
 
-        ![Attach db structure](documentation/structure/db_structure.png)
+        ![Attach db structure](documentation/structure/db_revised_structure.png)
+
+        The schema has been revised and the intial database structure can be found [here](documentation/structure/db_structure.pdf)
+
+        - **User**
+          - Stores a users registration information provided upon signing up
+          - Information from the User Model is used to create the UserProfile upon signing up
+
+        - **UserProfile model**
+          - Stores detail information about user such as full name, phone number, address that can be retrieved at checkout or when contacting the shop owner
+          - Stores wishlist items using many-to-many relationship with artwork model
+          - This model is related to orders and reviews to easily retrieve users order details and reviews
+
+        - **PortfolioCategory model**
+          - Stores category name for portfolio
+          - Is used to generate dynamic nav bar menu ang group portfolios together
+
+        - **Portoflio model**
+          - Stores detailed information about a portfolio to be displayed in portfolio pages such as name, description, materials, image and status
+          - Status information is used to decide whether the portfolio is displayed or not
+          - Related with artwork model to display image library 
+        
+        - **ShopCategory model**
+          - Stores category and category back end name
+          - Used to generate dynamic shop's dropdown menu and shop pages
+          - Used to retrieve list of artwork to be displayed on relevant shop pages
+
+        - **Artwork model**
+          - Stores detailed information about an artwork to be displayed in artwork detail page, such as name, image, size, price ...
+          - Features stock information with stock adjustment upon successful checkout. Stock information is also used to display dynamic quantity options and whether the artwork can be added to bag or not. 
+          - Features an optional stock alert used to inform the shop owner if stock reach a critical level.
+          - Status is used to decide wether artwork can be displayed, added to wishlist and bag as well as whether reviews can be added for that artwork.
+          - Status is also used to override delete method if an artwork features in any order_lines
+          - Feature a boolean and decimal field for displaying sale price and overriding artwork's default price
+          - Feature a many-to-many relationship to self to select related products
+          - Rating field auto-populate and average of all reviews for that artwork
+          - Related to Portfolio and ShopCategoy model to easily retrieve information
+
+        - **Order model**
+          - Stores all the information related to a successful order made by a user, including order number, delivery and billing details
+          - Stores if there's a gift option as well as gift recipient and gift message
+          - Stores if paiement was successfully made as well as Braintree paiement id 
+      
+        - **Order_line model**
+          - Stores details that have been added to the user’s bag, such as artwork name, price and quantity
+          - Takes information from the artwork model to artwork detail to the user’s order.
+          - Information from the Order_line is sent to the Order model to update the order.
+
+        - **Review model**
+          - Stores review details information about an artwork 
+          - Information from the Review model is sent to the Artwork model using a signal to update average rating
+          - Related to artwork and order_line model to verify wether the user is leaving a review for an item that has been purchased
+          - Related to UserProfile to easily retrieved information to be displayed in my reviews
+
+        - **Event model**
+          - Stores detailed information about an event (can be an exhibition, event...) such as start date, end date, place and description.
+          - Used to be display in event section in about page
 
  - ### **Skeleton**
     
@@ -226,8 +283,12 @@ View live project here [link to deployed link]
          - [Policy page](documentation/wireframes/policy_pages.png)
 
     - #### **Difference to design**
-
-    - #### **Limitations** 
+      - Sections in the profiles pages feature on their own dedicated pages
+      - Collection details (portfolio) feature a panel of the left with the portfolio details and a panel on the right the image library
+      - Work page wasn't implemented as not needed
+      - Items in shop page features additional buttons
+      - Saved items has been renamed wishlist
+      - Line items in shopping bag layout has been adjusted for better user experience.
 
  - ### **Surface / Design** 
 
