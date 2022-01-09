@@ -36,7 +36,7 @@ class ArtworkAdmin(admin.ModelAdmin):
         if model.image:
             return mark_safe(
                 '<img src="/media/%s" width="50" height="50" alt="product image"/>' % model.image)
-    
+
     admin_image.allow_tags = True
 
     list_display = (
@@ -54,17 +54,25 @@ class ArtworkAdmin(admin.ModelAdmin):
     ordering = ('name',)
     search_fields = ['name', 'status', 'shop_category__name', 'portfolio__name']
 
+    actions = ['delete_selected']
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            obj.delete()
+
     @admin.action(description='Mark as draft')
-    def make_draft(modeladmin, request, queryset):
+    def make_draft(self, request, queryset):
         queryset.update(status='draft')
 
     @admin.action(description='Mark as active')
-    def make_active(modeladmin, request, queryset):
+    def make_active(self, request, queryset):
         queryset.update(status='active')
 
     @admin.action(description='Mark as inactive')
-    def make_inactive(modeladmin, request, queryset):
+    def make_inactive(self, request, queryset):
         queryset.update(status='inactive')
+        for obj in queryset:
+            obj.save()
 
     actions = [make_draft, make_active, make_inactive]
 
