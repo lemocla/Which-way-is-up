@@ -1,4 +1,4 @@
-/*----------[ ABOUT ]------------*/
+/*------------[ ABOUT ]--------------*/
 
 .about-portrait-cont {
     text-align: center;
@@ -14,9 +14,9 @@
     position: relative;
 }
 
-/*-----------[ EVENTS ]----------*/
+/*------------[ EVENTS ]-------------*/
 
-/* adapted from https://github.com/Code-Institute-Solutions/resume-miniproject-bootstrap4/tree/master/16-adding-work-history*/
+/*adapted from https://github.com/Code-Institute-Solutions/resume-miniproject-bootstrap4/tree/master/16-adding-work-history*/
 
 .timeline-item {
     padding: 4em 2em 0em 3em;

@@ -17,11 +17,11 @@ $(document).ready(function () {
     }
 
     if ($('#is_gift').val() == 'on') {
-        $('#id_gift_option').attr('checked', true)
+        $('#id_gift_option').attr('checked', true);
         $('#gift-option-container').removeClass("hide");
         if ($('#gift-message').val() != "None") {
             let msg = $('#gift-message').val();
-            $('#id_gift_message').val(msg)
+            $('#id_gift_message').val(msg);
         }
     }
 
@@ -44,11 +44,10 @@ $(document).ready(function () {
     // display error message if country selected is not UK
     $('#id_delivery_country').change(function () {
         countryCheck();
-    })
+    });
 
     // toggle billing container if delivery details are different than billing details 
     $('#id_billing_same_as_delivery').change(function () {
-        console.log('billing option is change')
         if ($('#id_billing_same_as_delivery').is(":checked")) {
             $('#billing-details-container').addClass('hide');
             $('#id_billing_street_address1').val($('#id_delivery_street_address1').val()).prop('required', false);
@@ -66,7 +65,7 @@ $(document).ready(function () {
             $('#id_billing_county').val("");
             $('#id_billing_country').val("").prop('required', true);
         }
-    })
+    });
 
     // display gift message container
     $('#gift-checkbox').change(function () {
@@ -75,7 +74,7 @@ $(document).ready(function () {
         } else {
             $('#form-message-container').addClass('hide');
         }
-    })
+    });
 
     // add gift option
     $('#id_gift_option').change(function () {
@@ -93,5 +92,5 @@ $(document).ready(function () {
             $('#id_gift_recipient').val("");
             $('#id_gift_message').val("");
         }
-    })
-})
+    });
+});

@@ -11,12 +11,12 @@
          let data = {
              'csrfmiddlewaretoken': csrfToken
          };
-
+         // post to add to wishlist
          $.post(url, data)
              .done(function () {
                  location.reload();
              });
-     })
+     });
 
      // Remove artwork to wishlist 
      $('button[data-action=remove-from-wishlist]').click(function (e) {
@@ -26,29 +26,29 @@
          let data = {
              'csrfmiddlewaretoken': csrfToken
          };
-
+         // post to remove from wishlist
          $.post(url, data)
              .done(function () {
                  location.reload();
              });
-     })
+     });
 
      //togle password
 
      // login page
      $('#div_id_password').append(
          '<i class="password-visible far fa-eye" data-target="id_password" aria-hidden="true"></i><span class="sr-only">toggle password</span>'
-     )
+     );
      // register page
      $('#div_id_password1').append(
          '<i class="password-visible far fa-eye" data-target="id_password1" aria-hidden="true"></i><span class="sr-only">toggle password</span>'
-     )
+     );
      $('#div_id_password2').append(
          '<i class="password-visible far fa-eye" data-target="id_password2" aria-hidden="true"></i><span class="sr-only">toggle password</span>'
-     )
-
+     );
+     // toggle function
      $(".password-visible").click(function () {
-         id = $(this).attr("data-target");
+         let id = $(this).attr("data-target");
          if ($(`#${id}`).attr("type") == "password") {
              $(`#${id}`).attr("type", "text");
              $(this).removeClass("fa-eye").addClass("fa-eye-slash");
@@ -57,5 +57,4 @@
              $(this).removeClass("fa-eye-slash").addClass("fa-eye");
          }
      });
-     //end file
- })
+ });

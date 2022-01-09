@@ -9,7 +9,6 @@ braintree.client.create({
     authorization: client_token
 }, function (clientErr, clientInstance) {
     if (clientErr) {
-        console.error(clientErr);
         return;
     }
 
@@ -44,18 +43,14 @@ braintree.client.create({
         }
     }, function (hostedFieldsErr, hostedFieldsInstance) {
         if (hostedFieldsErr) {
-            console.error(hostedFieldsErr);
             return;
         }
-
+        // Form submission
         submit.removeAttribute('disabled');
-
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-
             hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
                 if (tokenizeErr) {
-                    console.error(tokenizeErr);
                     return;
                 }
                 // Paiement submission

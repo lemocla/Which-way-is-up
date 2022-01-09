@@ -1,20 +1,19 @@
 //bespoke responsive carousel for related items
 
-let screen = $(window).width();
+let screenSize = $(window).width();
 
 // Adjust number of cards in the carousel
-let nb = 2
-if (screen >= 768) {
+let nb = 2;
+if (screenSize >= 768) {
     nb = 3;
 }
-if (screen >= 1200) {
+if (screenSize >= 1200) {
     nb = 4;
 }
 
 // Variables 
 let index_display = 0;
-let endpoint;
-let list_items = $('.card-items')
+let list_items = $('.card-items');
 
 // disable previous on start  
 $('#previous').prop('disabled', true);
@@ -28,25 +27,25 @@ if (list_items.length <= nb) {
 // reset carousel on screen change
 $(window).on('resize', function () {
     // get screen width
-    screen = $(window).width();
+    screenSize = $(window).width();
     let new_nb;
     // new number of card in container
-    if (screen < 768) {
+    if (screenSize < 768) {
         new_nb = 2;
     }
-    if (screen >= 768 && screen < 1200) {
+    if (screenSize >= 768 && screen < 1200) {
         new_nb = 3;
     }
-    if (screen >= 1200) {
+    if (screenSize >= 1200) {
         new_nb = 4;
     }
-    nb = new_nb
+    nb = new_nb;
     // reset carousel display
     $.each(list_items, function (index, element) {
         if (index >= 0) {
             $(this).removeAttr("style");
         }
-    })
+    });
     // reset button display
     index_display = 0;
     $('#next').prop('disabled', false);
@@ -58,11 +57,10 @@ $(window).on('resize', function () {
         $('#previous').show();
         $('#next').show();
     }
-})
+});
 
 // next button actions
 $('#next').click(function () {
-    console.log(nb)
     // enable previous button
     $('#previous').prop('disabled', false);
     $.each(list_items, function (index, element) {
@@ -87,7 +85,7 @@ $('#next').click(function () {
 // previous button actions
 $('#previous').click(function () {
     $.each(list_items, function (index, element) {
-        // endpoint
+        // calculate endpoint
         let endpoint = index_display - nb;
         if (endpoint < 0) {
             endpoint = 0;

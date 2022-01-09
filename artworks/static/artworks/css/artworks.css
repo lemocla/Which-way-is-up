@@ -53,7 +53,9 @@
 /*----------[ MEDIA QUERIES ]-----------*/
 
 @media only screen and (min-width: 576px) {
-    .shop-link>img, .card-rel-items>img {
+
+    .shop-link>img,
+    .card-rel-items>img {
         height: 210px;
     }
 
@@ -63,18 +65,21 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .shop-link>img, .card-rel-items>img {
+
+    .shop-link>img,
+    .card-rel-items>img {
         height: 200px;
     }
 
     .card-shop {
         margin: initial;
     }
-
 }
 
 @media only screen and (min-width: 992px) {
-    .shop-link>img, .card-rel-items>img {
+
+    .shop-link>img,
+    .card-rel-items>img {
         height: 240px;
     }
 }
