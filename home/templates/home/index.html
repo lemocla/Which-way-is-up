@@ -44,8 +44,10 @@
             <!-- portfolio text -->
             {% if portfolio %}
             <h3 class="pb-4">{{ portfolio.name }}</h3>
-            <p>{{ portfolio.description|linebreaks }}</p>
-            <p>{{ portfolio.materials|linebreaks }}</p>
+            <div class="paragraph">
+                {{ portfolio.description|linebreaks }}
+                {{ portfolio.materials|linebreaks }}
+            </div>
 
             <div class="mt-3 py-3">
                 <a href="{% url 'portfolio_detail' portfolio.id %}" class="btn btn-black px-5 py-2 text-uppercase">View

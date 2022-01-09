@@ -11,8 +11,11 @@ def index(request):
     """
     View to return the index page
     """
-    portfolio = Portfolio.objects.filter(
-                homepage=True)[0]
+    portfolio_initial = Portfolio.objects.filter(homepage=True)
+    if len(portfolio_initial) > 0:
+        portfolio = portfolio_initial[0]
+    else:
+        portfolio = None
     # https://stackoverflow.com/questions/20555673/django-query-get-last-n-records
     reviews = Review.objects.all().order_by('-ratings', '-created_at')[:3]
     context = {

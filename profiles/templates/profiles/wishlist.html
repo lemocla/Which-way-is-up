@@ -79,8 +79,8 @@
                                 {% csrf_token %}
                                 {% if artwork.display_shop %}
                                 {% if artwork.stock > 0 and artwork.status == 'active' %}
-                                <button type="submit" id="add-to-bag"
-                                    class="btn btn-black fs-md-5 px-4 px-md-3 px-lg-5 py-2 text-uppercase">Add to bag</button>
+                                <button type="submit"
+                                    class="bag btn btn-black fs-md-5 px-4 px-md-3 px-lg-5 py-2 text-uppercase">Add to bag</button>
                                 {% endif %}
                                 {% else %}
                                 <a href="{% url 'contact' %}" class="btn btn-black px-xl-5 py-2 text-uppercase">Contact

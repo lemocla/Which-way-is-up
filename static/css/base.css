@@ -192,6 +192,7 @@ footer li a:hover,
 }
 
 #add-to-bag:hover,
+.bag:hover,
 #checkout:hover,
 #go-checkout:hover,
 form .btn-black:hover {
@@ -436,7 +437,7 @@ select {
 
 /*----------------[ REVIEWS ]----------------*/
 
-#ratings .list-group-item {
+.list-group-item {
     border: none !important;
     padding: 0rem 0.15rem;
 }

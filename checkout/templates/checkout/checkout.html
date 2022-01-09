@@ -99,16 +99,13 @@
           <!-- Braintree hosted fields-->
           {{ client_token|json_script:'client_token' }}
           <div class="mb-3">
-            <label for="card-number">Card Number</label>
             <div id="card-number" class="form-control braintree-field"></div>
           </div>
           <div class="row">
             <div class="col-6 mb-3">
-              <label for="expiration-date">Expiration Date</label>
               <div id="expiration-date" class="form-control braintree-field"></div>
             </div>
             <div class="col-6 mb-3">
-              <label for="cvv" class="field">CVV</label>
               <div id="cvv" class="form-control braintree-field"></div>
             </div>
           </div>

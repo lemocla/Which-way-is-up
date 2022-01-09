@@ -87,12 +87,12 @@
                 </div>
 
                 <!-- Modal delete -->
-                <div class="modal fade" id="deleteEvent-{{event.id}}" tabindex="-1" aria-labelledby="deleteModalLabel"
+                <div class="modal fade" id="deleteEvent-{{event.id}}" tabindex="-1" aria-labelledby="deleteModalLabel-{{event.id}}"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
+                                <h1 class="modal-title fs-5" id="deleteModalLabel-{{event.id}}">Confirm delete</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>

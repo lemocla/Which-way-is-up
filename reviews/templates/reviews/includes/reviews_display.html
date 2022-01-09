@@ -1,61 +1,71 @@
 <h3 class='fs-6 my-1'>{{ review.user_profile.full_name }}</h3>
-<ul id="ratings" class="list-group list-group-horizontal mt-3">
-    <li class="list-group-item {% if review.ratings >= 1 %}starred{% endif %}" aria-label="1 star">
+<!-- star ratings display -->
+<ul class="list-group list-group-horizontal mt-3">
+    <li class="list-group-item {% if review.ratings >= 1 %}starred{% endif %}">
         <i class="fas fa-star" aria-hidden="true"></i>
+        <span class="sr-only">1 star</span>
     </li>
-    <li class="list-group-item {% if review.ratings >= 2 %}starred{% endif %}" aria-label="2 star">
+    <li class="list-group-item {% if review.ratings >= 2 %}starred{% endif %}">
         <i class="fas fa-star" aria-hidden="true"></i>
+        <span class="sr-only">2 star</span>
     </li>
-    <li class="list-group-item {% if review.ratings >= 3 %}starred{% endif %}" aria-label="3 star">
+    <li class="list-group-item {% if review.ratings >= 3 %}starred{% endif %}">
         <i class="fas fa-star" aria-hidden="true"></i>
+        <span class="sr-only">3 star</span>
     </li>
-    <li class="list-group-item {% if review.ratings >= 4 %}starred{% endif %}" aria-label="4 star">
+    <li class="list-group-item {% if review.ratings >= 4 %}starred{% endif %}">
         <i class="fas fa-star" aria-hidden="true"></i>
+        <span class="sr-only">4 star</span>
     </li>
-    <li class="list-group-item {% if review.ratings >= 5 %}starred{% endif %}" aria-label="5 star">
+    <li class="list-group-item {% if review.ratings >= 5 %}starred{% endif %}">
         <i class="fas fa-star" aria-hidden="true"></i>
+        <span class="sr-only">5 star</span>
     </li>
 </ul>
 
-<p class='my-2'>{{ review.comments }}
-</p>
+{% if review.comments %}
+<p class='my-2'>{{ review.comments }}</p>
+{% endif %}
 
 <div class="card mt-3">
     <div class="row g-0">
         <p class="small text-muted mb-1">Purchased item:</p>
         {% if review.artwork.status == 'active' %}
         <a class="d-flex align-middle text-muted" href="{% url 'artwork_details' review.artwork.id %}">
-            <img src="{{ MEDIA_URL }}{% if review.artwork.image %}{{ review.artwork.image }}{% else %}default_image.png{% endif %}" 
+            <img src="{{ MEDIA_URL }}{% if review.artwork.image %}{{ review.artwork.image }}{% else %}default_image.png{% endif %}"
                 class="review-img" alt="{{ review.artwork }}" width="60" height="60">
             <p class="ps-3 my-2 text-decoration-underline">{{ review.artwork|title }}</p>
         </a>
         {% else %}
         <div class="d-flex align-middle text-muted">
-            <img src="{{ MEDIA_URL }}{% if review.artwork.image %}{{ review.artwork.image }}{% else %}default_image.png{% endif %}" 
+            <img src="{{ MEDIA_URL }}{% if review.artwork.image %}{{ review.artwork.image }}{% else %}default_image.png{% endif %}"
                 class="review-img" alt="{{ review.artwork }}" width="60" height="60">
             <p class="ps-3 my-2">{{ review.artwork|title }}</p>
         </div>
         {% endif %}
     </div>
+    <!-- edit and delete links -->
     {% if request.user.is_authenticated and request.user == review.user_profile.user %}
     <div class="mt-3">
         <a href="{% url 'edit_reviews' review.id %}?next={{ request.path|urlencode }}"
             class="text-primary small text-uppercase me-3">
             <i class="far fa-edit me-1" aria-hidden="true"></i><span class="text-link">Edit review</span>
         </a>
-        <button class="btn-bag text-danger small text-uppercase" data-bs-toggle="modal" data-bs-target="#deleteReview-{{review.id}}">
-        <i class="far fa-trash-alt me-1" aria-hidden="true"></i><span class="text-link">Delete review</span>
+        <button class="btn-bag text-danger small text-uppercase" data-bs-toggle="modal"
+            data-bs-target="#deleteReview-{{review.id}}">
+            <i class="far fa-trash-alt me-1" aria-hidden="true"></i><span class="text-link">Delete review</span>
         </button>
     </div>
     {% endif %}
 </div>
 
 <!-- Modal delete -->
-<div class="modal fade" id="deleteReview-{{review.id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteReview-{{review.id}}" tabindex="-1" aria-labelledby="deleteModalLabel-{{review.id}}"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
+                <h1 class="modal-title fs-5" id="deleteModalLabel-{{review.id}}">Confirm delete</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

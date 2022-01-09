@@ -20,10 +20,10 @@
 {% if not widget.is_initial %}
 <p class="mb-2">Image</p>
 {% endif %}
-<button class="btn btn-black btn-file mt-4 mt-md-0 px-4">
-    Select {% if widget.is_initial %}new{% endif %} Image <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
-</button>
+<div class="btn btn-black btn-file mt-4 mt-md-0 px-4">
+    Select {% if widget.is_initial %}new{% endif %} Image <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
 </div>
-<strong><p class="text-secondary" id="filename"></p></strong>
+</div>
+<p class="text-secondary fw-bold" id="filename"></p>
 
 </div>

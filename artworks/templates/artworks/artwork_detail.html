@@ -112,7 +112,7 @@
                     <option value="4">4</option>
                     {% endif %}
                     {% if artwork.stock >= 5 %}
-                    <option value=5">5</option>
+                    <option value="5">5</option>
                     {% endif %}
                 </select>
 
@@ -251,7 +251,7 @@
                 {% if order_line_add %}
                 <a href="{% url 'add_reviews' artwork.id order_line_add.id %}"
                     class="text-primary fw-bold text-uppercase">
-                    <i class="far fa-comment-alt me-1" aria-hdden="True"></i>
+                    <i class="far fa-comment-alt me-1" aria-hidden="true"></i>
                     <span class="small text-link">Leave a review</span>
                 </a>
                 {% endif %}
