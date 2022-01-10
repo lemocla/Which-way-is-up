@@ -234,10 +234,7 @@
                 <form class="row" id="subscribe-form" method="post" action="{% url 'newsletter' %}">
                     {% csrf_token %}
                     <div class="col-8 col-lg-8 text-black">
-                        {% for field in newsletter_form %}
-                        {{ field }}
-                        <label for="{{ field.auto_id }}">{{ field.label }}</label>
-                        {% endfor %}
+                        {{ newsletter_form | crispy }}
                     </div>
                     <div class="col-4 col-lg-4 px-0">
                         <button type="submit" class="btn bg-white text-black text-uppercase footer-btn">Sign up</button>

@@ -22,8 +22,9 @@
         <!-- sort  -->
         {% if artworks.count > 0 %}
         <div class="col text-end py-2">
+            <label id="sort-label" for="sort-selector">Sort items</label>
             <select class="d-inline-block py-1 px-2 w-100" id="sort-selector">
-                <option value="reset"  {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                 <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)
                 </option>
                 <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price(high to low)
@@ -37,7 +38,6 @@
             </select>
         </div>
         {% endif %}
-
         <!-- end sort -->
     </div>
 
@@ -47,22 +47,25 @@
         {% if artworks.count > 0 %}
         {% for artwork in artworks %}
         <div class="card card-shop pb-0 col-12 col-sm-6 col-md-4 col-xl-3" data-item="{{artwork.id}}">
+
             {%if artwork.stock == 0 %}
             <div class="out-of-stock-label px-3 mx-3">out of stock</div>
             {% endif %}
             {% if artwork.on_sale %}
             <div class="sale-label text-uppercase mx-3">sale</div>
             {% endif %}
-            <a href="{% url 'artwork_details' artwork.id %}" class="shop-link border-danger card-img-top">
-                <img class="card-img-top" width="350" height="350" 
+
+            <a href="{% url 'artwork_details' artwork.id %}" class="shop-link text-link card-img-top">
+                <img class="card-img-top" width="350" height="350"
                     src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
                     alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
+                <div class="px-1 mt-4 text-start">
+                    <!-- artwork name -->
+                    <h2 class="card-title fs-5 mb-0 text-truncate ">{{ artwork.name }}</h2>
+                </div>
             </a>
-            <div class="card-body px-1 mt-1 pb-0">
-                <!-- artwork name-->
-                <a href="{% url 'artwork_details' artwork.id %}" class="text-link">
-                <h2 class="card-title fs-5 mb-0 text-truncate">{{ artwork.name }}</h2>
-                </a>
+
+            <div class="card-body pt-0 px-1 pb-0">
                 <!-- artwork details -->
                 <p class="mt-2 mb-0 text-muted small">{{ artwork.materials }}</p>
                 <p class="mb-0 text-muted small">Size: {{ artwork.size }} cm</p>
@@ -76,24 +79,24 @@
                         £{{ artwork.price }}
                         {% endif %}
                     </p>
-                   
+
                     <!--action buttons -->
                     <div class="btn-group pe-1" role="group" aria-label="Basic example">
-                    {% csrf_token %}
+                        {% csrf_token %}
                         {% if artwork.stock > 0 %}
-                        <a href="{% url 'add_to_bag' artwork.id %}" class="btn round-btn btn-light px-0 me-2" aria-label="add to cart">
-                        <i class="fas fa-cart-plus" aria-hidden="true"></i></a>
+                        <a href="{% url 'add_to_bag' artwork.id %}" class="btn round-btn btn-light px-0 me-2"
+                            aria-label="add to cart">
+                            <i class="fas fa-cart-plus" aria-hidden="true"></i></a>
                         {% endif %}
                         {% if request.user.is_authenticated and artwork in wishlist %}
-                        <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" class="btn round-btn btn-light p-0 pt-1 m-0"
-                            aria-label="remove-from-wishlist">
-                        <i class="fa-lg fas fa-heart red-text" aria-hidden="true"></i></button>
+                        <button data-action="remove-from-wishlist" data-item="{{artwork.id}}"
+                            class="btn round-btn btn-light p-0 pt-1 m-0" aria-label="remove-from-wishlist">
+                            <i class="fa-lg fas fa-heart red-text" aria-hidden="true"></i></button>
                         {% else %}
-                        <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light p-0 pt-1 m-0"
-                        aria-label="add to wishlist"> 
-                        <i class="fa-lg far fa-heart" aria-hidden="true"></i></button>
+                        <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button"
+                            class="round-btn btn-light p-0 pt-1 m-0" aria-label="add to wishlist">
+                            <i class="fa-lg far fa-heart" aria-hidden="true"></i></button>
                         {% endif %}
-                        
                     </div>
                 </div>
 
@@ -139,23 +142,22 @@
 
         <!-- Modal Delete -->
         <div class="modal fade" id="deleteModal-{{artwork.id}}" tabindex="-1"
-          aria-labelledby="deleteModalLabel-{{artwork.id}}" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteModalLabel-{{artwork.id}}">Confirm delete</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                Are you sure you want to delete <strong>{{ artwork.name}}</strong>?
-              </div>
-              <div class="modal-footer justify-content-start">
-                <button type="button" class="btn btn-white px-3" data-bs-dismiss="modal">Close</button>
-                <a class="btn btn-danger px-4"
-                  href="{% url 'delete_artwork' artwork.id %}">Yes</a>
-              </div>
+            aria-labelledby="deleteModalLabel-{{artwork.id}}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title fs-5" id="deleteModalLabel-{{artwork.id}}">Confirm delete</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete <strong>{{ artwork.name}}</strong>?
+                    </div>
+                    <div class="modal-footer justify-content-start">
+                        <button type="button" class="btn btn-white px-3" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-danger px-4" href="{% url 'delete_artwork' artwork.id %}">Yes</a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
         <!-- end modal -->
 

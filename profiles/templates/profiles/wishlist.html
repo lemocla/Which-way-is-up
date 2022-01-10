@@ -28,12 +28,12 @@
                     {% if artwork.on_sale %}
                     <div class="sale-label text-uppercase">sale</div>
                     {% endif %}
-                    <a class="wishlist-img" href="{% url 'artwork_details' artwork.id %}">
+                    <div class="wishlist-img">
                         <img class="img-fluid rounded"
                             src="{{ MEDIA_URL }}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"
                             width="350" height="350"
                             alt="{% if not artwork.image %}default for {% endif %}{{ artwork.name }}">
-                    </a>
+                    </div>
                 </div>
                 <div class="col">
                     <form class="card-body" action="{% url 'add_to_bag' artwork.id %} " method="POST">
@@ -47,7 +47,7 @@
                                 <p class="mb-3 text-muted">Size: {{ artwork.size }} cm</p>
                             </div>
                             <div>
-                                <p class="fs-5 fw-bold mb-2">Quantity</p>
+                                <h3 class="fs-5 fw-bold mb-2 normal-text">Quantity</h3>
                                 <select class="px-4 py-2 mb-1" aria-label="Select quantity" name="quantity">
                                     <option selected value="1">1</option>
                                     {% if artwork.stock >= 2 %}

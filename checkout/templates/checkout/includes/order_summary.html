@@ -12,14 +12,16 @@
     <div class="d-flex justify-content-between text-muted">
       <div class="row w-100">
         <div class="col-3 pe-0">
-          <a class="img-checkout" href="{% url 'artwork_details' item.artwork.id %}">
+          <div class="img-checkout">
             <img class="img-fluid rounded" width="250" height="250"
               src="{{ MEDIA_URL }}{% if item.artwork.image %}{{ item.artwork.image }}{% else %}default_image.png{% endif %}"
               alt="{% if not item.artwork.image %}default for {% endif %}{{ item.artwork.name }}">
-          </a>
+          </div>
         </div>
         <div class="col">
-          <p class="my-0 ">{{ item.artwork.name|title }}</p>
+          <a href="{% url 'artwork_details' item.artwork.id %}" class="text-link">
+            <p class="my-0 ">{{ item.artwork.name|title }}</p>
+          </a>
           <p class="mt-1 small mb-0">{{ item.artwork.materials }}</p>
           <p class="my-0 small">Qty: {{ item.quantity }}</p>
         </div>

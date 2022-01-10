@@ -45,6 +45,7 @@ body {
 h1,
 h2,
 h3,
+.modal-title,
 .navbar-brand,
 .homepage-h2,
 .toast-header {
@@ -66,6 +67,10 @@ h3,
 
 .red-text {
     color: var(--red);
+}
+
+.normal-text{
+    font-family: Mulish !important;
 }
 
 /*---------------[ BACKGROUND ]---------------*/
@@ -339,11 +344,22 @@ select {
     margin-bottom: 0.35rem;
 }
 
+#subscribe-form label,
+#sort-label,
 #profile-form label,
 #checkout-form label,
 .gift-label {
     position: absolute;
     z-index: -1;
+}
+
+#subscribe-form label,
+#div_id_email_newsletter .asteriskField {
+    color: var(--white);
+}
+
+#id_email_newsletter {
+    border: 1px solid var(--white);
 }
 
 .custom-checkbox label {
@@ -443,7 +459,7 @@ select {
 }
 
 .starred {
-    color: #fdc00d;
+    color: var(--black);
 }
 
 .review-img {

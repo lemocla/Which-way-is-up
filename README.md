@@ -486,6 +486,8 @@ View live project here [link to deployed link]
     - https://stackoverflow.com/questions/37338925/django-tabularinline-discard-empty-rows
     - https://docs.djangoproject.com/en/4.0/topics/forms/
     - https://stackoverflow.com/questions/1455126/unique-booleanfield-value-in-django
+    - https://stackoverflow.com/questions/19598213/generating-a-date-relative-to-another-date-in-django-template
+    - https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template
   - ### **Media and content**
     - All images and contents for this website have been provided by the artist himself, Peter Charalambides.
     - Card icons on checkout page from [Aaron Fagan](https://github.com/aaronfagan/svg-credit-card-payment-icons/)

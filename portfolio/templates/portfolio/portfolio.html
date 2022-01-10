@@ -48,14 +48,20 @@
 
           <div class="overlay">
             <div class="p-2 d-flex justify-content-end">
+
               <!-- super user edit and delete buttons-->
               {% if request.user.is_superuser %}
-              <a class="btn round-btn btn-light me-2 m-0 px-0" href="{% url 'edit_artwork' artwork.id %}" aria-label="edit artwork"><i
-                  class="far fa-edit fa-lg text-primary" aria-hidden="true"></i></a>
-              <button class="btn round-btn btn-light me-2 m-0 p-0" data-bs-toggle="modal" data-bs-target="#deleteModal-{{artwork.id}}">
-                <i class="far fa-trash-alt text-danger fa-lg" aria-hidden="true"></i>
+              <a class="btn round-btn btn-light me-2 m-0 px-0" href="{% url 'edit_artwork' artwork.id %}"
+                aria-label="edit artwork"><i class="far fa-edit fs-5 text-primary" aria-hidden="true"></i>
+                <span class="sr-only">edit artwork</span>
+              </a>
+              <button class="btn round-btn btn-light me-2 m-0 p-0" data-bs-toggle="modal"
+                data-bs-target="#deleteModal-{{artwork.id}}">
+                <i class="far fa-trash-alt text-danger fs-5" aria-hidden="true"></i>
+                <span class="sr-only">delete artwork</span>
               </button>
               {% endif %}
+
               <!-- buttons -->
               {% if artwork.image %}
               <button type="button" class="round-btn btn-light me-2 " data-bs-toggle="modal"
@@ -65,14 +71,16 @@
               </button>
               {% endif %}
               <a href="{% url 'artwork_details' artwork.id %}" class="btn round-btn btn-light me-2 m-0">
-                <i class="fas fa-info fs-5" aria-hidden="true"></i></a>
-              <span class="sr-only">go to artwork details</span>
+                <i class="fas fa-info fs-5" aria-hidden="true"></i>
+                <span class="sr-only">go to artwork details</span>
+              </a>
               {% csrf_token %}
               {% if request.user.is_authenticated and artwork in wishlist %}
               <button data-action="remove-from-wishlist" data-item="{{artwork.id}}" type="button"
                 class="round-btn btn-light ">
-                <i class="fa-lg fas fa-heart red-text" aria-hidden="true"></i></button>
-              <span class="sr-only">remove from wishlist</span>
+                <i class="fa-lg fas fa-heart red-text" aria-hidden="true"></i>
+                <span class="sr-only">remove from wishlist</span>
+              </button>
               {% else %}
               <button data-action="add-wishlist" data-item="{{artwork.id}}" type="button" class="round-btn btn-light">
                 <i class="fa-lg far fa-heart" aria-hidden="true"></i>
@@ -99,7 +107,7 @@
           <div class="modal-dialog modal-gallery-cont">
             <div class="modal-content border-0">
               <div class="modal-header border-0 text-uppercase">
-                <h3 class="modal-title fs-5" id="ModalLabel-{{artwork.id}}">{{artwork.name}}</h3>
+                <p class="modal-title fs-5" id="ModalLabel-{{artwork.id}}">{{artwork.name}}</p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
                     class="fas fa-times fa-2x"></i></button>
               </div>
@@ -118,7 +126,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteModalLabel-{{artwork.id}}">Confirm delete</h1>
+                <p class="modal-title fs-5" id="deleteModalLabel-{{artwork.id}}">Confirm delete</p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -146,12 +154,13 @@
     </div>
   </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
+        <p class="modal-title fs-5" id="deleteModalLabel">Confirm delete</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
