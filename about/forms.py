@@ -1,5 +1,5 @@
 """
-Form definition for add and edit an event
+Forms configuration for About application
 """
 from django import forms
 from .models import Event
@@ -7,7 +7,7 @@ from .models import Event
 
 class EventForm(forms.ModelForm):
     """
-    Model form to add/edit an portfolio
+    Configure model form to add/edit an event
     """
     class Meta:
         """All fields from event model """
@@ -19,6 +19,7 @@ class EventForm(forms.ModelForm):
         widget=forms.Textarea(attrs={
                               'rows': '3',
                               'placeholder': 'Enter event desciption'}))
+
     # https://stackoverflow.com/questions/61076688/django-form-dateinput-with-widget-in-update-loosing-the-initial-value
     date_start = forms.DateField(
         widget=forms.DateInput(

@@ -1,5 +1,5 @@
 """
-Admin models for artwork app
+Admin configuration for Artwork app
 """
 
 from django.contrib import admin
@@ -9,8 +9,8 @@ from .models import ShopCategory, Artwork
 
 class ShopCategoryAdmin(admin.ModelAdmin):
     """
-    Admin model to display user portfolio categories
-    Display category name
+    Admin setting to display list of shop category,
+    Ordered by date created at
     """
     model = ShopCategory
     list_display = (
@@ -22,22 +22,14 @@ class ShopCategoryAdmin(admin.ModelAdmin):
 
 class ArtworkAdmin(admin.ModelAdmin):
     """
-    Admin model to display user portfolio categories
-    Display category name
+    Admin setting to display list of artwork,
+    Ordered by name, with a vertical filter and a
+    Search box
+    Widget to display image thumbnail in list display
     """
 
     model = Artwork
     # https://stackoverflow.com/questions/2443752/django-display-image-in-admin-interface
-
-    def admin_image(self, model):
-        """
-        Render image in admin panel
-        """
-        if model.image:
-            return mark_safe(
-                '<img src="/media/%s" width="50" height="50" alt="product image"/>' % model.image)
-
-    admin_image.allow_tags = True
 
     list_display = (
         'name',
@@ -50,27 +42,45 @@ class ArtworkAdmin(admin.ModelAdmin):
         'status',
         'admin_image',
     )
+
     list_filter = ('status', 'portfolio', 'shop_category', 'stock')
     ordering = ('name',)
-    search_fields = ['name', 'status', 'shop_category__name', 'portfolio__name']
+    search_fields = ['name', 'status', 'shop_category__name',
+                     'portfolio__name']
 
     actions = ['delete_selected']
 
+    def admin_image(self, model):
+        """
+        Render image in artwork list display
+        """
+        if model.image:
+            return mark_safe(
+                '<img src="/media/%s" width="50" height="50"'
+                ' alt="product image"/>' % model.image)
+
+    admin_image.allow_tags = True
+
     def delete_queryset(self, request, queryset):
+        """Override delete queryset to call delete method"""
         for obj in queryset:
             obj.delete()
 
     @admin.action(description='Mark as draft')
     def make_draft(self, request, queryset):
+        """Update selected artworks' status as draft"""
         queryset.update(status='draft')
 
     @admin.action(description='Mark as active')
     def make_active(self, request, queryset):
+        """Update selected artworks' status as active"""
         queryset.update(status='active')
 
     @admin.action(description='Mark as inactive')
     def make_inactive(self, request, queryset):
+        """Update selected artworks' status as inactive"""
         queryset.update(status='inactive')
+        # Call save method for object in queryset
         for obj in queryset:
             obj.save()
 

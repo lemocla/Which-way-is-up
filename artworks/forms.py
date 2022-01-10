@@ -1,6 +1,7 @@
 """
-Form definition for artwork app
+Forms configuration for Artwork application
 """
+
 from django import forms
 from django.db import models
 from portfolio.widgets import CustomClearableFileInput
@@ -10,19 +11,22 @@ from .models import ShopCategory, Artwork
 
 class ArtworkForm(forms.ModelForm):
     """
-    Model form to add a artwork
+    Configure model form to add/edit an artwork
     """
     class Meta:
-        """All fields from porfolio model """
+        """Set fields from artwork model"""
         model = Artwork
-        # fields = '__all__'
         exclude = ('rating',)
 
+    # Custom image form widgget
     image = forms.ImageField(label='Image',
                              required=False,
                              widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
+        """
+        Set placeholders and labels for fields in the form
+        """
         super().__init__(*args, **kwargs)
         placeholders = {
             'name': 'Enter artwork name',
@@ -34,7 +38,8 @@ class ArtworkForm(forms.ModelForm):
         }
         for field in self.fields:
             if field in placeholders:
-                self.fields[field].widget.attrs['placeholder'] = placeholders[field]
+                self.fields[field].widget.attrs[
+                    'placeholder'] = placeholders[field]
 
         self.fields['size'].label = 'Size (in cm)'
         self.fields['shop_category'].label = 'Select shop category'

@@ -1,11 +1,16 @@
+"""
+Admin configuration for About app
+"""
+
 from django.contrib import admin
 from .models import Event
 
 
 class EventAdmin(admin.ModelAdmin):
     """
-    Admin model to display user portfolio categories
-    Display category name
+    Event admin settings to display list of events,
+    Ordered by most recent date, with a vertical filter and a
+    Search box
     """
 
     model = Event

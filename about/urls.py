@@ -1,5 +1,5 @@
 """
-URL pattern for about page
+URL patterns for About application
 """
 
 from django.urls import path

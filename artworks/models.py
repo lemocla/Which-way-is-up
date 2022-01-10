@@ -1,6 +1,7 @@
 """
-Models to manage artwork and shop categories
+Models configuration for Artwork application
 """
+
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -13,10 +14,10 @@ from portfolio.models import Portfolio
 
 class ShopCategory(models.Model):
     """
-    Model for shop categories
+    Store shop categories details
     """
     class Meta:
-        """Order by name"""
+        """Order by created date and set verbose name"""
         ordering = ['created_at']
         verbose_name_plural = "Shop categories"
 
@@ -30,6 +31,7 @@ class ShopCategory(models.Model):
         return str(self.name)
 
     def save(self, *args, **kwargs):
+        """Override save method to populate backend name"""
         with transaction.atomic():
             str_name = self.name
             self.backend_name = str_name.replace(' ', '_')
@@ -38,7 +40,8 @@ class ShopCategory(models.Model):
 
 class Artwork(models.Model):
     """
-    Model for portfolio
+    Store Artwork details
+    Related to ShopCategory and Portfolio models
     """
     class Meta:
         """Order by name"""
@@ -95,16 +98,22 @@ class Artwork(models.Model):
 
     def calculate_average_rating(self):
         """
-        ratings
+        Calculate average ratings from Reviews
         """
         self.rating = self.artwork.all().aggregate(Avg("ratings"))[
                               'ratings__avg']
         self.save()
 
     def __str__(self):
+        """Return string name"""
         return str(self.name)
 
     def save(self, *args, **kwargs):
+        """
+        Override save method to:
+        - Set display shop as False for commission items
+        - Remove artwork from users' wishlist items when not active
+        """
         if self.portfolio:
             if str(self.portfolio.category) == 'commission':
                 self.display_shop = False
@@ -113,7 +122,7 @@ class Artwork(models.Model):
                 with transaction.atomic():
                     users_wishlist = self.wishlist_artwork.all()
                     for profile in users_wishlist:
-                        # Update user profile
+                        # Remove artwork from users' wishlist
                         profile.wishlist_items.remove(self)
                         profile.save()
                         # Notify user
@@ -128,6 +137,10 @@ class Artwork(models.Model):
         return super(Artwork, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
+        """
+        Override delete method to set artworks' status as inactive
+        if attached to an order_lines (lineartworks)
+        """
         if self.lineartworks:
             self.status = 'inactive'
             self.save()

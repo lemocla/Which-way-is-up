@@ -1,5 +1,5 @@
 """
-URL pattern for bag app
+URL patterns for Bag application
 """
 
 from django.urls import path
