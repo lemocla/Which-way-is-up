@@ -1,5 +1,5 @@
 """
-Models for reviews app
+Models configuration for reviews app
 """
 
 from django.db import models
@@ -10,10 +10,10 @@ from artworks.models import Artwork
 
 class Review(models.Model):
     """
-    Model for portfolio
+    Stores review details in the database
     """
     class Meta:
-        """Order by name"""
+        """Order by date created"""
         ordering = ['created_at']
 
     RATINGS = [
@@ -39,4 +39,5 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        """string representation"""
         return f'{self.artwork} - {self.ratings}'

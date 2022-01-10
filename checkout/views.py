@@ -1,6 +1,7 @@
 """
 Views to handle checkout functionalities
 """
+
 import json
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -9,31 +10,37 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.contrib import messages
 from bag.bag_contexts import bag_content
-from profiles.models import UserProfile
+
 from artworks.models import Artwork
+from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 
 from .models import Order, OrderLineItem
 from .forms import OrderForm
 
-
+# Braintre
 gateway = settings.BRAINTREE_GATEWAY
 
 
 def checkout(request):
     """
-    Views to display checkout page
+    - Views to display checkout page
+    - Process paiement with Braintree
+    - Create order and order lines with form data
     """
     if request.method == 'POST':
+        # Check if delivery address is in UK and return to checkout if not
         if request.POST['delivery_country'] != 'GB':
             messages.error(request, 'Sorry, we couldn\'t process your order.'
                            ' Please provide a UK address')
             return redirect(reverse('checkout'))
 
+        # Get shopping bag and totals
         bag = request.session.get('bag', {})
         current_bag = bag_content(request)
         total = current_bag['grand_total']
 
+        # Set billing address
         if request.POST.get('billing_same_as_delivery') == 'on':
             billing_street_address1 = request.POST['delivery_street_address1']
             billing_street_address2 = request.POST['delivery_street_address2']
@@ -49,11 +56,13 @@ def checkout(request):
             billing_county = request.POST['billing_county']
             billing_country = request.POST['billing_country']
 
+        # Set gift option
         if request.POST.get('gift_option') == 'on':
             gift_option = True
         else:
             gift_option = False
 
+        # Set form data
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -79,7 +88,7 @@ def checkout(request):
 
         form = OrderForm(form_data)
 
-        # check if all items in the bag are available before processing order
+        # Check if all items in the bag are available before processing order
         check = []
         for item_id, item_data in bag.items():
             try:
@@ -95,10 +104,10 @@ def checkout(request):
                 return redirect(reverse('view_bag'))
 
         if form.is_valid() and False not in check:
-            # request nonce from client
+            # Request nonce from client
             nonce_from_the_client = request.POST.get(
                                     'payment_method_nonce', None)
-            # process paiement
+            # Process paiement
             result = gateway.transaction.sale({
                      "amount": total,
                      "payment_method_nonce": nonce_from_the_client,
@@ -108,7 +117,7 @@ def checkout(request):
 
             if result.is_success:
 
-                # if payment success - save form
+                # If payment success - save form
                 order = form.save(commit=False)
                 order.bag = json.dumps(bag)
                 order.transaction_id = result.transaction.id
@@ -120,7 +129,7 @@ def checkout(request):
                 # Save order
                 order.save()
 
-                # create order line for each items in the bag
+                # Create order line for each items in the bag
                 for item_id, item_data in bag.items():
                     artwork = Artwork.objects.get(id=item_id)
                     order_line_item = OrderLineItem(
@@ -130,7 +139,7 @@ def checkout(request):
                     )
                     order_line_item.save()
 
-                # delete bag and gift session
+                # Delete bag and gift session
                 del request.session['bag']
                 if request.session.get('gift', {}):
                     del request.session['gift']
@@ -158,6 +167,7 @@ def checkout(request):
                     artwork = Artwork.objects.get(name=item.artwork)
                     artwork.stock -= item.quantity
                     artwork.save()
+                    # Stock alert if stock level reach critical level
                     if artwork.stock_alert:
                         if artwork.stock <= artwork.stock_alert:
                             # email shop owner
@@ -171,15 +181,16 @@ def checkout(request):
                             recipients = [sender]
                             send_mail(subject, body, sender, recipients)
 
-                # message
+                # Success message
                 messages.success(request, f'Order successful - '
                                  f'Order Number: {order.order_number}')
 
-                # redirect to checkout sucess
+                # Redirect to checkout sucess
                 return redirect(reverse('checkout_success',
                                 args=[order.order_number]))
 
             else:
+                # Non successful paiement
                 messages.error(request, (
                         'We couldn\t process your paiement'
                         '- please check your paiement details')
@@ -187,11 +198,14 @@ def checkout(request):
                 return redirect(reverse('checkout'))
 
         else:
+            # Error with order form
             messages.error(request, 'There was an error with your form.'
                            'Please double check your information.')
+            return redirect(reverse('checkout'))
     else:
+        # Get bag from session
         bag = request.session.get('bag', {})
-
+        # If bag doesn't exist, return to shop
         if not bag:
             messages.error(request, 'There\'s nothing in your bag at the '
                            'moment')
@@ -201,11 +215,13 @@ def checkout(request):
         for artwork_id in list(bag.keys()):
             try:
                 artwork = Artwork.objects.get(id=artwork_id)
+                # Return to bag if item out of stock or not active
                 if artwork.stock == 0 or artwork.status != 'active':
                     messages.error(request, f'{artwork.name.title()}'
-                                            f' is no longer available.')
+                                   f' is no longer available.')
                     return redirect(reverse('bag'))
             except ObjectDoesNotExist:
+                # Return to bag if object does not exist
                 messages.error(request, 'This artwork is no longer available')
                 return redirect(reverse('bag'))
 
@@ -249,8 +265,10 @@ def checkout(request):
                 form = OrderForm()
         else:
             form = OrderForm()
+        # Info message about UK delivery only
         messages.info(request, 'Please note that we only deliver to the UK'
                       ' only')
+    # Set context
     context = {
         "form": form,
         'client_token': client_token,
@@ -261,7 +279,9 @@ def checkout(request):
 
 def checkout_success(request, order_number):
     """
-    Display when checkout is successful
+    - View to display checkout success page
+    - Update user's info if option selected
+    - Attach the order to user's profile if authenticated
     """
     order = get_object_or_404(Order, order_number=order_number)
     save_info = request.session.get('save_info')
@@ -289,7 +309,9 @@ def checkout_success(request, order_number):
             if user_profile_form.is_valid():
                 user_profile_form.save()
 
+    # Set context
     context = {
         'order': order,
     }
+
     return render(request, 'checkout/checkout_success.html', context)

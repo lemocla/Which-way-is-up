@@ -1,5 +1,5 @@
 """
-Admin models for reviews app
+Admin configuration for reviews application
 """
 
 from django.contrib import admin
@@ -8,8 +8,11 @@ from .models import Review
 
 class ReviewAdmin(admin.ModelAdmin):
     """
-    Admin model to display reviews
+    Admin settings to display list of Reviews
+    Ordered by date created and ratings
+    Vertical filter by ratings
     """
+
     model = Review
     list_display = (
         'artwork',
@@ -20,5 +23,6 @@ class ReviewAdmin(admin.ModelAdmin):
 
     ordering = ('-created_at', '-ratings', )
     list_filter = ('ratings',)
+
 
 admin.site.register(Review, ReviewAdmin)

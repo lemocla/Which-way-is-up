@@ -1,5 +1,5 @@
 """
-Functions handling newsletter mailing list
+Views for Newsletter application
 """
 
 from django.http import HttpResponseRedirect
@@ -31,15 +31,15 @@ def add_to_mailing_list(request):
             # Data from form
             form.save()
 
-            # message / subject
+            # Message / subject
             msg = 'Thank you for signing up to our newsletter!'
-            # acknowledgment email variables
+            # Acknowledgment email variables
             sender = settings.EMAIL_HOST_USER
             recipients = [form.cleaned_data['email_newsletter']]
             subject = msg
             body = render_to_string('newsletter/email/body.txt')
 
-            # check if email match a user and tick newsletter checkbox
+            # Check if email match a user and tick newsletter checkbox
             existing_user = User.objects.get(email=form.cleaned_data['email'])
             if existing_user:
                 profile = UserProfile.objects.get(user=existing_user)
@@ -55,7 +55,7 @@ def add_to_mailing_list(request):
                 messages.error(request, "Sorry - an error occured our side, "
                                "please retry later")
         else:
-            # error message
+            # Error message
             messages.warning(request,
                              'You have already subscribed to our newsletter')
     return HttpResponseRedirect(redirect_url)

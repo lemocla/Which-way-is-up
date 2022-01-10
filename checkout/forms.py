@@ -1,13 +1,14 @@
 """
-Forms for oder model
+Forms configuration for Checkout application
 """
+
 from django import forms
 from .models import Order
 
 
 class OrderForm(forms.ModelForm):
     """
-    Form field for personal information
+    Configure form to collect order details during checkout
     """
     class Meta:
         """
@@ -24,7 +25,7 @@ class OrderForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
+        labels
         """
         super().__init__(*args, **kwargs)
 

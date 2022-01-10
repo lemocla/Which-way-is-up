@@ -1,5 +1,5 @@
 """
-URL pattern for homepage
+URL patterns for Home application
 """
 
 from django.urls import path

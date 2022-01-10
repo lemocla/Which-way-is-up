@@ -1,6 +1,7 @@
 """
-Form definition for portfolio app
+Form definition for portfolio application
 """
+
 from django import forms
 from .widgets import CustomClearableFileInput
 from .models import PortfolioCategory, Portfolio
@@ -8,7 +9,7 @@ from .models import PortfolioCategory, Portfolio
 
 class PortfolioForm(forms.ModelForm):
     """
-    Model form to add a portfolio
+    Configure model form to add/edit a portfolio
     """
     class Meta:
         """All fields from porfolio model """

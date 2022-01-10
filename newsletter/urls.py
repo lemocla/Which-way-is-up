@@ -1,6 +1,7 @@
 """
-URL patterns for newsletter mailing list
+URL patterns for newsletter application
 """
+
 from django.urls import path
 from . import views
 

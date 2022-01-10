@@ -1,6 +1,7 @@
 """
-Forms for profile model
+Forms configuration for profile model
 """
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, HTML, ButtonHolder, Submit
 
@@ -10,17 +11,20 @@ from .models import UserProfile
 
 class UserProfileForm(forms.ModelForm):
     """
-    Form field for personal information
+    Form to collect users' personal information
     """
     class Meta:
+        """Configure model and fields"""
         model = UserProfile
         exclude = ('user', 'wishlist_items')
 
     def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
+        labels
+        Use Crispy helper to design layout and style
         """
+
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_action = 'profile'
@@ -78,4 +82,3 @@ class UserProfileForm(forms.ModelForm):
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'mb-3'
-

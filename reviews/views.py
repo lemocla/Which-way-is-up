@@ -1,5 +1,5 @@
 """
-Views for reviews app
+Views for reviews application
 """
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -17,7 +17,7 @@ from .forms import ReviewForm
 
 def all_reviews(request):
     """
-    View to return the all the reviews page
+    View to display all the reviews
     """
     reviews = Review.objects.all().order_by('-ratings', '-created_at')
     context = {
@@ -29,20 +29,25 @@ def all_reviews(request):
 @login_required
 def add_reviews(request, artwork_id, orderline_id):
     """
-    View to return the all the reviews page
+    View to add a review to the database
+    Display add a review page
+    Check if artwork is active and if review has already been created
     """
 
+    # Get user profile
     user_profile = get_object_or_404(UserProfile, user=request.user)
-
+    # Get artwork
     artwork = get_object_or_404(Artwork, id=artwork_id)
     order_line = None
     order = None
 
+    # Check if artwork status is active
     if artwork.status != 'active':
         messages.error(request, 'Sorry you cannot leave a review for this'
                        ' item as it is no longer available.')
         return redirect('my_reviews')
 
+    # Check for existing reviews
     review = Review.objects.filter(artwork=artwork).filter(
              order_line=orderline_id)
 
@@ -51,10 +56,11 @@ def add_reviews(request, artwork_id, orderline_id):
                        ' item. You can edit your review')
         return redirect('order_history')
 
+    # Check if review is added for a verified purchase
     if orderline_id:
         order_line = get_object_or_404(OrderLineItem, id=orderline_id)
         order = Order.objects.get(id=order_line.order.id)
-
+        # Check if artwork and user profile match those of order lines
         if order.user_profile != user_profile or artwork != order_line.artwork:
             messages.error(request, 'You don\'t have the credentials to add a'
                            ' review for this item')
@@ -78,7 +84,7 @@ def add_reviews(request, artwork_id, orderline_id):
             review.order_line = order_line
             review.artwork = artwork
             form.save()
-
+            # Success message
             messages.success(request, f'Your review for '
                              f'{artwork.name.title()} has been '
                              f'successfully added!')
@@ -100,32 +106,43 @@ def add_reviews(request, artwork_id, orderline_id):
 @login_required
 def edit_reviews(request, review_id):
     """
-    View to return the all the reviews page
+    View to edit a review and display edit review page
+    Check if authenticated user has created the review
     """
 
+    # Get user profile
     user_profile = get_object_or_404(UserProfile, user=request.user)
+    # Get review
     review = get_object_or_404(Review, pk=review_id)
 
+    # Set redirect url
     redirect_url = request.POST.get('next', 'my_reviews')
 
+    # Check if authenticated user created review being deleted
     if user_profile.id != review.user_profile.id:
         messages.error(request, 'You don\'t have the credentials to edit a'
                        ' review for this item')
         return redirect('home')
 
     if request.method == 'POST':
+        # Instanciate from with post data
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
+            # Save review with form data
             form.save()
-
+            # message success
             messages.success(request, f'Your review for '
                              f'{review.artwork.name.title()} has been'
                              f' successfully edited!')
             return HttpResponseRedirect(redirect_url)
 
     else:
+        # Instanciate form with review object
         form = ReviewForm(instance=review)
+        # Info message
+        messages.info(request, f'Editing review for {review.artwork.name}')
 
+    # Set context
     context = {
         'form': form,
         'review': review,
@@ -137,18 +154,25 @@ def edit_reviews(request, review_id):
 @login_required
 def delete_reviews(request, review_id):
     """
-    View to return the all the reviews page
+    View to delete a review
+    Check if authenticated user created the review being deleted
     """
 
+    # Get user profile
     user_profile = get_object_or_404(UserProfile, user=request.user)
+    # Get review object
     review = get_object_or_404(Review, pk=review_id)
 
+    # Get redirect url
     redirect_url = request.GET.get('next', 'my_reviews')
+
+    # Check if authenticated user created review being deleted
     if user_profile.id != review.user_profile.id:
         messages.error(request, 'You don\'t have the credentials to delete a'
                        ' review for this item')
         return redirect('home')
 
+    # Delete review
     review.delete()
 
     messages.success(request, 'Review successfully deleted!')

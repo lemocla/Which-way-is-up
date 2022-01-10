@@ -1,5 +1,5 @@
 """
-Models to manage portfolio and portfolios categories
+Models configuration for Portfolio application
 """
 
 from django.db import models
@@ -9,7 +9,7 @@ from .fields import CaseInsensitiveCharField
 
 class PortfolioCategory(models.Model):
     """
-    Model for portfolio categories
+    Stores portfolio categories details
     """
     class Meta:
         """Order by name"""
@@ -24,7 +24,8 @@ class PortfolioCategory(models.Model):
 
 class Portfolio(models.Model):
     """
-    Model for portfolio
+    Stores portfolio details
+    Related to PortfolioCategory model
     """
     class Meta:
         """Order by name"""
@@ -53,10 +54,15 @@ class Portfolio(models.Model):
     homepage = models.BooleanField(default=False)
 
     def __str__(self):
+        """return name as string"""
         return self.name
 
     # https://stackoverflow.com/questions/1455126/unique-booleanfield-value-in-django
     def save(self, *args, **kwargs):
+        """
+        Override save model so that one boolean is selected to display on
+        homepage
+        """
         if not self.homepage:
             return super(Portfolio, self).save(*args, **kwargs)
         with transaction.atomic():

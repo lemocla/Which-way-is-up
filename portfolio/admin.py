@@ -1,5 +1,5 @@
 """
-Admin models for portfolio app
+Admin configuration for portfolio application
 """
 
 from django.contrib import admin
@@ -9,7 +9,7 @@ from .models import PortfolioCategory, Portfolio
 
 class PortfolioCategoryAdmin(admin.ModelAdmin):
     """
-    Admin model to display user portfolio categories
+    Admin setting to display user portfolio categories
     Display category name
     """
     model = PortfolioCategory
@@ -20,7 +20,11 @@ class PortfolioCategoryAdmin(admin.ModelAdmin):
 
 class PortfolioAdmin(admin.ModelAdmin):
     """
-    Admin panel for portfolios
+    Admin setting to display list of portfolios with
+    - widget to display image cover
+    - vertical filter
+    - search box
+    - custom actions to set portfolio as active, inactive, draft
     """
     model = Portfolio
 
@@ -30,7 +34,8 @@ class PortfolioAdmin(admin.ModelAdmin):
         """
         if model.image:
             return mark_safe(
-                '<img src="/media/%s" width="50" height="50" alt="product image"/>' % model.image)
+                '<img src="/media/%s" width="50" height="50" '
+                'alt="product image"/>' % model.image)
 
     list_display = (
         'name',
@@ -46,17 +51,21 @@ class PortfolioAdmin(admin.ModelAdmin):
 
     @admin.action(description='Mark as draft')
     def make_draft(modeladmin, request, queryset):
+        """Set queryset as draft"""
         queryset.update(status='draft')
 
     @admin.action(description='Mark as active')
     def make_active(modeladmin, request, queryset):
+        """Set queryset as active"""
         queryset.update(status='active')
 
     @admin.action(description='Mark as inactive')
     def make_inactive(modeladmin, request, queryset):
+        """Set queryset as inactive"""
         queryset.update(status='inactive')
 
     actions = [make_draft, make_active, make_inactive]
+
 
 admin.site.register(PortfolioCategory, PortfolioCategoryAdmin)
 admin.site.register(Portfolio, PortfolioAdmin)

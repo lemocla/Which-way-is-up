@@ -1,5 +1,5 @@
 """
-Admin models for artwork app
+Admin configuration for Checkout application
 """
 
 from django.contrib import admin
@@ -8,7 +8,7 @@ from .models import Order, OrderLineItem
 
 class OrderLineItemAdminInline(admin.TabularInline):
     """
-    Admin model to display line of items for each order
+    Admin setting to display line of items for each order
     """
     model = OrderLineItem
     # https://stackoverflow.com/questions/37338925/django-tabularinline-discard-empty-rows
@@ -18,17 +18,17 @@ class OrderLineItemAdminInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     """
-    Admin model to display order information
+    Admin setting to display order information with
+    - inline display for Order Line
+    - filter by status, paid and full name
+    - search box
+    - custom action to mark order as dispatched
     """
 
     model = Order
     inlines = (OrderLineItemAdminInline,)
     readonly_fields = ('order_number', 'date', 'total',
                        'bag',)
-
-    @admin.action(description='Mark as dispatched')
-    def dispatched(modeladmin, request, queryset):
-        queryset.update(status='dispatched')
 
     list_display = (
         'order_number',
@@ -39,12 +39,19 @@ class OrderAdmin(admin.ModelAdmin):
         'paid',
         'status',
     )
-    actions = [dispatched]
+
     ordering = ('-date',)
-    list_filter = ('status', 'paid')
-    search_fields = ['full_name', 'date', 'order_number', 'lineitems__artwork__name']
+    list_filter = ('status', 'paid', 'full_name')
+    search_fields = ['full_name', 'date', 'order_number',
+                     'lineitems__artwork__name']
 
+    @admin.action(description='Mark as dispatched')
+    def dispatched(modeladmin, request, queryset):
+        """
+        Custom action to mark order as dispatched
+        """
+        queryset.update(status='dispatched')
 
-
+    actions = [dispatched]
 
 admin.site.register(Order, OrderAdmin)

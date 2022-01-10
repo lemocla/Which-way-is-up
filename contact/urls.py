@@ -1,6 +1,7 @@
 """
-URL patterns for policies
+URL patterns for Contact application
 """
+
 from django.urls import path
 from . import views
 

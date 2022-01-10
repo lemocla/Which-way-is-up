@@ -1,3 +1,7 @@
+"""
+Admin configuration for Newsletter application
+"""
+
 from django.contrib import admin
 from .models import Mailing
 

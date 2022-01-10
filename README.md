@@ -444,12 +444,30 @@ View live project here [link to deployed link]
 ## **TESTING**
 
   - ### **Introduction**
+    The website was extensively tested as it was developed with the implementation of new features, using:
+    - console.log() and google developer tools
+    - terminal for backend functionalities by printing expected outcome
+    - Manual testing of user stories
+
   - ### **Code validation**
+
+    - #### **W3C HTML Code Validator**
+
+    - #### **W3C CSS Jigsaw Validator**
+      The CSS file was tested with [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) via direct input and returned no errors
+      [include screenshots]
+
+    - #### **JSHint validator**
+      All javascripts files were tested with [JSHint](https://jshint.com/) and returned no errors
+      [include screenshots]
+
+    - #### **Python 8**
+      
   - ### **Testing User stories**
   - ### **Automated testing**
   - ### **Responsiveness and compatibility**
   - ### **Testing performance**
-  - ###  **Testing accessibility**
+  - ### **Testing accessibility**
   - ### **Interesting issues and known bugs**
     - #### **Known bugs**
  
@@ -458,8 +476,16 @@ View live project here [link to deployed link]
 ## **CREDITS**
 
   - ### **Code**
-    - [Add code credit]
- 
+    - About page event section styling adapted from [Code Institute CV mini-project](https://github.com/Code-Institute-Solutions/resume-miniproject-bootstrap4/tree/master/16-adding-work-history)
+    - trapezoid shape inspired from https://bennettfeely.com/clippy/
+    - /* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
+    - https://stackoverflow.com/questions/20555673/django-query-get-last-n-records
+    - https://stackoverflow.com/questions/61076688/django-form-dateinput-with-widget-in-update-loosing-the-initial-value
+    - https://stackoverflow.com/questions/43990154/braintree-jsv3-payment-method-nonce-value-bad-with-hostedfields?rq=1
+    - https://codepen.io/braintree/pen/zeamxM card validation
+    - https://stackoverflow.com/questions/37338925/django-tabularinline-discard-empty-rows
+    - https://docs.djangoproject.com/en/4.0/topics/forms/
+    - https://stackoverflow.com/questions/1455126/unique-booleanfield-value-in-django
   - ### **Media and content**
     - All images and contents for this website have been provided by the artist himself, Peter Charalambides.
     - Card icons on checkout page from [Aaron Fagan](https://github.com/aaronfagan/svg-credit-card-payment-icons/)

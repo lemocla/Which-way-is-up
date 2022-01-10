@@ -1,6 +1,5 @@
 """
-Models for checkout app
-- Order
+Models configuration for Checkout App
 """
 
 import uuid
@@ -14,7 +13,7 @@ from artworks.models import Artwork
 
 class Order(models.Model):
     """
-    Model for checkout orders
+    Stores order details and related to UserProfile model
     """
     class Meta:
         """Order by date"""
@@ -47,7 +46,8 @@ class Order(models.Model):
     delivery_county = models.CharField(max_length=80, null=True, blank=True)
     delivery_country = CountryField(blank_label='Country *', null=False,
                                     blank=False)
-    delivery_postcode = models.CharField(max_length=20, null=True, blank=True, default='GB')
+    delivery_postcode = models.CharField(max_length=20, null=True, blank=True,
+                                         default='GB')
     # billing address
     billing_same_as_delivery = models.BooleanField(default=True)
     billing_street_address1 = models.CharField(max_length=80, null=False,
@@ -84,8 +84,7 @@ class Order(models.Model):
 
     def update_total(self):
         """
-        Update grand total each time a line item is added,
-        accounting for delivery costs.
+        Update total via signal each time a line item is added
         """
         self.total = self.lineitems.aggregate(Sum('lineitem_total'))[
                      'lineitem_total__sum'] or 0
@@ -106,7 +105,8 @@ class Order(models.Model):
 
 class OrderLineItem(models.Model):
     """
-    Model for each line of products attached to the order
+    Stores details for each line of products attached to the order
+    Related to Order and Artwork models
     """
     order = models.ForeignKey(Order, null=False, blank=False,
                               on_delete=models.CASCADE,
@@ -132,4 +132,5 @@ class OrderLineItem(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
+        """Display string"""
         return f'{self.artwork.name} on order {self.order.order_number}'

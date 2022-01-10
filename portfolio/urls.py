@@ -1,5 +1,5 @@
 """
-Urls for portfolio app
+Urls patterns for portfolio app
 """
 
 from django.urls import path

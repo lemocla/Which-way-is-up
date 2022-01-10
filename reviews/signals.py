@@ -12,7 +12,6 @@ def update_rating_on_save(sender, instance, **kwargs):
     """
     Update artwork's average rating on review is created/updated.
     """
-    print('signal update received')
     if instance.artwork:
         instance.artwork.calculate_average_rating()
 

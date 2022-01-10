@@ -9,7 +9,8 @@ from artworks.models import Artwork
 
 class UserProfile(models.Model):
     """
-    A user profile model for default delivery information
+    Stores user details and default delivery information
+    Related to Artwork models
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=35, null=True, blank=True)
@@ -19,11 +20,14 @@ class UserProfile(models.Model):
     town_or_city = models.CharField(max_length=40, null=True, blank=True)
     county = models.CharField(max_length=80, null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
-    country = CountryField(blank_label='Country', null=True, blank=True, default='GB')
+    country = CountryField(blank_label='Country', null=True, blank=True,
+                           default='GB')
     newsletter = models.BooleanField(default=False)
-    wishlist_items = models.ManyToManyField(Artwork, related_name='wishlist_artwork')
+    wishlist_items = models.ManyToManyField(Artwork,
+                                            related_name='wishlist_artwork')
 
     def __str__(self):
+        """username as string"""
         return self.user.username
 
 
