@@ -61,7 +61,6 @@
         clear: both;
         column-count: 2;
         column-gap: 1.95rem;
-        /*column-fill: auto;*/
     }
 
     .gallery-item {
