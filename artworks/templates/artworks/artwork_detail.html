@@ -78,7 +78,7 @@
                     <a class="text-primary px-3" href="{% url 'edit_artwork' artwork.id %}" aria-label="edit artwork">
                         <i class="far fa-edit fa-lg"></i>
                     </a>
-                    <button class="btn-bag" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <button class="btn-bag pe-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
                         <i class="far fa-trash-alt text-danger fa-lg" aria-hidden="true"></i>
                         <span class="sr-only">delete artwork</span>
                     </button>
@@ -181,14 +181,14 @@
                 <!-- related items image -->
                 <a href="{% url 'artwork_details' item.id %}" class="card-rel-items text-link">
                     {% if item.stock == 0 %}
-                    <div class="out-of-stock-label px-5 py-1">out of stock</div>
+                    <div class="out-of-stock-label px-4 px-md-5 py-1">out of stock</div>
                     {% endif %}
                     <img class="card-img-top"
                         src="{{ MEDIA_URL }}{% if item.image %}{{ item.image }}{% else %}default_image.png{% endif %}"
                         alt="{% if not item.image %}default for {% endif %}{{ item.name }}" width="350" height="250">
                     <!-- related artwork name -->
                     <div class="px-1 mt-4 text-start">
-                        <h3 class="card-title fs-5 mb-0 text-truncate ">{{ artwork.name }}</h3>
+                        <h3 class="card-title fs-5 mb-0 text-truncate ">{{ item.name }}</h3>
                     </div>
                 </a>
                 <div class="card-body px-1 pt-0 pb-0">

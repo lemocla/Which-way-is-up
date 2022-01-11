@@ -1,29 +1,31 @@
 <div class="row widget align-items-end mb-2">
-{% if widget.is_initial %}
+    {% if widget.is_initial %}
     <div class="col-12">
-    <p>{{ widget.initial_text }}:</p>
+        <p>{{ widget.initial_text }}:</p>
     </div>
     <div class="col-12 col-md-6 d-flex align-items-end">
-    <a href="{{ widget.value.url }}">
-        <img width="65" height="65" class="rounded shadow-sm" src="{{ widget.value.url }}" alt="preview artwork image">
-    </a>
-    {% if not widget.required %}
+        <a href="{{ widget.value.url }}">
+            <img width="65" height="65" class="rounded shadow-sm" src="{{ widget.value.url }}"
+                alt="preview artwork image">
+        </a>
+        {% if not widget.required %}
         <div class="custom-control custom-checkbox ps-5">
-            <input class="custom-control-input" type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}">
+            <input class="custom-control-input" type="checkbox" name="{{ widget.checkbox_name }}"
+                id="{{ widget.checkbox_id }}">
             <label class="custom-control-label" for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
         </div>
-    {% endif %}<br>
-    {{ widget.input_text }}
+        {% endif %}<br>
+        {{ widget.input_text }}
     </div>
-{% endif %}
-<div class="{% if widget.is_initial %}col-12 col-md-6 pe-md-0 text-md-end{% else %}col-12{% endif %}">
-{% if not widget.is_initial %}
-<p class="mb-2">Image</p>
-{% endif %}
-<div class="btn btn-black btn-file mt-4 mt-md-0 px-4">
-    Select {% if widget.is_initial %}new{% endif %} Image <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
-</div>
-</div>
-<p class="text-secondary fw-bold" id="filename"></p>
-
+    {% endif %}
+    <div class="{% if widget.is_initial %}col-12 col-md-6 pe-md-0 text-md-end{% else %}col-12{% endif %}">
+        {% if not widget.is_initial %}
+        <p class="mb-2">Image</p>
+        {% endif %}
+        <div class="btn btn-black btn-file mt-4 mt-md-0 px-4">
+            Select {% if widget.is_initial %}new{% endif %} Image <input type="{{ widget.type }}"
+                aria-label="select image" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>
+        </div>
+    </div>
+    <p class="text-secondary fw-bold" id="filename"></p>
 </div>
