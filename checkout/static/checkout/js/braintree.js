@@ -30,7 +30,7 @@ braintree.client.create({
         fields: {
             number: {
                 container: '#card-number',
-                placeholder: 'card number ex. 4111 1111 1111 1111',
+                placeholder: 'card number ex. 4111 •••• •••• ••11',
             },
             cvv: {
                 container: '#cvv',
@@ -51,7 +51,7 @@ braintree.client.create({
         function createInputChangeEventListener(element) {
             return function () {
                 validateInput(element);
-            }
+            };
         }
 
         function setValidityClasses(element, validity) {

@@ -12,12 +12,12 @@
 {% block content %}
 
 <div class="container pt-md-5 pt-4 pb-3">
-  <div class="row pb-md-3 mb-4">
+  <div class="row pb-3">
     <h1 class="h1-page mt-md-0">Checkout</h1>
   </div>
 
   <div class="row">
-    <p class="">Please fill out the form below to complete your order</p>
+    <p class="">Please fill out the form below to complete your order.</p>
 
     <!-- order summary-->
     <div class="d-lg-none col-12 mb-5 accordion accordion-flush" id="order-summary">
@@ -79,6 +79,7 @@
         <!-- delivery details-->
         <div id="delivery-details-container" class="my-5">
           <h2 class='trapez-bg fs-4 ps-4 py-1 mb-4'>Delivery details</h2>
+          <p><strong>Please note we only delivery to the United Kingdom only.</strong></p>
           {{ form.delivery_street_address1 | as_crispy_field }}
           {{ form.delivery_street_address2 | as_crispy_field }}
           <div class="row">
@@ -110,13 +111,13 @@
           </div>
           <div class="row">
             <div class="col-6 mb-3">
-              <div id="expiration-date" class="form-control braintree-field" aria-label="expiry date"></div>
+              <div id="expiration-date" class="form-control braintree-field"></div>
               <div class="invalid-feedback">
                 Expiration date required
               </div>
             </div>
             <div class="col-6 mb-3">
-              <div id="cvv" class="form-control braintree-field" aria-label="cvv"></div>
+              <div id="cvv" class="form-control braintree-field"></div>
               <div class="invalid-feedback">
                 Security code required
               </div>

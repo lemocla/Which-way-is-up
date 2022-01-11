@@ -11,6 +11,23 @@ $(document).ready(function () {
         }
     }
 
+    // Style placeholders for delivery & billing countries
+    // Adapted from Code Institute Boutique Ado project
+    $('.lazyselect ').each(function () {
+        let countrySelected = $(this).val();
+        if (!countrySelected) {
+            $(this).css('color', '#6c767d');
+        }
+        $(this).change(function () {
+            countrySelected = $(this).val();
+            if (!countrySelected) {
+                $(this).css('color', '#6c767d');
+            } else {
+                $(this).css('color', '#0D0000');
+            }
+        });
+    });
+
     // on load - display gift option if option is checked
     if ($('#is_auth').val() == 'true') {
         $('#id_email').prop('readonly', 'readonly');

@@ -8,10 +8,6 @@
     box-shadow: none;
 }
 
-.accordion-button:not(.collapsed)::after {
-    filter: brightness(5) sepia(0) hue-rotate(87deg) saturate(5);
-}
-
 .accordion-button::after {
     margin-top: 0.25rem;
     flex-shrink: 0;

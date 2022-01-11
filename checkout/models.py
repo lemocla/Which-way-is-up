@@ -6,6 +6,7 @@ import uuid
 
 from django.db import models
 from django.db.models import Sum
+from django_countries import Countries
 from django_countries.fields import CountryField
 from profiles.models import UserProfile
 from artworks.models import Artwork
@@ -27,6 +28,11 @@ class Order(models.Model):
         (DISPATCHED, 'dispatched'),
     ]
 
+    # https://pypi.org/project/django-countries/#customize-the-country-list
+    class G8Countries(Countries):
+        """ Restrict delivery countries to GB only """
+        only = ['GB']
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
     date = models.DateTimeField(auto_now_add=True)
     # user personal details
@@ -45,9 +51,8 @@ class Order(models.Model):
                                              blank=False)
     delivery_county = models.CharField(max_length=80, null=True, blank=True)
     delivery_country = CountryField(blank_label='Country *', null=False,
-                                    blank=False)
-    delivery_postcode = models.CharField(max_length=20, null=True, blank=True,
-                                         default='GB')
+                                    blank=False, countries=G8Countries)
+    delivery_postcode = models.CharField(max_length=20, null=True, blank=True)
     # billing address
     billing_same_as_delivery = models.BooleanField(default=True)
     billing_street_address1 = models.CharField(max_length=80, null=False,
@@ -58,7 +63,7 @@ class Order(models.Model):
                                             blank=False)
     billing_county = models.CharField(max_length=80, null=True, blank=True)
     billing_country = CountryField(blank_label='Country *', null=False,
-                                   blank=False, default='GB')
+                                   blank=False)
     billing_postcode = models.CharField(max_length=20, null=True, blank=True)
     # gift option
     gift_option = models.BooleanField(default=False)
