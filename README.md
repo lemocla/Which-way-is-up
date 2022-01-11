@@ -319,7 +319,8 @@ View live project here [link to deployed link]
         - Slightly rounded edge borders and buttons for a more user friendly and inviting interface.
         - Some light shadows to add further dimension and depth to the website.
 
-     - #### **Difference to design** 
+     - #### **Design issues** 
+        The image library in collection and commission sections is looking at presenting the images in their aspect ration. Whilst it works relatively well when there are many images, it does look a bit odd when there are only a few items to display. Ideally the developer would have liked to implement a masonry layout.
 
 ## **FEATURES**
 
@@ -374,12 +375,15 @@ View live project here [link to deployed link]
     Delete a review | No | Yes | Yes |
 
   - ### **defensive design**
+
     - #### **Delete operations**
       Users first need to confirm that they are sure they want to delete the specifified item (artwork, portfolio, reviews and event)
+
     - #### **Adding quantity of specified item to shopping bag**
       - The options for quantity to be added to shopping bag are limited to stock availability 
       - Users cannot add an item out of stock to their shopping cart and the button 'add to cart' to be removed from page
       - Users cannot add an item who status is not active to their shopping bag
+
     - #### **Artwork and portoflio status**
       - If artwork is set as inactive / draft:
         - Artwork will not be displayed in portfolio pages
@@ -391,12 +395,15 @@ View live project here [link to deployed link]
       - If portfolio is set as inactive / draft:
         - Portfolio will not be displayed in the dynamically generated nav bar
         - Portfolio page will not be accessible to users except for the super admin
+
     - #### **Add/edit/delete artworks**
       - Conditions in place to ensure that on superuser can add/edit/delte artworks
       - If an artwork has been purchased, it cannot be deleted and status will be set as inactive instead
+
     - #### **Add/edit/delete reviews**
       - Users can only add reviews for items that they have purchased and reviews will also be related to the order line in checkout orders
       - Users can also only add reviews for items still active, but can edit and delete reviews wehter the items is active or not
+
     - #### **Checkout page**
       - Users can only have a delivery address set in the UK and if the country selected is anything other than UK an error message will display.
 
@@ -452,24 +459,102 @@ View live project here [link to deployed link]
   - ### **Code validation**
 
     - #### **W3C HTML Code Validator**
+      Each page for the website was run through the [W3C Markup Validation Service](https://validator.w3.org/) and returned no errors. 
+      As all web pages are rendered dynamically using Jinja template, each page and scenario had to be validated by direct input by copying and pasting the source code for the page.
 
     - #### **W3C CSS Jigsaw Validator**
       The CSS file was tested with [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) via direct input and returned no errors
-      [include screenshots]
 
     - #### **JSHint validator**
-      All javascripts files were tested with [JSHint](https://jshint.com/) and returned no errors
-      [include screenshots]
+      All javascripts files were tested with [JSHint](https://jshint.com/) and returned no errors except for braintree scripts for hosted fields, especially scripts for fields validation. Since the scripts will be actionned for the fields hosted in an iframe, the developer left the scripts as they are.
+
+      ![screenshots jshint issues](documentation/testing/screenshots/jshint_braintree.png)
 
     - #### **Python 8**
-      
+      Each python file was run through [PEP8 online](http://pep8online.com/) and returned no errors, except for settings.py and password validation section.
+
   - ### **Testing User stories**
-  - ### **Automated testing**
+    User stories were tested manually and details can be found here:
+
+    [Go to testing user stories](documentation/testing/user_stories.md)
+
   - ### **Responsiveness and compatibility**
+    The website was tested on the following devices and browsers:
+    ![browser testing](documentation/testing/screenshots/browser_test.png)
+
+    Prefixes needed to be added to clip-path as trapezeoid shapes did not render on tablets regardless of the browser.
+
+    The website was also tested using Google Inspect and Responsive viewer
+    ![responsive viewer](documentation/testing/screenshots/shop_responsive.png)
+
   - ### **Testing performance**
+    Google Lighthouse was run on different pages, with performances ranging from 83% to 100% depending on the number of images on the pages. The page with lower performance is the shop page with all products displayed. Below is an extract of the reports:
+
+    ![extract google lighthouse reports](documentation/testing/screenshots/google_lighthouse.jpg)
+
   - ### **Testing accessibility**
+
+    Since the website was developed using Django templating, each page was tested individually for accessibility with [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/) and returned no errors except for Braintree hosted fields as the accessibility tools cannot identify labels for these fields.
+    
+    ![screenshot wave issues](documentation/testing/screenshots/wave_braintree_errors.png)
+
+    Since these fields displayed in an iframe and after trying to add additional options such as 'internalLabel', the errors remained and the developer decided to keep the scripts as they are.
+
   - ### **Interesting issues and known bugs**
-    - #### **Known bugs**
+
+    - #### **Context processor and all auth template**
+      
+      As the newsletter form is rendered in the base template and accessible across the website, it was put in a context processor. At first return if post request is get, which must have override functionalities within all auth and as the result, if there were any errors in the login or whilst registering - it would throw a NoneType error. The solution was to remove if request is get & also renaming file - to make sure - it doesn’t override allauth functionalities 
+
+    - #### **Display crispy form in two columns - profile**
+      
+      One of the issue was to render to profile form in two column using the crispy form functionalities. At first two form, but that would have created issues with the post action. So used crispy layout to design the form in the backend. 
+
+    - #### **Beautifying code and if statement in form input attribute**
+      The developer had to be careful checking for django template variable being cut-off when beatufifying the code and causing errors when running the application. 
+
+    - #### **Gitpod workplace**
+
+      - **Gitpod workplace opening to previous version of project**
+        On 03/01/22 the workplace for this project opened to a previous version showing changes that has been previously committed and pushed. Upon further inspection, many other files were missing and it became apparent that the workspace opened to a previous version of the project. 
+
+      - **Step taken to resolve the issue**
+        - Commit the changes on the workplace
+        - Pull from origin main
+        - Merge conflicts
+        - Commit and push to origin main
+        - Run the application to check for any issues and adjust settings to remove star ratings, which was previously installed and removed
+
+      - **Change to gitpod and Code Institute template**
+
+        When gitpod updated their platform, it inadvertently affected the workspace and the template developed by Code Institute used for this project, whereby affecting the packages installed for running the application.
+
+        Following the previous with the workspace, the developer took the opportunity to follow the recommendations to open a new workspace with the updated Code Institute template by taking the following steps:
+          - Export the current database following this tutorial (the dump was included
+          - Fix the current requirements and override the dockerfile as recommended by Code Insitute
+          - Open a new workspace using the new CI template 
+          - Upload the sqlite from previous workspace to new workspace
+
+      - **Django variable to javascript**
+
+        For ease and having had some initial issues with connecting the static javascript files, the developer included scripts at the bottom of the html file. Since it’s cleaner to have the scripts in static files, scripts were moved to respective static files. The connection issue was resolved by closing the server and reopening it.
+
+        For the checkout app, the client token variable needed to be retrieved from the html template. After some research, the solution was to use json_script as per suggestion in this [stack overflow post] (https://stackoverflow.com/questions/298772/django-template-variables-and-javascript) and using this [django documentation](https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#json-script)
+
+        Html template:
+        ```
+        {{ client_token|json_script:'client_token' }}
+        ```
+        Javascript
+        ```
+        const client_token = JSON.parse(document.getElementById('client_token').textContent);
+        ```
+
+    - #### **Known issues**
+
+      Known issues are those raised in the accessibility report and formating of javascript for Braintree hosted fields. Other than that, all Braintree functionalities works as intended and error messages are displayed properly.
+
+      Also should the developer add an order from the admin platform, the stock will not deduct, although the shop owner should not add orders from django admin platform and maybe this option should be removed entirely.
  
 ## **DEPLOYMENT**
 
@@ -488,6 +573,8 @@ View live project here [link to deployed link]
     - https://stackoverflow.com/questions/1455126/unique-booleanfield-value-in-django
     - https://stackoverflow.com/questions/19598213/generating-a-date-relative-to-another-date-in-django-template
     - https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template
+    - https://pypi.org/project/django-countries/#customize-the-country-list
+
   - ### **Media and content**
     - All images and contents for this website have been provided by the artist himself, Peter Charalambides.
     - Card icons on checkout page from [Aaron Fagan](https://github.com/aaronfagan/svg-credit-card-payment-icons/)
