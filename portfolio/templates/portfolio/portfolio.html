@@ -13,7 +13,7 @@
 <div class="container pt-md-5 pt-4 pb-3">
   <div class="row pb-md-3 mb-4">
 
-    <div class="col-lg-4 portfolio-cont">
+    <div class="col-lg-4 portfolio-cont text-wrap text-truncate">
       <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">{{ portfolio.name }}</h1>
       <!--https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template-->
       {{ portfolio.description|linebreaks }}
@@ -33,9 +33,7 @@
         </button>
       </div>
       {% endif %}
-
       <hr class="my-5 my-lg-0 d-lg-none">
-
     </div>
 
     <div class="col-lg-8 ps-lg-4">
@@ -102,14 +100,14 @@
         </div>
 
         <!-- Modal zoom image -->
-        <div class="modal mt-5 pt-4 fade modal-gallery" id="modal-{{artwork.id}}" tabindex="-1"
+        <div class="modal mt-5 mt-md-4 mt-xl-5 pt-4 fade modal-gallery" id="modal-{{artwork.id}}" tabindex="-1"
           aria-labelledby="ModalLabel-{{artwork.id}}" aria-hidden="true">
           <div class="modal-dialog modal-gallery-cont">
             <div class="modal-content border-0">
               <div class="modal-header border-0 text-uppercase">
                 <p class="modal-title fs-5" id="ModalLabel-{{artwork.id}}">{{artwork.name}}</p>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                    class="fas fa-times fa-2x"></i></button>
+                <button type="button" class="btn-close pb-3" data-bs-dismiss="modal" aria-label="Close"><i
+                    class="fas fa-times fs-2"></i></button>
               </div>
               <div class="modal-body text-center">
                 <img src="{{MEDIA_URL}}{% if artwork.image %}{{ artwork.image }}{% else %}default_image.png{% endif %}"

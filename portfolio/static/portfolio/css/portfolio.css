@@ -28,7 +28,7 @@
 
 .modal-gallery img {
     width: auto;
-    height: 100%;
+    height: auto;
     max-height: 78vh !important;
 }
 
@@ -61,6 +61,10 @@
         clear: both;
         column-count: 2;
         column-gap: 1.95rem;
+    }
+
+    .modal-gallery img {
+        height: auto;
     }
 
     .gallery-item {
