@@ -6,6 +6,7 @@
 
 .wishlist-img>img {
     object-fit: contain;
+    max-height: 280px;
 }
 
 .relative {

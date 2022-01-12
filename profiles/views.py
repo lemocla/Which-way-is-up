@@ -81,34 +81,36 @@ def wishlist(request):
     return render(request, 'profiles/wishlist.html', context)
 
 
-@login_required
 def add_to_wishlist(request, artwork_id):
     """
     Add artwortk to user wishlist using ajax request
     """
+    if request.user.is_authenticated:
+        # Get user
+        user = get_object_or_404(UserProfile, user=request.user)
+        # Get artwork
+        artwork = get_object_or_404(Artwork, pk=artwork_id)
 
-    # Get user
-    user = get_object_or_404(UserProfile, user=request.user)
-    # Get artwork
-    artwork = get_object_or_404(Artwork, pk=artwork_id)
+        # Restrict add to wishlist to active items
+        if artwork.status != 'active':
+            messages.error(request, 'This item is no longer available.')
+            return redirect(reverse('shop'))
 
-    # Restrict add to wishlist to active items
-    if artwork.status != 'active':
-        messages.error(request, 'This item is no longer available.')
-        return redirect(reverse('shop'))
-
-    # Check if items already added to wishlist
-    if user.wishlist_items.filter(pk=artwork_id).exists():
-        # Toast error message
-        messages.error(request, f'{artwork.name.title()} already added '
-                       'to wishlist')
+        # Check if items already added to wishlist
+        if user.wishlist_items.filter(pk=artwork_id).exists():
+            # Toast error message
+            messages.error(request, f'{artwork.name.title()} already added '
+                           'to wishlist')
+        else:
+            # Add to wishlist
+            user.wishlist_items.add(artwork)
+            # Toast success message
+            messages.success(request, f'{artwork.name.title()} added to '
+                             'wishlist')
     else:
-        # Add to wishlist
-        user.wishlist_items.add(artwork)
-        # Toast success message
-        messages.success(request, f'{artwork.name.title()} added to '
-                         'wishlist')
-
+        # Invite non authenticated users to login or register
+        messages.info(request, ('Please login or create an account to add '
+                      'items to your wishlist'))
     return HttpResponse(status=200)
 
 
