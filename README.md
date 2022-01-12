@@ -456,6 +456,11 @@ View live project here [link to deployed link]
     - terminal for backend functionalities by printing expected outcome
     - Manual testing of user stories
 
+  - ### **Testing User stories**
+    User stories were tested manually and details can be found here:
+
+    [Go to testing user stories](documentation/testing/user_stories.md)
+
   - ### **Code validation**
 
     - #### **W3C HTML Code Validator**
@@ -472,11 +477,6 @@ View live project here [link to deployed link]
 
     - #### **Python 8**
       Each python file was run through [PEP8 online](http://pep8online.com/) and returned no errors, except for settings.py and password validation section.
-
-  - ### **Testing User stories**
-    User stories were tested manually and details can be found here:
-
-    [Go to testing user stories](documentation/testing/user_stories.md)
 
   - ### **Responsiveness and compatibility**
     The website was tested on the following devices and browsers:
@@ -562,18 +562,18 @@ View live project here [link to deployed link]
 
   - ### **Code**
     - About page event section styling adapted from [Code Institute CV mini-project](https://github.com/Code-Institute-Solutions/resume-miniproject-bootstrap4/tree/master/16-adding-work-history)
-    - trapezoid shape inspired from https://bennettfeely.com/clippy/
-    - /* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
-    - https://stackoverflow.com/questions/20555673/django-query-get-last-n-records
-    - https://stackoverflow.com/questions/61076688/django-form-dateinput-with-widget-in-update-loosing-the-initial-value
-    - https://stackoverflow.com/questions/43990154/braintree-jsv3-payment-method-nonce-value-bad-with-hostedfields?rq=1
-    - https://codepen.io/braintree/pen/zeamxM card validation
-    - https://stackoverflow.com/questions/37338925/django-tabularinline-discard-empty-rows
-    - https://docs.djangoproject.com/en/4.0/topics/forms/
-    - https://stackoverflow.com/questions/1455126/unique-booleanfield-value-in-django
-    - https://stackoverflow.com/questions/19598213/generating-a-date-relative-to-another-date-in-django-template
-    - https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template
-    - https://pypi.org/project/django-countries/#customize-the-country-list
+    - Trapezoid background shapes inspired from https://bennettfeely.com/clippy/
+    - Toasts small triangles adapted from [CSS-tricks](https://css-tricks.com/snippets/css/css-triangle/)
+    - Getting last n records from django queryset adapted from this [stack overflow post](https://stackoverflow.com/questions/20555673/django-query-get-last-n-records)
+    - Implementation of Django date input widget adapted from [stack overflow post](https://stackoverflow.com/questions/61076688/django-form-dateinput-with-widget-in-update-loosing-the-initial-value)
+    - [stack overflow post](https://stackoverflow.com/questions/43990154/braintree-jsv3-payment-method-nonce-value-bad-with-hostedfields?rq=1)
+    - Implementation for Braintree hosted fields validation from [Braintree code recipe](https://codepen.io/braintree/pen/zeamxM)
+    - Discarding rows in tabular inline table implemented from this [stack overflow post](https://stackoverflow.com/questions/37338925/django-tabularinline-discard-empty-rows)
+    - Implementation of contact form adapted from [official Django documentation](https://docs.djangoproject.com/en/4.0/topics/forms/)
+    - Implementing unique boolean field in portfolio app adapated from this [Stack overflow post](https://stackoverflow.com/questions/1455126/unique-booleanfield-value-in-django)
+    - Template tag for calculating estimated delivery date adapted from this [Stack overflow post](https://stackoverflow.com/questions/19598213/generating-a-date-relative-to-another-date-in-django-template)
+    - Rendering textfield data in template adapated from this [stackoverflow post](https://stackoverflow.com/questions/10270891/newline-in-models-textfield-not-rendered-in-template)
+    - Restricting Django country list adapted from [pypi.org documentation](https://pypi.org/project/django-countries/#customize-the-country-list)
 
   - ### **Media and content**
     - All images and contents for this website have been provided by the artist himself, Peter Charalambides.
