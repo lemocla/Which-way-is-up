@@ -11,6 +11,9 @@ $(document).ready(function () {
         }
     }
 
+    // Select GB address by default
+    $('#id_delivery_country').val('GB');
+
     // Style placeholders for delivery & billing countries
     // Adapted from Code Institute Boutique Ado project
     $('.lazyselect ').each(function () {

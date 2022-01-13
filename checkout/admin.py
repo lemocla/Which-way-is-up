@@ -41,7 +41,7 @@ class OrderAdmin(admin.ModelAdmin):
     )
 
     ordering = ('-date',)
-    list_filter = ('status', 'paid', 'full_name')
+    list_filter = ('status', 'paid', 'full_name', 'lineitems__artwork__name')
     search_fields = ['full_name', 'date', 'order_number',
                      'lineitems__artwork__name']
 

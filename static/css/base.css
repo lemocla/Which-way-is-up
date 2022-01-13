@@ -418,6 +418,11 @@ select {
     z-index: 1;
 }
 
+form.submitted *:not(form):invalid {
+    border-color: var(--red) !important;
+    box-shadow: 0 0 0 0.1rem rgba(220, 53, 69, 0.25);
+}
+
 /*--------------[ FORM IMAGE WIDGET ]------------*/
 
 .widget {

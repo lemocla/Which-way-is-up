@@ -57,4 +57,27 @@
              $(this).removeClass("fa-eye-slash").addClass("fa-eye");
          }
      });
+
+     // Check for invalid fields and display error message
+     $('button[type="submit"]').click(function () {
+         $('form').addClass('submitted');
+         $('*:not(form):invalid').each(function () {
+             let id = $(this).attr('id');
+             let label = $(`label[for="${id}"]`).text().replace('*', '');
+             if ($(`p[data-error="${id}"]`).length == 0) {
+                 $(this).parent().append(
+                     `<p class="red-text pt-1 my-0 small" data-error="${id}">Enter a valid ${label}</p>`
+                 );
+             }
+         });
+     });
+
+     // Remove error message when input is valid
+     $('*:not(form):invalid').change(function () {
+         if ($(this).is(":valid")) {
+             let id = $(this).attr('id');
+             $(`p[data-error="${id}"]`).remove();
+         }
+     });
+
  });

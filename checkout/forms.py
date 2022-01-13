@@ -59,7 +59,6 @@ class OrderForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'mb-3'
         self.fields['gift_option'].label = "Add gift option"
         self.fields['billing_same_as_delivery'].label = (
             'My billing address is the same as my delivery address')
