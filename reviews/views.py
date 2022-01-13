@@ -41,11 +41,14 @@ def add_reviews(request, artwork_id, orderline_id):
     order_line = None
     order = None
 
+    # Set redirect url
+    redirect_url = request.GET.get('ref', 'my_reviews')
+
     # Check if artwork status is active
     if artwork.status != 'active':
         messages.error(request, 'Sorry you cannot leave a review for this'
                        ' item as it is no longer available.')
-        return redirect('my_reviews')
+        return HttpResponseRedirect('order_history')
 
     # Check for existing reviews
     review = Review.objects.filter(artwork=artwork).filter(
@@ -88,7 +91,7 @@ def add_reviews(request, artwork_id, orderline_id):
             messages.success(request, f'Your review for '
                              f'{artwork.name.title()} has been '
                              f'successfully added!')
-            return redirect('order_history')
+            return redirect(redirect_url)
 
     else:
         form = ReviewForm()
@@ -116,7 +119,7 @@ def edit_reviews(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
 
     # Set redirect url
-    redirect_url = request.POST.get('next', 'my_reviews')
+    redirect_url = request.GET.get('ref', 'my_reviews')
 
     # Check if authenticated user created review being deleted
     if user_profile.id != review.user_profile.id:

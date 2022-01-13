@@ -10,7 +10,7 @@
         <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">reviews</h1>
         <p>You are leaving a review for <strong>{{ artwork.name|title }}</strong> purchased on {{ order.date|date:"d/m/y" }} with order reference: {{ order.order_number }}</p>
         <div class="col-12">
-            <form method="POST" action="{% url 'add_reviews' artwork.id order_line.id %}">
+            <form method="POST" action="{% url 'add_reviews' artwork.id order_line.id %}?ref={{request.META.HTTP_REFERER}}">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="mt-5">

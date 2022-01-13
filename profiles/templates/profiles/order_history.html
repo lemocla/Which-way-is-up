@@ -82,7 +82,7 @@
                             {% else %}
                             {% if item.artwork.status == 'active' %}
                             <div>
-                                <a href="{% url 'add_reviews' item.artwork.id item.id %}"
+                                <a href="{% url 'add_reviews' item.artwork.id item.id %}?next={{ request.path|urlencode }}"
                                     class="text-muted text-uppercase me-4">
                                     <i class="far fa-comment-alt me-1" aria-hidden="true"></i>
                                     <span class="small text-link">Leave a review</span>
