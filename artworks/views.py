@@ -240,15 +240,15 @@ def delete_artwork(request, artwork_id):
     if 'ref' in request.GET:
         redirect_url = request.GET['ref']
     else:
-        redirect_url = request.META.get('HTTP_REFERER')
+        redirect_url = request.META.get('HTTP_REFERER', 'artworks')
 
     # Get artwork object
     artwork = get_object_or_404(Artwork, id=artwork_id)
     # Delete artwork
-    artwork.delete()
+    artwork.post_delete()
 
     # Info message if items set inactive during delete method
-    if artwork.lineartworks:
+    if artwork.lineartworks.exists():
         messages.info(request, 'This item has been set has inactive, as there '
                       'are orders attached to it')
     else:

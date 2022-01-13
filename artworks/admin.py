@@ -64,7 +64,7 @@ class ArtworkAdmin(admin.ModelAdmin):
     def delete_queryset(self, request, queryset):
         """Override delete queryset to call delete method"""
         for obj in queryset:
-            obj.delete()
+            obj.post_delete()
 
     @admin.action(description='Mark as draft')
     def make_draft(self, request, queryset):

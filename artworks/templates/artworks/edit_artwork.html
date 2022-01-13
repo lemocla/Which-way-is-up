@@ -11,6 +11,7 @@
 
         <form method="POST" action="{% url 'edit_artwork' artwork.id %}" enctype="multipart/form-data">
             {% csrf_token %}
+            {{ artwork.id|json_script:'artworkId' }}
             {% for field in form %}
             {% if field.name != 'image' %}
             {{ field | as_crispy_field }}
@@ -32,4 +33,5 @@
 {% block extra_js %}
 {{ block.super }}
 <script src="{% static 'artworks/js/image.js' %}"></script>
+<script src="{% static 'artworks/js/option.js' %}"></script>
 {% endblock %}

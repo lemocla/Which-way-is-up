@@ -65,7 +65,7 @@ class Artwork(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2,
                                 validators=[MinValueValidator(0.00)])
     # https://stackoverflow.com/questions/849142/how-to-limit-the-maximum-value-of-a-numeric-field-in-a-django-model
-    stock = models.PositiveSmallIntegerField(default=0,
+    stock = models.PositiveSmallIntegerField(default=1,
                                              validators=[
                                                 MaxValueValidator(500),
                                                 MinValueValidator(0)
@@ -136,12 +136,13 @@ class Artwork(models.Model):
                         send_mail(subject, body, sender, recipients)
         return super(Artwork, self).save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
+    def post_delete(self):
         """
         Override delete method to set artworks' status as inactive
         if attached to an order_lines (lineartworks)
         """
-        if self.lineartworks:
+        order_lines = self.lineartworks.all().count()
+        if order_lines > 0:
             self.status = 'inactive'
             self.save()
         else:
