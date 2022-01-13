@@ -186,8 +186,8 @@
     - ### **As a shopper, I want to review items in my shopping bag so that I can adjust quantities ordered**
       - When I browse my shopping bag, I can see a list of items in my bag with thumbnail, title, quantity and subtotals,
       - When I click in the select field under the quantity column and changes the quantity, the subtotals and totals adjust accordingly
-      - When I click on the "bin" icon, the item is removed from my shopping bag and the subtotals as well as totals are adjusted accordingly
-      - When I click on the button "move to wishlist" and if I am authenticated, the artwork will be added to my wishlist and a success message will display
+      - When I click on the "remove item" link, the item is removed from my shopping bag and the subtotals as well as totals are adjusted accordingly
+      - When I click on the "move to wishlist" link and if I am authenticated, the artwork will be added to my wishlist and a success message will display
       - When I click on wishlist and I am not authenticated, a message will display inviting me to either login or register
       - When I click on on the button "Continue Shopping", I am redirected to the previous shopping page
       - When I click on checkout, I am redirected to the checkout page
@@ -206,24 +206,50 @@
       ![remove item not in the list](screenshots/bag_remove_error.png)
 
     - ### **As a shopper, I want to have a gift option so I can buy a print / piece of art for a special occasion for a friend**
-      - When on the shopping bag and /or checkout page,
-      - I can see a checkbox entitled "gift option",
-      - When I check "gift option", additional fields are displayed such as the name of the recipient and a message to be sent alongside the item
-      - **Result**: Pass  ✅
-  
+      - **Path 1**
+        - When on the shopping bag and /or checkout page,
+        - I can see a checkbox entitled "gift option",
+        - When I check "gift option", additional fields are displayed such as the name of the recipient and a message to be sent alongside the item
+        - **Result**: Pass  ✅
+      
+      - **Path 2**
+        - When the shopping cart and I have filled gift option information and,
+        - When I go the checkout page, the information I've completed are there and,
+        - I just need to complete the recipient name
+        - **Result**: Pass  ✅
+
+      **Gift option on shopping bag page**
+      ![bag gift option](screenshots/bag_gift.png)
+
+      **Gift option on checkout page**
+      ![checkout page gift option](screenshots/checkout_gift.png)
+
     - ### **As a shopper, I want to enter payment information in a safe and secure way so that I can checkout quickly with confidence**
+      - When landing on the checkout page, I can see a toast message informing me that the shop delivers to the UK only and
+      - If I am logged in, the form is prefilled with my informations,
       - When on the checkout page, I can see a paiement details section at the bottom of the page with field asking me for my debit/credit card details, expiry date and CVC
       - When I complete these details correctly and click "checkout" I am redirected to an order confirmation page and I also can see a notification informing me of my successful order.
       - When I complete these details incorrectly and click "checkout", an error message will display prompting me to enter the correct information.
       - **Result**: Pass  ✅
 
+      **Checkout prefilled with authenticated user information**
+      ![checkout prefilled](screenshots/checkout_user.png)
+
+      **Checkout form with missing information**
+      ![checkout missing information](screenshots/checkout_missing_field.png)
+
+      **Checkout form invalid paiement form**
+      ![checkout invalid paiement form](screenshots/checkout_paiement_invalid.png)
+
+      **Checkout form valid paiement form**
+      ![Checkout valid paiement form](screenshots/checkout_paiement_valid.png)
 
     - ### **As a shopper, I want to receive confirmation of my order so that I can have a proof of purchase**
       - When I click on the checkout and all the details on the checkout page, I am redirected to an order confirmation page with the details for my order, my details as well as delivery information. 
       - I should also receive an email with my order details with the same information as on the order confirmation page.
       - **Result**: Pass  ✅
 
-      
+      ![order confirmation](screenshots/checkout_success.png)
  
 - ## **Registration and account management** 
 
@@ -232,105 +258,194 @@
         - **Navigation**
             - When I click on the "user" icon, a dropdown menu is displayed with the options to login and to register,
             - When I click on the secondary menu item "Register", a form is displayed prompting me to complete my email, a username and a password.
-            - **Result**: Pass
+            - **Result**: Pass ✅
+
+            ![user menu](screenshots/user_menu.png)
+
         - **Form valid path**
             - when I enter my email in the "email” field and
             - When I enter my username in the “username” field and,
-            - When I enter a valid password of a minimum of 8 characters including a mix of letters, numbers and symbols including a capital letter,
+            - When I enter a valid password of a minimum of 8 characters including a mix of letters, numbers and symbols,
             - A message informing me to verify my email address is displayed.
-            - **Result**: Pass
+            - I should have also received an email with a link to confirm my email 
+            - When I click on the link in the email, I am redirecting to a page asking me to confirm my email
+            - When I click on the button "confirm email", I am redirected to the login page and a toast message is displayed to inform me that my email has been successfully verified.
+            - **Result**: Pass ✅
+          
+          **Verify email address**
+          ![sign-up confirm_email](screenshots/signup_confirm_email.png)
+
+          **Confirm email address**
+          ![signup email confirm](screenshots/signup_email_confirm.png)
+
+          **Email address verified**
+          ![!signup email confirmed](screenshots/signup_email_confirmed.png)
+
         - **Form invalid path**
             - When I enter invalid email in the “email” field and or leave the field empty, and/or
             - when I enter an invalid username address in the “username” field or leave the field empty and if
             - When I enter an invalid password or leave the password field empty,
             - Errors messages will display and I will be prompted to input valid information
-            - **Result**: Pass
+            - **Result**: Pass ✅
+          
+          ![register invalid path](screenshots/register_invalid_password.png)
+
         - **Invalid path: existing user**
             - When I enter credentials for a user that already exists, 
             - An error message will display to inform me that a user already exists with these credentials and inviting me to log in instead. 
-            - **Result**: Pass
+            - **Result**: Pass ✅
+            ![register exist email](screenshots/register_email_exist.png)
 
     - ### **As a site user, I want to login and logout so that I can access my profile safely**
         - **Navigation**
             - When I click on the "user" icon, a dropdown menu is displayed with the options to login and to register,
             - When I click on the secondary menu item "Login", a form is displayed prompting me to complete my email and a passwork.
-            - **Result**: Pass
+            - **Result**: Pass ✅
+
+            ![login form](screenshots/login.png)
 
         - **Form valid path**
             - When I enter my email in the “email” field and
             - When I enter my password in the “password” field and,
             - If the information match my account, a success message is displayed informing me that I have successfully logged in.
-            - **Result**:  Pass
+            - **Result**:  Pass ✅
+
+            ![login valid](screenshots/login_success.png)
 
         - **Form invalid path: Incorrect credentials**
             - If I enter the wrong password/email, a message will display to inform me that my credentials are incorrect, 
-            - **Result**: Pass
+            - **Result**: Pass  ✅
+
+            ![login error](screenshots/login_error.png)
 
         - **Form invalid path: invalid input**
             - If I enter invalid email in the “email” field or leave the field empty, and/or
             - If I leave the passwword field empty,
             - A message will display and I will be prompted to fill valid information and
-            - **Result**: Pass
+            - **Result**: Pass  ✅
 
+            ![login missing field](screenshots/login_missing_field.png)
+  
     - ### **As a site user, I want to edit my profile so that I can update my personal information**
         - **Navigation**
             - When I have successfully logged in and,
             - When I click on the user icon, a dropdown menu is displayed,
             - When I click on my profile, I am redirected to my profile page with the details I've already entered displayed in a a form
-            - **Result**: Pass
+            - **Result**: Pass  ✅
+
+        ![profile page](screenshots/profile.png)
+
        - **Edit profile - valid path**
             - When I edit a field in my personal information in the valid format and click on "update my profile", 
             - My profile is updated and a message informing me that my profile has been successfully updated is displayed.
-            - Results: Pass
-        - **Edit profile invalid path**
-            - If I enter information in an invalid format or
-            - A message error under the relevant field will display prompting me to enter the right information
-            - **Result**: Pass
-
+            - **Results**: Pass  ✅
+        
+        ![profile edit success](screenshots/profile_edit_success.png)
+           
     - ### **As a site user, I want to reset my password if I forgot it so that I can access my account**
         - **Navigation**
            - When I am the login page, I can see a link "reset your password" and,
            - When I click on the link "reset my password", I am redirected to a page asking me for an email address and a button to reset my password
-           - **Result**: Pass      
+           - **Result**: Pass ✅
+        
+        ![password reset](screenshots/password_reset.png)
+
         - **Valid path**
             - When I enter a valid address and I click the button "reset my password", I should receive an email with a link redirecting me to a form to edit my password. 
             - When I enter a new password, my credentials are updated. 
-            - **Result**: Pass          
+            - **Result**: Pass ✅
+        
+          ![password_changed_success](screenshots/password_changed_success.png)
+
         - **Invalid path**
             - When I leave the email field empty / input an invalid email address, I am prompted to enter valid data
             - When I enter an incorrect email address, a message is displayed informing me that the e-mail address is not assigned to any user account.
-            - **Result**: Pass
+            - **Result**: Pass ✅
+        ![password changed invalid path](screenshots/password_reset_invalid.png)
 
-- ## **Wishlist items and product review**
+- ## **Wishlist items, product review and order details**
 
     - ### **As a site user, I want to save artworks in my wishlist so that I can buy it later or buy it again**
-      - When I hover over the "heart" icon in the navigation, its appearance changes and, 
-      - When I click on the icon and if I am logged-in, I am redirected to "My wishlist" page and,
-      - A list of artwork added as my favourite is displayed with buttons to either add the artwork to cart or remove the the artwork from my saved items.
-      - When I click on the button "Remove", the artwork is removed from my saved items and a message informing me that the item has been successfully removed is displayed. 
-      - When I click on the button "Add to cart", the artwork is added to my shopping bag and a message informing me that the item has been successfully added to my shopping bag is displayed.
-      - **Result**: Pass
+
+      - **Path 1: accessing wishlist - authenticated users**
+        - When I hover over the "heart" icon in the navigation, its appearance changes and, 
+        - When I click on the icon and if I am logged-in, I am redirected to "My wishlist" page and,
+        - A list of artwork added as my favourite is displayed with buttons to either add the artwork to the shopping cart or remove the the artwork from my saved items.
+        - **Result**: Pass ✅
+
+        **Whishlist page**
+        ![wishlist page](screenshots/wishlist.png)
+
+      - **Path 2: removing items from wishlist**
+        - When I click on the button "Remove", the artwork is removed from my saved items and a message informing me that the item has been successfully removed is displayed.
+        - **Result**: Pass ✅
+
+        **Whislist remove success**
+        ![wishlist remove success](screenshots/wishlist_remove_success.png)
+
+      - **Path 3: adding artwork to shopping cart**
+        - When I click on the select field quantity, a dropdown with option to select from available quantities is displayed
+        - When I click on the button "Add to cart", the artwork is added to my shopping bag and a message informing me that the item has been successfully added to my shopping bag is displayed.
+        - **Result**: Pass ✅
+
+        **Wishlist add to shopping cart**
+        ![wishlist quantity](screenshots/wishlist_quantity.png)
+        ![wishlist add to cart](screenshots/wishlist_add_to_cart.png)
+
+      - **Path 4: wihslist page and non authenticated users**
+        - When I click on the icon and if I am not logged in, I am redirected to the "login page"
+         - **Result**: Pass ✅
+
+    - ### **As a site user, I want to view my orders**
+      - When I have successfully logged in and,
+      - When I click on the user icon, a dropdown menu is displayed,
+      - When I click on my orders, I am redirected to 'my orders' page displaying details of past orders,
+      - When I hover over one of the order reference number, its appearance changes and 
+      - When I click on one of the reference number, I am redirected to the order detail page
+      - **Result**: Pass ✅
+
+      **My orders page**
+      ![order page](screenshots/order_history.png)
+
+      **Order detail page**
+      ![order detail page](screenshots/order_summary.png)
 
     - ### **As a site user, I want to leave a review so that I can let others know about my shopping experience**
+
       - **Path 1 - artwork page**
-        - When I browse an artwork page I have purchasd and commissioned and I haven't yet left a review, I can see a button "leave a review"
-        - When I click on "leave a review", a page open with a form where I can enter a review in the "review" field, 
-        - When I submit the review, I am redirected to artwork page and my review is displayed, 
-        - Additional links will display under my review, so that I can edit / delete my reivew,
-        - When I select edit, the review page with the form prefilled is displayed and I can edit my review, 
-        - When I click submit, my review is updated and a notification informing me that my review has been successfully edited is displayed.
-        - **Result**: Pass
-      - **Path 2 - profile page**
-        - When I am logged in and under my profile page, I can see my order details with a button "Review", 
-        - When I click on "Review" a page open with a form to enter a review in the "review" field, 
-        - When I click "Submit", the review is displayed under the artwork I purchased / commissioned and notification informing me that I have successfully left a review is displayed
-        - **Result**: Pass
-      - **Path 3 - edit reviews**
-        - When I am on my profile page, I can see the tab reviews 
-        - When I click on the tab revies, all the reviews I have created are displayed, 
+        - When I browse an artwork page I have purchasd and commissioned and I haven't yet left a review, I can see a link "leave a review"
+        - When I click on "leave a review",  where I can select a rating in the "rating" field and enter a comment in the "comment" field,
+        - When I click "Submit" and that my form is valid, the review is displayed under the artwork I purchased / commissioned and notification informing me that I have successfully left a review is displayed
+        - When I click on "Submit" and my form is not valid, an error message will be displayed prompting me to fill the form with valid information.
+        - Additional links will display under my review, so that I can edit / delete my review.
+        - **Result**: Pass ✅
+
+      - **Path 2 - my order page**
+        - When I am logged in and that I browse my order history,
+        - For each item I have ordered but I haven't left a review, a link to add a review
+        - A page opens with a form where I can select a rating in the "rating" field and enter a comment in the "comment" field,
+        - When I submit the review and that my form is valid, I am redirected to the "Order history page"
+        - When I submit the review and that my form is not valid, an error message will display asking me to fill the form with valid information.
+        - **Result**: Pass ✅
+
+      - **Path 3 - My reviews page**
+        - When I am logged in and when I click on the user icon, a dropdown menu is displayed,
+        - When I click on "My reviews" a page opens with all the reviews that I have created and,
+        - For each review, a link to "edit my review" and a link to "delete my review" are displayed
+        - **Result**: Pass ✅
+
+      - **Path4 - Editing my reviews**
+        - When on my order pages, my reviews page or the artwork detail page, I can see a link to edit each of the reviews I have created
         - When I click on edit, a page opens with my reviews details and I am able to edit my reviews,
-        - When I click submit, my review is edited and a notification of my review has been successfully edited is displayed
-        - **Result**: Pass
+        - When I click submit and if the form is valid, my review is edited and a notification of my review has been successfully edited is displayed
+        - When I click submit and the form is invalid, error messages will dispaly asking me to complete the form with valid information.
+        - **Result**: Pass ✅
+
+      - **Path5 - Deleting my reviews**
+        - When on my order pages, my reviews page or the artwork detail page, I can see a link to edit each of the reviews I have created
+        - When I click on delete, a modal page opens asking me to confirm whether I wish to delete my review.
+        - When I click on yes, my review is deleted and a toast message confirming that my reviews has been successfully deleted is displayed.
+        - **Result**: Pass ✅
 
 - ## **Contact and connect**
 
@@ -377,20 +492,83 @@
 
       ![footer with icon changing appearance](screenshots/footer_social_media.png)
 
-- ## **Admin and site management** 
+- ## **Admin and site management**
+
     - ### **As the site owner, I want to add, edit and delete a collection so that I can keep my portfolio and work up-to-date**
-      - When I successfully log-in as the site owner, I can see a menu item entitled "Add Collection" in the top navigation bar under the user icon
-      - When I click on the menu item "Add Collection", a page opens with a form to add collection details 
-      - When I fill all the information correctly, the collection is successfully created and a notification informing of the successful creation of a collection is displayed.
-      - Wen I fill information incorrectly / do not complete all the compulsory fields in the form, an error message will display prompting me to correct my entries before submitting the form again
-      - **Result**: Pass
+
+      - **Path: Add a collection**
+        - When I successfully log-in as the site owner, I can see a menu item entitled "Add Collection" in the top navigation bar under the user icon
+        - When I click on the menu item "Add Collection", a page opens with a form to add collection details 
+        - When I fill all the information correctly, the collection is successfully created and a notification informing of the successful creation of a collection is displayed.
+        - Wen I fill information incorrectly / do not complete all the compulsory fields in the form, an error message will display prompting me to correct my entries before submitting the form again
+        - **Result**: Pass ✅
+
+      - **Path: edit collection from pages**
+        - When I am logged in a the super user and that I browse a collection page, I can see an icon to edit and an icon to delete my portfolio
+        - When I click on edit, I am redirected to a page with a form prefilled with the details of the collection being edited.
+        - When I click on submit and that the form is valid, the portfolio detail page will displayed updated information and a toast message informing that the portfolio has been successfully edited is displayed. 
+        - When I click on submit and that the form is not valid, error messages will be displayed informing to fill the right information.
+        - **Result**: Pass ✅
+
+      - **Path: delete a collection**
+        - When I click on the delete icon on the porfolio page (when I am logged in as a super user),
+        - A modal window opens asking me if I am sure that I want to delete this collection, 
+        - When I press yes, the collection is successfully deleted and a toast message is displayed 
+        - When I press close, the modal window closes and the collection is not deleted.
+        - **Result**: Pass ✅
+    
     - ### **As the site owner, I want to add, edit and delete individual artwork and items to that I can link them to collection and keep my shop up-to-date**
-      - When I successfully log-in as the site owner, I can see a menu item entitled "Add Artwork" in the top navigation bar under the user icon
-      - When I click on the menu item "Add Artwork", a page opens with a form to add artwork details 
-      - When I fill all the information correctly, the collection is successfully created and a notification informing me that the artwork has been successfully created is displayed.
-      - Wen I fill information incorrectly / do not complete all the compulsory fields in the form, an error message will display prompting me to correct my entries before submitting the form again
-      - **Result**: Pass      
+
+      - **Path 1: from the main site**
+        - When I successfully log-in as the site owner, I can see a menu item entitled "Add Artwork" in the top navigation bar under the user icon
+        - When I click on the menu item "Add Artwork", a page opens with a form to add artwork details 
+        - When I fill all the information correctly, the artowrk is successfully created and a notification informing me that the artwork has been successfully created is displayed.
+        - Wen I fill information incorrectly / do not complete all the compulsory fields in the form, an error message will display prompting me to correct my entries before submitting the form again
+        - **Result**: Pass ✅
+
+      - **Path 2: Setting artwork status from admin console**
+        - When I am on the admin console under the artwork section I can see a list of all the artwork I have created being displayed in a table.
+        - When I click in the dropdown menu on top of the artwork page, I can see the option to either delete the selected product, set the product as active, inactive or as draft.
+        - When I select multiple artworks and that I click delete, if there are an order attached to that artwork, the artwork status will be set as inactive
+        - When I select multiple artworks and I either select "set as active", "set as inactive" or "set at draft", the artwork status for each selected item will be updated accordingly.
+        - **Result**: Pass ✅
+
     - ### **As a site owner I want to add related product so that I can encourage multi-buy**
       - When I complete the form in "Add an Artwork" page, I can see an option to select related artwork from existing entries on the database.
       - When I select related artwork and submit the form, I can see under the artwork detail page related artwork displayed with a thumbnail, a title and price. 
-      - **Result**: Pass
+      - **Result**: Pass ✅
+
+    - ### **As a site owner, I want to be able to edit most of the content of the website, so that I can keep my website up to date and engaging.**
+      
+      - ### **Add events**
+        - From the dropdown menu under the user icon, I can see a link to add an event
+        - When I click on add an event, I am redirected to a page with a form with date input field, place and description,
+        - When I complete the form in a valid format and click on submit, I am redirected to "about page" where the event will be displayed and a toast message informing that I have succesfully created the event is displayed.
+        - If the form is invalid, error messages will be displayed to let me know to complete required field in a valid format.
+        - **Result**: Pass ✅
+
+      - ### **Edit/delete events**
+        - When I am logged in as the shop owner and under the events section in the about page, I can see a link to "edit event" and a link to "delete event",
+        - When I click on edit event, I am redirected to a page where all the details for my event are displayed and for me to edit,
+        - When I click on submit and that the form is valid, I am redirected to the about page and toast message will be displayed to inform me that my event has been successfully edited.
+        - When I click on submit and that the form is not valid, error messages will be displayed to let me know that I need complete the form in a valid format. 
+        - **Result**: Pass ✅
+
+      - ### **Deleting events**
+        - Same as above,
+        - When I click on the delete button, a modal window open asking me to confirm whether I want to delete this event,
+        - When I click yes, the event is successfully deleted with a toast message being displayed.
+        - **Result**: Pass ✅
+
+      - ### **Set featured portfolio for homepage**
+        - When I add/edit a portfolio, I can select the boolean field "display home" and the portolio will be displayed on the homepage.
+        - If any other portfolio in the database has a true value for "display home", it will be set as false
+        - **Result**: Pass ✅
+
+    - ### **As a site owner, I want to manage orders from the console so I can know I have dispatched the order.**
+      - When I am logged in as the shop owner and that I access the admin console and navigate under Orders,
+      - The list of all the orders I have received are being displayed including the paiement status
+      - When I click on the select field on top of the report, I can see an option to "mark order as dispatched",
+      - When I select multiple orders in the report, select "mark order as displatched" and click go, each of the selected orders's status will update accordingly.
+      - **Result**: Pass ✅
+
