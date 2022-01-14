@@ -413,12 +413,24 @@
     - ### **As a site user, I want to leave a review so that I can let others know about my shopping experience**
 
       - **Path 1 - artwork page**
-        - When I browse an artwork page I have purchasd and commissioned and I haven't yet left a review, I can see a link "leave a review"
+        - When I browse an artwork page I have purchased and I haven't yet left a review, I can see a link "leave a review" at the bottom of the page
         - When I click on "leave a review",  where I can select a rating in the "rating" field and enter a comment in the "comment" field,
         - When I click "Submit" and that my form is valid, the review is displayed under the artwork I purchased / commissioned and notification informing me that I have successfully left a review is displayed
         - When I click on "Submit" and my form is not valid, an error message will be displayed prompting me to fill the form with valid information.
         - Additional links will display under my review, so that I can edit / delete my review.
         - **Result**: Pass ✅
+
+        **Artwork page review section**
+        ![artwork page review section](screenshots/artwork_review_section.png)
+
+        **Add a review page**
+        ![review add page](screenshots/review_add.png)
+
+        **Add a review invalid input**
+        ![review add page](screenshots/review_add_invalid.png)
+
+        **Add a review success message**
+        ![review success message](screenshots/review_add_success.png)
 
       - **Path 2 - my order page**
         - When I am logged in and that I browse my order history,
@@ -428,11 +440,15 @@
         - When I submit the review and that my form is not valid, an error message will display asking me to fill the form with valid information.
         - **Result**: Pass ✅
 
+        ![success_order_page_review](screenshots/review_add_success.png)
+
       - **Path 3 - My reviews page**
         - When I am logged in and when I click on the user icon, a dropdown menu is displayed,
         - When I click on "My reviews" a page opens with all the reviews that I have created and,
         - For each review, a link to "edit my review" and a link to "delete my review" are displayed
         - **Result**: Pass ✅
+
+        ![my review](screenshots/my_reviews.png)
 
       - **Path4 - Editing my reviews**
         - When on my order pages, my reviews page or the artwork detail page, I can see a link to edit each of the reviews I have created
@@ -440,12 +456,24 @@
         - When I click submit and if the form is valid, my review is edited and a notification of my review has been successfully edited is displayed
         - When I click submit and the form is invalid, error messages will dispaly asking me to complete the form with valid information.
         - **Result**: Pass ✅
+        
+        **Edit review**
+        ![review_edit](screenshots/review_edit.png)
+      
+        **Toast message - review successfully edited**
+        ![review edit success](screenshots/review_edit_success.png)
 
       - **Path5 - Deleting my reviews**
         - When on my order pages, my reviews page or the artwork detail page, I can see a link to edit each of the reviews I have created
         - When I click on delete, a modal page opens asking me to confirm whether I wish to delete my review.
         - When I click on yes, my review is deleted and a toast message confirming that my reviews has been successfully deleted is displayed.
         - **Result**: Pass ✅
+      
+        **Delete a review modal**
+        ![review delete modal](screenshots/review_delete_modal.png)
+
+        **Delete a review - success message**
+        ![review delete success](screenshots/review_delete_success.png)
 
 - ## **Contact and connect**
 
@@ -502,13 +530,27 @@
         - When I fill all the information correctly, the collection is successfully created and a notification informing of the successful creation of a collection is displayed.
         - Wen I fill information incorrectly / do not complete all the compulsory fields in the form, an error message will display prompting me to correct my entries before submitting the form again
         - **Result**: Pass ✅
+      
+        **Add a portfolio page**
+        ![add a portfolio page](screenshots/portfolio_add.png)
 
-      - **Path: edit collection from pages**
+        **Add a portfolio invalid input**
+        ![Add portfolio invalid message](screenshots/portfolio_add_invalid.png)
+
+        **Add a portfolio - success message**
+        ![Add a portfolio success message](screenshots/portfolio_add_success.png)
+
+      - **Path: edit collection**
         - When I am logged in a the super user and that I browse a collection page, I can see an icon to edit and an icon to delete my portfolio
         - When I click on edit, I am redirected to a page with a form prefilled with the details of the collection being edited.
         - When I click on submit and that the form is valid, the portfolio detail page will displayed updated information and a toast message informing that the portfolio has been successfully edited is displayed. 
         - When I click on submit and that the form is not valid, error messages will be displayed informing to fill the right information.
         - **Result**: Pass ✅
+
+        **Edit collection page**
+        ![edit collection](screenshots/portfolio_edit.png)
+        **Edit collecion - success message**
+        ![edit collection success message](screenshots/portfolio_edit_success.png)
 
       - **Path: delete a collection**
         - When I click on the delete icon on the porfolio page (when I am logged in as a super user),
@@ -516,27 +558,80 @@
         - When I press yes, the collection is successfully deleted and a toast message is displayed 
         - When I press close, the modal window closes and the collection is not deleted.
         - **Result**: Pass ✅
-    
+
+        **Delete a collection modal**
+        ![Delete a collection modal](screenshots/portfolio_delete_modal.png)
+
+        **Delete a collection - confirmation message**
+        ![Delete success message](screenshots/portfolio_delete_success.png)
+  
     - ### **As the site owner, I want to add, edit and delete individual artwork and items to that I can link them to collection and keep my shop up-to-date**
 
-      - **Path 1: from the main site**
+      - **Path 1: Add artwork**
         - When I successfully log-in as the site owner, I can see a menu item entitled "Add Artwork" in the top navigation bar under the user icon
         - When I click on the menu item "Add Artwork", a page opens with a form to add artwork details 
         - When I fill all the information correctly, the artowrk is successfully created and a notification informing me that the artwork has been successfully created is displayed.
         - Wen I fill information incorrectly / do not complete all the compulsory fields in the form, an error message will display prompting me to correct my entries before submitting the form again
         - **Result**: Pass ✅
 
-      - **Path 2: Setting artwork status from admin console**
+        **Add artwork page**
+        ![Add event](screenshots/artwork_add.png)
+
+        **Add artwork - invalid input**
+        ![Add event invalid field](screenshots/artwork_add_invalid.png)
+
+        **Add artwork - success message**
+        ![Add event success](screenshots/artwork_add_success.png)
+
+      - **Path: edit artwork**
+        - When I am logged in a the super user and that I browse the artwork page, I can see an icon to edit and an icon to delete the artwork
+        - When I click on edit, I am redirected to a page with a form prefilled with the details of the artwork being edited
+        - An information message is also displayed to let me know which artwork I am currently editing
+        - When I click on submit and that the form is valid, the artwork detail page will displayed updated information and a toast message informing that the artwork has been successfully edited is displayed. 
+        - When I click on submit and that the form is not valid, error messages will be displayed informing to fill the right information.
+        - **Result**: Pass ✅
+
+        **Edit artwork page**
+        ![edit artwork](screenshots/artwork_edit.png)
+
+        **Edit artwork - success message**
+        ![edit artwork success message](screenshots/artwork_edit_success.png)
+
+      - **Path: delete an artwork**
+        - When I click on the delete icon on the artwork page and I am logged in as the shop owner,
+        - A modal window opens asking me if I am sure that I want to delete this collection, 
+        - When I press yes, the artwork is either:
+        - successfully deleted if no orders are attached to it and a success message is displayed to let me know that the artwork has been successfully deleted.
+        - Set as inactive if there are orderes attached it and an information message will be displayed to let me know that the artwork has been set as inactive.
+        - When I press close, the modal window closes and the artwork is not deleted.
+        - **Result**: Pass ✅
+
+        **Delete a artwork modal**
+        ![Delete artwork modal](screenshots/artwork_delete_modal.png)
+
+        **Delete artwork - confirmation message**
+        ![Delete success message](screenshots/artwork_delete_success.png)
+
+        **Delete artwork - information message - set as inactive**
+        ![Delete info message](screenshots/artwork_set_inactive.png)
+
+      - **Path : Setting artwork status from admin console**
         - When I am on the admin console under the artwork section I can see a list of all the artwork I have created being displayed in a table.
         - When I click in the dropdown menu on top of the artwork page, I can see the option to either delete the selected product, set the product as active, inactive or as draft.
         - When I select multiple artworks and that I click delete, if there are an order attached to that artwork, the artwork status will be set as inactive
         - When I select multiple artworks and I either select "set as active", "set as inactive" or "set at draft", the artwork status for each selected item will be updated accordingly.
+        - When I select an item as inactive, it will be removed from users' wishlist and relevant users will receive an email to inform them that their items has been removed from their wishlist.
         - **Result**: Pass ✅
+
+        ![Artwork admin platform](screenshots/artwork_admin_console.png)
 
     - ### **As a site owner I want to add related product so that I can encourage multi-buy**
       - When I complete the form in "Add an Artwork" page, I can see an option to select related artwork from existing entries on the database.
       - When I select related artwork and submit the form, I can see under the artwork detail page related artwork displayed with a thumbnail, a title and price. 
       - **Result**: Pass ✅
+
+      **Add related items in add or edit product page**
+      ![artwork related items](screenshots/artwork_related_field.png)
 
     - ### **As a site owner, I want to be able to edit most of the content of the website, so that I can keep my website up to date and engaging.**
       
@@ -547,6 +642,15 @@
         - If the form is invalid, error messages will be displayed to let me know to complete required field in a valid format.
         - **Result**: Pass ✅
 
+        **Add event page**
+        ![Add event page](screenshots/event_add.png)
+
+        **Add event - invalid input**
+        ![Add event invalid input](screenshots/event_add_invalid.png)
+
+        **Add event - success message**
+        ![Add event success message](screenshots/event_add_success.png)
+
       - ### **Edit/delete events**
         - When I am logged in as the shop owner and under the events section in the about page, I can see a link to "edit event" and a link to "delete event",
         - When I click on edit event, I am redirected to a page where all the details for my event are displayed and for me to edit,
@@ -554,11 +658,23 @@
         - When I click on submit and that the form is not valid, error messages will be displayed to let me know that I need complete the form in a valid format. 
         - **Result**: Pass ✅
 
+        **Edit event page**
+        ![Edit event](screenshots/event_edit.png)
+
+        **Edit event - success message**
+        ![Edit event](screenshots/event_edit_success.png)
+
       - ### **Deleting events**
         - Same as above,
         - When I click on the delete button, a modal window open asking me to confirm whether I want to delete this event,
         - When I click yes, the event is successfully deleted with a toast message being displayed.
         - **Result**: Pass ✅
+
+        **Delete events modal**
+        ![Edit event modal](screenshots/event_delete_modal.png)
+
+        **Delete event success**
+        ![Delete event message](screenshots/event_delete_success.png)
 
       - ### **Set featured portfolio for homepage**
         - When I add/edit a portfolio, I can select the boolean field "display home" and the portolio will be displayed on the homepage.
@@ -570,5 +686,12 @@
       - The list of all the orders I have received are being displayed including the paiement status
       - When I click on the select field on top of the report, I can see an option to "mark order as dispatched",
       - When I select multiple orders in the report, select "mark order as displatched" and click go, each of the selected orders's status will update accordingly.
+      - **Result**: Pass ✅
+
+      ![order mark as dispatched](screenshots/order_mark_as_dispatched.png)
+    
+    - ### **Stock management**
+      - When a user put an order through, the stock deducts by the ordered quantity,
+      - If the stock reaches the stock alert level (if set), I should receive an email informing me of the stock level
       - **Result**: Pass ✅
 
