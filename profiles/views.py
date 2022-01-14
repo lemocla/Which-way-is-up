@@ -64,7 +64,7 @@ def profile(request):
 
 
 @login_required
-def wishlist(request):
+def view_wishlist(request):
     """
     A view to return a user's favourites
     Get user and wishlist items

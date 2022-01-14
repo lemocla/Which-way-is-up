@@ -9,7 +9,7 @@ from django.contrib import messages
 from artworks.models import Artwork
 
 
-def bag(request):
+def view_bag(request):
     """
     View to return shopping bag page
     Remove out of stock and inactive items from bag
@@ -162,8 +162,8 @@ def remove_from_bag(request, artwork_id):
         request.session['bag'] = bag
         return HttpResponse(status=200)
 
-    except Exception as e:
-        messages.error(request, f'Error removing item: {e}')
+    except ObjectDoesNotExist:
+        messages.error(request, 'Error removing item')
         return HttpResponse(status=500)
 
 
