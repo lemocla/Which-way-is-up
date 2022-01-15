@@ -40,7 +40,8 @@ def add_to_mailing_list(request):
             body = render_to_string('newsletter/email/body.txt')
 
             # Check if email match a user and tick newsletter checkbox
-            existing_user = User.objects.get(email=form.cleaned_data['email'])
+            existing_user = User.objects.get(email=form.cleaned_data[
+                                             'email_newsletter'])
             if existing_user:
                 profile = UserProfile.objects.get(user=existing_user)
                 if profile and not profile.newsletter:
