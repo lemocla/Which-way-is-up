@@ -51,7 +51,8 @@ class Order(models.Model):
                                              blank=False)
     delivery_county = models.CharField(max_length=80, null=True, blank=True)
     delivery_country = CountryField(blank_label='Country *', null=False,
-                                    blank=False, countries=G8Countries)
+                                    max_length=80, blank=False,
+                                    countries=G8Countries)
     delivery_postcode = models.CharField(max_length=20, null=False,
                                          blank=False)
     # billing address
@@ -64,11 +65,11 @@ class Order(models.Model):
                                             blank=False)
     billing_county = models.CharField(max_length=80, null=True, blank=True)
     billing_country = CountryField(blank_label='Country *', null=False,
-                                   blank=False)
+                                   blank=False, max_length=80)
     billing_postcode = models.CharField(max_length=20, null=True, blank=True)
     # gift option
     gift_option = models.BooleanField(default=False)
-    gift_recipient = models.CharField(max_length=50, null=True, blank=True)
+    gift_recipient = models.CharField(max_length=80, null=True, blank=True)
     gift_message = models.TextField(max_length=1000, null=True, blank=True)
     # totals
     total = models.DecimalField(max_digits=10, decimal_places=2,

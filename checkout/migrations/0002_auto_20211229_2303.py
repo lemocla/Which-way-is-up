@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='delivery_country',
-            field=django_countries.fields.CountryField(default=django.utils.timezone.now, max_length=2),
+            field=django_countries.fields.CountryField(default=django.utils.timezone.now, max_length=80),
             preserve_default=False,
         ),
         migrations.AddField(
