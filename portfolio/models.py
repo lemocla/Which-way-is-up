@@ -19,7 +19,7 @@ class PortfolioCategory(models.Model):
     name = CaseInsensitiveCharField(max_length=150, unique=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Portfolio(models.Model):
@@ -55,7 +55,7 @@ class Portfolio(models.Model):
 
     def __str__(self):
         """return name as string"""
-        return self.name
+        return str(self.name)
 
     # https://stackoverflow.com/questions/1455126/unique-booleanfield-value-in-django
     def save(self, *args, **kwargs):

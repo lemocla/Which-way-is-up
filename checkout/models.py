@@ -52,7 +52,8 @@ class Order(models.Model):
     delivery_county = models.CharField(max_length=80, null=True, blank=True)
     delivery_country = CountryField(blank_label='Country *', null=False,
                                     blank=False, countries=G8Countries)
-    delivery_postcode = models.CharField(max_length=20, null=False, blank=False)
+    delivery_postcode = models.CharField(max_length=20, null=False,
+                                         blank=False)
     # billing address
     billing_same_as_delivery = models.BooleanField(default=True)
     billing_street_address1 = models.CharField(max_length=80, null=False,
