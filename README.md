@@ -10,6 +10,13 @@ Using the principles of UX design, this fully responsive and interactive website
 
 View live project here [link to deployed link](https://which-way-is-up.herokuapp.com/)
 
+To make a paiement, you may use the following card number:
+- Visa: 4111 1111 1111 1111
+- Mastercard: 2223 0000 4840 0011
+- Amex: 3714 49635 398431
+
+For a selection of card number to use, please refer to this Braintree [documentation](https://developer.paypal.com/braintree/docs/guides/credit-cards/testing-go-live/python)
+
 ## **TABLE OF CONTENT** 
 
   - [UX Design](#ux-design)

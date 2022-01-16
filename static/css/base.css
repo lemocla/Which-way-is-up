@@ -499,7 +499,6 @@ form.submitted *:not(form):invalid {
 }
 
 .error-img-fit {
-
     height: 340px;
     object-fit: scale-down;
 }

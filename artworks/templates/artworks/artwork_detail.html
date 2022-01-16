@@ -27,7 +27,7 @@
                     {% else %}
                     <li class="breadcrumb-item"><a href="{% url 'shop' %}">Shop</a></li>
                     <li class="breadcrumb-item">
-                        <a href="{{ request.META.HTTP_REFERER }}">
+                        <a href="{% url 'shop' %}?shop_category={{shop_category.backend_name}}">
                             {{artwork.shop_category|title}}
                         </a>
                     </li>

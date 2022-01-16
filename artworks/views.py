@@ -127,11 +127,14 @@ def artwork_detail(request, artwork_id):
     else:
         category = None
 
+    if artwork.display_shop:
+        shop_category = ShopCategory.objects.get(artwork=artwork.id)
     # Set context
     context = {
         'artwork': artwork,
         'related_items': related_items,
         'category': category,
+        'shop_category': shop_category,
         'user': user,
         'wishlist': wishlist,
         'is_wishlist': is_wishlist,
