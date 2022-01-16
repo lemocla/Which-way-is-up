@@ -362,7 +362,6 @@ View live project here [link to deployed link]
     Register | Yes | No | No |
     View profile | Yes | Yes | Yes |
     Edit profile | No | Yes | Yes |
-    Delete profile | No | Yes | Yes | 
     View wishlist | No | Yes | Yes | 
     Add to wishlist | No | Yes | Yes |
     Remove from wishlist | No | Yes | Yes |
@@ -461,6 +460,9 @@ View live project here [link to deployed link]
 
     [Go to testing user stories](documentation/testing/user_stories.md)
 
+  - ### **Automated testing**
+
+    The developer 
   - ### **Code validation**
 
     - #### **W3C HTML Code Validator**
@@ -557,6 +559,200 @@ View live project here [link to deployed link]
       Also should the developer add an order from the admin platform, the stock will not deduct, although the shop owner should not add orders from django admin platform and maybe this option should be removed entirely.
  
 ## **DEPLOYMENT**
+
+  This website was developed on Gitpod using the Code Institute student template with changes frequently committed to git then pushed onto GitHub from the Gitpod terminal.
+  The application is deployed on Heroku with the repository hosted on Github
+
+  - ### **Prerequisite**
+    - Have an account with Amazon AWS and get a connection string
+    - Have an account with Heroku
+    - Have an account with Braintree
+    - Have an account, preferrably with gmail, having set up 2-step verification as well as a password specific for the app.
+  
+  - ### **Deployment on Heroku**
+
+    - #### **This project was deployed in two stages:**
+      - Create an Heroku app, connect to Postgres database and deploy without static files
+      - Create and connect Amazon bucket for images and static files
+
+    - #### **Local environment**
+       | KEY         | VALUE |
+       | ----------- | ----------- |
+       | DEVELOPMENT | True |
+       | SECRET_KEY  | Your_value |
+       | AWS_ACCESS_KEY_ID | Your_value |
+       | AWS_SECRET_ACCESS_KEY | Your_value |
+       | BRAINTREE_MERCHANT_ID | Your_value |
+       | BRAINTREE_PUBLIC_KEY | Your_value |
+       | BRAINTREE_PRIVATE_KEY | Your_value |
+ 
+    - #### **Create app on Heroku and get Postgres URL**
+      - Log onto Heroku and click the create new app button
+      - Enter a unique name for your application
+      - Select the region closest to you
+        ![create heroku app](documentation/deploy/screenshots/heroku_create.png)
+      - Create Postgres add-on so Heroku will provide us with a database URL.
+        - Go to heroku website --> your app --> Resources tab
+      	- Under add-on --> type Postgres, select Heroku Postgres, then submit
+          ![heroku postgres](documentation/deploy/screenshots/heroku_postgres.png)
+        - Select free plan, then select submit order
+        - copy the DATABASE_URL under settings > reveal config var
+        - In settings > reveal config var, add temporary variable DISABLE_COLLECTSTATIC = 1
+
+    - #### **Back up your current sqlite database**
+      - As this database was designed without fixtures, make sure manage.py file is connected to mysql database
+      - Backup your current database for each of desired models and load it into a db.json file, by typing in CLI:
+        ```python3 manage.py dumpdata your_model_name > db.json```
+      - Repeat this action for each models you wish to transfer to the postgres database (alternatively you can backup your whole database)
+
+    - #### **Load data from db.json file into postgres**
+      - Create a temporary variable in your environement named: DATABASE_URL with the value of the Postgres URL from Heroku
+      - In your local IDE, install these two packages by typing in your CLI:
+	      - ```pip3 install dj_database_url```
+	      - ```pip3 install psycopg2-binary```
+        - Then ```pip3 freeze > requirements.txt``` 
+      - In whichwayisup > settings.py, add ```import dj_database_url``` at top of the page
+      - Connect your manage.py file to your postgres database      
+          ```
+          DATABASES = {
+    		 'default':  dj_database_url.parse('DATABASE_URL')
+	        }
+          ```
+      - Load your data from the db.json file into postgres by typing in CLI: ```python3 manage.py loaddata <your_file>.json``` (if you have backed up several json files, repeat this action for each file)
+      - Migrate the database into Postgres by typing in CLI: ```python3 manage.py migrate```
+      - Create superuser by typing in CLI ```python3 manage.py createsuperuser``` and create credentials as required
+      - Remove the variable DATABASE_URL from your local environment
+         	 
+    - #### **Change configuration to allow for production and development mode**
+       - Secret Key: ```SECRET_KEY = os.environ.get('SECRET_KEY', '')```
+       - Debug: ```DEBUG = 'DEVELOPMENT' in os.environ``` so that debug is true in your development environment, but false in production
+       - Allowed Hosts: ```ALLOWED_HOSTS = ['which-way-is-up.herokuapp.com', 'localhost']``` 
+       - Using an if statement in settings.py, the app will be connected to Postgres in production mode and SQlite when local development.
+          ```
+            if 'DATABASE_URL' in os.environ:
+                DATABASES = {
+                  'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+                }
+            else:
+                DATABASES = {
+                    'default': {
+                        'ENGINE': 'django.db.backends.sqlite3',
+                    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+                    }
+                }
+          ```
+       - Update email settings so that email are sent in production and display in console when in development environment:
+         ```
+         if 'DEVELOPMENT' in os.environ:
+            EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+            DEFAULT_FROM_EMAIL = 'whichwayisup@example.com'
+         else:
+            EMAIL_USE_TLS = True
+            EMAIL_PORT = 587
+            EMAIL_HOST = 'smtp.gmail.com'
+            EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+            EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+            DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
+         ```
+    - #### **Set automatic deployment in Heroku**
+        - Set your deployment method to 'GitHub' 
+        - Search for the repository you wish to deploy from
+          ![heroku github](documentation/deploy/screenshots/automatic_deploy.png)
+        - Enable automatic deploy 
+          ![heroku automatic deployment](documentation/deploy/screenshots/github_auto_deploy.png)
+
+    - #### **Prepare for deployment**
+       - Install gunicorn using command in cli: ```pip3 install gunicorn``` to replace development server once the app is deployed to Heroku.
+       - Update requirement.txt by typing command in cli: ```pip3 freeze > requirements.txt```
+       - Create a Procfile in root directory
+       - In Procfile, enter ```web: gunicorn django_todo.wsgi:application``` making sure that there is no blank line after it
+       - Add, commit and push changes to GitHub
+
+    - #### **Set environment in Heroku App**
+        - Go to settings, then click on reveal config vars and enter the following key value pairs as per your local environment:
+	        | KEY | VALUE |
+	        | ----------- | ----------- |
+	        | DATABASE_URL | Your_url_link |
+	        | SECRET_KEY  | Your_value |
+          | DISABLE_COLLECTSTATIC | 1 |
+	        | BRAINTREE_MERCHANT_ID | Your_value |
+	        | BRAINTREE_PUBLIC_KEY | Your_value |
+	        | BRAINTREE_PRIVATE_KEY | Your_value |
+	        | EMAIL_HOST_USER | Your_value |
+	        | EMAIL_HOST_PASS | Your_value |
+
+          Click open app to view the application in your browser, your app should display without any images and static files at this stage.
+
+    - #### **Create Amazon AWS S3 bucket**
+        - This project uses the cloud-based storage service Amazon Web Services s3 to store static files (css, javascript) and images. The following instructions explains how to create and configure a bucket, group and user for the purpose of this project [View Instructions](documentation/deploy/amazon.md).      
+  
+    - #### **Connect Amazon AWS S3 bucket to django**
+        - In your CLI, install the following packages:
+          - ```pip3 install boto3```
+          - ```pip3 install django-storages```
+          - ```pip3 freeze > requirements.txt```
+        - Create a ```custom_storage.py``` file in root directory
+      	- Add 'storages' to INSTALLED_APPS in settings.py
+      	- Add configuration for Amazon AWS in settings.py  using an if statement that - if AWS is true for bucket configuration, static and media files will be overriden in production.
+          ![amazon settings](documentation/deploy/screenshots/amazon_settings.png)
+
+
+    - #### **Update your environment in Heroku**
+        - Go to settings, then click on reveal config vars and add additional Amazon AWS key - values pairs
+        - (Make sure to remove DISABLE_COLLECTSTATIC = 1 when setting Amazon AWS)  
+        - Your configuration variables should now look like this: 
+	        | KEY | VALUE |
+	        | ----------- | ----------- |
+	        | DATABASE_URL | Your_url_link |
+	        | SECRET_KEY  | Your_value |
+	        | USE_AWS | True |
+	        | AWS_ACCESS_KEY_ID | Your_value |
+	        | AWS_SECRET_KEY | Your_value |
+	        | BRAINTREE_MERCHANT_ID | Your_value |
+	        | BRAINTREE_PUBLIC_KEY | Your_value |
+	        | BRAINTREE_PRIVATE_KEY | Your_value |
+	        | EMAIL_HOST_USER | Your_value |
+	        | EMAIL_HOST_PASS | Your_value |
+        - Create a 'media' folder in your Amazon bucket and upload your images
+        - Click open app to view the application in your browser, your app should display with all images, data and styles
+
+  - ### **To use the code locally**
+  
+     To use this project, you can either fork or clone the local repository on gitHug as follows, then go to the deployment section to configure and deploy the app on Heroku.
+    
+    - #### **Forking local repository**
+
+      You can make a copy of the GitHub Repository by "forking" the original repository onto your own account, where changes can be made without affecting the original repository by taking the following steps:
+      - Log onto Github
+      - Navigate to the GitHub repository : https://github.com/lemocla/Which-way-is-up
+      - Click on the fork icon (located on top right of the page at the same level of repository name)
+        ![fork repo](documentation/deploy/screenshots/github_fork.png)
+      - You should now have a copy of this repository into your GitHub account.
+      - To make a change, clone the file into your local IDE
+      
+      For more information on how to fork a repository, please check this [github documentation](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo).
+    
+    - #### **Cloning the repository into your local IDE**
+      - Log into GitHub and navigate to the GitHub repository: https://github.com/lemocla/Which-way-is-up
+      - Above the repository folder and file content, click “Code”
+      - Select from one of the following options:
+        ![github clone](documentation/deploy/screenshots/github_clone.png)
+      - Clone the files using url
+      	- Copy the url
+      	- Create a repository in GitHub and a workspace in your IDE
+      	- Open the terminal and type: ```$ git clone https://github.com/lemocla/Which-way-is-up.git```
+      	- All the files should have been imported in your workspace
+      - Download zip files
+      	- Create a repository in GitHub and a workspace in your IDE
+      	- Unzip the folder
+      	- Upload the files into your workspace
+	
+	You can find all the steps to follow according to your chosen method in this [GitHub documentation](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) on how to clone a repository.
+
+    - #### **Install python dependencies**
+   	  - To install all the Python dependencies dependencies needed for this project using the requirements.txt file, type the following command in the command line interface:
+   	   - ```$pip3 install -r requirements.txt```
+
 
 ## **CREDITS**
 
