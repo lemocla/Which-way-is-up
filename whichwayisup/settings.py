@@ -221,7 +221,8 @@ if 'USE_AWS' in os.environ:
 # Email
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'whichwayisup@example.com'
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
+    EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 else:
     EMAIL_USE_TLS = True
     EMAIL_PORT = 587

@@ -111,6 +111,7 @@ h3,
 a {
     text-decoration: none;
     color: inherit;
+    outline: none;
 }
 
 .form-link {
@@ -336,7 +337,9 @@ nav .list-inline-item i {
 
 select {
     min-width: 75px;
-    min-height: 38px;
+    height: 37px !important;
+    background-color: var(--white) !important;
+    border-radius: 2px !important;
 }
 
 .form-group {
@@ -505,7 +508,6 @@ form.submitted *:not(form):invalid {
 
 @media only screen and (min-width: 576px) {
     .error-img-fit {
-        object-fit: cover;
         height: 450px;
     }
 
