@@ -7,7 +7,7 @@
     - ### **As a site user, I want a responsive website so that I can access it on different devices.**
       - When I visit the website using my device, the content is optimized for that device
       - On a mobile and tablet the navigation bar is collapsed
-      - When the navigation is collapsed, a toggle button is displayed to right of the header, and
+      - When the navigation is collapsed, a toggle button is displayed to left of the header, and
       - When I click on the toggle button, a vertical menu is displayed,
       - When I click again on the toggle button, the vertical menu collapses back.
       - **Result**: Pass ✅
@@ -33,8 +33,8 @@
     - ### **As a site user, I want to read about the artist so that I can learn about artist background and exhibitions**
       - When I click on the "about" menu item in the top navigation bar, the "about me" page is displayed with
       - an image of the artist,
-      - biography about the artis and,
-      - a list of exhibitions and events
+      - biography about the artist and,
+      - a list of exhibitions and events displayed in inverse chronological order with latest event appearing first.
       - **Result**: Pass ✅
 
       **Artist biography**
@@ -47,6 +47,9 @@
         - When I click on the menu item "work", a secondary drop down menu is displayed with the name of the artist work (collection) and,
         - When I cick on a collection, I am redirected to the relevant page where information and an image library are displayed,
         - When I hover an image in the library, an overlay features a series of three buttons as follows:
+          - A magnifying glass button
+          - An information button
+          - A button with an heart icon
         - When I click on button with the magnifying glass icon, a modal window opens with a zoom image of the artwork
         - When I click on the button with the information icon, I am redirected to the product page
         - When I click on the button with heart icon and if I am authenticated the artwork is added to my wishlist and the appearance of the icon changes to red.
@@ -67,7 +70,7 @@
 
     - ### **As a site user, I want to see the details for an artwork so that I can get a better appreciation and decide if I would want to buy it**
         - **Path 1**
-            - When browsing a collection and when I click on image of an artwork,
+            - When browsing a collection and when I click on the information button for an artwork or,
             - I am redirected to page where the details for this artwork is displayed, including an image, a title, as well as the size for this artwork, related artworks and reviews (if they're are any)
             - If the artwork is available for sale, its price will be displayed as well as a button to add to cart,
             - If the artwork is not available for sale, a button inviting to contact the artist is displayed.
@@ -96,7 +99,7 @@
  - ## **Shopping experience** 
  
     - ### **As a shopper, I want to view all the artwork available so that I can quickly have an overview of what is on offer**
-      - When I select "all", from the shop in the top navigation bar, I can see all the artwork available with an image, a title and a price being displayed, as well as items out of stock and items for sales
+      - When I select "all" from the shop in the top navigation bar, I can see all the avaialbe artworks in the shop with an image, a title and a price being displayed, as well as items out of stock and items for sales
       - When I hover the artwork name, the text is underlined and when I click on the link I am redirected the artwork detailed page
       - When I click on the "shopping bag" button, the artwork is added to my shopping bag and a toast message is displayed with a summary of my shopping bag
       - When I click on the button with a heart icon and I am logged in, the artwork will be added to my wishlist but,
@@ -121,7 +124,7 @@
       ![Shop page example](screenshots/shop_page.png)
 
     - ### **As a shopper, I want to sort the list of artwork available by price so that I can find a piece in my price range**
-      - When I am browsing the shop, either by category, collection - I can a "sort by" select field, where I can sort items by price or alphabetical order,
+      - When I am browsing the shop - I can a "sort by" select field, where I can sort items by price or alphabetical order,
       - When I click on sort by price low to high, the page refresh with all the artwork arranged in pricing order from the lowest to the highest,
       - When I click on sort price high to low, the page refreshes will all the artwork arranged in pricing order from the highest to lowest
       - **Result**: Pass ✅
@@ -134,8 +137,8 @@
 
     - ### **As a shopper, I want to view the artwork price and details so that I can make an informed decision**
       - When I browse the shop - either viewing all items or specific category of items and,
-      - I can see, in addition of the image, the artwork title and price and,
-      - When I hover the artwork, its appearance changes and,
+      - I can see the image, the artwork title and price and,
+      - When I hover the artwork name, its appearance changes and,
       - When I click on the artwork, I am redirected the artwork detail page where all the details for the artwork is displayed including its price.
       - **Result**: Pass  ✅
 
@@ -265,7 +268,7 @@
         - **Form valid path**
             - when I enter my email in the "email” field and
             - When I enter my username in the “username” field and,
-            - When I enter a valid password of a minimum of 8 characters including a mix of letters, numbers and symbols,
+            - When I enter a valid password including a mix of letters, numbers and symbols,
             - A message informing me to verify my email address is displayed.
             - I should have also received an email with a link to confirm my email 
             - When I click on the link in the email, I am redirecting to a page asking me to confirm my email
@@ -371,6 +374,7 @@
         - When I hover over the "heart" icon in the navigation, its appearance changes and, 
         - When I click on the icon and if I am logged-in, I am redirected to "My wishlist" page and,
         - A list of artwork added as my favourite is displayed with buttons to either add the artwork to the shopping cart or remove the the artwork from my saved items.
+        - If I don't have any items in my wishlist, a paragraph will be displayed instead saying that "there is no items in my wishlist"
         - **Result**: Pass ✅
 
         **Whishlist page**
@@ -399,7 +403,7 @@
     - ### **As a site user, I want to view my orders**
       - When I have successfully logged in and,
       - When I click on the user icon, a dropdown menu is displayed,
-      - When I click on my orders, I am redirected to 'my orders' page displaying details of past orders,
+      - When I click on my orders, I am redirected to 'my orders' page displaying details of past orders in reverse chronological order,
       - When I hover over one of the order reference number, its appearance changes and 
       - When I click on one of the reference number, I am redirected to the order detail page
       - **Result**: Pass ✅
@@ -415,7 +419,7 @@
       - **Path 1 - artwork page**
         - When I browse an artwork page I have purchased and I haven't yet left a review, I can see a link "leave a review" at the bottom of the page
         - When I click on "leave a review",  where I can select a rating in the "rating" field and enter a comment in the "comment" field,
-        - When I click "Submit" and that my form is valid, the review is displayed under the artwork I purchased / commissioned and notification informing me that I have successfully left a review is displayed
+        - When I click "Submit" and that my form is valid, the review is displayed under the artwork I purchased and notification informing me that I have successfully left a review is displayed
         - When I click on "Submit" and my form is not valid, an error message will be displayed prompting me to fill the form with valid information.
         - Additional links will display under my review, so that I can edit / delete my review.
         - **Result**: Pass ✅
@@ -434,7 +438,7 @@
 
       - **Path 2 - my order page**
         - When I am logged in and that I browse my order history,
-        - For each item I have ordered but I haven't left a review, a link to add a review
+        - For each item I have ordered but I haven't left a review, a link to 'add a review' is displayed
         - A page opens with a form where I can select a rating in the "rating" field and enter a comment in the "comment" field,
         - When I submit the review and that my form is valid, I am redirected to the "Order history page"
         - When I submit the review and that my form is not valid, an error message will display asking me to fill the form with valid information.
@@ -451,10 +455,10 @@
         ![my review](screenshots/my_reviews.png)
 
       - **Path4 - Editing my reviews**
-        - When on my order pages, my reviews page or the artwork detail page, I can see a link to edit each of the reviews I have created
+        - When on my order pages, my reviews page or the artwork detail page, I can see a link to edit each of the reviews that I have created
         - When I click on edit, a page opens with my reviews details and I am able to edit my reviews,
-        - When I click submit and if the form is valid, my review is edited and a notification of my review has been successfully edited is displayed
-        - When I click submit and the form is invalid, error messages will dispaly asking me to complete the form with valid information.
+        - When I click submit and if the form is valid, my review is edited and a notification that my review has been successfully edited is displayed
+        - When I click submit and the form is invalid, error messages will be displayed asking me to complete the form with valid information.
         - **Result**: Pass ✅
         
         **Edit review**
@@ -464,7 +468,7 @@
         ![review edit success](screenshots/review_edit_success.png)
 
       - **Path5 - Deleting my reviews**
-        - When on my order pages, my reviews page or the artwork detail page, I can see a link to edit each of the reviews I have created
+        - When on my order page, my reviews page or the artwork detail page, I can see a link to edit each of the reviews that I have created
         - When I click on delete, a modal page opens asking me to confirm whether I wish to delete my review.
         - When I click on yes, my review is deleted and a toast message confirming that my reviews has been successfully deleted is displayed.
         - **Result**: Pass ✅
@@ -541,9 +545,9 @@
         ![Add a portfolio success message](screenshots/portfolio_add_success.png)
 
       - **Path: edit collection**
-        - When I am logged in a the super user and that I browse a collection page, I can see an icon to edit and an icon to delete my portfolio
-        - When I click on edit, I am redirected to a page with a form prefilled with the details of the collection being edited.
-        - When I click on submit and that the form is valid, the portfolio detail page will displayed updated information and a toast message informing that the portfolio has been successfully edited is displayed. 
+        - When I am logged in as the super user and that I browse a collection page, I can see an icon to edit and an icon to delete my portfolio
+        - When I click on edit, I am redirected to a page with a form prefilled with the details for the collection being edited.
+        - When I click on submit and that the form is valid, the portfolio detail page will displaye updated information and a toast message informing that the portfolio has been successfully edited is displayed. 
         - When I click on submit and that the form is not valid, error messages will be displayed informing to fill the right information.
         - **Result**: Pass ✅
 
@@ -554,7 +558,7 @@
 
       - **Path: delete a collection**
         - When I click on the delete icon on the porfolio page (when I am logged in as a super user),
-        - A modal window opens asking me if I am sure that I want to delete this collection, 
+        - A modal window opens asking me if I am sure that I want to delete this collection and,
         - When I press yes, the collection is successfully deleted and a toast message is displayed 
         - When I press close, the modal window closes and the collection is not deleted.
         - **Result**: Pass ✅
@@ -571,7 +575,7 @@
         - When I successfully log-in as the site owner, I can see a menu item entitled "Add Artwork" in the top navigation bar under the user icon
         - When I click on the menu item "Add Artwork", a page opens with a form to add artwork details 
         - When I fill all the information correctly, the artowrk is successfully created and a notification informing me that the artwork has been successfully created is displayed.
-        - Wen I fill information incorrectly / do not complete all the compulsory fields in the form, an error message will display prompting me to correct my entries before submitting the form again
+        - Wen I fill information incorrectly / do not complete all the required fields in the form, an error message will display prompting me to correct my entries before submitting the form again
         - **Result**: Pass ✅
 
         **Add artwork page**
@@ -584,10 +588,10 @@
         ![Add event success](screenshots/artwork_add_success.png)
 
       - **Path: edit artwork**
-        - When I am logged in a the super user and that I browse the artwork page, I can see an icon to edit and an icon to delete the artwork
-        - When I click on edit, I am redirected to a page with a form prefilled with the details of the artwork being edited
+        - When I am logged in as the super user and that I browse the artwork page, I can see an icon to edit and an icon to delete the artwork
+        - When I click on edit, I am redirected to a page with a form prefilled with the details for the artwork being edited
         - An information message is also displayed to let me know which artwork I am currently editing
-        - When I click on submit and that the form is valid, the artwork detail page will displayed updated information and a toast message informing that the artwork has been successfully edited is displayed. 
+        - When I click on submit and that the form is valid, the artwork detail page will display updated information and a toast message informing that the artwork has been successfully edited is displayed. 
         - When I click on submit and that the form is not valid, error messages will be displayed informing to fill the right information.
         - **Result**: Pass ✅
 
@@ -599,7 +603,7 @@
 
       - **Path: delete an artwork**
         - When I click on the delete icon on the artwork page and I am logged in as the shop owner,
-        - A modal window opens asking me if I am sure that I want to delete this collection, 
+        - A modal window opens asking me if I am sure that I want to delete this collection, and, 
         - When I press yes, the artwork is either:
         - successfully deleted if no orders are attached to it and a success message is displayed to let me know that the artwork has been successfully deleted.
         - Set as inactive if there are orderes attached it and an information message will be displayed to let me know that the artwork has been set as inactive.
@@ -617,7 +621,7 @@
 
       - **Path : Setting artwork status from admin console**
         - When I am on the admin console under the artwork section I can see a list of all the artwork I have created being displayed in a table.
-        - When I click in the dropdown menu on top of the artwork page, I can see the option to either delete the selected product, set the product as active, inactive or as draft.
+        - When I click in the dropdown menu on top of the artwork section, I can see the option to either delete the selected product, set the product as active, inactive or as draft.
         - When I select multiple artworks and that I click delete, if there are an order attached to that artwork, the artwork status will be set as inactive
         - When I select multiple artworks and I either select "set as active", "set as inactive" or "set at draft", the artwork status for each selected item will be updated accordingly.
         - When I select an item as inactive, it will be removed from users' wishlist and relevant users will receive an email to inform them that their items has been removed from their wishlist.
@@ -638,7 +642,7 @@
       - ### **Add events**
         - From the dropdown menu under the user icon, I can see a link to add an event
         - When I click on add an event, I am redirected to a page with a form with date input field, place and description,
-        - When I complete the form in a valid format and click on submit, I am redirected to "about page" where the event will be displayed and a toast message informing that I have succesfully created the event is displayed.
+        - When I complete the form in a valid format and click on submit, I am redirected to the "about page" where the event will be displayed and a toast message informing that I have succesfully created the event is displayed.
         - If the form is invalid, error messages will be displayed to let me know to complete required field in a valid format.
         - **Result**: Pass ✅
 
@@ -654,7 +658,7 @@
       - ### **Edit/delete events**
         - When I am logged in as the shop owner and under the events section in the about page, I can see a link to "edit event" and a link to "delete event",
         - When I click on edit event, I am redirected to a page where all the details for my event are displayed and for me to edit,
-        - When I click on submit and that the form is valid, I am redirected to the about page and toast message will be displayed to inform me that my event has been successfully edited.
+        - When I click on submit and that the form is valid, I am redirected to the about page and a toast message will be displayed to inform me that my event has been successfully edited.
         - When I click on submit and that the form is not valid, error messages will be displayed to let me know that I need complete the form in a valid format. 
         - **Result**: Pass ✅
 

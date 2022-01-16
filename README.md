@@ -4,11 +4,11 @@
 
 ![mockup](documentation/design/multi-screen.png)
 
-Which Way Is Up -  an online gallery and ecommerce website for artist Peter Charalambides - was created for educational purposes only as part of the Code Institute’s full stack development course.
+Which Way Is Up -  an online gallery and ecommerce website for artist Peter Charalambides - was created for educational purposes as part of the Code Institute’s full stack development course.
 
 Using the principles of UX design, this fully responsive and interactive website was developed using HTML, CSS, JavaScript and Python as well as Django as a framework.
 
-View live project here [link to deployed link]
+View live project here [link to deployed link](https://which-way-is-up.herokuapp.com/)
 
 ## **TABLE OF CONTENT** 
 
@@ -52,7 +52,7 @@ View live project here [link to deployed link]
 
  - ### **Strategy**  
 
-   Peter Charalambides is a London based artist operating under the umbrella Which Way Is Up and whose style sits within the urban art movement.
+   Peter Charalambides is a London based artist operating under the umbrella 'Which Way Is Up' and whose style sits within the urban art movement.
    
    Whilst Peter Charalambides’ breadth of work is versatile, he specialises in doodle art illustration on a wide range of mediums including furniture.  
    
@@ -74,24 +74,24 @@ View live project here [link to deployed link]
  - ### **User stories** 
 
     1. **Navigation and website experience**
-        - As a site user, I want a responsive website so that I can access it on different devices.
-        - As a site user, I want to easily navigate across the site so that I can find the information I need.
-        - As a site user, I want to read about the artist so that I can learn about artist background and exhibitions
-        - As a site user, I want to view the artist work so that can understand the artist work
-        - As a site user, I want to see the details for an artwork so that I can get a better appreciation and decide if I would want to buy it.
+        - As a site user, I want a responsive website so that I can access it on different devices
+        - As a site user, I want to easily navigate across the site so that I can find the information I need
+        - As a site user, I want to read about the artist so that I can learn about his background and exhibitions
+        - As a site user, I want to view the artist work so that can understand meaning and what his pieces are about
+        - As a site user, I want to see the details for an artwork so that I can get a better appreciation and decide if I would want to buy it
         - As site user, I want to engage with the artist work so that I can be part of the artist community
 
     2. **Shopping experience** 
         - As a shopper, I want to view all the artwork available so that I can quickly have an overview of what is on offer
-        - As a shopper, I want to view available artwork by specific collection and category so that I can quickly find products I’m interested in.
-        - As a shopper, I want to sort the list of artwork available so that I can find a piece in my price range
+        - As a shopper, I want to view available artwork by specific collection and category so that I can quickly find products I’m interested in
+        - As a shopper, I want to sort the list of artwork available so that I can find a piece within my price range
         - As a shopper, I want to view the artwork price and details so that I can make an informed decision
         - As a shopper, I want to read reviews so that I can have a better understanding of the quality of the artist work
         - As a shopper, I want to view related items so that I can purchase several artwork
-        - As a shopper, I want to select quantity of an item if applicable so I can order what I need
+        - As a shopper, I want to select a quantity for an item if applicable so I can order what I need
 
     3. **Shopping bag and checkout**
-        - As a shopper, I want to review items in my shopping bag so that I can adjust quantities ordered.
+        - As a shopper, I want to review items in my shopping bag so that I can adjust quantities ordered
         - As a shopper, I want to have a gift option so I can buy a print / piece of art for a special occasion for a friend
         - As a shopper, I want to enter payment information in a safe and secure way so that I can checkout quickly with confidence
         - As a shopper, I want to receive confirmation of my order so that I can have a proof of purchase
@@ -100,11 +100,10 @@ View live project here [link to deployed link]
         - As a site user, I want to register for an account so that I can view my orders and my favourite items
         - As a site user, I want to login and logout so that I can access my profile safely 
         - As a site user, I want to edit my profile so that I can update my personal information
-        - As a site user, I want to reset my password if I forgot it so that I can access my account
-        - As a site user, I want to delete my profile so that my personal information are removed from the website
+        - As a site user, I want to reset my password - if I forgot it - so that I can access my account
 
     5. **Favourite items and product review**
-        - As a site user, I want to save artwork as my favourites so that I can buy it later or buy it again
+        - As a site user, I want to save an artwork in my wishlist so that I can buy it later or buy it again
         - As a site user, I want to leave a review so that I can let others know about my shopping experience
 
     6. **Contact and connect**
@@ -145,7 +144,7 @@ View live project here [link to deployed link]
         - To be able to store and retrieve images 
         - To be able to contact the site owner 
         - To receive feedback for important actions: create - update - delete
-        - To handle errors: page 404 not found, page 500 Internal Server Error page and page 403/403 
+        - To handle errors: page 404 not found, page 500 Internal Server Error and page 403 access denied
 
 	  - #### **Non functional requirements**
          - Display artwork images and information in engaging way
@@ -161,11 +160,11 @@ View live project here [link to deployed link]
        - Icons for interactive and visual elements 
 
      - #### **Business rules**
-       - Artwork can be added to a portfolio and not be available for purchase
-       - Artwork can be available for purchase and not feature in a portfolio
-       - Artwork and portoflio may be set as active, inactive or draft
-       - Artwork cannot be deleted if it features in an order
-       - Orders will be set as in progress and the shop owner to action orders as dispatched
+       - An artwork can be added to a portfolio and not be available for purchase
+       - An artwork can be available for purchase and not feature in a portfolio
+       - An artwork and portoflio may be set as active, inactive or draft
+       - An artwork cannot be deleted if it features in an order but set as inactive instead
+       - Orders will be set as 'in progress' and the shop owner to action orders as dispatched
        - Delivery are free and items can only be shipped to a UK address 
 
      - #### **Constraints**
@@ -179,7 +178,7 @@ View live project here [link to deployed link]
 
         - Header: Logo and a collapsible menu with navigational links
         - Homepage: Give an overview of the artist universe including Hero image, featured collection, downloadable colouring page and reviews
-        - About: Information about the artist
+        - About: Information about the artist and events
         - Work: Display artist portfolio and image library
         - Shop: Display artwork, prints and other items for sale
         - Product page: Display artwork details
@@ -205,21 +204,21 @@ View live project here [link to deployed link]
           - Information from the User Model is used to create the UserProfile upon signing up
 
         - **UserProfile model**
-          - Stores detail information about user such as full name, phone number, address that can be retrieved at checkout or when contacting the shop owner
+          - Stores users' detail information such as full name, phone number, address that can be retrieved at checkout or when contacting the shop owner
           - Stores wishlist items using many-to-many relationship with artwork model
-          - This model is related to orders and reviews to easily retrieve users order details and reviews
+          - This model is related to orders and reviews to easily retrieve users' order details and reviews
 
         - **PortfolioCategory model**
           - Stores category name for portfolio
           - Is used to generate dynamic nav bar menu ang group portfolios together
 
         - **Portoflio model**
-          - Stores detailed information about a portfolio to be displayed in portfolio pages such as name, description, materials, image and status
+          - Stores detailed information about a portfolio such as name, description, materials, image and status and is used to display content in portfilios' pages (ex. work and commission)
           - Status information is used to decide whether the portfolio is displayed or not
           - Related with artwork model to display image library 
         
         - **ShopCategory model**
-          - Stores category and category back end name
+          - Stores category name and category back end name
           - Used to generate dynamic shop's dropdown menu and shop pages
           - Used to retrieve list of artwork to be displayed on relevant shop pages
 
@@ -230,22 +229,22 @@ View live project here [link to deployed link]
           - Status is used to decide wether artwork can be displayed, added to wishlist and bag as well as whether reviews can be added for that artwork.
           - Status is also used to override delete method if an artwork features in any order_lines
           - Feature a boolean and decimal field for displaying sale price and overriding artwork's default price
-          - Feature a many-to-many relationship to self to select related products
+          - Feature a many-to-many relationship to self to select related products (symmetrical)
           - Rating field auto-populate and average of all reviews for that artwork
           - Related to Portfolio and ShopCategoy model to easily retrieve information
 
         - **Order model**
           - Stores all the information related to a successful order made by a user, including order number, delivery and billing details
           - Stores if there's a gift option as well as gift recipient and gift message
-          - Stores if paiement was successfully made as well as Braintree paiement id 
+          - Stores if paiement was successfully made as well as Braintree paiement ID 
       
         - **Order_line model**
           - Stores details that have been added to the user’s bag, such as artwork name, price and quantity
-          - Takes information from the artwork model to artwork detail to the user’s order.
-          - Information from the Order_line is sent to the Order model to update the order.
+          - Takes information from the artwork model to display artwork detail
+          - Information from the Order_line is sent to the Order model to update the order
 
         - **Review model**
-          - Stores review details information about an artwork 
+          - Stores review details about an artwork such as ratings and comments
           - Information from the Review model is sent to the Artwork model using a signal to update average rating
           - Related to artwork and order_line model to verify wether the user is leaving a review for an item that has been purchased
           - Related to UserProfile to easily retrieved information to be displayed in my reviews
@@ -284,9 +283,9 @@ View live project here [link to deployed link]
 
     - #### **Difference to design**
       - Sections in the profiles pages feature on their own dedicated pages
-      - Collection details (portfolio) feature a panel of the left with the portfolio details and a panel on the right the image library
-      - Work page wasn't implemented as not needed
-      - Items in shop page features additional buttons
+      - Collection details (portfolio) feature a panel of the left for the portfolio details and a panel on the right for the image library
+      - Work page wasn't implemented as not needed, instead users will have access to each individual collections using a dropdown menu
+      - Items in shop page feature additional buttons
       - Saved items has been renamed wishlist
       - Line items in shopping bag layout has been adjusted for better user experience.
 
@@ -300,7 +299,7 @@ View live project here [link to deployed link]
 
     - #### **Colour scheme**
  
-       Since the artwork is either black and white or very colorful, the website will use mostly black and white with an some additional colours for interactive purposes (such as hovering effect) and feedback to site visitors / shoppers. 
+       Since the artwork is either black and white or very colorful, the website will use mostly black and white with some additional colours for interactive purposes (such as hovering effect) and users' feedback. 
 
        The website will use the following colour palette, which was custom-made and checked for accessibility using Adobe Color:
 
@@ -312,7 +311,7 @@ View live project here [link to deployed link]
         - Body: [Mulish](https://fonts.google.com/specimen/Mulish?query=mulish#glyphs) for its minimalist and light style in sharp contrast with the headers.
 
      - #### **Icons**
-       Icons by font-awesome will be used in the navigation bar to allow users to quickly access functionalities offered by the website such as the shopping cart / 
+       Icons by font-awesome will be used throughout the website to allow users to quickly access functionalities offered by the website such as the shopping cart, adding items to cart or wishlist.
 
      - #### **Styling**
         - Horizontal lines to structure and make the content of the website easy to read.
@@ -320,7 +319,7 @@ View live project here [link to deployed link]
         - Some light shadows to add further dimension and depth to the website.
 
      - #### **Design issues** 
-        The image library in collection and commission sections is looking at presenting the images in their aspect ration. Whilst it works relatively well when there are many images, it does look a bit odd when there are only a few items to display. Ideally the developer would have liked to implement a masonry layout.
+        The image library in collection and commission sections is looking at presenting the images in their aspect ratio. Whilst it works relatively well when there are many images, it does look a bit odd when there are only a few items to display. Ideally the developer would have liked to implement a masonry style layout, but would need to work a solution compatible with Bootstrap.
 
 ## **FEATURES**
 
@@ -334,7 +333,9 @@ View live project here [link to deployed link]
   	- Full content management to display and update content on the homepage and other static pages
   	- Improved user interface for the super admin to manage store, orders and content of the website
   	- Ability to share artwork on social media
-  	- Add a blog where artist to add/edit/delete post about his creative process and other work.
+    - Integration with Paypal
+    - Looking at possible solutions for integration with Instagram / facebook shopping
+  	- Add a blog where artist to add/edit/delete post about his creative process and other work (although shop owner not interested at his point)
 
 ## **CRUD operations and defensive design**
 
@@ -379,9 +380,9 @@ View live project here [link to deployed link]
       Users first need to confirm that they are sure they want to delete the specifified item (artwork, portfolio, reviews and event)
 
     - #### **Adding quantity of specified item to shopping bag**
-      - The options for quantity to be added to shopping bag are limited to stock availability 
-      - Users cannot add an item out of stock to their shopping cart and the button 'add to cart' to be removed from page
-      - Users cannot add an item who status is not active to their shopping bag
+      - The options for quantity to be added to shopping bag are limited to stock availability and to a maximum of 5 items
+      - Users cannot add an item out of stock to their shopping cart and the button 'add to cart' to be removed from page when items are out of stock.
+      - Users cannot add an item whose status is not active to their shopping bag
 
     - #### **Artwork and portoflio status**
       - If artwork is set as inactive / draft:
@@ -396,15 +397,26 @@ View live project here [link to deployed link]
         - Portfolio page will not be accessible to users except for the super admin
 
     - #### **Add/edit/delete artworks**
-      - Conditions in place to ensure that on superuser can add/edit/delte artworks
+      - Conditions in place to ensure that only the superuser can add/edit/delte artworks
       - If an artwork has been purchased, it cannot be deleted and status will be set as inactive instead
 
     - #### **Add/edit/delete reviews**
       - Users can only add reviews for items that they have purchased and reviews will also be related to the order line in checkout orders
-      - Users can also only add reviews for items still active, but can edit and delete reviews wehter the items is active or not
+      - Users can also only add reviews for items still active, but can edit and delete a review whether an item is active or not
 
     - #### **Checkout page**
       - Users can only have a delivery address set in the UK and if the country selected is anything other than UK an error message will display.
+
+## **BRAINTREE AS PAYMENT METHOD**
+
+  Braintree was selected as payment method for the following consideration:  
+  - Ease of implementation and customisation 
+  - Shop owner has previous experience of using Braintree, which will be helpful when the site goes live. 
+  - The shop owner is quite present on social media network - especially Insagram. One feature the shop owner may look to implement in the future is to sell through that channel, which uses Paypal as a paiement gateway.   
+  - The shop owner also wishes to add Paypal as a paiement method in future implementation - especially as the website goes live.  
+  - Braintree - being owned by Paypal - offers an easy integration with Paypal and also with many other mobile paiment method such as Apple Pay.   
+
+  The developer also looked at this [blog post](https://kinsta.com/blog/stripe-vs-braintree/) comparing features between Stripe and Braintree.  
 
 ## **TECHNOLOGIES USED**
 
@@ -462,7 +474,10 @@ View live project here [link to deployed link]
 
   - ### **Automated testing**
 
-    The developer 
+    The developer started implementing automated testing, namely checking all responses on views as well a test case on newsletter form. Unfortunately, as the developer is new to automated testing and time of the essence, full case automated testing on all models and forms was not implemented but it something that the developer is keen to learn, explore and implement. 
+
+    The website was extensively tested manually, going through different case scenarios.
+  
   - ### **Code validation**
 
     - #### **W3C HTML Code Validator**
@@ -500,17 +515,18 @@ View live project here [link to deployed link]
     
     ![screenshot wave issues](documentation/testing/screenshots/wave_braintree_errors.png)
 
-    Since these fields displayed in an iframe and after trying to add additional options such as 'internalLabel', the errors remained and the developer decided to keep the scripts as they are.
+    Since these fields displayed in an iframe and after trying to add additional options such as 'internalLabel', the errors still remained and the developer kept the initial setting.
 
   - ### **Interesting issues and known bugs**
 
     - #### **Context processor and all auth template**
       
-      As the newsletter form is rendered in the base template and accessible across the website, it was put in a context processor. At first return if post request is get, which must have override functionalities within all auth and as the result, if there were any errors in the login or whilst registering - it would throw a NoneType error. The solution was to remove if request is get & also renaming file - to make sure - it doesn’t override allauth functionalities 
+      As the newsletter form is rendered in the base template and accessible across the website, it was put into a context processor. 
+      At first return, as a condition looked whether the request is get seemed to have interferred with functionalities within all auth and as the result, if there were any errors in the login or whilst registering - it would throw a NoneType error. The solution was to remove "if request is get" & also renaming file - to make sure - it doesn’t override allauth functionalities 
 
     - #### **Display crispy form in two columns - profile**
       
-      One of the issue was to render to profile form in two column using the crispy form functionalities. At first two form, but that would have created issues with the post action. So used crispy layout to design the form in the backend. 
+      One of the issue was to render to profile form in two column using the crispy form functionalities. At first the developer used two forms, but that would have created issues with the post action, so crispy layout to design the form in the backend. 
 
     - #### **Beautifying code and if statement in form input attribute**
       The developer had to be careful checking for django template variable being cut-off when beatufifying the code and causing errors when running the application. 
@@ -539,7 +555,7 @@ View live project here [link to deployed link]
 
       - **Django variable to javascript**
 
-        For ease and having had some initial issues with connecting the static javascript files, the developer included scripts at the bottom of the html file. Since it’s cleaner to have the scripts in static files, scripts were moved to respective static files. The connection issue was resolved by closing the server and reopening it.
+        For ease and having had some initial issues with connecting the static javascript files, the developer included scripts at the bottom of the html file. Since it’s cleaner to have the scripts in static files, scripts were moved to their respective files. The connection issue was resolved by closing the server and reopening it.
 
         For the checkout app, the client token variable needed to be retrieved from the html template. After some research, the solution was to use json_script as per suggestion in this [stack overflow post] (https://stackoverflow.com/questions/298772/django-template-variables-and-javascript) and using this [django documentation](https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#json-script)
 
@@ -556,7 +572,7 @@ View live project here [link to deployed link]
 
       Known issues are those raised in the accessibility report and formating of javascript for Braintree hosted fields. Other than that, all Braintree functionalities works as intended and error messages are displayed properly.
 
-      Also should the developer add an order from the admin platform, the stock will not deduct, although the shop owner should not add orders from django admin platform and maybe this option should be removed entirely.
+      Also should the developer add an order from the admin platform, the stock will not deduct, although the shop owner should not add orders from django admin platform and maybe this option should be removed entirely or create a signal when order has been created successfully to update stock levels.
  
 ## **DEPLOYMENT**
 
@@ -572,8 +588,8 @@ View live project here [link to deployed link]
   - ### **Deployment on Heroku**
 
     - #### **This project was deployed in two stages:**
-      - Create an Heroku app, connect to Postgres database and deploy without static files
-      - Create and connect Amazon bucket for images and static files
+      - Create an Heroku app, connect to Postgres database and deploy the app without static files
+      - Create and connect Amazon bucket for storing images and static files
 
     - #### **Local environment**
        | KEY         | VALUE |
@@ -585,6 +601,8 @@ View live project here [link to deployed link]
        | BRAINTREE_MERCHANT_ID | Your_value |
        | BRAINTREE_PUBLIC_KEY | Your_value |
        | BRAINTREE_PRIVATE_KEY | Your_value |
+       | EMAIL_HOST_USER | Your_value |
+       | EMAIL_HOST_PASSWORD | Your_value |
  
     - #### **Create app on Heroku and get Postgres URL**
       - Log onto Heroku and click the create new app button
@@ -645,7 +663,8 @@ View live project here [link to deployed link]
          ```
          if 'DEVELOPMENT' in os.environ:
             EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-            DEFAULT_FROM_EMAIL = 'whichwayisup@example.com'
+            DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
+            EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
          else:
             EMAIL_USE_TLS = True
             EMAIL_PORT = 587

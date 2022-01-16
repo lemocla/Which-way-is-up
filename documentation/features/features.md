@@ -4,7 +4,7 @@
 
  - ## **Responsive website**
  
-    The layout and menu of website will resize according to the device used for better visibility and user experience. The navigation is collapsible on mobile devices for better visibility and automatically update according to the user's position on the page for better user experience.
+    The layout and menu of website will resize according to the device used for better visibility and user experience. The navigation is collapsible on mobile devices for better visibility.
 
     ![responsive design](screenshots/responsive.png)
 
@@ -20,7 +20,7 @@
     
     If a user has an item in their shopping bag, quantities in the shopping bag will display next to shopping cart icon.
     
-    The navigation bar will be partly populated dynamically when the shop owner adds additional types of portfolio (in the same way as commission and collection). Each dropdown menu in each portfolio categories will also dynamically populated so that the shop owner can keep the website up-to-date.
+    The navigation bar will be partly populated dynamically when the shop owner adds additional types of portfolio (in the same way as commission and collection). Each dropdown menu in each portfolio categories will also be dynamically populated so that the shop owner can keep the website up-to-date.
 
     ![navbar mobile](screenshots/navbar-mobile.png)
 
@@ -65,7 +65,7 @@
 
  - ## **Contact page**
    
-    The contact page features a form allowing the user to send a email to the shop owner. If the user is already signed his email address will be populated automatically.  
+    The contact page features a form allowing the user to send an email to the shop owner. If the user is already signed his email address will be populated automatically.  
     
     Upon submitting the form, an email should be sent to the site owner and a notification informing the user that the message has been successfully sent should display a the top of the page.
 
@@ -102,7 +102,7 @@
 
  - ## **Artwork detail page**
   
-   The artwork page is accessible from the online shop, collection and commission pages. It features all relevant the details for a specific piece of art, such as materials, sizes and prices.  The artwork page also features related artworks and a product review section.
+   The artwork page is accessible from the online shop, collection and commission pages. It features all relevant details for a specific piece of art, such as materials, sizes and prices.  The artwork page also features related artworks and a product review section.
   
    If the artwork is available from the store, the users will be a able to select from available quantity and add the artwork to their shopping bag. Out of stock items will feature a label and invite the users to contact the shop owner. 
    
@@ -114,12 +114,10 @@
 
    Users are also able to add any artworks - wether available in the shop or not - to their wishlist for future reference. 
    
-   The artwork detail page also feature breadcrumbs at the top of the page, indicating the current page's location within a navigational hierarchy, to allow users to return to the previous page or to navigate to higher level menu item.
+   The artwork detail page also feature breadcrumbs at the top of the page, indicating the current page's location within the navigational hierarchy, to allow users to return to the previous page or to navigate to higher level menu item.
 
    This page also includes an edit and delete button, only accessible to the shop owner, to easily manage the artwork catalogue.
    
-   
-
     - ### **User stories** 
       > - As a site user, I want to see the details for an artwork so that I can get a better appreciation and decide if I would want to buy it.
       > - As a shopper, I want to view related items so that I can purchase several artwork
@@ -130,13 +128,13 @@
  
  - ## **Shop**
  
-   The shop will display all the artwork available for sale by displaying artwork images, title and pricing information. The user will be able to select categories and collection of their choosing to browse artwork specific to their interest. The user will also be able to sort shop items by alphabetical order, pricing and collection in alphabetical order.
+   The shop will display all the artwork available for sale by displaying artwork images, title and pricing information. The user will be able to select categories of their choosing to browse artwork specific to their interest. The user will also be able to sort shop items by alphabetical order, pricing and collection in alphabetical order.
    
    Once the user click on an item card, they will be redirected to the product page where all the information related to the artwork will be displayed. 
    
-   From the shop pages, users will also be able to add an item to their shopping cart  and / or their wislist. Items added to users' wishlist will be displayed with a red hear icon. 
+   From the shop pages, users will also be able to add an item to their shopping cart  and / or their wislist. Items added to users' wishlist will be displayed with a red heart icon (if user is logged in)
    
-   Sale's item will have their price striked through and a sale price will be displayed in red. A label will also feature on the image.
+   Sale items will have their price striked through and a sale price will be displayed in red. A label will also feature on the image.
    
    Out of stock items will feature an out of stock label and the add to cart button will be disabled.
    
@@ -155,10 +153,10 @@
    The shopping bag features a summary list all the items added by the user, including a small thumbnail, quantity and prices as well as an order summary. The user will be able to:
    - Adjust quantities for each items in a shopping bag
    - Add / remove items to / from users' wishlist
-   - Remove an item for their shopping bag by clicking on the bin icon.
+   - Remove an item from their shopping bag by clicking on the 'remove item' link.
    - Add a gift option and message 
    
-   When adjusting / removing an item in the shopping bag the totals and subtotals will adjust accoringly and toast message will inform the user about their action and the content of the shopping bag. 
+   When adjusting / removing an item in/from the shopping bag the totals and subtotals will adjust accoringly and a toast message will inform the user about their action and the content of the shopping bag. 
 
    The site owner has decided that he will not apply a delivery charges and the delivery charges will be displayed as "Free". The shopping bag a also features a button "Continue shopping" to allow users to go back to the shop to browse / purchase further items. 
    
@@ -175,11 +173,13 @@
    
    The user - if not registered / signed-in - will be required to complete his personal details and delivery address for the items to be sent to, with the possibility to save these details by signing in or regsitering on the website. If the user is logged-in, these fields will be pre-populated and the user will be able to update these details.
    
-   The checkout form offers the user to select a gift option and have the items ordered sent to a different delivery address with a gift message. 
+   The checkout form offers the user the possbility to select a gift option and have the items ordered sent to a different delivery address with a gift message. 
    
    The checkout form includes a payment section where the user is required to fill their card details with secure paiement handled by Braintree. 
    
-   At any stage of the process the user will be able to go back to the shopping bag for further adjustement and when all the information are complete, the user will be able to place the order and paiement will be processed. A notification will display at the top of the page to inform the user that the order has been processed successfully / or of any errors happening during the checkout process. 
+   At any stage of the process the user will be able to go back to the shopping bag for further adjustement. 
+   
+   When all the information are complete, the user will be able to place the order and paiement will be processed. A notification will display at the top of the page to inform the user that the order has been processed successfully / or of any errors happening during the checkout process. If the order is successful, the user will be redirected to an order confirmation page.
 
    ![checkout](screenshots/checkout.png)
 
@@ -202,9 +202,9 @@
    
    The login page features a form asking the user for his email and password. The password can be made visible by toggling the eye icon. The login page also features a link allowing the user to reset their password.
 
-   Upon successfully login, a notification will display at the top of the page and the users will have access to all the features of the website such as profile page, saved items as well as adding/editing reviews. The navigation bar will update with additional menu items so that the users can access all the features available to them.
+   Upon successfully login, a notification will display at the top of the page and users will have access to all the features of the website such as profile page, saved items as well as adding/editing reviews. The navigation bar will update with additional menu items so that users can access all the features available to them.
    
-   Once signed in, the shop owner will be able to add, edit and delete collection and artwork.
+   Once signed in, the shop owner will be able to add, edit and delete collections, artworks and events
 
    ![login page](screenshots/login.png)
 
@@ -215,9 +215,9 @@
  
  - ## **Signup page**
    
-   The sign up page features a form asking the user for his email address, username and password. Once submitted the users will be asked to confirm their email address to complete the registration process. The users will be also be able to navigate to the login page, if they already have an account.
+   The sign up page features a form asking the user for his email address, username and password. Once submitted users will be asked to confirm their email address to complete the registration process. Users will also be able to navigate to the login page, if they already have an account.
    
-   Upon successfully registration to the website, the users will be informed via a notification displayed a the top of the page.
+   Upon successfully registration to the website, users will be informed via a toast message displayed a the top of the page.
 
    ![register page](screenshots/register.png)
    
@@ -227,7 +227,7 @@
 
  - ## **Profile page**
    
-   The profile page features the personal details, order details as well as reviews left by the users and is only accessible once the user has logged-in onto the website. The user will be able to update / delete his profile, review past orders and amend/delete reviews.
+   The profile page features the personal details of the user and is only accessible once the user has logged-in onto the website. The user will be able to update his profile.
    
    ![profile page](screenshots/profile.png)
 
@@ -258,7 +258,7 @@
 
  - ## **Review page**
    
-   The review page features a list of all the reviews left by users on items they have purchased / commissioned to allow user to have a shared understanding of other user experience of the website and artist's work.
+   The review page features a list of all the reviews left by users on items they have purchased to allow user to have a shared understanding of other user experience of the website and artist's work.
 
    ![review pages](screenshots/reviews.png)
    
@@ -268,7 +268,7 @@
 
  - ## **Wishlist**
    
-   The saved item page features all the artwork saved by the user and is only accessible once the user is signed in. The user will be able to remove items for their wishlist or add the artwork to their shopping bag. 
+   The wishlist page features all the artwork saved by the user and is only accessible once the user is signed in. The user will be able to remove items for their wishlist or add the artwork to their shopping bag. 
 
    ![wishlist](screenshots/wishlist.png)
    
@@ -295,7 +295,9 @@
 
  - ## **Add an item page**
   
-   The "Add an item page" is only available to the site owner once logged-in and features a form to add an artwork to shop and attach an artwork to a collection. The site owner will be able to add an image, a title, a description, as well as stock, size and pricing information. Additional features allow the site owner to select related items, whether to display the artwork in the shop or not and whether to display the artwork on the site or not. 
+   The "Add an item page" is only available to the site owner once logged-in and features a form to add an artwork to shop and/or attach an artwork to a collection.
+   
+   The site owner will be able to add an image, a title, a description, as well as stock, size and pricing information. Additional features allow the site owner to select related items, whether to display the artwork in the shop or not.
 
    ![add artwork](screenshots/add-artwork.png)
 
@@ -361,7 +363,7 @@
       - Signing up for an account to verify their email 
       - Resetting their passwords 
       - Placing an order with an order confirmation
-      - Items in their wishlist has been removed
+      - Items in users' wishlist that have been removed
       - Contacting the shop owner using the contact form
       - Signing up for the newsletter
 
