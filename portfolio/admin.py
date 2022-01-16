@@ -1,7 +1,7 @@
 """
 Admin configuration for portfolio application
 """
-
+from django.conf import settings
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from .models import PortfolioCategory, Portfolio
@@ -33,9 +33,10 @@ class PortfolioAdmin(admin.ModelAdmin):
         Render image in admin panel
         """
         if model.image:
+            img_path = settings.MEDIA_URL
             return mark_safe(
-                '<img src="/media/%s" width="50" height="50" '
-                'alt="product image"/>' % model.image)
+                f'<img src="{img_path}%s" width="50" height="50" '
+                f'alt="product image"/>' % model.image)
 
     list_display = (
         'name',
@@ -50,17 +51,17 @@ class PortfolioAdmin(admin.ModelAdmin):
     search_fields = ['name', 'status', 'category__name']
 
     @admin.action(description='Mark as draft')
-    def make_draft(modeladmin, request, queryset):
+    def make_draft(self, request, queryset):
         """Set queryset as draft"""
         queryset.update(status='draft')
 
     @admin.action(description='Mark as active')
-    def make_active(modeladmin, request, queryset):
+    def make_active(self, request, queryset):
         """Set queryset as active"""
         queryset.update(status='active')
 
     @admin.action(description='Mark as inactive')
-    def make_inactive(modeladmin, request, queryset):
+    def make_inactive(self, request, queryset):
         """Set queryset as inactive"""
         queryset.update(status='inactive')
 

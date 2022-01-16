@@ -1,7 +1,7 @@
 """
 Admin configuration for Artwork app
 """
-
+from django.conf import settings
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from .models import ShopCategory, Artwork
@@ -55,9 +55,10 @@ class ArtworkAdmin(admin.ModelAdmin):
         Render image in artwork list display
         """
         if model.image:
+            img_path = settings.MEDIA_URL
             return mark_safe(
-                '<img src="/media/%s" width="50" height="50"'
-                ' alt="product image"/>' % model.image)
+                f'<img src="{img_path}%s" width="50" height="50"'
+                f' alt="product image"/>' % model.image)
 
     admin_image.allow_tags = True
 
