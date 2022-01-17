@@ -33,7 +33,7 @@ class ShopCategory(models.Model):
     def save(self, *args, **kwargs):
         """Override save method to populate backend name"""
         with transaction.atomic():
-            str_name = self.name
+            str_name = str(self.name)
             self.backend_name = str_name.replace(' ', '_')
             return super(ShopCategory, self).save(*args, **kwargs)
 

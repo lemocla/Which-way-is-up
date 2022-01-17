@@ -342,6 +342,10 @@ select {
     border-radius: 2px !important;
 }
 
+.select-height {
+    height: 100px !important;
+}
+
 .form-group {
     margin-bottom: 1rem;
 }
