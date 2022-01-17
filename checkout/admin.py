@@ -46,12 +46,13 @@ class OrderAdmin(admin.ModelAdmin):
                      'lineitems__artwork__name']
 
     @admin.action(description='Mark as dispatched')
-    def dispatched(modeladmin, request, queryset):
+    def dispatched(self, request, queryset):
         """
         Custom action to mark order as dispatched
         """
         queryset.update(status='dispatched')
 
     actions = [dispatched]
+
 
 admin.site.register(Order, OrderAdmin)

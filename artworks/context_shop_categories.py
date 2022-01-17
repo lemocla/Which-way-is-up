@@ -13,7 +13,6 @@ def shop_categories(request):
     shop_object = ShopCategory.objects.all()
     shop = []
     for item in shop_object:
-        dic = {'name': item.name}
         shop.append(item)
 
     context = {'shop_categories': shop, 'request': request}

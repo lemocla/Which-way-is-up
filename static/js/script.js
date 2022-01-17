@@ -34,7 +34,6 @@
      });
 
      //togle password
-
      let style; //Additional styles for change password page
      if ($('h1').text() == "Change Password") {
          style = 'style="right: 42rem;"';

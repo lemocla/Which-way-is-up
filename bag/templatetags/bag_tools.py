@@ -1,9 +1,8 @@
 """
 Template tags
 """
-
-from django import template
 from datetime import date, timedelta
+from django import template
 
 register = template.Library()
 

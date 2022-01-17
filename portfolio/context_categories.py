@@ -18,8 +18,6 @@ def categories(request):
         portfolio_list = []
         # get portfolio for category item
         for portfolio in portfolio_object:
-
-            portfolio_dic = {'id': portfolio.id, 'name': portfolio.name}
             portfolio_list.append(portfolio)
         # build dictionary for navigation in base.html
         dic = {'name': item.name, 'id': item.id, 'col': portfolio_list}
