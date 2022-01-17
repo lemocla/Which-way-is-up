@@ -576,8 +576,6 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
       Known issues are those raised in the accessibility report and formating of javascript for Braintree hosted fields. Other than that, all Braintree functionalities works as intended and error messages are displayed properly.
 
-      Implementation for Django case insensitive fields from [pypi.org project documentation](https://pypi.org/project/django-case-insensitive-field/) is leaving a problem in the terminal: Bad first argument 'CaseInsensitiveFieldMixin' given to super()
-
       Also should the developer add an order from the admin platform, the stock will not deduct, although the shop owner should not add orders from django admin platform and maybe this option should be removed entirely or create a signal when order has been created successfully to update stock levels.
  
 ## **DEPLOYMENT**
