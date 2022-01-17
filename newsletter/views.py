@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.mail import BadHeaderError, send_mail
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.models import User
 from profiles.models import UserProfile
@@ -40,8 +41,12 @@ def add_to_mailing_list(request):
             body = render_to_string('newsletter/email/body.txt')
 
             # Check if email match a user and tick newsletter checkbox
-            existing_user = User.objects.get(email=form.cleaned_data[
-                                             'email_newsletter'])
+            try:
+                existing_user = User.objects.get(email=form.cleaned_data[
+                                                'email_newsletter'])
+            except ObjectDoesNotExist:
+                existing_user = None
+
             if existing_user:
                 profile = UserProfile.objects.get(user=existing_user)
                 if profile and not profile.newsletter:

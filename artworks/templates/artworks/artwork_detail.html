@@ -95,7 +95,7 @@
             <p class="mb-1">Collection: {{ artwork.portfolio|title }}</p>
 
             {% if artwork.display_shop %}
-            <form class="form" action="{% url 'add_to_bag' artwork.id %} " method="POST">
+            <form id="form-qty" class="form" action="{% url 'add_to_bag' artwork.id %} " method="POST">
                 {% csrf_token %}
                 <!--Quantity-->
                 <h2 class="fs-5 fw-bold mt-4 mb-2 normal-text">Quantity</h2>

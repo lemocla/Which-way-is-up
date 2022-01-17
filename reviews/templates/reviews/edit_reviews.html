@@ -8,15 +8,17 @@
 <div class="container pt-md-5 pt-4 pb-3">
     <div class="row pb-md-3 mb-4">
         <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">reviews</h1>
-        <p>You are leaving a review for <strong>{{ review.artwork.name|title }}</strong>:</p>
+        <p>You are editing a review for <strong>{{ review.artwork.name|title }}</strong>:</p>
         <div class="col-12">
-            <form method="POST" action="{% url 'edit_reviews' review.id %}?ref={{request.META.HTTP_REFERER}}">
+            <form method="POST" action="{% url 'edit_reviews' review.id %}?ref={{request.META.HTTP_REFERER}}"
+                id="form-edit-review">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="mt-5">
                     <input type="hidden" name="next" value="{{ request.GET.next }}">
                     <button class="btn px-5 py-2 text-uppercase btn-black" type="submit">Edit review</button>
-                    <button type="button" onclick="history.back()" class="btn btn-white text-uppercase px-5 py-2">Cancel</button>
+                    <button type="button" onclick="history.back()"
+                        class="btn btn-white text-uppercase px-5 py-2">Cancel</button>
                 </div>
             </form>
         </div>

@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <form class="card-body" action="{% url 'add_to_bag' artwork.id %} " method="POST">
+                    <form id="form-add-to-bag" class="card-body" action="{% url 'add_to_bag' artwork.id %} " method="POST">
                         {% csrf_token %}
                         <div class="d-flex justify-content-between">
                             <div>

@@ -9,15 +9,15 @@
     <div class="row pb-md-3 mb-4">
         <h1 class="h1-page pb-4 mt-md-0">Add artwork</h1>
 
-        <form method="POST" action="{% url 'add_artwork' %}" enctype="multipart/form-data">
+        <form id="form-add-artwork" method="POST" action="{% url 'add_artwork' %}" enctype="multipart/form-data">
             {% csrf_token %}
-                    {% for field in form %}
+                {% for field in form %}
                     {% if field.name != 'image' %}
                         {{ field | as_crispy_field }}
                     {% else %}
                         {{ field }}
                     {% endif %}
-                    {% endfor %}
+                {% endfor %}
             <div class="mt-5">
                 <a class="btn btn-white py-2 px-5" href="{% url 'home' %}">Cancel</a>
                 <button id="add-artwork" class="btn btn-black py-2 px-5" type="submit">Add artwork</button>

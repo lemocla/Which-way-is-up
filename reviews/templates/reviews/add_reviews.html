@@ -8,14 +8,18 @@
 <div class="container pt-md-5 pt-4 pb-3">
     <div class="row pb-md-3 mb-4">
         <h1 class="homepage-h2 pb-mb-5 pb-4 mt-md-0">reviews</h1>
-        <p>You are leaving a review for <strong>{{ artwork.name|title }}</strong> purchased on {{ order.date|date:"d/m/y" }} with order reference: {{ order.order_number }}</p>
+        <p>You are leaving a review for <strong>{{ artwork.name|title }}</strong> purchased on 
+           {{ order.date|date:"d/m/y" }} with order reference: {{ order.order_number }}</p>
         <div class="col-12">
-            <form method="POST" action="{% url 'add_reviews' artwork.id order_line.id %}?ref={{request.META.HTTP_REFERER}}">
+            <form method="POST"
+                action="{% url 'add_reviews' artwork.id order_line.id %}?ref={{request.META.HTTP_REFERER}}"
+                id="form-add-review">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="mt-5">
                     <button class="btn px-5 py-2 text-uppercase btn-black" type="submit">Add review</button>
-                    <button type="button" onclick="history.back()" class="btn btn-white text-uppercase px-5 py-2">Cancel</button>
+                    <button type="button" onclick="history.back()"
+                        class="btn btn-white text-uppercase px-5 py-2">Cancel</button>
                 </div>
             </form>
         </div>

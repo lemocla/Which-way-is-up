@@ -36,8 +36,8 @@
      //togle password
 
      let style; //Additional styles for change password page
-     if ($('h1').text()=="Change Password"){
-     style='style="right: 42rem;"';
+     if ($('h1').text() == "Change Password") {
+         style = 'style="right: 42rem;"';
      }
 
      // login page
@@ -65,14 +65,21 @@
 
      // Check for invalid fields and display error message
      $('button[type="submit"]').click(function () {
-         $('form').addClass('submitted');
+         // Get form submitted element and id 
+         let formSubmitted = $(this).parents("form:first");
+         let formId = formSubmitted.attr('id');
+         // Add class to the submitted form
+         $(this).parents("form:first").addClass('submitted');
+         // Check for invalid fields for form being submitted and add error message
          $('*:not(form):invalid').each(function () {
-             let id = $(this).attr('id');
-             let label = $(`label[for="${id}"]`).text().replace('*', '');
-             if ($(`p[data-error="${id}"]`).length == 0) {
-                 $(this).parent().append(
-                     `<p class="red-text pt-1 my-0 small" data-error="${id}">Enter a valid ${label}</p>`
-                 );
+             if ($(this).parents("form:first").attr("id") == formId) {
+                 let id = $(this).attr('id');
+                 let label = $(`label[for="${id}"]`).text().replace('*', '');
+                 if ($(`p[data-error="${id}"]`).length == 0) {
+                     $(this).parent().append(
+                         `<p class="red-text pt-1 my-0 small" data-error="${id}">Enter a valid ${label}</p>`
+                     );
+                 }
              }
          });
      });

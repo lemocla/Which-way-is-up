@@ -9,14 +9,14 @@
     <div class="row pb-md-3 mb-4">
         <h1 class="h1-page pb-4 mt-md-0">Add portfolio</h1>
 
-        <form method="POST" action="{% url 'add_portfolio' %}" enctype="multipart/form-data">
+        <form id="form-add-portfolio" method="POST" action="{% url 'add_portfolio' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
-            {% if field.name != 'image' %}
-            {{ field | as_crispy_field }}
-            {% else %}
-            {{ field }}
-            {% endif %}
+                {% if field.name != 'image' %}
+                    {{ field | as_crispy_field }}
+                {% else %}
+                    {{ field }}
+                {% endif %}
             {% endfor %}
             <div class="mt-5">
                 <a class="btn btn-white py-2 px-5" href="{% url 'home' %}">Cancel</a>
