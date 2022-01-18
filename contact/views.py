@@ -66,14 +66,11 @@ def contact(request):
         # Autofill user details if authenticated but not super user
         try:
             user = User.objects.get(username=request.user)
-            if user.is_superuser:
-                form = ContactForm()
-            else:
-                user_profile = get_object_or_404(UserProfile, user=user)
-                form = ContactForm(
-                        initial={'email': user.email,
-                                 'full_name': user_profile.full_name,
-                                 })
+            user_profile = get_object_or_404(UserProfile, user=user)
+            form = ContactForm(
+                    initial={'email': user.email,
+                             'full_name': user_profile.full_name,
+                             })
         except ObjectDoesNotExist:
             form = ContactForm()
 
