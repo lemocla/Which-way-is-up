@@ -2,7 +2,7 @@
 
 This project uses the cloud-based storage service Amazon Web Services s3 to store static files (css, javascript) and images. The following instructions explains how to create and configure a bucket, group and user for the purpose of this project.
 
-[Return to main ReadMe](/README.md)
+[Return to main ReadMe](/README.md#create-amazon-aws-s3-bucket)
 
 - ## **Create a new bucket**
   - Open s3 and create new bucket, which will be used to store the static files
@@ -122,4 +122,4 @@ This project uses the cloud-based storage service Amazon Web Services s3 to stor
     - Select tab "Add user to group" and select relevant group (ex whichwayisup-group)
     - Click through to the end and then click create user.
     - Download the CSV file which contains this users access key and secret access key    
-      (**Please note it's very important you download and save this CSV now as you won't be able to do so once the group has been created)
+      (**Please note it's very important you download and save this CSV now as you won't be able to do so once the group has been created**)

@@ -10,12 +10,11 @@ Using the principles of UX design, this fully responsive and interactive website
 
 View live project here [link to deployed link](https://which-way-is-up.herokuapp.com/)
 
-To make a paiement, you may use the following card number:
+To make a paiement, you may use the following card numbers:
 - Visa: 4111 1111 1111 1111
 - Mastercard: 2223 0000 4840 0011
 - Amex: 3714 49635 398431
 
-For a selection of card number to use, please refer to this Braintree [documentation](https://developer.paypal.com/braintree/docs/guides/credit-cards/testing-go-live/python)
 
 ## **TABLE OF CONTENT** 
 
@@ -29,9 +28,9 @@ For a selection of card number to use, please refer to this Braintree [documenta
   - [Features](#features)
     - [Existing features](#existing-features)
     - [Features left to implement](#features-left-to-implement)
-  - [CRUD operations and defensive design](#crud-operations-and-defensive-design)
-    -[CRUD operations](#crud-operations)
-    -[defensive design](#defensive-design)
+  - [CRUD operations and defensive design](#crud-operations-and-defensive-design)    
+    - [CRUD operations](#crud-operations)
+    - [Defensive design](#defensive-design)
   - [Technologies Used](#technologies-used)
     - [Languages](#languages)
     - [Databases platform and cloud storage](#database-platform-and-cloud-storage)
@@ -70,7 +69,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
    - #### **Site owner goal**
      - To increase online presence 
      - To drive and connect with audience through the website
-     - To tell artist story and profile by showcasing portfolio
+     - To tell artist story and showcase portfolio
      - Convert interest into sales 
    - #### **User goals** 
      - To access a user-friendly website across multiple devices 
@@ -84,9 +83,9 @@ For a selection of card number to use, please refer to this Braintree [documenta
         - As a site user, I want a responsive website so that I can access it on different devices
         - As a site user, I want to easily navigate across the site so that I can find the information I need
         - As a site user, I want to read about the artist so that I can learn about his background and exhibitions
-        - As a site user, I want to view the artist work so that can understand meaning and what his pieces are about
+        - As a site user, I want to view the artist work so that I can understand meaning and what his pieces are about
         - As a site user, I want to see the details for an artwork so that I can get a better appreciation and decide if I would want to buy it
-        - As site user, I want to engage with the artist work so that I can be part of the artist community
+        - As site user, I want to engage with the artist work so that I can be part of his community
 
     2. **Shopping experience** 
         - As a shopper, I want to view all the artwork available so that I can quickly have an overview of what is on offer
@@ -101,7 +100,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
         - As a shopper, I want to review items in my shopping bag so that I can adjust quantities ordered
         - As a shopper, I want to have a gift option so I can buy a print / piece of art for a special occasion for a friend
         - As a shopper, I want to enter payment information in a safe and secure way so that I can checkout quickly with confidence
-        - As a shopper, I want to receive confirmation of my order so that I can have a proof of purchase
+        - As a shopper, I want to receive confirmation for my order so that I can have a proof of purchase
 
     4. **Registration and account management** 
         - As a site user, I want to register for an account so that I can view my orders and my favourite items
@@ -120,10 +119,10 @@ For a selection of card number to use, please refer to this Braintree [documenta
     7. **Admin and site management** 
 
         - As the site owner, I want to add, edit and delete a collection so that I can keep my portfolio and work up-to-date
-        - As the site owner, I want to add, edit and delete individual artwork and items to that I can link them to collection and keep my shop up-to-date
-        - As a site owner I want to add related product so that I can encourage multi-buy
+        - As the site owner, I want to add, edit and delete individual artwork so that I can link them to a collection and keep my shop up-to-date
+        - As a site owner I want to add related products so that I can encourage multi-buy
         - As a site owner, I want to be able to edit most of the content of the website, so that I can keep my website up to date and engaging.
-        - As a site owner, I want to manage orders from the console so I can know I have dispatched the order.
+        - As a site owner, I want to manage orders from the console so that I know I have dispatched the order.
 
   - ### **Scope**
   
@@ -133,7 +132,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
         A pdf version of the feature trade-off can been see [here](documentation/scope/Feature_trade_off.pdf)
 
-        This website will be developed as a minimal viable product with room for future improvements and releases incorporating additional features.
+        This website will be developed as a minimal viable product with room for future improvements and releases, incorporating additional features.
 
      - #### **Functional requirements**
         - To be able to sign-up using email address and secure password
@@ -160,17 +159,17 @@ For a selection of card number to use, please refer to this Braintree [documenta
      - #### **Content requirements**
        - Artist biography and key events/exhibitions
        - Information about the artist work 
-       - Image library of artwork
-       - Details for the artwork - size, price
+       - Image library for artworks
+       - Details for the artwork - materials, size, price
        - Forms where user input is required
        - Engaging text and headings throughout to introduce main sections of the website
        - Icons for interactive and visual elements 
 
      - #### **Business rules**
-       - An artwork can be added to a portfolio and not be available for purchase
-       - An artwork can be available for purchase and not feature in a portfolio
-       - An artwork and portoflio may be set as active, inactive or draft
-       - An artwork cannot be deleted if it features in an order but set as inactive instead
+       - Artworks can be added to a portfolio and not be available for purchase
+       - Artworks can be available for purchase and not feature in a portfolio
+       - Artworks and portfolios may be set as active, inactive or draft
+       - An artwork cannot be deleted if it features in an order and should be set as inactive instead
        - Orders will be set as 'in progress' and the shop owner to action orders as dispatched
        - Delivery are free and items can only be shipped to a UK address 
 
@@ -186,7 +185,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
         - Header: Logo and a collapsible menu with navigational links
         - Homepage: Give an overview of the artist universe including Hero image, featured collection, downloadable colouring page and reviews
         - About: Information about the artist and events
-        - Work: Display artist portfolio and image library
+        - Work/Commission: Display artist portfolio and image library
         - Shop: Display artwork, prints and other items for sale
         - Product page: Display artwork details
         - Shopping bag: Display items added in the bag
@@ -195,8 +194,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
      - #### **Interaction design**
 
         - Collapsible menu
-        - Artwork image with hovering effect
-        - Buttons and icons with hovering effect
+        - Buttons, icons and links with hovering effect
 
      - #### **Database structure**
 
@@ -207,48 +205,48 @@ For a selection of card number to use, please refer to this Braintree [documenta
         The schema has been revised and the intial database structure can be found [here](documentation/structure/db_structure.pdf)
 
         - **User**
-          - Stores a users registration information provided upon signing up
+          - Stores users' registration information provided upon signing up
           - Information from the User Model is used to create the UserProfile upon signing up
 
         - **UserProfile model**
-          - Stores users' detail information such as full name, phone number, address that can be retrieved at checkout or when contacting the shop owner
+          - Stores users' detailed information such as full name, phone number and address that can be retrieved at checkout or when contacting the shop owner
           - Stores wishlist items using many-to-many relationship with artwork model
-          - This model is related to orders and reviews to easily retrieve users' order details and reviews
+          - This model is related to Order and Review models to easily retrieve users' order details and reviews
 
         - **PortfolioCategory model**
-          - Stores category name for portfolio
+          - Stores category name for a portfolio
           - Is used to generate dynamic nav bar menu ang group portfolios together
 
         - **Portoflio model**
-          - Stores detailed information about a portfolio such as name, description, materials, image and status and is used to display content in portfilios' pages (ex. work and commission)
+          - Stores detailed information about a portfolio such as name, description, materials, image and status and is used to display content in portfolios' pages (ex. work and commission)
           - Status information is used to decide whether the portfolio is displayed or not
           - Related with artwork model to display image library 
         
         - **ShopCategory model**
-          - Stores category name and category back end name
+          - Stores category name and category back end name, which is automatically generated
           - Used to generate dynamic shop's dropdown menu and shop pages
           - Used to retrieve list of artwork to be displayed on relevant shop pages
 
         - **Artwork model**
           - Stores detailed information about an artwork to be displayed in artwork detail page, such as name, image, size, price ...
-          - Features stock information with stock adjustment upon successful checkout. Stock information is also used to display dynamic quantity options and whether the artwork can be added to bag or not. 
+          - Features stock information with stock adjustment upon successful checkout. Stock information is also used to display dynamic options in select quantity fields and whether the artwork can be added to bag or not. 
           - Features an optional stock alert used to inform the shop owner if stock reach a critical level.
           - Status is used to decide wether artwork can be displayed, added to wishlist and bag as well as whether reviews can be added for that artwork.
-          - Status is also used to override delete method if an artwork features in any order_lines
+          - Status is also used to override delete method if an artwork features in any Order_line records
           - Feature a boolean and decimal field for displaying sale price and overriding artwork's default price
           - Feature a many-to-many relationship to self to select related products (symmetrical)
-          - Rating field auto-populate and average of all reviews for that artwork
+          - Rating field is auto-populated as average of all reviews for that item when a review is added
           - Related to Portfolio and ShopCategoy model to easily retrieve information
 
         - **Order model**
           - Stores all the information related to a successful order made by a user, including order number, delivery and billing details
-          - Stores if there's a gift option as well as gift recipient and gift message
-          - Stores if paiement was successfully made as well as Braintree paiement ID 
+          - Stores if there's a gift option as well as the gift recipient and a gift message
+          - Stores if paiement was successfully made as well as the paiement ID 
       
         - **Order_line model**
-          - Stores details that have been added to the user’s bag, such as artwork name, price and quantity
+          - Stores details that have been added to the user’s shopping bag, such as artwork name, price and quantity
           - Takes information from the artwork model to display artwork detail
-          - Information from the Order_line is sent to the Order model to update the order
+          - Information from the Order_line is sent to the Order model to update the order and order totals
 
         - **Review model**
           - Stores review details about an artwork such as ratings and comments
@@ -268,9 +266,9 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
        Please find all the wireframes in pdf format [here](documentation/wireframes/wireframes.pdf). 
     
-       Please find below links to a selection of wireframe for this project (png format)
+       Please find below links to a selection of wireframe used for this project (png format)
          - [Homepage menu](documentation/wireframes/homepage_menu.png)
-         - [Work](documentation/wireframes/work.png) 
+         - [Work](documentation/wireframes/Work.png) 
          - [Collection details](documentation/wireframes/collection_details.png)
          - [About page](documentation/wireframes/about.png)
          - [Shop](documentation/wireframes/shop.png)
@@ -289,20 +287,20 @@ For a selection of card number to use, please refer to this Braintree [documenta
          - [Policy page](documentation/wireframes/policy_pages.png)
 
     - #### **Difference to design**
-      - Sections in the profiles pages feature on their own dedicated pages
+      - Sections in the profile pages feature on their own dedicated pages
       - Collection details (portfolio) feature a panel of the left for the portfolio details and a panel on the right for the image library
       - Work page wasn't implemented as not needed, instead users will have access to each individual collections using a dropdown menu
       - Items in shop page feature additional buttons
       - Saved items has been renamed wishlist
-      - Line items in shopping bag layout has been adjusted for better user experience.
+      - Line items in the shopping bag have been adjusted for better user experience.
 
  - ### **Surface / Design** 
 
-     The website will feature a simple, modern and engaging design, with a minimum of colours to keep the emphasis on the artist's work.
+     The website will feature a simple, modern and engaging design, with minimum colours to keep the emphasis on the artist's work.
 
     - #### **Imagery**
 
-       The website will solely feature images from the artist's artwork. 
+       The website will solely feature images from the artist's work. 
 
     - #### **Colour scheme**
  
@@ -315,10 +313,10 @@ For a selection of card number to use, please refer to this Braintree [documenta
      - #### **Typography**
         The website will use the following fonts from Google:
         - [Bungee](https://fonts.google.com/specimen/Bungee#about) will use Bungee for its urban style in line with the artist's overall style 
-        - Body: [Mulish](https://fonts.google.com/specimen/Mulish?query=mulish#glyphs) for its minimalist and light style in sharp contrast with the headers.
+        - Body: [Mulish](https://fonts.google.com/specimen/Mulish?query=mulish#glyphs) for its minimalist and light style, in sharp contrast with the headers.
 
      - #### **Icons**
-       Icons by font-awesome will be used throughout the website to allow users to quickly access functionalities offered by the website such as the shopping cart, adding items to cart or wishlist.
+       Icons by font-awesome will be used throughout the website to allow users to quickly access functionalities such as adding items to the shopping cart or wishlist.
 
      - #### **Styling**
         - Horizontal lines to structure and make the content of the website easy to read.
@@ -337,12 +335,12 @@ For a selection of card number to use, please refer to this Braintree [documenta
   - ### **Features left to implement**
   	- Additional thumbnail images for product details 
   	- Pagination on shop when displaying all items 
-  	- Full content management to display and update content on the homepage and other static pages
+  	- Full content management to display and update content on the homepage and other static pages such as policies and biography
   	- Improved user interface for the super admin to manage store, orders and content of the website
   	- Ability to share artwork on social media
     - Integration with Paypal
-    - Looking at possible solutions for integration with Instagram / facebook shopping
-  	- Add a blog where artist to add/edit/delete post about his creative process and other work (although shop owner not interested at his point)
+    - Allauth integration with social media platform
+  	- Add a blog where artist can post about his creative process and other work (although shop owner not interested at his point)
 
 ## **CRUD operations and defensive design**
 
@@ -351,9 +349,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
     --- | --- | --- | --- 
     View homepage | Yes | Yes | Yes |
     View about page | Yes | Yes | Yes |
-    Add event | No | No | Yes |
-    Edit event | No | No | Yes |
-    Delete event | No | No | Yes |
+    Add/edit/delete event | No | No | Yes |
     View portfolio pages | Yes | Yes | Yes |
     Add/edit/delete categories | No | No | Yes |
     Add/edit/delete a portfolio | No | No | Yes |
@@ -368,23 +364,21 @@ For a selection of card number to use, please refer to this Braintree [documenta
     View profile | Yes | Yes | Yes |
     Edit profile | No | Yes | Yes |
     View wishlist | No | Yes | Yes | 
-    Add to wishlist | No | Yes | Yes |
-    Remove from wishlist | No | Yes | Yes |
+    Add to/remove from wishlist | No | Yes | Yes |
     View order history | No | Yes | Yes |
     View order details | No | Yes | Yes |
     View my reviews | No | Yes | Yes |
     View all reviews | Yes | Yes | Yes |
-    Add a review | No | Yes | Yes |
-    Edit a review | No | Yes | Yes |
-    Delete a review | No | Yes | Yes |
+    Add/edit/delete a review | No | Yes | Yes |
+
 
   - ### **defensive design**
 
     - #### **Delete operations**
-      Users first need to confirm that they are sure they want to delete the specifified item (artwork, portfolio, reviews and event)
+      Users first need to confirm that they are sure that they want to delete the specifified item (artwork, portfolio, reviews and event)
 
-    - #### **Adding quantity of specified item to shopping bag**
-      - The options for quantity to be added to shopping bag are limited to stock availability and to a maximum of 5 items
+    - #### **Adding quantity of a specified item to the shopping bag**
+      - The options for quantity to be added to the shopping bag are limited to stock availability and to a maximum of 5 items
       - Users cannot add an item out of stock to their shopping cart and the button 'add to cart' to be removed from page when items are out of stock.
       - Users cannot add an item whose status is not active to their shopping bag
 
@@ -401,24 +395,23 @@ For a selection of card number to use, please refer to this Braintree [documenta
         - Portfolio page will not be accessible to users except for the super admin
 
     - #### **Add/edit/delete artworks**
-      - Conditions in place to ensure that only the superuser can add/edit/delte artworks
-      - If an artwork has been purchased, it cannot be deleted and status will be set as inactive instead
+      - Conditions in place to ensure that only the superuser can add/edit/delete artworks
+      - If an artwork has been purchased, it cannot be deleted and its status will be set as inactive instead
 
     - #### **Add/edit/delete reviews**
       - Users can only add reviews for items that they have purchased and reviews will also be related to the order line in checkout orders
       - Users can also only add reviews for items still active, but can edit and delete a review whether an item is active or not
 
     - #### **Checkout page**
-      - Users can only have a delivery address set in the UK and if the country selected is anything other than UK an error message will display.
+      - Users can only have a delivery address set in the UK and if the country selected is anything other than UK an error message will be displayed.
 
 ## **BRAINTREE AS PAYMENT METHOD**
 
   Braintree was selected as payment method for the following consideration:  
   - Ease of implementation and customisation 
   - Shop owner has previous experience of using Braintree, which will be helpful when the site goes live. 
-  - The shop owner is quite present on social media network - especially Insagram. One feature the shop owner may look to implement in the future is to sell through that channel, which uses Paypal as a paiement gateway.   
-  - The shop owner also wishes to add Paypal as a paiement method in future implementation - especially as the website goes live.  
-  - Braintree - being owned by Paypal - offers an easy integration with Paypal and also with many other mobile paiment method such as Apple Pay.   
+  - The shop owner also wishes to add Paypal as a paiement method in future implementation
+  - Braintree offers an easy integration with Paypal and also with many other mobile paiment method such as Apple Pay.   
 
   The developer also looked at this [blog post](https://kinsta.com/blog/stripe-vs-braintree/) comparing features between Stripe and Braintree.  
 
@@ -431,9 +424,9 @@ For a selection of card number to use, please refer to this Braintree [documenta
     - [Python](https://www.python.org/)
 
   - ### **Databases platform and cloud storage**
-    - [SQlite](https://www.sqlite.org/index.html): SQL database engine provided by default as part of Django and used development
+    - [SQlite](https://www.sqlite.org/index.html): SQL database engine provided by default as part of Django and used during development
     - [Heroku Postgres](https://devcenter.heroku.com/articles/heroku-postgresql): SQL database service provided directly by Heroku for storing data
-    - [Amazon AWS S3]: to store images and static files in production
+    - [Amazon AWS S3](https://aws.amazon.com/s3/): to store images and static files in production
     - [Heroku](https://www.heroku.com/): to deploy and run the application in production
 
   - ### **Libraries and frameworks**
@@ -445,8 +438,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
     - [Google font](https://fonts.google.com/): used for body and headings font
     - [Crispy form](https://django-crispy-forms.readthedocs.io/en/latest/): to manage rendering behaviour and layout of Django forms
     - [Bootstrap 5 crispy](https://github.com/django-crispy-forms/crispy-bootstrap5): Boostrap5 template for Dango Crispy Forms
-    - Django-countries: countries that already has a pre-built country field containing all the valid country codes. 
-    - [Pillow](https://pillow.readthedocs.io/en/stable/): for image processing
+    - [Django-countries](https://pypi.org/project/django-countries/): countries that already has a pre-built country field containing all the valid country codes. 
     - [Django_case_insensitive_field](https://pypi.org/project/django-case-insensitive-field/): to allow case insensitive comparison for unique fields
     - [Django cleanup](https://pypi.org/project/django-cleanup/): to automatically delete images / files when an ImagField is removed / updated or deleted
 
@@ -478,7 +470,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
   - ### **Automated testing**
 
-    The developer started implementing automated testing, namely checking all responses on views as well a test case on newsletter form. Unfortunately, as the developer is new to automated testing and time of the essence, full case automated testing on all models and forms was not implemented but it something that the developer is keen to learn, explore and implement. 
+    The developer started implementing automated testing, namely checking all responses on views as well a test case on newsletter form. Unfortunately, as the developer is new to automated testing and time was of the essence, full case automated testing on all models and forms were not implemented. However this is something that the developer is keen to learn, explore and implement. 
 
     The website was extensively tested manually, going through different case scenarios.
   
@@ -489,7 +481,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
       As all web pages are rendered dynamically using Jinja template, each page and scenario had to be validated by direct input by copying and pasting the source code for the page.
 
     - #### **W3C CSS Jigsaw Validator**
-      The CSS file was tested with [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) via direct input and returned no errors
+      Each CSS file was tested with [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) via direct input and returned no errors
 
     - #### **JSHint validator**
       All javascripts files were tested with [JSHint](https://jshint.com/) and returned no errors except for braintree scripts for hosted fields, especially scripts for fields validation. Since the scripts will be actionned for the fields hosted in an iframe, the developer left the scripts as they are.
@@ -503,13 +495,13 @@ For a selection of card number to use, please refer to this Braintree [documenta
     The website was tested on the following devices and browsers:
     ![browser testing](documentation/testing/screenshots/browser_test.png)
 
-    Prefixes needed to be added to clip-path as trapezeoid shapes did not render on tablets regardless of the browser.
+    Prefixes needed to be added to clip-path as trapezeoid shapes as they did not render on tablets regardless of the browser.
 
     The website was also tested using Google Inspect and Responsive viewer
     ![responsive viewer](documentation/testing/screenshots/shop_responsive.png)
 
   - ### **Testing performance**
-    Google Lighthouse was run on different pages, with performances ranging from 83% to 100% depending on the number of images on the pages. The page with lower performance is the shop page with all products displayed. Below is an extract of the reports:
+    Google Lighthouse was run on different pages, with performances ranging from 83% to 100% depending on the number of images on the pages. The page with the lowest performance is the shop page with all products displayed. Below is an extract of the reports:
 
     ![extract google lighthouse reports](documentation/testing/screenshots/google_lighthouse.jpg)
 
@@ -525,8 +517,11 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
     - #### **Context processor and all auth template**
       
-      As the newsletter form is rendered in the base template and accessible across the website, it was put into a context processor. 
-      At first return, as a condition looked whether the request is get seemed to have interferred with functionalities within all auth and as the result, if there were any errors in the login or whilst registering - it would throw a NoneType error. The solution was to remove "if request is get" & also renaming file - to make sure - it doesn’t override allauth functionalities 
+      As the newsletter form is rendered in the base template and accessible across the website, it was included into a context processor. 
+
+      At first return, as a condition looked for a get request, it seemed to have interferred with Allauth functionalities - and as a result - if there were any errors in the login or whilst registering, it would throw a NoneType error.
+      
+      The solution was to remove "if request is get" & also renaming file - to make sure - it doesn’t override allauth functionalities 
 
     - #### **Display crispy form in two columns - profile**
       
@@ -538,7 +533,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
     - #### **Gitpod workplace**
 
       - **Gitpod workplace opening to previous version of project**
-        On 03/01/22 the workplace for this project opened to a previous version showing changes that has been previously committed and pushed. Upon further inspection, many other files were missing and it became apparent that the workspace opened to a previous version of the project. 
+        On 03/01/22 the workplace for this project opened to a previous version showing changes that have been previously committed and pushed. Upon further inspection, many other files were missing and it became apparent that the workspace opened to a previous version of the project. 
 
       - **Step taken to resolve the issue**
         - Commit the changes on the workplace
@@ -551,17 +546,17 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
         When gitpod updated their platform, it inadvertently affected the workspace and the template developed by Code Institute used for this project, whereby affecting the packages installed for running the application.
 
-        Following the previous with the workspace, the developer took the opportunity to follow the recommendations to open a new workspace with the updated Code Institute template by taking the following steps:
+        Following the previous issue with the workspace, the developer took the opportunity to follow the recommendations to open a new workspace with the updated Code Institute template by taking the following steps:
           - Export the current database following this tutorial (the dump was included
           - Fix the current requirements and override the dockerfile as recommended by Code Insitute
           - Open a new workspace using the new CI template 
-          - Upload the sqlite from previous workspace to new workspace
+          - Upload the sqlite from the previous workspace to the one
 
       - **Django variable to javascript**
 
         For ease and having had some initial issues with connecting the static javascript files, the developer included scripts at the bottom of the html file. Since it’s cleaner to have the scripts in static files, scripts were moved to their respective files. The connection issue was resolved by closing the server and reopening it.
 
-        For the checkout app, the client token variable needed to be retrieved from the html template. After some research, the solution was to use json_script as per suggestion in this [stack overflow post] (https://stackoverflow.com/questions/298772/django-template-variables-and-javascript) and using this [django documentation](https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#json-script)
+        For the checkout app, the client token variable needed to be retrieved from the html template. After some research, the solution was to use json_script as per suggestion in this [stack overflow post](https://stackoverflow.com/questions/298772/django-template-variables-and-javascript) and using this [django documentation](https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#json-script)
 
         Html template:
         ```
@@ -576,7 +571,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
       Known issues are those raised in the accessibility report and formating of javascript for Braintree hosted fields. Other than that, all Braintree functionalities works as intended and error messages are displayed properly.
 
-      Also should the developer add an order from the admin platform, the stock will not deduct, although the shop owner should not add orders from django admin platform and maybe this option should be removed entirely or create a signal when order has been created successfully to update stock levels.
+      Also should the developer add an order form the admin platform, the stock will not deduct since the stock deduction scripts are within the views rather than the models. In retrospective, the developer should have created a signal when an order line for an order form is created (only).
  
 ## **DEPLOYMENT**
 
@@ -587,7 +582,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
     - Have an account with Amazon AWS and get a connection string
     - Have an account with Heroku
     - Have an account with Braintree
-    - Have an account, preferrably with gmail, having set up 2-step verification as well as a password specific for the app.
+    - Have an email account, preferrably with gmail, having set up 2-step verification with a password specific for this app.
   
   - ### **Deployment on Heroku**
 
@@ -613,7 +608,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
       - Enter a unique name for your application
       - Select the region closest to you
         ![create heroku app](documentation/deploy/screenshots/heroku_create.png)
-      - Create Postgres add-on so Heroku will provide us with a database URL.
+      - Add Postgres add-on so that Heroku can provide a database URL.
         - Go to heroku website --> your app --> Resources tab
       	- Under add-on --> type Postgres, select Heroku Postgres, then submit
           ![heroku postgres](documentation/deploy/screenshots/heroku_postgres.png)
@@ -623,13 +618,13 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
     - #### **Back up your current sqlite database**
       - As this database was designed without fixtures, make sure manage.py file is connected to mysql database
-      - Backup your current database for each of desired models and load it into a db.json file, by typing in CLI:
+      - Backup the current database for each of desired models and load it into a db.json file, by typing in CLI:
         ```python3 manage.py dumpdata your_model_name > db.json```
       - Repeat this action for each models you wish to transfer to the postgres database (alternatively you can backup your whole database)
 
     - #### **Load data from db.json file into postgres**
       - Create a temporary variable in your environement named: DATABASE_URL with the value of the Postgres URL from Heroku
-      - In your local IDE, install these two packages by typing in your CLI:
+      - In your local IDE, install these two packages by typing in the CLI:
 	      - ```pip3 install dj_database_url```
 	      - ```pip3 install psycopg2-binary```
         - Then ```pip3 freeze > requirements.txt``` 
@@ -640,16 +635,16 @@ For a selection of card number to use, please refer to this Braintree [documenta
     		 'default':  dj_database_url.parse('DATABASE_URL')
 	        }
           ```
-      - Load your data from the db.json file into postgres by typing in CLI: ```python3 manage.py loaddata <your_file>.json``` (if you have backed up several json files, repeat this action for each file)
+      - Load your data from the db.json file into postgres by typing in the CLI: ```python3 manage.py loaddata <your_file>.json``` (if you have backed up several json files, repeat this action for each file)
       - Migrate the database into Postgres by typing in CLI: ```python3 manage.py migrate```
-      - Create superuser by typing in CLI ```python3 manage.py createsuperuser``` and create credentials as required
+      - Create superuser by typing in CLI ```python3 manage.py createsuperuser``` and add credentials as required
       - Remove the variable DATABASE_URL from your local environment
          	 
     - #### **Change configuration to allow for production and development mode**
        - Secret Key: ```SECRET_KEY = os.environ.get('SECRET_KEY', '')```
        - Debug: ```DEBUG = 'DEVELOPMENT' in os.environ``` so that debug is true in your development environment, but false in production
        - Allowed Hosts: ```ALLOWED_HOSTS = ['which-way-is-up.herokuapp.com', 'localhost']``` 
-       - Using an if statement in settings.py, the app will be connected to Postgres in production mode and SQlite when local development.
+       - Using an if statement in settings.py, the app will be connected to Postgres in production mode and SQlite when in development.
           ```
             if 'DATABASE_URL' in os.environ:
                 DATABASES = {
@@ -663,7 +658,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
                     }
                 }
           ```
-       - Update email settings so that email are sent in production and display in console when in development environment:
+       - Update email settings so that email are sent in production and display in the console when in development environment:
          ```
          if 'DEVELOPMENT' in os.environ:
             EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -716,13 +711,13 @@ For a selection of card number to use, please refer to this Braintree [documenta
           - ```pip3 freeze > requirements.txt```
         - Create a ```custom_storage.py``` file in root directory
       	- Add 'storages' to INSTALLED_APPS in settings.py
-      	- Add configuration for Amazon AWS in settings.py  using an if statement that - if AWS is true for bucket configuration, static and media files will be overriden in production.
+      	- Add configuration for Amazon AWS in settings.py using an if statement so that - if AWS is true for bucket configuration, static and media files will be overriden in production.
           ![amazon settings](documentation/deploy/screenshots/amazon_settings.png)
 
 
     - #### **Update your environment in Heroku**
         - Go to settings, then click on reveal config vars and add additional Amazon AWS key - values pairs
-        - (Make sure to remove DISABLE_COLLECTSTATIC = 1 when setting Amazon AWS)  
+        - Make sure to remove DISABLE_COLLECTSTATIC = 1 when setting Amazon AWS
         - Your configuration variables should now look like this: 
 	        | KEY | VALUE |
 	        | ----------- | ----------- |
@@ -741,7 +736,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
   - ### **To use the code locally**
   
-     To use this project, you can either fork or clone the local repository on gitHug as follows, then go to the deployment section to configure and deploy the app on Heroku.
+     To use this project, you can either fork or clone the local repository on gitHub as follows, then go to the deployment section to configure and deploy the app on Heroku.
     
     - #### **Forking local repository**
 
@@ -773,7 +768,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
 	You can find all the steps to follow according to your chosen method in this [GitHub documentation](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) on how to clone a repository.
 
     - #### **Install python dependencies**
-   	  - To install all the Python dependencies dependencies needed for this project using the requirements.txt file, type the following command in the command line interface:
+   	  - To install all the Python dependencies dependencies needed for this project using the requirements.txt file, type the following command in the CLI:
    	   - ```$pip3 install -r requirements.txt```
 
 
@@ -783,7 +778,7 @@ For a selection of card number to use, please refer to this Braintree [documenta
     - About page event section styling adapted from [Code Institute CV mini-project](https://github.com/Code-Institute-Solutions/resume-miniproject-bootstrap4/tree/master/16-adding-work-history)
     - Trapezoid background shapes inspired from https://bennettfeely.com/clippy/
     - Toasts small triangles adapted from [CSS-tricks](https://css-tricks.com/snippets/css/css-triangle/)
-    - Getting last n records from django queryset adapted from this [stack overflow post](https://stackoverflow.com/questions/20555673/django-query-get-last-n-records)
+    - Getting last n records from a django queryset adapted from this [stack overflow post](https://stackoverflow.com/questions/20555673/django-query-get-last-n-records)
     - Implementation of Django date input widget adapted from [stack overflow post](https://stackoverflow.com/questions/61076688/django-form-dateinput-with-widget-in-update-loosing-the-initial-value)
     - [stack overflow post](https://stackoverflow.com/questions/43990154/braintree-jsv3-payment-method-nonce-value-bad-with-hostedfields?rq=1)
     - Implementation for Braintree hosted fields validation from [Braintree code recipe](https://codepen.io/braintree/pen/zeamxM)
@@ -801,11 +796,11 @@ For a selection of card number to use, please refer to this Braintree [documenta
 
   - ### **Additional Content**
     - Accessibility statement is from [W3C Web Accessibility Initiatlive](https://www.w3.org/WAI/planning/statements/minimal-example/)
-    - Privacy policy generated by and adapted from [FreePrivacyPolicy](https://www.freeprivacypolicy.com/free-privacy-policy-generator/)
+    - Privacy policy generated and adapted from [FreePrivacyPolicy](https://www.freeprivacypolicy.com/free-privacy-policy-generator/)
     - Terms and conditions generated and adapted from [Termly](https://app.termly.io/builder/websites/0e418e55-2145-4384-b941-1e5af44699ae/documents/1595101/Company/Contact%20Information)
 
   - ### **Acknowledgments**
     - My mentor Akshat Garg for his advice and guidance during this project,
     - Peter Charalambides for his trust and allowing me to develop his website
     - Code Institute tutor services for their advice and support,
-    - The Code Institute slack community for support and advices
+    - The Code Institute slack community for support and advice
