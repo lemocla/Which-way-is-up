@@ -33,7 +33,7 @@ $('#order-is-gift').change(function () {
     }
 
     // Put message and gift option in session when message is entered
-    $("#gift-message").focusout(function () {
+    $('#gift-message').focusout(function () {
         // add to session
         let csrfToken = $('input[name=csrfmiddlewaretoken]').val();
         let url = `/bag/gift_option/`;
@@ -47,7 +47,7 @@ $('#order-is-gift').change(function () {
 });
 
 // Edit gift message
-$("#gift-message").focusout(function () {
+$('#gift-message').focusout(function () {
     if ($('#order-is-gift').attr('data-session') == 'on') {
         // add to session
         let csrfToken = $('input[name=csrfmiddlewaretoken]').val();

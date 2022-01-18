@@ -35,7 +35,7 @@
 
      //togle password
      let style; //Additional styles for change password page
-     if ($('h1').text() == "Change Password") {
+     if ($('h1').text() == 'Change Password') {
          style = 'style="right: 42rem;"';
      }
 
@@ -51,24 +51,24 @@
          `<i class="password-visible far fa-eye" data-target="id_password2" aria-hidden="true" ${style}></i><span class="sr-only">toggle password</span>`
      );
      // toggle function
-     $(".password-visible").click(function () {
-         let id = $(this).attr("data-target");
-         if ($(`#${id}`).attr("type") == "password") {
-             $(`#${id}`).attr("type", "text");
-             $(this).removeClass("fa-eye").addClass("fa-eye-slash");
-         } else if ($(`#${id}`).attr("type") == "text") {
-             $(`#${id}`).attr("type", "password");
-             $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+     $('.password-visible').click(function () {
+         let id = $(this).attr('data-target');
+         if ($(`#${id}`).attr('type') == 'password') {
+             $(`#${id}`).attr('type', 'text');
+             $(this).removeClass('fa-eye').addClass('fa-eye-slash');
+         } else if ($(`#${id}`).attr('type') == 'text') {
+             $(`#${id}`).attr('type', 'password');
+             $(this).removeClass('fa-eye-slash').addClass('fa-eye');
          }
      });
 
      // Check for invalid fields and display error message
      $('button[type="submit"]').click(function () {
          // Get form submitted element and id 
-         let formSubmitted = $(this).parents("form:first");
+         let formSubmitted = $(this).parents('form:first');
          let formId = formSubmitted.attr('id');
          // Add class to the submitted form
-         $(this).parents("form:first").addClass('submitted');
+         $(this).parents('form:first').addClass('submitted');
          // Check for invalid fields for form being submitted and add error message
          $('*:not(form):invalid').each(function () {
              if ($(this).parents("form:first").attr("id") == formId) {

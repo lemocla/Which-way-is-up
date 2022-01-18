@@ -43,7 +43,7 @@ $(window).on('resize', function () {
     // reset carousel display
     $.each(list_items, function (index, element) {
         if (index >= 0) {
-            $(this).removeAttr("style");
+            $(this).removeAttr('style');
         }
     });
     // reset button display
@@ -71,7 +71,7 @@ $('#next').click(function () {
             $(this).hide();
         }
         if (index > (index_display + nb)) {
-            $(this).removeAttr("style");
+            $(this).removeAttr('style');
         }
     });
     // calculate new start index
@@ -92,7 +92,7 @@ $('#previous').click(function () {
         }
         // show previous n items
         if (index >= endpoint && index < index_display) {
-            $(this).removeAttr("style");
+            $(this).removeAttr('style');
         } else {
             $(this).hide();
         }
