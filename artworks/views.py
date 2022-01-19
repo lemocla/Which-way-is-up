@@ -101,7 +101,8 @@ def artwork_detail(request, artwork_id):
     # restrict access to draft/inactive artwork
     if artwork.status != 'active':
         if not request.user.is_superuser:
-            messages.error(request, 'Sorry, access restricted to shop owner')
+            messages.error(request, 'Sorry, access restricted to the shop '
+                           'owner')
             return redirect(reverse('home'))
 
     # get wishlist items and first order line for adding reviews
@@ -158,7 +159,7 @@ def add_artwork(request):
     # Restrict access to shop owner
     if not request.user.is_superuser:
         # Error message
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         # Redirect to homepage
         return redirect(reverse('home'))
 
@@ -198,7 +199,7 @@ def edit_artwork(request, artwork_id):
     """
     # Additional security to restrict access to shop owner
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         return redirect(reverse('home'))
 
     # Get artwork object
@@ -239,7 +240,7 @@ def delete_artwork(request, artwork_id):
     """
     # Additional security to restrict access to shop owner
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         return redirect(reverse('home'))
 
     # Set redirect url

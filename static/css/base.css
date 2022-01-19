@@ -597,3 +597,9 @@ form.submitted *:not(form):invalid {
         top: 1.1rem;
     }
 }
+
+@media only screen and (min-height: 1105px) {
+    .container {
+        min-height: 75vh !important;
+    }
+}

@@ -31,7 +31,7 @@ def add_event(request):
     # Security to restrict access to shop owner
     if not request.user.is_superuser:
         # Error message
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         # Redirect to homepage
         return redirect('home')
 
@@ -67,7 +67,7 @@ def edit_event(request, event_id):
     # Security to restrict access to shop owner
     if not request.user.is_superuser:
         # Error message
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         # Redirect home
         return redirect('home')
 
@@ -111,7 +111,7 @@ def delete_event(request, event_id):
     # Restrict access to shop owner
     if not request.user.is_superuser:
         # Error message
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         # Redirect home
         return redirect('home')
 

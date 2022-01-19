@@ -31,7 +31,8 @@ def portfolio_detail(request, portfolio_id):
     # restrict access to draft/inactive porfolio
     if portfolio.status != 'active':
         if not request.user.is_superuser:
-            messages.error(request, 'Sorry, access restricted to shop owner')
+            messages.error(request, 'Sorry, access restricted to the shop '
+                           'owner')
             return redirect(reverse('home'))
 
     # Get artworks
@@ -59,7 +60,7 @@ def add_portfolio(request):
 
     # Restrict access to shop owner
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
@@ -99,7 +100,7 @@ def edit_portfolio(request, portfolio_id):
 
     # Restrict access to shop owner
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         return redirect(reverse('home'))
 
     # Get portfolio object
@@ -141,7 +142,7 @@ def delete_portfolio(request, portfolio_id):
     """
     # Restrict access to shop owner
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, access restricted to shop owner')
+        messages.error(request, 'Sorry, access restricted to the shop owner')
         return redirect(reverse('home'))
 
     # Get portfolio object

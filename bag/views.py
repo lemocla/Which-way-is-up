@@ -28,7 +28,7 @@ def view_bag(request):
                     # Error messages to infom user item not available
                     messages.error(request, f'{artwork.name.title()}'
                                    f' is out of stock and has been '
-                                   f'from your bag.')
+                                   f'removed from your bag.')
                 # Draft and inactive artworks
                 if artwork.status != 'active':
                     # Remove from bag
@@ -66,7 +66,7 @@ def add_to_bag(request, artwork_id):
 
     # Restrict adding items to bag to items displayed in shop
     if not artwork.display_shop:
-        messages.error(request, 'This item is not available for purhcase.')
+        messages.error(request, 'This item is not available for purchase.')
         return redirect(reverse('shop'))
 
     # Set quantity to one when add to cart from shop
@@ -102,7 +102,7 @@ def add_to_bag(request, artwork_id):
     return redirect(redirect_url)
 
 
-def ajdust_bag(request, artwork_id):
+def adjust_bag(request, artwork_id):
     """
     Adjust the quantity of a specified item to the specified amount
     """

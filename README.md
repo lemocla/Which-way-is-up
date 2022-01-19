@@ -10,7 +10,7 @@ Using the principles of UX design, this fully responsive and interactive website
 
 View live project here [link to deployed link](https://which-way-is-up.herokuapp.com/)
 
-To make a paiement, you may use the following card numbers:
+To make a test paiement, you may use the following card numbers:
 - Visa: 4111 1111 1111 1111
 - Mastercard: 2223 0000 4840 0011
 - Amex: 3714 49635 398431
@@ -781,6 +781,7 @@ To make a paiement, you may use the following card numbers:
     - Getting last n records from a django queryset adapted from this [stack overflow post](https://stackoverflow.com/questions/20555673/django-query-get-last-n-records)
     - Implementation of Django date input widget adapted from [stack overflow post](https://stackoverflow.com/questions/61076688/django-form-dateinput-with-widget-in-update-loosing-the-initial-value)
     - [stack overflow post](https://stackoverflow.com/questions/43990154/braintree-jsv3-payment-method-nonce-value-bad-with-hostedfields?rq=1)
+    - Implementation for Braintree paiement functionality from Braintree [official documentation](https://developer.paypal.com/braintree/docs/start/hello-server)
     - Implementation for Braintree hosted fields validation from [Braintree code recipe](https://codepen.io/braintree/pen/zeamxM)
     - Discarding rows in tabular inline table implemented from this [stack overflow post](https://stackoverflow.com/questions/37338925/django-tabularinline-discard-empty-rows)
     - Implementation of contact form adapted from [official Django documentation](https://docs.djangoproject.com/en/4.0/topics/forms/)
