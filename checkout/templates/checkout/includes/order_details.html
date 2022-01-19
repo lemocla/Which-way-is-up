@@ -85,9 +85,9 @@
             <p class="mb-1">£{{ order.total | floatformat:2 }}</p>
           </div>
         <p class="fw-bold mt-4">Additional information:</p>
-        {% if gift_option %}
-        <p><strong>Gift to:</strong> {{ gift_recipient }}</p>
-        <p><strong>Gift message:</strong> {{ gift_message }}</p>
+        {% if order.gift_option %}
+        <p><strong>Gift to:</strong> {{ order.gift_recipient }}</p>
+        <p><strong>Gift message:</strong> {{ order.gift_message }}</p>
         {% endif %}
         </div>
 

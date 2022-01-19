@@ -129,6 +129,9 @@ def artwork_detail(request, artwork_id):
 
     if artwork.display_shop:
         shop_category = ShopCategory.objects.get(artwork=artwork.id)
+    else:
+        shop_category = None
+
     # Set context
     context = {
         'artwork': artwork,

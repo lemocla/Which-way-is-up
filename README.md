@@ -171,7 +171,7 @@ To make a paiement, you may use the following card numbers:
        - Artworks and portfolios may be set as active, inactive or draft
        - An artwork cannot be deleted if it features in an order and should be set as inactive instead
        - Orders will be set as 'in progress' and the shop owner to action orders as dispatched
-       - Delivery are free and items can only be shipped to a UK address 
+       - Delivery are free and items can only be shipped to a UK address but can be billed anywhere
 
      - #### **Constraints**
 	

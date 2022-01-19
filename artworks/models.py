@@ -118,6 +118,10 @@ class Artwork(models.Model):
             if str(self.portfolio.category) == 'commission':
                 self.display_shop = False
 
+        if not self.portfolio and not self.shop_category:
+            self.display_shop = False
+            self.status = 'inactive'
+
         if str(self.status) != 'active':
             with transaction.atomic():
                 users_wishlist = self.wishlist_artwork.all()

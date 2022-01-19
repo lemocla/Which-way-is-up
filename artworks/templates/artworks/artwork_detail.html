@@ -26,11 +26,13 @@
                     </li>
                     {% else %}
                     <li class="breadcrumb-item"><a href="{% url 'shop' %}">Shop</a></li>
+                    {% if artwork.shop_category %}
                     <li class="breadcrumb-item">
                         <a href="{% url 'shop' %}?shop_category={{shop_category.backend_name}}">
                             {{artwork.shop_category|title}}
                         </a>
                     </li>
+                    {% endif %}
                     {% endif %}
                     <li class="d-none d-sm-inline-block breadcrumb-item active" aria-current="page"><span
                             class="truncate">{{ artwork.name|title }}</span></li>
