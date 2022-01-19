@@ -33,23 +33,32 @@
              });
      });
 
-     //togle password
-     let style; //Additional styles for change password page
-     if ($('h1').text() == 'Change Password') {
-         style = 'style="right: 42rem;"';
-     }
-
+     // togle password
      // login page
      $('#div_id_password').append(
          '<i class="password-visible far fa-eye" data-target="id_password" aria-hidden="true"></i><span class="sr-only">toggle password</span>'
      );
      // register page
      $('#div_id_password1').append(
-         `<i class="password-visible far fa-eye" data-target="id_password1" aria-hidden="true" ${style}></i><span class="sr-only">toggle password</span>`
+         `<i class="password-visible far fa-eye" data-target="id_password1" aria-hidden="true"></i><span class="sr-only">toggle password</span>`
      );
      $('#div_id_password2').append(
-         `<i class="password-visible far fa-eye" data-target="id_password2" aria-hidden="true" ${style}></i><span class="sr-only">toggle password</span>`
+         `<i class="password-visible far fa-eye" data-target="id_password2" aria-hidden="true"></i><span class="sr-only">toggle password</span>`
      );
+
+     // password page
+     if ($('h1').text() == 'Change Password') {
+         $('#div_id_oldpassword').css({
+             "max-width": "635px"
+         });
+         $('#div_id_password1').css({
+             "max-width": "635px"
+         });
+         $('#div_id_password2').css({
+             "max-width": "635px"
+         });
+     }
+
      // toggle function
      $('.password-visible').click(function () {
          let id = $(this).attr('data-target');
