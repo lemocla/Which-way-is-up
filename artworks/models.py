@@ -118,23 +118,23 @@ class Artwork(models.Model):
             if str(self.portfolio.category) == 'commission':
                 self.display_shop = False
 
-            if str(self.status) != 'active':
-                with transaction.atomic():
-                    users_wishlist = self.wishlist_artwork.all()
-                    for profile in users_wishlist:
-                        # Remove artwork from users' wishlist
-                        profile.wishlist_items.remove(self)
-                        profile.save()
-                        name = str(self.name).capitalize()
-                        # Notify user
-                        subject = ("Notification: wishlist item no longer "
-                                   "available")
-                        body = render_to_string(
+        if str(self.status) != 'active':
+            with transaction.atomic():
+                users_wishlist = self.wishlist_artwork.all()
+                for profile in users_wishlist:
+                    # Remove artwork from users' wishlist
+                    profile.wishlist_items.remove(self)
+                    profile.save()
+                    name = str(self.name).capitalize()
+                    # Notify user
+                    subject = ("Notification: wishlist item no longer "
+                               "available")
+                    body = render_to_string(
                             'artworks/email/wishlist_notification.txt',
                             {'artwork': name})
-                        sender = settings.EMAIL_HOST_USER
-                        recipients = [profile.user.email]
-                        send_mail(subject, body, sender, recipients)
+                    sender = settings.EMAIL_HOST_USER
+                    recipients = [profile.user.email]
+                    send_mail(subject, body, sender, recipients)
         return super(Artwork, self).save(*args, **kwargs)
 
     def post_delete(self):
