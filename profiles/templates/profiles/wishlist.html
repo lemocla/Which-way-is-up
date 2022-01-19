@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <form id="form-add-to-bag" class="card-body" action="{% url 'add_to_bag' artwork.id %} " method="POST">
+                    <form id="form-add-to-bag-{{ artwork.id }}" class="card-body" action="{% url 'add_to_bag' artwork.id %} " method="POST">
                         {% csrf_token %}
                         <div class="d-flex justify-content-between">
                             <div>
@@ -60,7 +60,7 @@
                                     <option value="4">4</option>
                                     {% endif %}
                                     {% if artwork.stock >= 5 %}
-                                    <option value=5">5</option>
+                                    <option value="5">5</option>
                                     {% endif %}
                                 </select>
                             </div>

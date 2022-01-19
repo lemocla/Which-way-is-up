@@ -129,6 +129,8 @@
                     {% if artwork.stock > 0 %}
                     <input type="submit" id="add-to-bag" class="btn btn-black px-xl-5 py-2 text-uppercase"
                         value="Add to Bag">
+                    {% else %}
+                    <a href="{% url 'contact' %}" class="btn btn-black px-xl-5 py-2 text-uppercase">Contact us</a>
                     {% endif %}
                 </div>
 

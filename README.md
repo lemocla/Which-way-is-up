@@ -472,6 +472,8 @@ To make a test paiement, you may use the following card numbers:
 
     The developer started implementing automated testing, namely checking all responses on views as well a test case on newsletter form. Unfortunately, as the developer is new to automated testing and time was of the essence, full case automated testing on all models and forms were not implemented. However this is something that the developer is keen to learn, explore and implement. 
 
+    setUp function was used to create test classes - as explained in this [django documentation](https://docs.djangoproject.com/en/4.0/topics/testing/overview/)
+
     The website was extensively tested manually, going through different case scenarios.
   
   - ### **Code validation**

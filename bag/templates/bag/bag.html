@@ -50,7 +50,11 @@
                   <h3 class="fs-5 fw-bold mb-2 normal-text">Quantity</h3>
                   <select data-action="update-bag" data-item="{{item.artwork.id}}" class="px-4 py-2 mb-1"
                     aria-label="Select quantity" name="quantity">
+                    {% if item.quantity == 1 %}
                     <option selected value="1">1</option>
+                    {% elif item.quantity != 1 and item.artwork.stock >= 0 %}
+                    <option value="1">1</option>
+                    {% endif %}
                     {% if item.quantity == 2 %}
                     <option selected value="2">2</option>
                     {% elif item.quantity != 2 and item.artwork.stock >= 2 %}
