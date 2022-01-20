@@ -163,13 +163,13 @@
 
         <!-- buttons -->
         <div class="mt-5 mb-2 text-center">
-          <a href="{% url 'bag' %}" class="btn btn-white px-2 px-sm-5 py-2 text-uppercase">
+          <a href="{% url 'bag' %}" class="btn btn-white px-2 px-sm-5 px-lg-4 px-xl-5 py-2 text-uppercase">
             <i class="fas fa-chevron-left pe-1" aria-hidden="true"></i>Adjust Bag
           </a>
           <!-- hidden field - braintree -->
           <input type="hidden" name="payment_method_nonce">
           <!--https://stackoverflow.com/questions/43990154/braintree-jsv3-payment-method-nonce-value-bad-with-hostedfields?rq=1-->
-          <button id="checkout-submit" type="submit" class="btn btn-black px-3 px-sm-5 py-2 text-uppercase">
+          <button id="checkout-submit" type="submit" class="btn btn-black px-3 px-lg-4 px-xl-5 px-sm-5 py-2 text-uppercase">
             Complete Order<i class="fas fa-lock ps-2" aria-hidden="true"></i>
           </button>
         </div>
