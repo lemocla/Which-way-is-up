@@ -1,1 +1,0 @@
-web: gunicorn whichwayisup.wsgi:application
