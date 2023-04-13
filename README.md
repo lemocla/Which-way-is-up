@@ -587,7 +587,7 @@ To make a test paiement, you may use the following card numbers:
     - Have an account with [ElephantSQL](https://www.elephantsql.com/)
     - Have an email account, preferrably with gmail, having set up 2-step verification with a password specific for this app.
   
-  - ### **Deployment on Heroku**
+  - ### **Deployment**
 
     - #### **This project was deployed in three stages:**
       - Create a postgres instance on [ElephantSQL](https://www.elephantsql.com/)
