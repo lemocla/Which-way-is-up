@@ -8,7 +8,7 @@ Which Way Is Up -  an online gallery and ecommerce website for artist Peter Char
 
 Using the principles of UX design, this fully responsive and interactive website was developed using HTML, CSS, JavaScript and Python as well as Django as a framework.
 
-View live project here [link to deployed link](https://which-way-is-up.herokuapp.com/)
+View live project here [link to deployed link](https://which-way-is-up.onrender.com/)
 
 To make a test paiement, you may use the following card numbers:
 - Visa: 4111 1111 1111 1111
@@ -578,45 +578,45 @@ To make a test paiement, you may use the following card numbers:
 ## **DEPLOYMENT**
 
   This website was developed on Gitpod using the Code Institute student template with changes frequently committed to git then pushed onto GitHub from the Gitpod terminal.
-  The application is deployed on Heroku with the repository hosted on Github
+  The application is deployed on [Render](https://render.com/) with the repository hosted on Github and the postgres database hosted on [ElephantSQL](https://www.elephantsql.com/)
 
   - ### **Prerequisite**
     - Have an account with Amazon AWS and get a connection string
-    - Have an account with Heroku
-    - Have an account with Braintree
+    - Have an account with [Render](https://render.com/)
+    - Have an account with [Braintree](https://www.braintreepayments.com/gb)
+    - Have an account with [ElephantSQL](https://www.elephantsql.com/)
     - Have an email account, preferrably with gmail, having set up 2-step verification with a password specific for this app.
   
   - ### **Deployment on Heroku**
 
-    - #### **This project was deployed in two stages:**
-      - Create an Heroku app, connect to Postgres database and deploy the app without static files
+    - #### **This project was deployed in three stages:**
+      - Create a postgres instance on [ElephantSQL](https://www.elephantsql.com/)
+      - Create a webservice on Render, connect to Postgres database and deploy the app without static files
       - Create and connect Amazon bucket for storing images and static files
 
     - #### **Local environment**
-       | KEY         | VALUE |
-       | ----------- | ----------- |
-       | DEVELOPMENT | True |
-       | SECRET_KEY  | Your_value |
-       | AWS_ACCESS_KEY_ID | Your_value |
-       | AWS_SECRET_ACCESS_KEY | Your_value |
-       | BRAINTREE_MERCHANT_ID | Your_value |
-       | BRAINTREE_PUBLIC_KEY | Your_value |
-       | BRAINTREE_PRIVATE_KEY | Your_value |
-       | EMAIL_HOST_USER | Your_value |
-       | EMAIL_HOST_PASSWORD | Your_value |
- 
-    - #### **Create app on Heroku and get Postgres URL**
-      - Log onto Heroku and click the create new app button
-      - Enter a unique name for your application
-      - Select the region closest to you
-        ![create heroku app](documentation/deploy/screenshots/heroku_create.png)
-      - Add Postgres add-on so that Heroku can provide a database URL.
-        - Go to heroku website --> your app --> Resources tab
-      	- Under add-on --> type Postgres, select Heroku Postgres, then submit
-          ![heroku postgres](documentation/deploy/screenshots/heroku_postgres.png)
-        - Select free plan, then select submit order
-        - copy the DATABASE_URL under settings > reveal config var
-        - In settings > reveal config var, add temporary variable DISABLE_COLLECTSTATIC = 1
+      | KEY         | VALUE |
+      | ----------- | ----------- |
+      | DEVELOPMENT | True |
+      | SECRET_KEY  | Your_value |
+      | AWS_ACCESS_KEY_ID | Your_value |
+      | AWS_SECRET_ACCESS_KEY | Your_value |
+      | BRAINTREE_MERCHANT_ID | Your_value |
+      | BRAINTREE_PUBLIC_KEY | Your_value |
+      | BRAINTREE_PRIVATE_KEY | Your_value |
+      | EMAIL_HOST_USER | Your_value |
+      | EMAIL_HOST_PASSWORD | Your_value |
+
+    - #### **Create a Postgres instance on ElephantSQL**
+      - Create new instance
+       ![elephant](documentation/deploy/screenshots/elephant_create.png)
+      - Enter a name and select Tiny Turtle (free plan)
+       ![elephant](documentation/deploy/screenshots/elephant_name.png)
+      - Go to select region and select closest region to you
+       ![elephant](documentation/deploy/screenshots/elephant_region.png)
+      - Click review and create, you should then be redirected to the following page
+       ![elephant](documentation/deploy/screenshots/elephant_url.png)
+      - Copy the URL
 
     - #### **Back up your current sqlite database**
       - As this database was designed without fixtures, make sure manage.py file is connected to mysql database
@@ -641,11 +641,30 @@ To make a test paiement, you may use the following card numbers:
       - Migrate the database into Postgres by typing in CLI: ```python3 manage.py migrate```
       - Create superuser by typing in CLI ```python3 manage.py createsuperuser``` and add credentials as required
       - Remove the variable DATABASE_URL from your local environment
+
+    - #### **Prepare for deployment**
+       - Install gunicorn using command in cli: ```pip3 install gunicorn``` to replace development server once the app is deployed to Heroku.
+       - Update requirement.txt by typing command in cli: ```pip3 freeze > requirements.txt```
+       - Create a ```build.sh``` file in the root directory
+       - In the ```build.sh``` file, add the following scripts:
+         ```
+          set -o errexit
+          pip install -r requirements.txt
+          python manage.py collectstatic --noinput
+          python manage.py makemigrations && python manage.py migrate
+         ```
+       - Add, commit and push changes to GitHub
          	 
     - #### **Change configuration to allow for production and development mode**
        - Secret Key: ```SECRET_KEY = os.environ.get('SECRET_KEY', '')```
        - Debug: ```DEBUG = 'DEVELOPMENT' in os.environ``` so that debug is true in your development environment, but false in production
-       - Allowed Hosts: ```ALLOWED_HOSTS = ['which-way-is-up.herokuapp.com', 'localhost']``` 
+       - Allowed Hosts: ```ALLOWED_HOSTS = ['localhost']``` 
+       - Add Render.com URL to allowed hosts     
+          ```
+          RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+          if RENDER_EXTERNAL_HOSTNAME:
+            ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+          ```
        - Using an if statement in settings.py, the app will be connected to Postgres in production mode and SQlite when in development.
           ```
             if 'DATABASE_URL' in os.environ:
@@ -674,34 +693,41 @@ To make a test paiement, you may use the following card numbers:
             EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
             DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
          ```
-    - #### **Set automatic deployment in Heroku**
-        - Set your deployment method to 'GitHub' 
-        - Search for the repository you wish to deploy from
-          ![heroku github](documentation/deploy/screenshots/automatic_deploy.png)
-        - Enable automatic deploy 
-          ![heroku automatic deployment](documentation/deploy/screenshots/github_auto_deploy.png)
+       - Add, commit and push changes to github
 
-    - #### **Prepare for deployment**
-       - Install gunicorn using command in cli: ```pip3 install gunicorn``` to replace development server once the app is deployed to Heroku.
-       - Update requirement.txt by typing command in cli: ```pip3 freeze > requirements.txt```
-       - Create a Procfile in root directory
-       - In Procfile, enter ```web: gunicorn django_todo.wsgi:application``` making sure that there is no blank line after it
-       - Add, commit and push changes to GitHub
 
-    - #### **Set environment in Heroku App**
-        - Go to settings, then click on reveal config vars and enter the following key value pairs as per your local environment:
-	        | KEY | VALUE |
-	        | ----------- | ----------- |
-	        | DATABASE_URL | Your_url_link |
-	        | SECRET_KEY  | Your_value |
-          | DISABLE_COLLECTSTATIC | 1 |
-	        | BRAINTREE_MERCHANT_ID | Your_value |
-	        | BRAINTREE_PUBLIC_KEY | Your_value |
-	        | BRAINTREE_PRIVATE_KEY | Your_value |
-	        | EMAIL_HOST_USER | Your_value |
-	        | EMAIL_HOST_PASS | Your_value |
+    - #### **Create a webservice app on Render**
 
-          Click open app to view the application in your browser, your app should display without any images and static files at this stage.
+      - Log onto Render and click the "new" button in the top menu
+      ![Heroku add app](documentation/deploy/screenshots/render-new-button.png)
+      - Select the option "new webservice"
+        ![Heroku add app](documentation/deploy/screenshots/render-new-webservice.png)
+      - Search and select the relevant repo, then click connect
+      - Enter a unique name for your application
+      - Select the region closest to you 
+      - Enter "main" as branch
+      - Enter "Python 3" as runtime
+          ![Heroku add app](documentation/deploy/screenshots/render-set.png)
+      - Set the build command as ```./build.sh```
+      - Set the start command as ```gunicorn whichwayisup.wsgi:application```
+      - Make sure you select the free option under instance type 
+      ![Heroku add app](documentation/deploy/screenshots/render_build.png)
+      - Add your environment variables, by selecting "advance" then select option to add variables:    
+      	| KEY | VALUE |
+        | ----------- | ----------- |
+        | DATABASE_URL | Your_url_link |
+        | SECRET_KEY  | Your_value |
+        | DISABLE_COLLECTSTATIC | 1 |
+        | BRAINTREE_MERCHANT_ID | Your_value |
+        | BRAINTREE_PUBLIC_KEY | Your_value |
+        | BRAINTREE_PRIVATE_KEY | Your_value |
+        | EMAIL_HOST_USER | Your_value |
+        | EMAIL_HOST_PASS | Your_value |
+      - Select "yes" for auto-deploy
+      ![Heroku connect github](documentation/deploy/screenshots/render-auto-deploy.png) 
+      - Click "create webservice" - you should see the following message when build is successful
+      ![Heroku connect github](documentation/deploy/screenshots/render-success.png) 
+
 
     - #### **Create Amazon AWS S3 bucket**
         - This project uses the cloud-based storage service Amazon Web Services s3 to store static files (css, javascript) and images. The following instructions explains how to create and configure a bucket, group and user for the purpose of this project [View Instructions](documentation/deploy/amazon.md).      
@@ -717,8 +743,10 @@ To make a test paiement, you may use the following card numbers:
           ![amazon settings](documentation/deploy/screenshots/amazon_settings.png)
 
 
-    - #### **Update your environment in Heroku**
-        - Go to settings, then click on reveal config vars and add additional Amazon AWS key - values pairs
+    - #### **Update your environment in Render**
+        - Go to dashboard, then click on your app and navigate to Envrironment in left handside menu
+        ![rencer](documentation/deploy/screenshots/render-amazon.png)
+        - Add additional Amazon AWS key - values pairs
         - Make sure to remove DISABLE_COLLECTSTATIC = 1 when setting Amazon AWS
         - Your configuration variables should now look like this: 
 	        | KEY | VALUE |
