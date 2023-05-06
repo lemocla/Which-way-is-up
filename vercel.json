@@ -11,8 +11,7 @@
       },
       {
         "src": "build_files.sh",
-        "use": "@vercel/static-build",
-
+        "use": "@vercel/static-build"
       }
     ],
     "routes": [
@@ -21,6 +20,11 @@
         "src": "/(.*)",
         "dest": "whichwayisup/wsgi.py"
       }
-    ]
+    ],
+    "functions": {
+      "*/wsgi.py.py": {
+        "excludeFiles": "public/**"
+      }
+    }
   }
   
